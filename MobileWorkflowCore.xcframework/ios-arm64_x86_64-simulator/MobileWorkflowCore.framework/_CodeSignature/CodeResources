@@ -18,15 +18,15 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		rOx02YlTxFCIuytXI8dEEY0YOfc=
+		9RiDXl8f0X0/+280UUSfYeWwolk=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<data>
-		u3W41cVjdcoP3XnOW9JQf79epRw=
+		43VqnIYSLBV4PAjQ+hXjlVkwnlw=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<data>
-		SOLV3oEF8bGZUrbW66DiPFeNW7s=
+		f77BuJ4nGXrsp15ELE8GtIlnq9g=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		fCp0jrmB/ibLIN61lLQN+PAJrn4=
+		TvQNUznAbqlhgK5AO6Y70/WViTM=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		fCp0jrmB/ibLIN61lLQN+PAJrn4=
+		TvQNUznAbqlhgK5AO6Y70/WViTM=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -108,14 +108,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			vp0P3+droYw19d04ufTBCUAx6+JYqbXDCAzNrMUaAd4=
+			v3Tnjmf6OOhHkvvDMsUiMWyKg8migzXN5/4Wm+/KAhY=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Qj7rwmxfZyeKvGXJUy3Y8e3zN6cJTEhawyolYZV8UZc=
+			WV1jEhR3OPluzjBzONfkDD3X8U5gPHqGPL02u4VA57s=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -136,7 +136,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			I90hfv36vT5eLv/ngVdKucztlkk3SzKm10na+dHdycU=
+			ar4gD1zpPApWycW20MaJhojDtxF/tXMARTrccePfbJk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -157,7 +157,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			I90hfv36vT5eLv/ngVdKucztlkk3SzKm10na+dHdycU=
+			ar4gD1zpPApWycW20MaJhojDtxF/tXMARTrccePfbJk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
