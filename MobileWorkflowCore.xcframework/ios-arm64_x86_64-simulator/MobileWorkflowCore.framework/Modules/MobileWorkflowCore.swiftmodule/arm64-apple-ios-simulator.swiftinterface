@@ -64,12 +64,8 @@ public class Session {
   public init(providers: [Swift.String : MobileWorkflowCore.SessionProvider] = [:])
   @objc deinit
 }
-public protocol StepFactory {
-  func doesSupport(className: Swift.String) -> Swift.Bool
-  func load(_ data: MobileWorkflowCore.StepData, imageLoader: MobileWorkflowCore.ImageLoader, networkManager: MobileWorkflowCore.NetworkManager) throws -> ResearchKit.ORKStep
-}
 public class AppConfigurationManager {
-  public init(stepsSession: MobileWorkflowCore.Session = Session(), urlSession: Foundation.URLSession = .shared, factories: [MobileWorkflowCore.StepFactory] = [], imageLoader: MobileWorkflowCore.ImageLoader? = nil, cache: MobileWorkflowCore.CacheStorage? = nil, cryptor: MobileWorkflowCore.CryptoManager? = nil, outputDirectory: Swift.String = NSTemporaryDirectory(), authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
+  public init(stepsSession: MobileWorkflowCore.Session = Session(), urlSession: Foundation.URLSession = .shared, factories: [MobileWorkflowCore.StepFactory] = [], imageLoader: MobileWorkflowCore.ImageLoader? = nil, cache: MobileWorkflowCore.CacheStorage? = nil, cryptor: MobileWorkflowCore.CryptoManager? = nil, outputDirectory: Swift.String = NSTemporaryDirectory(), authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil, bundle: Foundation.Bundle = .main)
   @objc deinit
 }
 public protocol CredentialsStoreProtocol {
@@ -91,7 +87,7 @@ public protocol ImageLoader {
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
 @objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController, ResearchKit.ORKTaskViewControllerDelegate {
-  public init(manager: MobileWorkflowCore.AppConfigurationManager, initialConfiguration: MobileWorkflowCore.AppConfigurationContext? = nil, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol = CredentialsStore())
+  public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol = CredentialsStore())
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
   @objc public func taskViewController(_ taskViewController: ResearchKit.ORKTaskViewController, didFinishWith reason: ResearchKit.ORKTaskViewControllerFinishReason, error: Swift.Error?)
@@ -100,14 +96,31 @@ public protocol ImageLoader {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
+public protocol StepFactory {
+  func doesSupport(className: Swift.String) -> Swift.Bool
+  func load(_ data: MobileWorkflowCore.StepData, imageLoader: MobileWorkflowCore.ImageLoader, networkManager: MobileWorkflowCore.NetworkManager, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+}
 public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-public struct AppConfigurationContext {
+public enum AppConfigurationContext {
+  case urlContext(url: Swift.String, serverId: Swift.Int?)
+  case cached
+  case file(path: Swift.String, serverId: Swift.Int?)
 }
 extension AppConfigurationContext {
   public init?(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>, with urlSchemeManager: MobileWorkflowCore.URLSchemeManager = URLSchemeManager())
+  public init(with filePath: Swift.String, serverId: Swift.Int? = nil)
+  public var needsCleanUserSession: Swift.Bool {
+    get
+  }
+  public var shouldShowLoadingActivity: Swift.Bool {
+    get
+  }
+}
+@_hasMissingDesignatedInitializers final public class Localization {
+  @objc deinit
 }
 public enum CredentialError : Swift.Error {
   case invalidInputData

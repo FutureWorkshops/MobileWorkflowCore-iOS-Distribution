@@ -43,12 +43,24 @@ typedef NS_ENUM(NSUInteger, ORKESerializationErrorCode) {
 
 @interface ORKESerializationLocalizer : NSObject
 
+- (NSString *)localizedStringForString:(NSString *)string;
+
+@end
+
+@interface ORKESerializationBundleLocalizer : ORKESerializationLocalizer
+
 - (instancetype)initWithBundle:(NSBundle *)bundle tableName:(NSString *)tableName;
 
 @property (nonatomic, strong) NSBundle *bundle;
 @property (nonatomic, copy) NSString *tableName;
 
-- (NSString *)localizedStringForString:(NSString *)string;
+@end
+
+@interface ORKESerializationDictionaryLocalizer : ORKESerializationLocalizer
+
+- (instancetype)initWithDictionary:(NSDictionary *)dictionary;
+
+@property (nonatomic, strong) NSDictionary *translations;
 
 @end
 
