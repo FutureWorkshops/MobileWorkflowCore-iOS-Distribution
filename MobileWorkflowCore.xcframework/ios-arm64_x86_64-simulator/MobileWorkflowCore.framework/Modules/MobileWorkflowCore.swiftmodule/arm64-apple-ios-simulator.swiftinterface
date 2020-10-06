@@ -29,6 +29,10 @@ public struct URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
+public protocol BuildableStep : ResearchKit.ORKStep {
+  static var stepClassName: Swift.String { get }
+  static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+}
 public enum CredentialType : Swift.String, Swift.CaseIterable {
   case token
   case refreshToken
@@ -57,6 +61,13 @@ final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   final public func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   final public func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
+}
+extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+  public func fetchData(for path: Swift.String) -> Any?
 }
 public protocol SessionProvider {
 }
@@ -96,13 +107,30 @@ public protocol ImageLoader {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
+public struct MobileWorkflowStepFactory : MobileWorkflowCore.StepFactory {
+  public init()
+  public func doesSupport(className: Swift.String) -> Swift.Bool
+  public func load(_ data: MobileWorkflowCore.StepData, imageLoader: MobileWorkflowCore.ImageLoader, networkManager: MobileWorkflowCore.NetworkManager, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+  public mutating func registerStep(_ step: MobileWorkflowCore.BuildableStep.Type)
+}
 public protocol StepFactory {
   func doesSupport(className: Swift.String) -> Swift.Bool
   func load(_ data: MobileWorkflowCore.StepData, imageLoader: MobileWorkflowCore.ImageLoader, networkManager: MobileWorkflowCore.NetworkManager, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public struct StepData : Swift.Codable {
+  public let className: Swift.String
+  public let identifier: Swift.String
+  public let image: UIKit.UIImage?
+  public let imageURL: Swift.String?
+  public let content: [Swift.String : Any]
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+}
+extension ORKImageCaptureStep : MobileWorkflowCore.BuildableStep {
+  public static var stepClassName: Swift.String {
+    get
+  }
+  public static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public enum AppConfigurationContext {
   case urlContext(url: Swift.String, serverId: Swift.Int?)
@@ -132,6 +160,11 @@ public enum CredentialError : Swift.Error {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
+public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
+  var content: [Swift.AnyHashable : Swift.Codable] { get }
+  func fetchData(for path: Swift.String) -> Any?
+  func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
 public struct AuthRedirectHandler {
   public init(_ handler: @escaping (MobileWorkflowCore.AuthFlowResumer) -> Swift.Void)
 }
@@ -148,7 +181,6 @@ extension AuthRedirector {
 extension MobileWorkflowCore.CredentialType : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
 extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
-extension ResearchKit.ORKQuestionResult : MobileWorkflowCore.SessionProvider {}
 extension ResearchKit.ORKFileResult : MobileWorkflowCore.SessionProvider {}
 extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
