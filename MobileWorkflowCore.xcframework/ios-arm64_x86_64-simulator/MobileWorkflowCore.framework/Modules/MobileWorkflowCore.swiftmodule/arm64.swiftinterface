@@ -3,8 +3,6 @@
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
-import AppAuth
-import AuthenticationServices
 import Combine
 import CoreLocation
 import CryptoKit
@@ -28,9 +26,16 @@ public struct URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
+extension UIViewController {
+  public func addCovering(childViewController: UIKit.UIViewController)
+}
 public protocol BuildableStep : ResearchKit.ORKStep {
   static var stepClassName: Swift.String { get }
   static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+}
+public struct Credential : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
 }
 extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
   public var content: [Swift.AnyHashable : Swift.Codable] {
@@ -110,6 +115,9 @@ public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
 }
 public struct AuthRedirectHandler {
   public init(_ handler: @escaping (MobileWorkflowCore.AuthFlowResumer) -> Swift.Void)
+}
+public protocol AuthProvider {
+  func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
 }
 public protocol AuthFlowResumer : AnyObject {
   func resumeAuth(with url: Foundation.URL) -> Swift.Bool
