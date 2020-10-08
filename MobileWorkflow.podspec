@@ -1,11 +1,11 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = '0.0.4'
+    s.version               = '0.0.5'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
     DESC
-    s.homepage              = 'https://mobile-workflow-staging.herokuapp.com'
+    s.homepage              = 'https://www.mobileworkflow.io'
     s.license               = { :type => 'Copyright', :file => 'LICENSE' }
     s.author                = { 'Future Workshops' => 'info@futureworkshops.com' }
     s.source                = { :git => 'https://github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution.git', :tag => "#{s.version}" }
@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
     s.default_subspecs      = 'Core'
 
     s.subspec 'Core' do |cs|
-        cs.dependency           'AppAuth', '~> 1.4.0'
         cs.dependency           'MobileWorkflow/ResearchKit'
         cs.vendored_frameworks   = 'MobileWorkflowCore.xcframework'
         cs.preserve_paths        = ['MobileWorkflowCore.xcframework']
