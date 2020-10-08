@@ -16,11 +16,18 @@ import Swift
 import UIKit
 import VisionKit
 public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
-@_hasMissingDesignatedInitializers final public class NetworkManager {
+final public class NetworkManager {
+  public init(environment: MobileWorkflowCore.Server?, stepsSession: MobileWorkflowCore.Session, urlFormatter: MobileWorkflowCore.URLFormatter = URLFormatter(), decoder: Foundation.JSONDecoder = JSONDecoder(), urlSession: Foundation.URLSession = .shared, userSessionManagement: MobileWorkflowCore.CredentialsStoreProtocol = CredentialsStore(), authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
   final public func postSession(to url: Swift.String, queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
   @objc deinit
+}
+public struct CacheStorage {
+  public init(path: Swift.String, cryptor: MobileWorkflowCore.CryptoManager, fileManager: Foundation.FileManager = .default)
+}
+public struct CryptoManager {
+  public init(applicationLabel label: Swift.String)
 }
 public struct URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
@@ -33,9 +40,38 @@ public protocol BuildableStep : ResearchKit.ORKStep {
   static var stepClassName: Swift.String { get }
   static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
+public enum CredentialType : Swift.String, Swift.CaseIterable {
+  case token
+  case refreshToken
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public typealias AllCases = [MobileWorkflowCore.CredentialType]
+  public static var allCases: [MobileWorkflowCore.CredentialType] {
+    get
+  }
+}
+public struct URLFormatter {
+  public static let URLComposerRegex: Swift.String
+  public init(regex: Swift.String = URLComposerRegex)
+}
 public struct Credential : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+}
+public protocol SecurityStoreProtocol {
+  func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
+  func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+}
+final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
+  public init()
+  final public func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  final public func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
+  final public func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  @objc deinit
 }
 extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
   public var content: [Swift.AnyHashable : Swift.Codable] {
@@ -46,16 +82,37 @@ extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
 }
 public protocol SessionProvider {
 }
-@_hasMissingDesignatedInitializers public class AppConfigurationManager {
+public class Session {
+  public init(providers: [Swift.String : MobileWorkflowCore.SessionProvider] = [:])
+  @objc deinit
+}
+public class AppConfigurationManager {
   convenience public init(withAdditionalSteps steps: [MobileWorkflowCore.BuildableStep.Type], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
+  public init(stepsSession: MobileWorkflowCore.Session = Session(), urlSession: Foundation.URLSession = .shared, factories: [MobileWorkflowCore.StepFactory] = [], imageLoader: MobileWorkflowCore.ImageLoader? = nil, cache: MobileWorkflowCore.CacheStorage? = nil, cryptor: MobileWorkflowCore.CryptoManager? = nil, outputDirectory: Swift.String = NSTemporaryDirectory(), authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil, bundle: Foundation.Bundle = .main)
+  @objc deinit
+}
+public protocol CredentialsStoreProtocol {
+  func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
+  func retrieveCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<MobileWorkflowCore.Credential?, MobileWorkflowCore.CredentialError>
+  func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+}
+final public class CredentialsStore : MobileWorkflowCore.CredentialsStoreProtocol {
+  public init(securityStore: MobileWorkflowCore.SecurityStoreProtocol = SecurityStore())
+  final public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
+  final public func saveCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
+  final public func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  final public func retrieveCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<MobileWorkflowCore.Credential?, MobileWorkflowCore.CredentialError>
+  final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
 }
 public protocol ImageLoader {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
-@objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController, ResearchKit.ORKTaskViewControllerDelegate {
+@objc public class MobileWorkflowRootViewController : UIKit.UIViewController, ResearchKit.ORKTaskViewControllerDelegate {
   public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [])
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
   @objc public func taskViewController(_ taskViewController: ResearchKit.ORKTaskViewController, didFinishWith reason: ResearchKit.ORKTaskViewControllerFinishReason, error: Swift.Error?)
@@ -79,6 +136,10 @@ public enum HTTPMethod : Swift.String {
     get
   }
   public init?(rawValue: Swift.String)
+}
+public protocol StepFactory {
+  func doesSupport(className: Swift.String) -> Swift.Bool
+  func load(_ data: MobileWorkflowCore.StepData, imageLoader: MobileWorkflowCore.ImageLoader, networkManager: MobileWorkflowCore.NetworkManager, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public struct StepData : Swift.Codable {
   public let className: Swift.String
@@ -104,9 +165,25 @@ extension AppConfigurationContext {
   public init?(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>, with urlSchemeManager: MobileWorkflowCore.URLSchemeManager = URLSchemeManager())
   public init(with filePath: Swift.String, serverId: Swift.Int? = nil)
 }
-@_hasMissingDesignatedInitializers final public class Localization {
+public typealias TranslationDictionary = [Swift.String : Swift.String]
+final public class Localization {
+  public init(translations: MobileWorkflowCore.TranslationDictionary?)
   final public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
   @objc deinit
+}
+public enum CredentialError : Swift.Error {
+  case invalidInputData
+  case storingError
+  case unexpected
+  public static func == (a: MobileWorkflowCore.CredentialError, b: MobileWorkflowCore.CredentialError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public struct Server : Swift.Codable {
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   var content: [Swift.AnyHashable : Swift.Codable] { get }
@@ -129,7 +206,12 @@ extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
+extension MobileWorkflowCore.CredentialType : Swift.Equatable {}
+extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
+extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
 extension ResearchKit.ORKFileResult : MobileWorkflowCore.SessionProvider {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
+extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
+extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
