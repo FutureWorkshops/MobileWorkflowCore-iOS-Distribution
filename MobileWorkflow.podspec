@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = '0.0.7'
+    s.version               = '0.0.8'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
@@ -12,7 +12,6 @@ Pod::Spec.new do |s|
     s.platform              = :ios
     s.swift_version         = '5'
     s.ios.deployment_target = '13.0'
-    s.requires_arc          = true
     s.default_subspecs      = 'Core'
 
     s.subspec 'Core' do |cs|
