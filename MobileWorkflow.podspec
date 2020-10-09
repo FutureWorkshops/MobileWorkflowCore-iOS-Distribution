@@ -15,13 +15,8 @@ Pod::Spec.new do |s|
     s.default_subspecs      = 'Core'
 
     s.subspec 'Core' do |cs|
-        cs.dependency           'MobileWorkflow/ResearchKit'
+        cs.dependency            'ResearchKit'
         cs.vendored_frameworks   = 'MobileWorkflowCore.xcframework'
         cs.preserve_paths        = ['MobileWorkflowCore.xcframework']
-    end
-
-    s.subspec 'ResearchKit' do |cs|
-        cs.vendored_frameworks   = 'ResearchKit.xcframework'
-        cs.preserve_paths        = ['ResearchKit.xcframework']
     end
 end
