@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = '0.0.14'
+    s.version               = '0.0.15'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
@@ -15,8 +15,13 @@ Pod::Spec.new do |s|
     s.default_subspecs      = 'Core'
 
     s.subspec 'Core' do |cs|
-        cs.dependency            'ResearchKit'
+        cs.dependency            'MobileWorkflow/ResearchKit'
         cs.vendored_frameworks   = 'MobileWorkflowCore.xcframework'
         cs.preserve_paths        = ['MobileWorkflowCore.xcframework']
+    end
+
+    s.subspec 'ResearchKit' do |cs|
+        cs.vendored_frameworks   = 'ResearchKit.xcframework'
+        cs.preserve_paths        = ['ResearchKit.xcframework']
     end
 end
