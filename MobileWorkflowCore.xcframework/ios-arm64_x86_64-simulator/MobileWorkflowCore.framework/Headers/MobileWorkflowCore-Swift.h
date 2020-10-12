@@ -218,7 +218,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 @interface MobileWorkflowRootViewController : UIViewController <ORKTaskViewControllerDelegate>
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError * _Nullable)error;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
@@ -470,7 +470,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 @interface MobileWorkflowRootViewController : UIViewController <ORKTaskViewControllerDelegate>
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError * _Nullable)error;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
