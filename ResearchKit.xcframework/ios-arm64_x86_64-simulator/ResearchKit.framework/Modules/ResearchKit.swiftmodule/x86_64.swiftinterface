@@ -1,0 +1,931 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name ResearchKit
+import Foundation
+@_exported import ResearchKit
+import Swift
+import UIKit
+public enum Currency : Swift.String {
+  case afghani, algerianDinar, argentinePeso, armenianDram, arubanFlorin, australianDollar, azerbaijanManat, bahamianDollar, bahrainiDinar, baht, balboa, barbadosDollar, belarusianRuble, belizeDollar, bermudianDollar, boliviano, bolívar, brazilianReal, bruneiDollar, bulgarianLev, burundiFranc, caboVerdeEscudo, canadianDollar, caymanIslandsDollar, chileanPeso, colombianPeso, comorianFranc, congoleseFranc, convertibleMark, cordobaOro, costaRicanColon, cubanPeso, czechKoruna, dalasi, danishKrone, denar, djiboutiFranc, dobra, dollar, dominicanPeso, dong, eastCaribbeanDollar, egyptianPound, elSalvadorColon, ethiopianBirr, euro, falklandIslandsPound, fijiDollar, forint, ghanaCedi, gibraltarPound, gourde, guarani, guineanFranc, guyanaDollar, hongKongDollar, hryvnia, icelandKrona, indianRupee, iranianRial, iraqiDinar, jamaicanDollar, jordanianDinar, kenyanShilling, kina, kuna, kuwaitiDinar, kwanza, kyat, laoKip, lari, lebanesePound, lek, lempira, leone, liberianDollar, libyanDinar, lilangeni, loti, malagasyAriary, malawiKwacha, malaysianRinggit, mauritiusRupee, mexicanPeso, mexicanUnidadDeInversion, moldovanLeu, moroccanDirham, mozambiqueMetical, mvdol, naira, nakfa, namibiaDollar, nepaleseRupee, netherlandsAntilleanGuilder, newIsraeliSheqel, newTaiwanDollar, newZealandDollar, ngultrum, northKoreanWon, norwegianKrone, ouguiya, paanga, pakistanRupee, pataca, pesoConvertible, pesoUruguayo, philippinePiso, poundSterling, pula, qatariRial, quetzal, rand, rialOmani, riel, romanianLeu, rufiyaa, rupiah, russianRuble, rwandaFranc, saintHelenaPound, saudiRiyal, serbianDinar, seychellesRupee, singaporeDollar, sol, solomonIslandsDollar, som, somaliShilling, somoni, southSudanesePound, sriLankaRupee, sudanesePound, surinamDollar, swedishKrona, swissFranc, syrianPound, taka, tala, tanzanianShilling, tenge, trinidadAndTobagoDollar, tugrik, tunisianDinar, turkishLira, turkmenistanNewManat, uaeDirham, ugandaShilling, unidadDeFomento, unidadDeValorReal, uruguayPesoEnUnidadesIndexadas, uzbekistanSum, vatu, wirEuro, wirFranc, won, yemeniRial, yen, yuanRenminbi, zambianKwacha, zimbabweDollar, zloty, none
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol CurrencyFormatting {
+  var maxDigitsCount: Swift.Int { get }
+  var decimalDigits: Swift.Int { get set }
+  var maxValue: Swift.Double? { get set }
+  var minValue: Swift.Double? { get set }
+  var initialText: Swift.String { get }
+  var currencySymbol: Swift.String { get set }
+  func string(from double: Swift.Double) -> Swift.String?
+  func unformatted(string: Swift.String) -> Swift.String?
+  func double(from string: Swift.String) -> Swift.Double?
+}
+public protocol CurrencyAdjusting {
+  func formattedStringWithAdjustedDecimalSeparator(from string: Swift.String) -> Swift.String?
+  func formattedStringAdjustedToFitAllowedValues(from string: Swift.String) -> Swift.String?
+}
+@objc public class CurrencyFormatter : ObjectiveC.NSObject, ResearchKit.CurrencyFormatting {
+  public var locale: ResearchKit.LocaleConvertible {
+    get
+    set
+  }
+  @objc public var nsLocale: Foundation.NSLocale {
+    @objc get
+    @objc set
+  }
+  public var currency: ResearchKit.Currency {
+    get
+    set
+  }
+  public var showCurrencySymbol: Swift.Bool {
+    get
+    set
+  }
+  public var currencySymbol: Swift.String {
+    get
+    set
+  }
+  public var minValue: Swift.Double? {
+    get
+    set
+  }
+  public var maxValue: Swift.Double? {
+    get
+    set
+  }
+  public var decimalDigits: Swift.Int {
+    get
+    set
+  }
+  public var hasDecimals: Swift.Bool {
+    get
+    set
+  }
+  public var decimalSeparator: Swift.String {
+    get
+    set
+  }
+  @objc public var currencyCode: Swift.String {
+    @objc get
+    @objc set
+  }
+  public var alwaysShowsDecimalSeparator: Swift.Bool {
+    get
+    set
+  }
+  public var groupingSize: Swift.Int {
+    get
+    set
+  }
+  public var secondaryGroupingSize: Swift.Int {
+    get
+    set
+  }
+  public var groupingSeparator: Swift.String {
+    get
+    set
+  }
+  public var hasGroupingSeparator: Swift.Bool {
+    get
+    set
+  }
+  public var zeroSymbol: Swift.String? {
+    get
+    set
+  }
+  public var nilSymbol: Swift.String {
+    get
+    set
+  }
+  @objc final public let numberFormatter: Foundation.NumberFormatter
+  public var maxIntegers: Swift.Int? {
+    get
+    set
+  }
+  public var maxDigitsCount: Swift.Int {
+    get
+  }
+  public var initialText: Swift.String {
+    get
+  }
+  public typealias InitHandler = ((ResearchKit.CurrencyFormatter) -> (Swift.Void))
+  @objc public init(_ handler: ResearchKit.CurrencyFormatter.InitHandler? = nil)
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension CurrencyFormatter {
+  @objc dynamic public func string(from double: Swift.Double) -> Swift.String?
+  public func double(from string: Swift.String) -> Swift.Double?
+  @objc dynamic public func doubleAsNSNumber(from string: Swift.String) -> Foundation.NSNumber?
+  @objc dynamic public func unformatted(string: Swift.String) -> Swift.String?
+}
+extension CurrencyFormatter : ResearchKit.CurrencyAdjusting {
+  public func formattedStringWithAdjustedDecimalSeparator(from string: Swift.String) -> Swift.String?
+  public func formattedStringAdjustedToFitAllowedValues(from string: Swift.String) -> Swift.String?
+}
+public protocol LocaleConvertible {
+  var locale: Foundation.Locale { get }
+}
+extension Locale : ResearchKit.LocaleConvertible {
+  public var locale: Foundation.Locale {
+    get
+  }
+}
+public enum CurrencyLocale : Swift.String, ResearchKit.LocaleConvertible {
+  case current
+  case autoUpdating
+  case afrikaans
+  case afrikaansNamibia
+  case afrikaansSouthAfrica
+  case aghem
+  case aghemCameroon
+  case akan
+  case akanGhana
+  case albanian
+  case albanianAlbania
+  case albanianKosovo
+  case albanianMacedonia
+  case amharic
+  case amharicEthiopia
+  case arabic
+  case arabicAlgeria
+  case arabicBahrain
+  case arabicChad
+  case arabicComoros
+  case arabicDjibouti
+  case arabicEgypt
+  case arabicEritrea
+  case arabicIraq
+  case arabicIsrael
+  case arabicJordan
+  case arabicKuwait
+  case arabicLebanon
+  case arabicLibya
+  case arabicMauritania
+  case arabicMorocco
+  case arabicOman
+  case arabicPalestinianTerritories
+  case arabicQatar
+  case arabicSaudiArabia
+  case arabicSomalia
+  case arabicSouthSudan
+  case arabicSudan
+  case arabicSyria
+  case arabicTunisia
+  case arabicUnitedArabEmirates
+  case arabicWesternSahara
+  case arabicWorld
+  case arabicYemen
+  case armenian
+  case armenianArmenia
+  case assamese
+  case assameseIndia
+  case asu
+  case asuTanzania
+  case azerbaijani
+  case azerbaijaniAzerbaijan
+  case azerbaijaniCyrillic
+  case azerbaijaniCyrillicAzerbaijan
+  case bafia
+  case bafiaCameroon
+  case bambara
+  case bambaraMali
+  case basaa
+  case basaaCameroon
+  case basque
+  case basqueSpain
+  case belarusian
+  case belarusianBelarus
+  case bemba
+  case bembaZambia
+  case bena
+  case benaTanzania
+  case bengali
+  case bengaliBangladesh
+  case engaliIndia
+  case bodo
+  case bodoIndia
+  case bosnian
+  case bosnianBosniaHerzegovina
+  case bosnianCyrillic
+  case bosnianCyrillicBosniaHerzegovina
+  case breton
+  case bretonFrance
+  case bulgarian
+  case bulgarianBulgaria
+  case burmese
+  case burmeseMyanmarBurma
+  case catalan
+  case catalanAndorra
+  case catalanFrance
+  case catalanItaly
+  case catalanSpain
+  case centralAtlasTamazight
+  case centralAtlasTamazightMorocco
+  case centralKurdish
+  case centralKurdishIran
+  case centralKurdishIraq
+  case cherokee
+  case cherokeeUnitedStates
+  case chiga
+  case chigaUganda
+  case chinese
+  case chineseChina
+  case chineseHongKongSarChina
+  case chineseMacauSarChina
+  case chineseSimplified
+  case chineseSimplifiedHongKongSarChina
+  case chineseSimplifiedMacauSarChina
+  case chineseSingapore
+  case chineseTaiwan
+  case chineseTraditional
+  case colognian
+  case colognianGermany
+  case cornish
+  case cornishUnitedKingdom
+  case croatian
+  case croatianBosniaHerzegovina
+  case croatianCroatia
+  case czech
+  case czechCzechRepublic
+  case danish
+  case danishDenmark
+  case danishGreenland
+  case duala
+  case dualaCameroon
+  case dutch
+  case dutchAruba
+  case dutchBelgium
+  case dutchCaribbeanNetherlands
+  case dutchCuraao
+  case dutchNetherlands
+  case dutchSintMaarten
+  case dutchSuriname
+  case dzongkha
+  case dzongkhaBhutan
+  case embu
+  case embuKenya
+  case english
+  case englishAlbania
+  case englishAmericanSamoa
+  case englishAndorra
+  case englishAnguilla
+  case englishAntiguaBarbuda
+  case englishAustralia
+  case englishAustria
+  case englishBahamas
+  case englishBarbados
+  case englishBelgium
+  case englishBelize
+  case englishBermuda
+  case englishBosniaHerzegovina
+  case englishBotswana
+  case englishBritishIndianOceanTerritory
+  case englishBritishVirginIslands
+  case englishCameroon
+  case englishCanada
+  case englishCaymanIslands
+  case englishChristmasIsland
+  case englishCocosKeelingIslands
+  case englishCookIslands
+  case englishCroatia
+  case englishCyprus
+  case englishCzechRepublic
+  case englishDenmark
+  case englishDiegoGarcia
+  case englishDominica
+  case englishEritrea
+  case englishEstonia
+  case englishEurope
+  case englishFalklandIslands
+  case englishFiji
+  case englishFinland
+  case englishFrance
+  case englishGambia
+  case englishGermany
+  case englishGhana
+  case englishGibraltar
+  case englishGreece
+  case englishGrenada
+  case englishGuam
+  case englishGuernsey
+  case englishGuyana
+  case englishHongKongSarChina
+  case englishHungary
+  case englishIceland
+  case englishIndia
+  case englishIreland
+  case englishIsleOfMan
+  case englishIsrael
+  case englishItaly
+  case englishJamaica
+  case englishJersey
+  case englishKenya
+  case englishKiribati
+  case englishLatvia
+  case englishLesotho
+  case englishLiberia
+  case englishLithuania
+  case englishLuxembourg
+  case englishMacauSarChina
+  case englishMadagascar
+  case englishMalawi
+  case englishMalaysia
+  case englishMalta
+  case englishMarshallIslands
+  case englishMauritius
+  case englishMicronesia
+  case englishMontenegro
+  case englishMontserrat
+  case englishNamibia
+  case englishNauru
+  case englishNetherlands
+  case englishNewZealand
+  case englishNigeria
+  case englishNiue
+  case englishNorfolkIsland
+  case englishNorthernMarianaIslands
+  case englishNorway
+  case englishPakistan
+  case englishPalau
+  case englishPapuaNewGuinea
+  case englishPhilippines
+  case englishPitcairnIslands
+  case englishPoland
+  case englishPortugal
+  case englishPuertoRico
+  case englishRomania
+  case englishRussia
+  case englishRwanda
+  case englishSamoa
+  case englishSeychelles
+  case englishSierraLeone
+  case englishSingapore
+  case englishSintMaarten
+  case englishSlovakia
+  case englishSlovenia
+  case englishSolomonIslands
+  case englishSouthAfrica
+  case englishSouthSudan
+  case englishSpain
+  case englishStHelena
+  case englishStKittsNevis
+  case englishStLucia
+  case englishStVincentGrenadines
+  case englishSudan
+  case englishSwaziland
+  case englishSweden
+  case englishSwitzerland
+  case englishTanzania
+  case englishTokelau
+  case englishTonga
+  case englishTrinidadTobago
+  case englishTurkey
+  case englishTurksCaicosIslands
+  case englishTuvalu
+  case englishUSOutlyingIslands
+  case englishUSVirginIslands
+  case englishUganda
+  case englishUnitedKingdom
+  case englishUnitedStates
+  case englishUnitedStatesComputer
+  case englishVanuatu
+  case englishWorld
+  case englishZambia
+  case englishZimbabwe
+  case esperanto
+  case estonian
+  case estonianEstonia
+  case ewe
+  case eweGhana
+  case eweTogo
+  case ewondo
+  case ewondoCameroon
+  case faroese
+  case faroeseFaroeIslands
+  case filipino
+  case filipinoPhilippines
+  case finnish
+  case finnishFinland
+  case french
+  case frenchAlgeria
+  case frenchBelgium
+  case frenchBenin
+  case frenchBurkinaFaso
+  case frenchBurundi
+  case frenchCameroon
+  case frenchCanada
+  case frenchCentralAfricanRepublic
+  case frenchChad
+  case frenchComoros
+  case frenchCongoBrazzaville
+  case frenchCongoKinshasa
+  case frenchCteDivoire
+  case frenchDjibouti
+  case frenchEquatorialGuinea
+  case frenchFrance
+  case frenchFrenchGuiana
+  case frenchFrenchPolynesia
+  case frenchGabon
+  case frenchGuadeloupe
+  case frenchGuinea
+  case frenchHaiti
+  case frenchLuxembourg
+  case frenchMadagascar
+  case frenchMali
+  case frenchMartinique
+  case frenchMauritania
+  case frenchMauritius
+  case frenchMayotte
+  case frenchMonaco
+  case frenchMorocco
+  case frenchNewCaledonia
+  case frenchNiger
+  case frenchRunion
+  case frenchRwanda
+  case frenchSenegal
+  case frenchSeychelles
+  case frenchStBarthlemy
+  case frenchStMartin
+  case frenchStPierreMiquelon
+  case frenchSwitzerland
+  case frenchSyria
+  case frenchTogo
+  case frenchTunisia
+  case frenchVanuatu
+  case frenchWallisFutuna
+  case friulian
+  case friulianItaly
+  case fulah
+  case fulahCameroon
+  case fulahGuinea
+  case fulahMauritania
+  case fulahSenegal
+  case galician
+  case galicianSpain
+  case ganda
+  case gandaUganda
+  case georgian
+  case georgianGeorgia
+  case german
+  case germanAustria
+  case germanBelgium
+  case germanGermany
+  case germanLiechtenstein
+  case germanLuxembourg
+  case germanSwitzerland
+  case greek
+  case greekCyprus
+  case greekGreece
+  case gujarati
+  case gujaratiIndia
+  case gusii
+  case gusiiKenya
+  case hausa
+  case hausaGhana
+  case hausaNiger
+  case hausaNigeria
+  case hawaiian
+  case hawaiianUnitedStates
+  case hebrew
+  case hebrewIsrael
+  case hindi
+  case hindiIndia
+  case hungarian
+  case hungarianHungary
+  case icelandic
+  case icelandicIceland
+  case igbo
+  case igboNigeria
+  case inariSami
+  case inariSamiFinland
+  case indonesian
+  case indonesianIndonesia
+  case inuktitut
+  case inuktitutUnifiedCanadianAboriginalSyllabics
+  case inuktitutUnifiedCanadianAboriginalSyllabicsCanada
+  case irish
+  case irishIreland
+  case italian
+  case italianItaly
+  case italianSanMarino
+  case italianSwitzerland
+  case japanese
+  case japaneseJapan
+  case jolaFonyi
+  case jolaFonyiSenegal
+  case kabuverdianu
+  case kabuverdianuCapeVerde
+  case kabyle
+  case kabyleAlgeria
+  case kako
+  case kakoCameroon
+  case kalaallisut
+  case kalaallisutGreenland
+  case kalenjin
+  case kalenjinKenya
+  case kamba
+  case kambaKenya
+  case kannada
+  case kannadaIndia
+  case kashmiri
+  case kashmiriArabic
+  case kashmiriArabicIndia
+  case kazakh
+  case kazakhKazakhstan
+  case khmer
+  case khmerCambodia
+  case kikuyu
+  case kikuyuKenya
+  case kinyarwanda
+  case kinyarwandaRwanda
+  case konkani
+  case konkaniIndia
+  case korean
+  case koreanNorthKorea
+  case koreanSouthKorea
+  case koyraChiini
+  case koyraChiiniMali
+  case koyraboroSenni
+  case koyraboroSenniMali
+  case kwasio
+  case kwasioCameroon
+  case kyrgyz
+  case kyrgyzKyrgyzstan
+  case lakota
+  case lakotaUnitedStates
+  case langi
+  case langiTanzania
+  case lao
+  case laoLaos
+  case latvian
+  case latvianLatvia
+  case lingala
+  case lingalaAngola
+  case lingalaCentralAfricanRepublic
+  case lingalaCongoBrazzaville
+  case lingalaCongoKinshasa
+  case lithuanian
+  case lithuanianLithuania
+  case lowerSorbian
+  case lowerSorbianGermany
+  case lubaKatanga
+  case lubaKatangaCongoKinshasa
+  case luo
+  case luoKenya
+  case luxembourgish
+  case luxembourgishLuxembourg
+  case luyia
+  case luyiaKenya
+  case macedonian
+  case macedonianMacedonia
+  case machame
+  case machameTanzania
+  case makhuwaMeetto
+  case makhuwaMeettoMozambique
+  case makonde
+  case makondeTanzania
+  case malagasy
+  case malagasyMadagascar
+  case malay
+  case malayArabic
+  case malayArabicBrunei
+  case malayArabicMalaysia
+  case malayBrunei
+  case malayMalaysia
+  case malaySingapore
+  case malayalam
+  case malayalamIndia
+  case maltese
+  case malteseMalta
+  case manx
+  case manxIsleOfMan
+  case marathi
+  case marathiIndia
+  case masai
+  case masaiKenya
+  case masaiTanzania
+  case meru
+  case meruKenya
+  case meta
+  case metaCameroon
+  case mongolian
+  case mongolianMongolia
+  case morisyen
+  case morisyenMauritius
+  case mundang
+  case mundangCameroon
+  case nama
+  case namaNamibia
+  case nepali
+  case nepaliIndia
+  case nepaliNepal
+  case ngiemboon
+  case ngiemboonCameroon
+  case ngomba
+  case ngombaCameroon
+  case northNdebele
+  case northNdebeleZimbabwe
+  case northernSami
+  case northernSamiFinland
+  case northernSamiNorway
+  case northernSamiSweden
+  case norwegianBokml
+  case norwegianBokmlNorway
+  case norwegianBokmlSvalbardJanMayen
+  case norwegianNynorsk
+  case norwegianNynorskNorway
+  case nuer
+  case nuerSudan
+  case nyankole
+  case nyankoleUganda
+  case oriya
+  case oriyaIndia
+  case oromo
+  case oromoEthiopia
+  case oromoKenya
+  case ossetic
+  case osseticGeorgia
+  case osseticRussia
+  case pashto
+  case pashtoAfghanistan
+  case persian
+  case persianAfghanistan
+  case persianIran
+  case polish
+  case polishPoland
+  case portuguese
+  case portugueseAngola
+  case portugueseBrazil
+  case portugueseCapeVerde
+  case portugueseGuineaBissau
+  case portugueseMacauSarChina
+  case portugueseMozambique
+  case portuguesePortugal
+  case portugueseSoTomPrncipe
+  case portugueseTimorLeste
+  case punjabi
+  case punjabiArabic
+  case punjabiArabicPakistan
+  case punjabiIndia
+  case quechua
+  case quechuaBolivia
+  case quechuaEcuador
+  case quechuaPeru
+  case romanian
+  case romanianMoldova
+  case romanianRomania
+  case romansh
+  case romanshSwitzerland
+  case rombo
+  case romboTanzania
+  case rundi
+  case rundiBurundi
+  case russian
+  case russianBelarus
+  case russianKazakhstan
+  case russianKyrgyzstan
+  case russianMoldova
+  case russianRussia
+  case russianUkraine
+  case rwa
+  case rwaTanzania
+  case sakha
+  case sakhaRussia
+  case samburu
+  case samburuKenya
+  case sango
+  case sangoCentralAfricanRepublic
+  case sangu
+  case sanguTanzania
+  case scottishGaelic
+  case scottishGaelicUnitedKingdom
+  case sena
+  case senaMozambique
+  case serbian
+  case serbianBosniaHerzegovina
+  case serbianKosovo
+  case serbianLatin
+  case serbianLatinBosniaHerzegovina
+  case serbianLatinKosovo
+  case serbianLatinMontenegro
+  case serbianLatinSerbia
+  case serbianMontenegro
+  case serbianSerbia
+  case shambala
+  case shambalaTanzania
+  case shona
+  case shonaZimbabwe
+  case sichuanYi
+  case sichuanYiChina
+  case sinhala
+  case sinhalaSriLanka
+  case slovak
+  case slovakSlovakia
+  case slovenian
+  case slovenianSlovenia
+  case soga
+  case sogaUganda
+  case somali
+  case somaliDjibouti
+  case somaliEthiopia
+  case somaliKenya
+  case somaliSomalia
+  case spanish
+  case spanishArgentina
+  case spanishBolivia
+  case spanishCanaryIslands
+  case spanishCeutaMelilla
+  case spanishChile
+  case spanishColombia
+  case spanishCostaRica
+  case spanishCuba
+  case spanishDominicanRepublic
+  case spanishEcuador
+  case spanishElSalvador
+  case spanishEquatorialGuinea
+  case spanishGuatemala
+  case spanishHonduras
+  case spanishLatinAmerica
+  case spanishMexico
+  case spanishNicaragua
+  case spanishPanama
+  case spanishParaguay
+  case spanishPeru
+  case spanishPhilippines
+  case spanishPuertoRico
+  case spanishSpain
+  case spanishUnitedStates
+  case spanishUruguay
+  case spanishVenezuela
+  case standardMoroccanTamazight
+  case standardMoroccanTamazightMorocco
+  case swahili
+  case swahiliCongoKinshasa
+  case swahiliKenya
+  case swahiliTanzania
+  case swahiliUganda
+  case swedish
+  case swedishlandIslands
+  case swedishFinland
+  case swedishSweden
+  case swissGerman
+  case swissGermanFrance
+  case swissGermanLiechtenstein
+  case swissGermanSwitzerland
+  case tachelhit
+  case tachelhitMorocco
+  case tachelhitTifinagh
+  case tachelhitTifinaghMorocco
+  case taita
+  case taitaKenya
+  case tajik
+  case tajikTajikistan
+  case tamil
+  case tamilIndia
+  case tamilMalaysia
+  case tamilSingapore
+  case tamilSriLanka
+  case tasawaq
+  case tasawaqNiger
+  case telugu
+  case teluguIndia
+  case teso
+  case tesoKenya
+  case tesoUganda
+  case thai
+  case thaiThailand
+  case tibetan
+  case tibetanChina
+  case tibetanIndia
+  case tigrinya
+  case tigrinyaEritrea
+  case tigrinyaEthiopia
+  case tongan
+  case tonganTonga
+  case turkish
+  case turkishCyprus
+  case turkishTurkey
+  case turkmen
+  case turkmenTurkmenistan
+  case ukrainian
+  case ukrainianUkraine
+  case upperSorbian
+  case upperSorbianGermany
+  case urdu
+  case urduIndia
+  case urduPakistan
+  case uyghur
+  case uyghurArabic
+  case uyghurArabicChina
+  case uzbek
+  case uzbekArabic
+  case uzbekArabicAfghanistan
+  case uzbekLatin
+  case uzbekLatinUzbekistan
+  case uzbekUzbekistan
+  case vai
+  case vaiLatin
+  case vaiLatinLiberia
+  case vaiLiberia
+  case vietnamese
+  case vietnameseVietnam
+  case vunjo
+  case vunjoTanzania
+  case walser
+  case walserSwitzerland
+  case welsh
+  case welshUnitedKingdom
+  case westernFrisian
+  case westernFrisianNetherlands
+  case yangben
+  case yangbenCameroon
+  case yiddish
+  case yiddishWorld
+  case yoruba
+  case yorubaBenin
+  case yorubaNigeria
+  case zarma
+  case zarmaNiger
+  case zulu
+  case zuluSouthAfrica
+  public var locale: Foundation.Locale {
+    get
+  }
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers public class CurrencyUITextFieldDelegate : ObjectiveC.NSObject {
+  public var formatter: (ResearchKit.CurrencyAdjusting & ResearchKit.CurrencyFormatting)!
+  public var clearsWhenValueIsZero: Swift.Bool
+  @objc public var passthroughDelegate: UIKit.UITextFieldDelegate? {
+    @objc get
+    @objc set
+  }
+  @objc override dynamic public init()
+  @objc public init(formatter: ResearchKit.CurrencyFormatter)
+  @objc deinit
+}
+extension CurrencyUITextFieldDelegate : UIKit.UITextFieldDelegate {
+  @discardableResult
+  @objc dynamic open func textFieldShouldBeginEditing(_ textField: UIKit.UITextField) -> Swift.Bool
+  @objc dynamic public func textFieldDidBeginEditing(_ textField: UIKit.UITextField)
+  @discardableResult
+  @objc dynamic public func textFieldShouldEndEditing(_ textField: UIKit.UITextField) -> Swift.Bool
+  @objc dynamic open func textFieldDidEndEditing(_ textField: UIKit.UITextField)
+  @discardableResult
+  @objc dynamic open func textFieldShouldClear(_ textField: UIKit.UITextField) -> Swift.Bool
+  @discardableResult
+  @objc dynamic open func textFieldShouldReturn(_ textField: UIKit.UITextField) -> Swift.Bool
+  @discardableResult
+  @objc dynamic public func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
+}
+extension NumberFormatter {
+  public func string(from doubleValue: Swift.Double?) -> Swift.String?
+}
+extension ORKPredicateStepNavigationRule {
+  convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
+}
+public protocol CurrencyString {
+  var representsZero: Swift.Bool { get }
+  var hasNumbers: Swift.Bool { get }
+  var lastNumberOffsetFromEnd: Swift.Int? { get }
+  func numeralFormat() -> Swift.String
+  mutating func updateDecimalSeparator(decimalDigits: Swift.Int)
+}
+extension String : ResearchKit.CurrencyString {
+  public var representsZero: Swift.Bool {
+    get
+  }
+  public var hasNumbers: Swift.Bool {
+    get
+  }
+  public var lastNumberOffsetFromEnd: Swift.Int? {
+    get
+  }
+  public mutating func updateDecimalSeparator(decimalDigits: Swift.Int)
+  public func numeralFormat() -> Swift.String
+}
+extension String {
+  public static let negativeSymbol: Swift.String
+}
+extension UITextField {
+  public var selectedTextRangeOffsetFromEnd: Swift.Int {
+    get
+  }
+  public func setInitialSelectedTextRange()
+  public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
+}
+extension ResearchKit.Currency : Swift.Equatable {}
+extension ResearchKit.Currency : Swift.Hashable {}
+extension ResearchKit.Currency : Swift.RawRepresentable {}
+extension ResearchKit.CurrencyLocale : Swift.Equatable {}
+extension ResearchKit.CurrencyLocale : Swift.Hashable {}
+extension ResearchKit.CurrencyLocale : Swift.RawRepresentable {}
