@@ -36,6 +36,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 FOUNDATION_EXPORT NSErrorDomain const ORKESerializationErrorDomain;
+FOUNDATION_EXPORT NSString *ORKESerializationClassKey;
 
 typedef NS_ENUM(NSUInteger, ORKESerializationErrorCode) {
     ORKESerializationErrorCodeUnexpectedClass = 1001

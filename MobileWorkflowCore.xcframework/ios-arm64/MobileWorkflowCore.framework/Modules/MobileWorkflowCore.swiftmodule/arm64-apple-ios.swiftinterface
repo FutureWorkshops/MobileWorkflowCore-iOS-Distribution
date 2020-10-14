@@ -30,7 +30,6 @@ extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
 }
 public protocol BuildableStep : ResearchKit.ORKStep {
-  static var stepClassName: Swift.String { get }
   static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public struct Credential : Swift.Codable {
@@ -47,7 +46,7 @@ extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
 public protocol SessionProvider {
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withAdditionalSteps steps: [MobileWorkflowCore.BuildableStep.Type], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
+  convenience public init(withAdditionalSteps steps: [MobileWorkflowCore.MobileWorkflowStepType], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
   @objc deinit
 }
 public protocol ImageLoader {
@@ -80,8 +79,16 @@ public enum HTTPMethod : Swift.String {
   }
   public init?(rawValue: Swift.String)
 }
+public protocol MobileWorkflowStep : MobileWorkflowCore.BuildableStep {
+}
+public protocol MobileWorkflowStepType : MobileWorkflowCore.StepType {
+  var stepClass: MobileWorkflowCore.MobileWorkflowStep.Type { get }
+}
+public protocol StepType {
+  var typeName: Swift.String { get }
+}
 public struct StepData : Swift.Codable {
-  public let className: Swift.String
+  public let type: Swift.String
   public let identifier: Swift.String
   public let image: UIKit.UIImage?
   public let imageURL: Swift.String?
@@ -89,10 +96,7 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension ORKImageCaptureStep : MobileWorkflowCore.BuildableStep {
-  public static var stepClassName: Swift.String {
-    get
-  }
+extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
   public static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public enum AppConfigurationContext {
