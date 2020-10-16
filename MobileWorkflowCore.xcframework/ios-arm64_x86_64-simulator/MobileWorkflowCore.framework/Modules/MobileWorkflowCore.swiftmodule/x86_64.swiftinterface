@@ -8,6 +8,7 @@ import CoreLocation
 import CryptoKit
 import Foundation
 import MediaPlayer
+import MessageUI
 @_exported import MobileWorkflowCore
 import ResearchKit.Private
 import ResearchKit
@@ -22,6 +23,24 @@ public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
   @objc deinit
 }
+public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
+  case invalidStepData(cause: Swift.String)
+  case invalidWorkflowData(cause: Swift.String)
+  case invalidServerData(cause: Swift.String)
+  case invalidAppName(cause: Swift.String)
+  case invalidAppData(cause: Swift.String)
+  case invalidNavigationStyle(cause: Swift.String)
+  case invalidNavigationRule(cause: Swift.String)
+  public var domain: Swift.String {
+    get
+  }
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
 public struct URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
@@ -30,7 +49,14 @@ extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
 }
 public protocol BuildableStep : ResearchKit.ORKStep {
-  static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+  static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+}
+@objc @_inheritsConvenienceInitializers public class MobileWorkflowButtonViewController : ResearchKit.ORKStepViewController {
+  public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
+  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc deinit
+  @objc override dynamic public init(step: ResearchKit.ORKStep?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
 public struct Credential : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
@@ -46,7 +72,7 @@ extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
 public protocol SessionProvider {
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withAdditionalSteps steps: [MobileWorkflowCore.MobileWorkflowStepType], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
+  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
   @objc deinit
 }
 public protocol ImageLoader {
@@ -79,13 +105,18 @@ public enum HTTPMethod : Swift.String {
   }
   public init?(rawValue: Swift.String)
 }
-public protocol MobileWorkflowStep : MobileWorkflowCore.BuildableStep {
+public protocol MobileWorkflowPlugin {
+  static var allStepsTypes: [MobileWorkflowCore.MobileWorkflowStepType] { get }
 }
 public protocol MobileWorkflowStepType : MobileWorkflowCore.StepType {
   var stepClass: MobileWorkflowCore.MobileWorkflowStep.Type { get }
 }
+public protocol MobileWorkflowStep : MobileWorkflowCore.BuildableStep {
+}
 public protocol StepType {
   var typeName: Swift.String { get }
+}
+public struct StepContext {
 }
 public struct StepData : Swift.Codable {
   public let type: Swift.String
@@ -97,7 +128,7 @@ public struct StepData : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
 }
 extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
-  public static func build(data: MobileWorkflowCore.StepData, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
+  public static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public enum AppConfigurationContext {
   case urlContext(url: Swift.String, serverId: Swift.Int?)
@@ -122,6 +153,10 @@ public struct AuthRedirectHandler {
 }
 public protocol AuthProvider {
   func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
+}
+@_hasMissingDesignatedInitializers public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
+  public func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
+  @objc deinit
 }
 public protocol AuthFlowResumer : AnyObject {
   func resumeAuth(with url: Foundation.URL) -> Swift.Bool

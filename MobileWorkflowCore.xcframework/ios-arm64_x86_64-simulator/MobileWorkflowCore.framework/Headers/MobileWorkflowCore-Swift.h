@@ -211,9 +211,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+@class UITraitCollection;
+@class ORKStep;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
+@interface MobileWorkflowButtonViewController : ORKStepViewController
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class ORKTaskViewController;
-@class ORKStepViewController;
 @class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
@@ -463,9 +472,18 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 
 
+@class UITraitCollection;
+@class ORKStep;
 @class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
+@interface MobileWorkflowButtonViewController : ORKStepViewController
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 @class ORKTaskViewController;
-@class ORKStepViewController;
 @class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
