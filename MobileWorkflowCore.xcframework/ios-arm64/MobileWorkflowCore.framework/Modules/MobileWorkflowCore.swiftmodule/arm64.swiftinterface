@@ -41,7 +41,10 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
     get
   }
 }
-public struct URLSchemeManager {
+public protocol URLSchemeManager {
+  func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
+}
+public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
@@ -67,7 +70,7 @@ extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
     get
   }
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
-  public func fetchData(for path: Swift.String) -> Any?
+  public func fetchValue(for path: Swift.String) -> Any?
 }
 public protocol SessionProvider {
 }
@@ -131,13 +134,12 @@ extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
   public static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> ResearchKit.ORKStep
 }
 public enum AppConfigurationContext {
-  case urlContext(url: Swift.String, serverId: Swift.Int?)
+  case remote(url: Swift.String, serverId: Swift.Int?)
   case cached
-  case file(path: Swift.String, serverId: Swift.Int?)
+  case file(path: Swift.String, serverId: Swift.Int?, workflowId: Swift.Int?, sessionValues: [Swift.String : Any]? = nil)
 }
-extension AppConfigurationContext {
-  public init?(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>, with urlSchemeManager: MobileWorkflowCore.URLSchemeManager = URLSchemeManager())
-  public init(with filePath: Swift.String, serverId: Swift.Int? = nil)
+extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
+  public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
 @_hasMissingDesignatedInitializers final public class Localization {
   final public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
@@ -145,8 +147,24 @@ extension AppConfigurationContext {
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   var content: [Swift.AnyHashable : Swift.Codable] { get }
-  func fetchData(for path: Swift.String) -> Any?
+  func fetchValue(for path: Swift.String) -> Any?
   func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+extension String : MobileWorkflowCore.ValueProvider {
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+extension Dictionary : MobileWorkflowCore.SessionProvider {
+}
+extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.String {
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
 public struct AuthRedirectHandler {
   public init(_ handler: @escaping (MobileWorkflowCore.AuthFlowResumer) -> Swift.Void)
