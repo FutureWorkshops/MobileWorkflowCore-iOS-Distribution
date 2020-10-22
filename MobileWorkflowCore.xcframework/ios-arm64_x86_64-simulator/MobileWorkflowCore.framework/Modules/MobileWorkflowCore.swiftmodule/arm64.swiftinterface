@@ -48,13 +48,6 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
-#warning("Remove")
-public struct NexaLawURLSchemeManager : MobileWorkflowCore.URLSchemeManager {
-  public let filePath: Swift.String
-  public let serverId: Swift.Int
-  public init(filePath: Swift.String, serverId: Swift.Int)
-  public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
-}
 extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
 }
@@ -163,6 +156,8 @@ extension String : MobileWorkflowCore.ValueProvider {
   }
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+extension Dictionary : MobileWorkflowCore.SessionProvider {
 }
 extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.String {
   public var content: [Swift.AnyHashable : Swift.Codable] {
