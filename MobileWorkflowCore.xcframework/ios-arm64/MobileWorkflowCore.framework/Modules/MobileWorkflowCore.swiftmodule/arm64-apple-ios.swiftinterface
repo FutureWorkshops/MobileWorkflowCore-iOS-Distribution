@@ -10,6 +10,7 @@ import Foundation
 import MediaPlayer
 import MessageUI
 @_exported import MobileWorkflowCore
+import PDFKit
 import ResearchKit.Private
 import ResearchKit
 import Security
@@ -190,3 +191,4 @@ extension ResearchKit.ORKFileResult : MobileWorkflowCore.SessionProvider {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
+extension ResearchKit.ORKSignatureResult : MobileWorkflowCore.SessionProvider {}
