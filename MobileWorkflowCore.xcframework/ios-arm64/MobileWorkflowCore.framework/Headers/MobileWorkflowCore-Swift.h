@@ -188,9 +188,12 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import ResearchKit;
+@import Foundation;
+@import ObjectiveC;
 @import UIKit;
 #endif
+
+#import <MobileWorkflowCore/MobileWorkflowCore.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -208,6 +211,78 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #endif
 
 
+
+@class NSLocale;
+@class NSNumberFormatter;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore17CurrencyFormatter")
+@interface CurrencyFormatter : NSObject
+@property (nonatomic, strong) NSLocale * _Nonnull nsLocale;
+/// Can be used to set a custom currency code string
+@property (nonatomic, copy) NSString * _Nonnull currencyCode;
+/// Encapsulated Number formatter
+@property (nonatomic, readonly, strong) NSNumberFormatter * _Nonnull numberFormatter;
+/// Initialize a new currency formatter with optional configuration handler callback.
+/// \param handler configuration handler callback.
+///
+- (nonnull instancetype)init:(void (^ _Nullable)(CurrencyFormatter * _Nonnull))handler OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+@class NSNumber;
+
+@interface CurrencyFormatter (SWIFT_EXTENSION(MobileWorkflowCore))
+/// Returns a currency string from a given double value.
+/// \param doubleValue the monetary amount.
+///
+///
+/// returns:
+/// formatted currency string.
+- (NSString * _Nullable)stringFrom:(double)doubleValue SWIFT_WARN_UNUSED_RESULT;
+/// Returns a double (as NSNumber) from a string that represents a numerical value.
+/// \param string string that describes the numerical value.
+///
+///
+/// returns:
+/// the value as a Double.
+- (NSNumber * _Nullable)doubleAsNSNumberFrom:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
+/// Receives a currency formatted string and returns its
+/// numerical/unformatted representation.
+/// \param string currency formatted string
+///
+///
+/// returns:
+/// numerical representation
+- (NSString * _Nullable)unformattedWithString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@protocol UITextFieldDelegate;
+
+/// Custom text field delegate, that formats user inputs based on a given currency formatter.
+SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
+@interface CurrencyUITextFieldDelegate : NSObject
+/// A delegate object to receive and potentially handle <code>UITextFieldDelegate events</code> that are sent to <code>CurrencyUITextFieldDelegate</code>.
+/// Note: Make sure the implementation of this object does not wrongly interfere with currency formatting.
+/// By returning <code>false</code> on<code>textField(textField:shouldChangeCharactersIn:replacementString:)</code> no currency formatting is done.
+@property (nonatomic, strong) id <UITextFieldDelegate> _Nullable passthroughDelegate;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithFormatter:(CurrencyFormatter * _Nonnull)formatter OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@class UITextField;
+
+@interface CurrencyUITextFieldDelegate (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextFieldDelegate>
+- (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
+- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
+- (BOOL)textFieldShouldEndEditing:(UITextField * _Nonnull)textField;
+- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
+- (BOOL)textFieldShouldClear:(UITextField * _Nonnull)textField;
+- (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
+- (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
+@end
 
 @class UITraitCollection;
 @class ORKStep;
@@ -232,6 +307,9 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillDisappear:(ORKStepViewController * _Nonnull)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
+
+
+
 
 
 

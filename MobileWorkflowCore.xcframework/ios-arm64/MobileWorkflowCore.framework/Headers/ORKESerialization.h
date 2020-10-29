@@ -32,6 +32,7 @@
 @import Foundation;
 @import UIKit;
 
+#import <MobileWorkflowCore/MobileWorkflowCore.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
