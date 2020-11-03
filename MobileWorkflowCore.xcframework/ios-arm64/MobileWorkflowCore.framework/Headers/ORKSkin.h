@@ -101,12 +101,6 @@ ORK_EXTERN NSString *const ORKBulletItemTextColorKey;
 /// ORKStepContentView stepTopContentImage  KVO keyPath image changed
 ORK_EXTERN NSString *const ORKStepTopContentImageChangedKey;
 
-/// Name of notification that is triggered when the keyboard's done button is pressed
-ORK_EXTERN NSString *const ORKDoneButtonPressedKey;
-
-/// Name of notification that is triggered when the keyboard's done button is pressed
-ORK_EXTERN NSString *const ORKResetDoneButtonKey;
-
 /// Return the color for a specified ORK...ColorKey
 UIColor *ORKColor(NSString *colorKey);
 
