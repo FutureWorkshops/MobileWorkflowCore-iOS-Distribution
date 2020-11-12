@@ -6,11 +6,11 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		dPyE2piHG3AFCf498DhxUmET8FQ=
+		Zs0T9w73hVZwx1vvy3jqyky2Clk=
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		45UUkIf2opBCJ8G9Ra2FUuMR9+k=
+		8RZFsPKEhvPhdygv3V9eiqUfD0A=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
@@ -290,7 +290,7 @@
 		</data>
 		<key>Headers/ORKImageCaptureStep.h</key>
 		<data>
-		F1rOIb/27KKiHGUPxj8tSoZUf7E=
+		Q/9aVbUoRGLJY5OYUiI1WSstEuQ=
 		</data>
 		<key>Headers/ORKImageCaptureStepViewController.h</key>
 		<data>
@@ -738,11 +738,11 @@
 		</data>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<data>
-		fTRQuVsvhciqPCVhnTPjv2sJGLc=
+		dx8aHJTHzBX2qWFGv0FGdPpDkXk=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<data>
-		ZF4crmkQnoiAfCJfzOjuzaLneNs=
+		56fGOwIH48jtDp1S2JHO3nZm7JM=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -754,7 +754,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		WHZMvVbR+spXoghxtpofXrJ49KI=
+		VXBT0TTrhhhCZF4Fu0SEJ4B/4Zk=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -766,7 +766,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		WHZMvVbR+spXoghxtpofXrJ49KI=
+		VXBT0TTrhhhCZF4Fu0SEJ4B/4Zk=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -778,7 +778,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		20meuMEWi3cDBgbNzMRVC3eflHY=
+		o/F3Gh/1FEZc4jU2ejMhif7+pUc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -790,7 +790,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		20meuMEWi3cDBgbNzMRVC3eflHY=
+		o/F3Gh/1FEZc4jU2ejMhif7+pUc=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -1573,14 +1573,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HDE5IaHl4WitFrf60wq6HJlXK7GTASteJ8H6LwPfUXs=
+			IgvbD6GYh0ZMtvpSBWpz4SsiZt7J1Q/8mYHNsozxhLU=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			GClmPyHLeIKTBrqP+GDdaH9tO4W/XOZUIboOVUM1EgU=
+			Jgc1FynEJVcTM3DuXOEnFLfr5Uywe8xMVOcv6LYYLU8=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
@@ -2070,7 +2070,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Nr+vc1FTeYxbriuavXZPOoRbH/q7ozOLLg7xu97nojA=
+			W5QrqtJsiICIHKGzKmT/a/SUUdSz2GBecLI5MllctNY=
 			</data>
 		</dict>
 		<key>Headers/ORKImageCaptureStepViewController.h</key>
@@ -2847,14 +2847,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sc1wZZqEQciT1J9GdJKcfPLNVjKzpTyWxdVlUNsj8OY=
+			Rpp+tzIOj//5Z1vzSFrPX3ickaaWLpNFivVPx5i29Qc=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			AJfKt49UEuScd72LqtDIF0Lh+LL2d1RS/93ttWQmRhQ=
+			x1BIcFqEZl69hTzXVqudIMVoJk5uFS3JXHZL3xmqQr4=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -2875,7 +2875,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6k2iIQCTDLGWZ29p6u+n8WKle4lJE7Ypt2ixel5M/Ig=
+			iMo6WvQfZh3vr760w8sxfe0k4X5aY4Da7CURZpmYYyI=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -2896,7 +2896,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6k2iIQCTDLGWZ29p6u+n8WKle4lJE7Ypt2ixel5M/Ig=
+			iMo6WvQfZh3vr760w8sxfe0k4X5aY4Da7CURZpmYYyI=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -2917,7 +2917,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y0a2Ty1xOPL5o9fDmPzlIyFtVBdiDxQHZtVrZVYZpLY=
+			hqcoxnPft4z8L8SFyP+Rl+9Qn2U26l8tCHbaqtnRaR8=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -2938,7 +2938,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y0a2Ty1xOPL5o9fDmPzlIyFtVBdiDxQHZtVrZVYZpLY=
+			hqcoxnPft4z8L8SFyP+Rl+9Qn2U26l8tCHbaqtnRaR8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

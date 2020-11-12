@@ -105,6 +105,13 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic) AVCaptureDevicePosition devicePosition;
 
+/**
+ A float value specifiying the desired JPEG compression quality.
+ 
+ The default value is '1.0', which corresponds to best available quality.
+ */
+@property (nonatomic, assign) CGFloat compressionQuality;
+
 @end
 
 NS_ASSUME_NONNULL_END

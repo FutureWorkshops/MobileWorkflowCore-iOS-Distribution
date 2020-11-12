@@ -333,6 +333,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 
 
 
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -649,6 +650,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillDisappear:(ORKStepViewController * _Nonnull)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
+
 
 
 
