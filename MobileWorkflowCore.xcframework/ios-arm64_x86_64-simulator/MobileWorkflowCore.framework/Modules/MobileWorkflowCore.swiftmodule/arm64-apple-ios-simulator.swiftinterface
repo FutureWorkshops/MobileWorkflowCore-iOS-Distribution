@@ -40,6 +40,9 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
     get
   }
 }
+extension FileManager {
+  @objc(mw_sharedManager) public static var shared: Foundation.FileManager
+}
 public protocol URLSchemeManager {
   func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
@@ -817,7 +820,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
+  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler? = nil)
   @objc deinit
 }
 public protocol CurrencyFormatting {
@@ -1102,6 +1105,14 @@ public protocol AuthRedirector : AnyObject {
 extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
+}
+public protocol PreAuthProvider {
+  func performPreAuth(completion: @escaping (Swift.Result<Swift.String, Swift.Error>) -> Swift.Void)
+}
+public class MyPreAuthProvider : MobileWorkflowCore.PreAuthProvider {
+  public init()
+  public func performPreAuth(completion: @escaping (Swift.Result<Swift.String, Swift.Error>) -> Swift.Void)
+  @objc deinit
 }
 extension MobileWorkflowCore.CurrencyLocale : Swift.Equatable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Hashable {}

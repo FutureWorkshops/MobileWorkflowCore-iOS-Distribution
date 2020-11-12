@@ -286,6 +286,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
+
+@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
++ (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
++ (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
+@end
+
 @class UITraitCollection;
 @class ORKStep;
 @class NSCoder;
@@ -625,6 +632,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textFieldShouldClear:(UITextField * _Nonnull)textField;
 - (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
+@end
+
+
+@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
++ (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
++ (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
 @end
 
 @class UITraitCollection;
