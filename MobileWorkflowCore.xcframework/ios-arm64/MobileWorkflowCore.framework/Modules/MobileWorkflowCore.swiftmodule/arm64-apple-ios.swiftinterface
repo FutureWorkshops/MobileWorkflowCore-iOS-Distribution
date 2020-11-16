@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3 (swiftlang-1200.0.29.2 clang-1200.0.30.1)
+// swift-compiler-version: Apple Swift version 5.3.1 (swiftlang-1200.0.41 clang-1200.0.32.8)
 // swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
@@ -1047,6 +1047,9 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
+extension UIColor {
+  public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
+}
 extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
   public static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
 }
@@ -1105,14 +1108,6 @@ public protocol AuthRedirector : AnyObject {
 extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
-}
-public protocol PreAuthProvider {
-  func performPreAuth(completion: @escaping (Swift.Result<Swift.String, Swift.Error>) -> Swift.Void)
-}
-public class MyPreAuthProvider : MobileWorkflowCore.PreAuthProvider {
-  public init()
-  public func performPreAuth(completion: @escaping (Swift.Result<Swift.String, Swift.Error>) -> Swift.Void)
-  @objc deinit
 }
 extension MobileWorkflowCore.CurrencyLocale : Swift.Equatable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Hashable {}
