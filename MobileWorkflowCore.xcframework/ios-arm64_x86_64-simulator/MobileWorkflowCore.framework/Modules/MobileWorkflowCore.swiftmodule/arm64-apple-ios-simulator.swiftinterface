@@ -53,6 +53,34 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
 extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
 }
+public protocol JSONRepresentable {
+  var jsonContent: Swift.String? { get }
+}
+extension Date : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension NSDate : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension CLLocation : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension CLLocationCoordinate2D : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension ORKLocation : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
 }
@@ -802,6 +830,11 @@ public enum CurrencyLocale : Swift.String, MobileWorkflowCore.LocaleConvertible 
     get
   }
 }
+extension ORKQuestionResult : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
 extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
   public var content: [Swift.AnyHashable : Swift.Codable] {
     get
@@ -937,6 +970,13 @@ extension CurrencyFormatter : MobileWorkflowCore.CurrencyAdjusting {
   public func formattedStringWithAdjustedDecimalSeparator(from string: Swift.String) -> Swift.String?
   public func formattedStringAdjustedToFitAllowedValues(from string: Swift.String) -> Swift.String?
 }
+extension ORKChoiceQuestionResult : MobileWorkflowCore.NavigationTriggerResult {
+  public var navigationDestinationKey: Swift.String? {
+    get
+  }
+}
+public enum BinaryContentType {
+}
 public protocol ImageLoader {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
@@ -980,6 +1020,12 @@ extension String : MobileWorkflowCore.CurrencyString {
 }
 extension String {
   public static let negativeSymbol: Swift.String
+}
+public protocol NavigationTriggerResult {
+  var navigationDestinationKey: Swift.String? { get }
+}
+extension UIFont {
+  public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
 extension ORKPredicateStepNavigationRule {
   convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
@@ -1085,6 +1131,14 @@ extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.Strin
   }
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+public enum ViewOrder {
+  case top
+  case above(view: UIKit.UIView)
+  case below(view: UIKit.UIView)
+}
+extension UIView {
+  public func addPinnedSubview(_ view: UIKit.UIView, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
 }
 extension NumberFormatter {
   public func string(from doubleValue: Swift.Double?) -> Swift.String?
