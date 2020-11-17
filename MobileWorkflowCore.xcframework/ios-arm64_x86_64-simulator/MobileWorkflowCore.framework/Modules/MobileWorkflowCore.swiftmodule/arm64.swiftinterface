@@ -1083,6 +1083,9 @@ public protocol StepType {
   var typeName: Swift.String { get }
 }
 public struct StepContext {
+  public let appName: Swift.String?
+  public let workflowName: Swift.String?
+  public let systemTintColor: UIKit.UIColor
 }
 public struct StepData : Swift.Codable {
   public let type: Swift.String
