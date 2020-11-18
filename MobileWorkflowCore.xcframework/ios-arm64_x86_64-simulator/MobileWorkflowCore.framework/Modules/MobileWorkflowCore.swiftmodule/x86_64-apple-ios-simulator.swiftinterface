@@ -976,6 +976,16 @@ extension ORKChoiceQuestionResult : MobileWorkflowCore.NavigationTriggerResult {
   }
 }
 public enum BinaryContentType {
+  public enum Image {
+    public static let heif: Swift.String
+    public static let jpeg: Swift.String
+  }
+  public enum Video {
+    public static let mp4: Swift.String
+  }
+  public enum Application {
+    public static let pdf: Swift.String
+  }
 }
 public protocol ImageLoader {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
