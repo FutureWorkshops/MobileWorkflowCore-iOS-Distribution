@@ -96,9 +96,11 @@ extension ORKLocation : MobileWorkflowCore.JSONRepresentable {
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
 }
-@objc @_inheritsConvenienceInitializers public class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
+@objc @_inheritsConvenienceInitializers open class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  public func showLoading()
+  public func hideLoading()
   @objc deinit
   @objc override dynamic public init(step: MobileWorkflowCore.ORKStep?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -1222,7 +1224,8 @@ public struct AuthRedirectHandler {
 public protocol AuthProvider {
   func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
 }
-@_hasMissingDesignatedInitializers public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
+public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
+  public init(_ start: @escaping (@escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer)
   public func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
   @objc deinit
 }
