@@ -20,6 +20,7 @@ public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
   final public func postSession(to url: Swift.String, queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
+  final public func authenticateWithProvider(_ authProvider: MobileWorkflowCore.AuthProvider, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
   @objc deinit
 }
 public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
@@ -104,6 +105,19 @@ public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   @objc deinit
   @objc override dynamic public init(step: MobileWorkflowCore.ORKStep?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+}
+public enum CredentialType : Swift.String, Swift.CaseIterable {
+  case token
+  case refreshToken
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+  public typealias AllCases = [MobileWorkflowCore.CredentialType]
+  public static var allCases: [MobileWorkflowCore.CredentialType] {
+    get
+  }
 }
 public struct Credential : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
@@ -1164,6 +1178,16 @@ extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   final public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
   @objc deinit
 }
+public enum CredentialError : Swift.Error {
+  case invalidInputData
+  case storingError
+  case unexpected
+  public static func == (a: MobileWorkflowCore.CredentialError, b: MobileWorkflowCore.CredentialError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   var content: [Swift.AnyHashable : Swift.Codable] { get }
   func fetchValue(for path: Swift.String) -> Any?
@@ -1239,6 +1263,9 @@ extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
+extension MobileWorkflowCore.CredentialType : Swift.Equatable {}
+extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
+extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Equatable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Hashable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.RawRepresentable {}
@@ -1250,5 +1277,7 @@ extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ORKSignatureResult : MobileWorkflowCore.SessionProvider {}
+extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
+extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
 extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
 extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
