@@ -120,6 +120,7 @@ public enum CredentialType : Swift.String, Swift.CaseIterable {
   }
 }
 public struct Credential : Swift.Codable {
+  public init(type: Swift.String, value: Swift.String, expirationDate: Foundation.Date)
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
