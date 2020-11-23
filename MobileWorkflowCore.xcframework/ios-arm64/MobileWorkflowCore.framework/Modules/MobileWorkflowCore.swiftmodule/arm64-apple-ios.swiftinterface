@@ -51,7 +51,19 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
 extension UIViewController {
+  public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
+  public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (Swift.Bool) -> Swift.Void)
+}
+extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
+}
+public protocol RemoteContentStep {
+  associatedtype ResponseType
+  var networkManager: MobileWorkflowCore.NetworkManager { get }
+  var contentURL: Swift.String? { get }
+}
+extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
+  public func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
@@ -1034,6 +1046,23 @@ extension String {
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
 }
+public protocol RemoteContentStepViewController : UIKit.UIViewController {
+  associatedtype StepType : MobileWorkflowCore.RemoteContentStep
+  var remoteContentStep: Self.StepType! { get }
+  var showBadURLError: Swift.Bool { get }
+  func loadContent()
+  func showLoading()
+  func hideLoading()
+  func update(content: Self.StepType.ResponseType)
+}
+extension RemoteContentStepViewController {
+  public var showBadURLError: Swift.Bool {
+    get
+  }
+}
+extension RemoteContentStepViewController where Self.StepType.ResponseType : Swift.Decodable {
+  public func loadContent()
+}
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
@@ -1106,6 +1135,15 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
+@objc @_hasMissingDesignatedInitializers public class MessageStateView : UIKit.UIView {
+  public init(frame: CoreGraphics.CGRect, message: Swift.String)
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LoadingStateView : UIKit.UIView {
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc deinit
+}
 extension UIColor {
   public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
 }
@@ -1144,6 +1182,28 @@ extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.Strin
   }
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+public enum SyncResult {
+  case alreadyInSync
+  case didSync
+  public static func == (a: MobileWorkflowCore.SyncResult, b: MobileWorkflowCore.SyncResult) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+public protocol SyncableContentSource : AnyObject {
+  var resolvedURL: Foundation.URL? { get set }
+  func syncContentSource() -> MobileWorkflowCore.SyncResult
+}
+extension SyncableContentSource where Self : MobileWorkflowCore.RemoteContentStep {
+  public func syncContentSource() -> MobileWorkflowCore.SyncResult
+}
+public protocol ContentClearable {
+  func clearContent()
+}
+extension RemoteContentStepViewController where Self : MobileWorkflowCore.ContentClearable, Self.StepType : MobileWorkflowCore.SyncableContentSource {
+  public func resyncContent()
 }
 public enum ViewOrder {
   case top
@@ -1187,3 +1247,5 @@ extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ORKSignatureResult : MobileWorkflowCore.SessionProvider {}
+extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
+extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
