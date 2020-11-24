@@ -188,7 +188,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
-@import CoreGraphics;
 @import Foundation;
 @import ObjectiveC;
 @import UIKit;
@@ -292,23 +291,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnu
 + (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
 @end
 
-@class NSCoder;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore16LoadingStateView")
-@interface LoadingStateView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore16MessageStateView")
-@interface MessageStateView : UIView
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
-@end
-
 @class UITraitCollection;
 @class ORKStep;
+@class NSCoder;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
 @interface MobileWorkflowButtonViewController : ORKStepViewController

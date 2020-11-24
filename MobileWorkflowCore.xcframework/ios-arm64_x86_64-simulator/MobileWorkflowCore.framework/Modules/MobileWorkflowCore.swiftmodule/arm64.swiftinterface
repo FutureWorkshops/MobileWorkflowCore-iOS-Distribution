@@ -20,7 +20,6 @@ public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
   final public func postSession(to url: Swift.String, queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
-  final public func authenticateWithProvider(_ authProvider: MobileWorkflowCore.AuthProvider, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
   @objc deinit
 }
 public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
@@ -52,19 +51,7 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
 extension UIViewController {
-  public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
-  public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (Swift.Bool) -> Swift.Void)
-}
-extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
-}
-public protocol RemoteContentStep {
-  associatedtype ResponseType
-  var networkManager: MobileWorkflowCore.NetworkManager { get }
-  var contentURL: Swift.String? { get }
-}
-extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
-  public func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
@@ -97,30 +84,14 @@ extension ORKLocation : MobileWorkflowCore.JSONRepresentable {
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
 }
-@objc @_inheritsConvenienceInitializers open class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
+@objc @_inheritsConvenienceInitializers public class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  public func showLoading()
-  public func hideLoading()
   @objc deinit
   @objc override dynamic public init(step: MobileWorkflowCore.ORKStep?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
 }
-public enum CredentialType : Swift.String, Swift.CaseIterable {
-  case token
-  case refreshToken
-  public typealias RawValue = Swift.String
-  public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
-    get
-  }
-  public typealias AllCases = [MobileWorkflowCore.CredentialType]
-  public static var allCases: [MobileWorkflowCore.CredentialType] {
-    get
-  }
-}
 public struct Credential : Swift.Codable {
-  public init(type: Swift.String, value: Swift.String, expirationDate: Foundation.Date)
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1063,23 +1034,6 @@ extension String {
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
 }
-public protocol RemoteContentStepViewController : UIKit.UIViewController {
-  associatedtype StepType : MobileWorkflowCore.RemoteContentStep
-  var remoteContentStep: Self.StepType! { get }
-  var showBadURLError: Swift.Bool { get }
-  func loadContent()
-  func showLoading()
-  func hideLoading()
-  func update(content: Self.StepType.ResponseType)
-}
-extension RemoteContentStepViewController {
-  public var showBadURLError: Swift.Bool {
-    get
-  }
-}
-extension RemoteContentStepViewController where Self.StepType.ResponseType : Swift.Decodable {
-  public func loadContent()
-}
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
@@ -1152,15 +1106,6 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-@objc @_hasMissingDesignatedInitializers public class MessageStateView : UIKit.UIView {
-  public init(frame: CoreGraphics.CGRect, message: Swift.String)
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LoadingStateView : UIKit.UIView {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc deinit
-}
 extension UIColor {
   public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
 }
@@ -1178,16 +1123,6 @@ extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
 @_hasMissingDesignatedInitializers final public class Localization {
   final public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
   @objc deinit
-}
-public enum CredentialError : Swift.Error {
-  case invalidInputData
-  case storingError
-  case unexpected
-  public static func == (a: MobileWorkflowCore.CredentialError, b: MobileWorkflowCore.CredentialError) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   var content: [Swift.AnyHashable : Swift.Codable] { get }
@@ -1210,28 +1145,6 @@ extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.Strin
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
-public enum SyncResult {
-  case alreadyInSync
-  case didSync
-  public static func == (a: MobileWorkflowCore.SyncResult, b: MobileWorkflowCore.SyncResult) -> Swift.Bool
-  public var hashValue: Swift.Int {
-    get
-  }
-  public func hash(into hasher: inout Swift.Hasher)
-}
-public protocol SyncableContentSource : AnyObject {
-  var resolvedURL: Foundation.URL? { get set }
-  func syncContentSource() -> MobileWorkflowCore.SyncResult
-}
-extension SyncableContentSource where Self : MobileWorkflowCore.RemoteContentStep {
-  public func syncContentSource() -> MobileWorkflowCore.SyncResult
-}
-public protocol ContentClearable {
-  func clearContent()
-}
-extension RemoteContentStepViewController where Self : MobileWorkflowCore.ContentClearable, Self.StepType : MobileWorkflowCore.SyncableContentSource {
-  public func resyncContent()
-}
 public enum ViewOrder {
   case top
   case above(view: UIKit.UIView)
@@ -1249,8 +1162,7 @@ public struct AuthRedirectHandler {
 public protocol AuthProvider {
   func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
 }
-public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
-  public init(_ start: @escaping (@escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer)
+@_hasMissingDesignatedInitializers public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
   public func authenticate(completion: @escaping MobileWorkflowCore.Response<MobileWorkflowCore.Credential>) -> MobileWorkflowCore.AuthFlowResumer
   @objc deinit
 }
@@ -1264,9 +1176,6 @@ extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
-extension MobileWorkflowCore.CredentialType : Swift.Equatable {}
-extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
-extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Equatable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Hashable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.RawRepresentable {}
@@ -1278,7 +1187,3 @@ extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ORKSignatureResult : MobileWorkflowCore.SessionProvider {}
-extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
-extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
-extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
-extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
