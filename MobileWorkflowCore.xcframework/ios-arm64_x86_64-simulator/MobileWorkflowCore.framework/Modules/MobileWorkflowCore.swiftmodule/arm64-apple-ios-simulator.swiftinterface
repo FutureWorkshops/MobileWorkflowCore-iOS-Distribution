@@ -16,10 +16,10 @@ import Swift
 import UIKit
 import VisionKit
 public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
-@_hasMissingDesignatedInitializers final public class NetworkManager {
-  final public func postSession(to url: Swift.String, queue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
-  final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
-  final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, queue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
+@_hasMissingDesignatedInitializers final public class NetworkService {
+  final public func postSession(to url: Swift.String, completionQueue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
+  final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, completionQueue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
+  final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, completionQueue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
   final public func authenticateWithProvider(_ authProvider: MobileWorkflowCore.AuthProvider, completion: @escaping MobileWorkflowCore.Response<Swift.Void>)
   @objc deinit
 }
@@ -60,7 +60,7 @@ extension UIViewController {
 }
 public protocol RemoteContentStep {
   associatedtype ResponseType
-  var networkManager: MobileWorkflowCore.NetworkManager { get }
+  var networkService: MobileWorkflowCore.NetworkService { get }
   var contentURL: Swift.String? { get }
 }
 extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
@@ -94,8 +94,14 @@ extension ORKLocation : MobileWorkflowCore.JSONRepresentable {
     get
   }
 }
+public struct MobileWorkflowServices {
+  public let session: MobileWorkflowCore.Session
+  public let networkService: MobileWorkflowCore.NetworkService
+  public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
+  public let localizationService: MobileWorkflowCore.LocalizationService
+}
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
-  static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
+  static func build(step: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.ORKStep
 }
 @objc @_inheritsConvenienceInitializers open class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
@@ -873,6 +879,14 @@ extension ORKQuestionResult : MobileWorkflowCore.ValueProvider {
 }
 public protocol SessionProvider {
 }
+@_hasMissingDesignatedInitializers public class Session {
+  @objc deinit
+}
+extension Session : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
 public enum Currency : Swift.String {
   case afghani, algerianDinar, argentinePeso, armenianDram, arubanFlorin, australianDollar, azerbaijanManat, bahamianDollar, bahrainiDinar, baht, balboa, barbadosDollar, belarusianRuble, belizeDollar, bermudianDollar, boliviano, bolívar, brazilianReal, bruneiDollar, bulgarianLev, burundiFranc, caboVerdeEscudo, canadianDollar, caymanIslandsDollar, chileanPeso, colombianPeso, comorianFranc, congoleseFranc, convertibleMark, cordobaOro, costaRicanColon, cubanPeso, czechKoruna, dalasi, danishKrone, denar, djiboutiFranc, dobra, dollar, dominicanPeso, dong, eastCaribbeanDollar, egyptianPound, elSalvadorColon, ethiopianBirr, euro, falklandIslandsPound, fijiDollar, forint, ghanaCedi, gibraltarPound, gourde, guarani, guineanFranc, guyanaDollar, hongKongDollar, hryvnia, icelandKrona, indianRupee, iranianRial, iraqiDinar, jamaicanDollar, jordanianDinar, kenyanShilling, kina, kuna, kuwaitiDinar, kwanza, kyat, laoKip, lari, lebanesePound, lek, lempira, leone, liberianDollar, libyanDinar, lilangeni, loti, malagasyAriary, malawiKwacha, malaysianRinggit, mauritiusRupee, mexicanPeso, mexicanUnidadDeInversion, moldovanLeu, moroccanDirham, mozambiqueMetical, mvdol, naira, nakfa, namibiaDollar, nepaleseRupee, netherlandsAntilleanGuilder, newIsraeliSheqel, newTaiwanDollar, newZealandDollar, ngultrum, northKoreanWon, norwegianKrone, ouguiya, paanga, pakistanRupee, pataca, pesoConvertible, pesoUruguayo, philippinePiso, poundSterling, pula, qatariRial, quetzal, rand, rialOmani, riel, romanianLeu, rufiyaa, rupiah, russianRuble, rwandaFranc, saintHelenaPound, saudiRiyal, serbianDinar, seychellesRupee, singaporeDollar, sol, solomonIslandsDollar, som, somaliShilling, somoni, southSudanesePound, sriLankaRupee, sudanesePound, surinamDollar, swedishKrona, swissFranc, syrianPound, taka, tala, tanzanianShilling, tenge, trinidadAndTobagoDollar, tugrik, tunisianDinar, turkishLira, turkmenistanNewManat, uaeDirham, ugandaShilling, unidadDeFomento, unidadDeValorReal, uruguayPesoEnUnidadesIndexadas, uzbekistanSum, vatu, wirEuro, wirFranc, won, yemeniRial, yen, yuanRenminbi, zambianKwacha, zimbabweDollar, zloty, none
   public typealias RawValue = Swift.String
@@ -1016,7 +1030,7 @@ public enum BinaryContentType {
     public static let pdf: Swift.String
   }
 }
-public protocol ImageLoader {
+public protocol ImageLoadingService {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
@@ -1143,9 +1157,14 @@ public struct StepContext {
   public let workflowName: Swift.String?
   public let systemTintColor: UIKit.UIColor
 }
+public struct StepInfo {
+  public let data: MobileWorkflowCore.StepData
+  public let context: MobileWorkflowCore.StepContext
+}
 public struct StepData : Swift.Codable {
   public let type: Swift.String
   public let identifier: Swift.String
+  public let uuid: Swift.String
   public let image: UIKit.UIImage?
   public let imageURL: Swift.String?
   public let content: [Swift.String : Any]
@@ -1165,7 +1184,7 @@ extension UIColor {
   public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
 }
 extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
-  public static func build(data: MobileWorkflowCore.StepData, context: MobileWorkflowCore.StepContext, networkManager: MobileWorkflowCore.NetworkManager, imageLoader: MobileWorkflowCore.ImageLoader, localizationManager: MobileWorkflowCore.Localization) throws -> MobileWorkflowCore.ORKStep
+  public static func build(step: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.ORKStep
 }
 public enum AppConfigurationContext {
   case remote(url: Swift.String, serverId: Swift.Int?)
@@ -1175,7 +1194,7 @@ public enum AppConfigurationContext {
 extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
-@_hasMissingDesignatedInitializers final public class Localization {
+@_hasMissingDesignatedInitializers final public class LocalizationService {
   final public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
   @objc deinit
 }

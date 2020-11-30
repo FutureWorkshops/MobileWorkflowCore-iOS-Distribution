@@ -115,6 +115,13 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy, readonly) NSString *identifier;
 
 /**
+ A UUID string that should uniquely identify the step across tasks.
+ 
+Unlike `identifier`, this UUID should be unique across tasks, to enable better analytics tracking.
+ */
+@property (nonatomic, copy, nullable) NSString *uuid;
+
+/**
  A Boolean value indicating whether a task can be restored to the step
  during state restoration. (read-only)
  
