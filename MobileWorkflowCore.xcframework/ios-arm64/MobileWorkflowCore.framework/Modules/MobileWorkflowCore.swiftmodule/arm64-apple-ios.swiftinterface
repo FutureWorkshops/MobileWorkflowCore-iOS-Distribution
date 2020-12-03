@@ -17,6 +17,8 @@ import UIKit
 import VisionKit
 public typealias Response<T> = (Swift.Result<T, Swift.Error>) -> Swift.Void
 @_hasMissingDesignatedInitializers final public class NetworkService {
+  final public func resolve(value: Swift.String) -> Swift.String
+  final public func resolve(url: Swift.String) -> Foundation.URL?
   final public func postSession(to url: Swift.String, completionQueue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void)
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, completionQueue: Dispatch.DispatchQueue = .main, type: T.Type, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
   final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, completionQueue: Dispatch.DispatchQueue = .main, parse: @escaping (Foundation.Data) throws -> T, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
@@ -43,6 +45,71 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
 }
 extension FileManager {
   @objc(mw_sharedManager) public static var shared: Foundation.FileManager
+}
+public protocol StringConvertableValue {
+  var stringValue: Swift.String { get }
+}
+extension String : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension NSString : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Date : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension NSDate : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Bool : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension NSNumber : MobileWorkflowCore.StringConvertableValue {
+}
+extension CLLocation : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension CLLocationCoordinate2D : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Int : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Float : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Double : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension ORKLocation : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension Array : MobileWorkflowCore.StringConvertableValue where Element == MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
 }
 public protocol URLSchemeManager {
   func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
