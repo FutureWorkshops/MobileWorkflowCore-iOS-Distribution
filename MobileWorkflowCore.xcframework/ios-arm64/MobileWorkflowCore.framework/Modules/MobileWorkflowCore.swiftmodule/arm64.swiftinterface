@@ -198,8 +198,8 @@ public enum WorkflowPresentationError : Foundation.LocalizedError {
 }
 public typealias OnWorkflowDismiss = (MobileWorkflowCore.ORKTaskViewControllerFinishReason) -> Swift.Void
 public protocol WorkflowPresentationDelegate : AnyObject {
-  func presentWorkflowWithName(_ name: Swift.String, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
-  func presentWorkflowWithId(_ id: Swift.Int, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
+  func presentWorkflowWithName(_ name: Swift.String, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
+  func presentWorkflowWithId(_ id: Swift.Int, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
 }
 public protocol WorkflowPresentationDelegator : AnyObject {
   var workflowPresentationDelegate: MobileWorkflowCore.WorkflowPresentationDelegate? { get set }
