@@ -165,6 +165,7 @@ public struct MobileWorkflowServices {
   public let networkService: MobileWorkflowCore.NetworkService
   public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
   public let localizationService: MobileWorkflowCore.LocalizationService
+  public let eventService: MobileWorkflowCore.EventService
 }
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(step: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.ORKStep
@@ -1021,7 +1022,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, networkService: MobileWorkflowCore.NetworkService)
+  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, networkService: MobileWorkflowCore.NetworkService, eventService: MobileWorkflowCore.EventService)
   @objc deinit
 }
 public protocol CredentialsStoreProtocol {
@@ -1207,6 +1208,30 @@ extension UITextField {
   }
   public func setInitialSelectedTextRange()
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
+}
+public protocol EventService : MobileWorkflowCore.AppDelegateEventDelegate, MobileWorkflowCore.AuthRedirector {
+  func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
+}
+public protocol AppDelegateEventDelegate : AnyObject {
+  func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
+  func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
+  func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
+}
+public protocol APNSRegister {
+  func registerForRemoteNotifications()
+}
+extension UIApplication : MobileWorkflowCore.APNSRegister {
+}
+public class EventServiceImplementation : MobileWorkflowCore.EventService {
+  public var authFlowResumer: MobileWorkflowCore.AuthFlowResumer?
+  public init(apnsRegister: MobileWorkflowCore.APNSRegister = UIApplication.shared)
+  public func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
+  @objc deinit
+}
+extension EventServiceImplementation {
+  public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
+  public func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
+  public func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
 @objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController, MobileWorkflowCore.ORKTaskViewControllerDelegate {
   public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [])
