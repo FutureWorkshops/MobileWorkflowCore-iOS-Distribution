@@ -1211,6 +1211,7 @@ extension UITextField {
 }
 public protocol EventService : MobileWorkflowCore.AppDelegateEventDelegate, MobileWorkflowCore.AuthRedirector {
   func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
+  func didBecomeActivePublisher() -> Combine.AnyPublisher<Swift.Void, Swift.Never>
 }
 public protocol AppDelegateEventDelegate : AnyObject {
   func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
@@ -1224,8 +1225,9 @@ extension UIApplication : MobileWorkflowCore.APNSRegister {
 }
 public class EventServiceImplementation : MobileWorkflowCore.EventService {
   public var authFlowResumer: MobileWorkflowCore.AuthFlowResumer?
-  public init(apnsRegister: MobileWorkflowCore.APNSRegister = UIApplication.shared)
+  public init(notificationCenter: Foundation.NotificationCenter = .default, apnsRegister: MobileWorkflowCore.APNSRegister = UIApplication.shared)
   public func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
+  public func didBecomeActivePublisher() -> Combine.AnyPublisher<Swift.Void, Swift.Never>
   @objc deinit
 }
 extension EventServiceImplementation {
