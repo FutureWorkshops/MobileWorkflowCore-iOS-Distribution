@@ -1209,26 +1209,28 @@ extension UITextField {
   public func setInitialSelectedTextRange()
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
 }
-public protocol EventService : MobileWorkflowCore.AppDelegateEventDelegate, MobileWorkflowCore.AuthRedirector {
-  func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
-  func didBecomeActivePublisher() -> Combine.AnyPublisher<Swift.Void, Swift.Never>
+public enum Event {
+  case notification(name: Foundation.NSNotification.Name)
+  case apnsTokenRegistered
 }
-public protocol AppDelegateEventDelegate : AnyObject {
-  func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
-  func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
-  func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
+public protocol EventService : MobileWorkflowCore.AppDelegateEventDelegate, MobileWorkflowCore.AuthRedirector {
+  func publisher<T>(for event: MobileWorkflowCore.Event) -> Combine.AnyPublisher<T?, Swift.Error>
+}
+public class EventServiceImplementation : MobileWorkflowCore.EventService {
+  public var authFlowResumer: MobileWorkflowCore.AuthFlowResumer?
+  public init(notificationCenter: Foundation.NotificationCenter = .default, apnsRegister: MobileWorkflowCore.APNSRegister = UIApplication.shared)
+  public func publisher<T>(for event: MobileWorkflowCore.Event) -> Combine.AnyPublisher<T?, Swift.Error>
+  @objc deinit
 }
 public protocol APNSRegister {
   func registerForRemoteNotifications()
 }
 extension UIApplication : MobileWorkflowCore.APNSRegister {
 }
-public class EventServiceImplementation : MobileWorkflowCore.EventService {
-  public var authFlowResumer: MobileWorkflowCore.AuthFlowResumer?
-  public init(notificationCenter: Foundation.NotificationCenter = .default, apnsRegister: MobileWorkflowCore.APNSRegister = UIApplication.shared)
-  public func apnsTokenPublisher() -> Combine.AnyPublisher<Foundation.Data?, Swift.Error>
-  public func didBecomeActivePublisher() -> Combine.AnyPublisher<Swift.Void, Swift.Never>
-  @objc deinit
+public protocol AppDelegateEventDelegate : AnyObject {
+  func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
+  func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
+  func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
 extension EventServiceImplementation {
   public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
