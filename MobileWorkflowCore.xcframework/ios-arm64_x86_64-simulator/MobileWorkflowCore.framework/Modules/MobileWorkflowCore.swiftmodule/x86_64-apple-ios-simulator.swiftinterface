@@ -15,14 +15,6 @@ import Security
 import Swift
 import UIKit
 import VisionKit
-final public class NetworkServiceImplementation : MobileWorkflowCore.NetworkService {
-  public init(urlSession: Foundation.URLSession = .shared, userSessionManagement: MobileWorkflowCore.CredentialsStoreProtocol = CredentialsStore(), authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
-  final public func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod = .get, using session: MobileWorkflowCore.Session, requiresAuthentication: Swift.Bool = false, parsePublisher: @escaping (Combine.AnyPublisher<Foundation.Data, Swift.Error>) -> Combine.AnyPublisher<T, Swift.Error>, completionQueue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) -> Combine.AnyCancellable?
-  final public func postSession(to url: Swift.String, using session: MobileWorkflowCore.Session, completionQueue: Dispatch.DispatchQueue = .main, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void) -> Combine.AnyCancellable?
-  final public func upload(urls: [MobileWorkflowCore.NetworkStepBinaryResponse], using session: MobileWorkflowCore.Session, completionQueue: Dispatch.DispatchQueue, completion: @escaping (MobileWorkflowCore.FileUploadUpdate) -> Swift.Void) -> Combine.AnyCancellable?
-  final public func authenticateWithProvider(_ authProvider: MobileWorkflowCore.AuthProvider, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
-  @objc deinit
-}
 public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
   case invalidStepData(cause: Swift.String)
   case invalidWorkflowData(cause: Swift.String)
@@ -43,6 +35,14 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
 }
 extension FileManager {
   @objc(mw_sharedManager) public static var shared: Foundation.FileManager
+}
+public struct MobileWorkflowServices {
+  public let session: MobileWorkflowCore.Session
+  public let credentialStore: MobileWorkflowCore.CredentialsStoreProtocol
+  public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
+  public let localizationService: MobileWorkflowCore.LocalizationService
+  public let eventService: MobileWorkflowCore.EventService
+  public func perform<T>(task: T, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
 }
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
@@ -128,9 +128,10 @@ public protocol RemoteContentStep {
   var services: MobileWorkflowCore.MobileWorkflowServices { get }
   var contentURL: Swift.String? { get }
   var authenticationWorkflowId: Swift.Int? { get }
+  func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
 extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
-  public func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
+  public func perform<T>(url: Swift.String, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
@@ -160,13 +161,6 @@ extension ORKLocation : MobileWorkflowCore.JSONRepresentable {
     get
   }
 }
-public struct MobileWorkflowServices {
-  public let session: MobileWorkflowCore.Session
-  public let networkService: MobileWorkflowCore.NetworkService
-  public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
-  public let localizationService: MobileWorkflowCore.LocalizationService
-  public let eventService: MobileWorkflowCore.EventService
-}
 public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(step: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.ORKStep
 }
@@ -184,12 +178,26 @@ public enum FileUploadUpdate {
   case uploaded(identifier: Swift.String)
   case completed
 }
+public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
+  public init(credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
+  @discardableResult
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  @discardableResult
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  @objc deinit
+}
 public protocol BinaryProvider : MobileWorkflowCore.SessionProvider {
   var binaryIdentifier: Swift.String { get }
   var cachePath: Swift.String? { get }
   var fileName: Swift.String? { get }
   var fileType: Swift.String? { get }
   func load(using fileManager: Foundation.FileManager) -> Foundation.Data?
+}
+public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = MobileWorkflowCore.AuthFlowResumer
+  public let input: MobileWorkflowCore.AuthProvider
+  public init(input: MobileWorkflowCore.AuthProvider)
+  public typealias Input = MobileWorkflowCore.AuthProvider
 }
 public enum WorkflowPresentationError : Foundation.LocalizedError {
   case workflowNotFound(name: Swift.String)
@@ -238,6 +246,11 @@ public protocol SecurityStoreProtocol {
   func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+}
+public protocol AsyncTask {
+  associatedtype Response
+  associatedtype Input
+  var input: Self.Input { get }
 }
 final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   public init()
@@ -981,6 +994,20 @@ public enum CurrencyLocale : Swift.String, MobileWorkflowCore.LocaleConvertible 
     get
   }
 }
+public enum SuccessAction : Swift.String, Swift.Codable {
+  case none
+  case reload
+  case backward
+  case forward
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public protocol SuccessActionHandler {
+  func handleSuccessAction(_ action: MobileWorkflowCore.SuccessAction)
+}
 extension ORKQuestionResult : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
@@ -1022,7 +1049,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, networkService: MobileWorkflowCore.NetworkService, eventService: MobileWorkflowCore.EventService)
+  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol? = nil, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, supportServices: [MobileWorkflowCore.AsyncTaskService])
   @objc deinit
 }
 public protocol CredentialsStoreProtocol {
@@ -1193,6 +1220,11 @@ final public class CredentialsStore : MobileWorkflowCore.CredentialsStoreProtoco
   final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
 }
+public struct NetworkDisplayItemTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = [MobileWorkflowCore.DisplayItem]
+  public let input: Foundation.URL
+  public typealias Input = Foundation.URL
+}
 public struct ValueFormatter {
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
@@ -1202,6 +1234,40 @@ public protocol ImageLoadingService {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
+@objc public class DisplayItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
+  public enum ItemType : Swift.String, Swift.Codable {
+    case text
+    case image
+    case video
+    case button
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  final public let type: MobileWorkflowCore.DisplayItem.ItemType
+  final public let label: Swift.String?
+  final public let text: Swift.String?
+  final public let previewURL: Swift.String?
+  final public let url: Swift.String?
+  final public let method: Swift.String?
+  final public let onSuccess: MobileWorkflowCore.SuccessAction?
+  final public let modalWorkflow: Swift.String?
+  final public let buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?
+  @objc required convenience public init?(coder: Foundation.NSCoder)
+  public init(type: MobileWorkflowCore.DisplayItem.ItemType, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?) throws
+  @objc public func encode(with coder: Foundation.NSCoder)
+  @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc deinit
+  @objc override dynamic public init()
+  required public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public typealias DisplayItemButtonStyle = MobileWorkflowCore.ButtonStyle
 extension UITextField {
   public var selectedTextRangeOffsetFromEnd: Swift.Int {
     get
@@ -1247,6 +1313,41 @@ extension EventServiceImplementation {
   @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
+@objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
+  @objc public static var supportsSecureCoding: Swift.Bool {
+    @objc get
+  }
+  final public let id: Swift.Int
+  final public let text: Swift.String
+  final public let detailText: Swift.String?
+  final public let sfSymbolName: Swift.String?
+  final public let imageURL: Swift.String?
+  @objc required convenience public init?(coder: Foundation.NSCoder)
+  public init(id: Swift.Int, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?)
+  @objc public func encode(with coder: Foundation.NSCoder)
+  @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
+  @objc override dynamic public init()
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+}
+extension ListStepItem {
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+}
+extension ListStepItem : MobileWorkflowCore.ValueProvider {
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+}
+public struct NetworkListItemTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = [MobileWorkflowCore.ListStepItem]
+  public let input: Foundation.URL
+  public typealias Input = Foundation.URL
+}
 public protocol CurrencyString {
   var representsZero: Swift.Bool { get }
   var hasNumbers: Swift.Bool { get }
@@ -1270,12 +1371,44 @@ extension String : MobileWorkflowCore.CurrencyString {
 extension String {
   public static let negativeSymbol: Swift.String
 }
+public struct URLTaskInput {
+  public enum URLTaskMethod : Swift.String {
+    case GET
+    case POST
+    case PUT
+    case DELETE
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public let url: Foundation.URL
+  public let method: MobileWorkflowCore.URLTaskInput.URLTaskMethod
+  public let body: Foundation.Data?
+  public let headers: [Swift.String : Swift.String]
+  public init(url: Foundation.URL, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, body: Foundation.Data? = nil, headers: [Swift.String : Swift.String] = [:])
+}
+public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
+  public typealias Response = T
+  public typealias URLTaskParser = (Foundation.Data) throws -> T
+  public let input: MobileWorkflowCore.URLTaskInput
+  public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
+  public typealias Input = MobileWorkflowCore.URLTaskInput
+}
+extension URLAsyncTask {
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential? = nil, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+}
+extension URLAsyncTask where T == Foundation.Data {
+  public static func build(urlString: Swift.String, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential?) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+}
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
 }
 public typealias Parse<T> = (Foundation.Data) throws -> T
 public typealias ParsePublisher<T> = (Combine.AnyPublisher<Foundation.Data, Swift.Error>) -> Combine.AnyPublisher<T, Swift.Error>
 extension Decodable {
+  public static func parse(data: Foundation.Data, decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> Self
   public static func decodeParse(decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.Parse<Self>
   public static func parsePublisher(_ parse: @escaping MobileWorkflowCore.Parse<Self> = Self.decodeParse()) -> MobileWorkflowCore.ParsePublisher<Self>
 }
@@ -1299,8 +1432,25 @@ extension RemoteContentStepViewController where Self.StepType.ResponseType : Swi
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
+public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
+  public init(urlSession: Foundation.URLSession = .shared)
+  @discardableResult
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  @discardableResult
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  @objc deinit
+}
 extension ORKPredicateStepNavigationRule {
   convenience public init(resultPredicatesAndDestinationStepIdentifiers tuples: [(resultPredicate: Foundation.NSPredicate, destinationStepIdentifier: Swift.String)], defaultStepIdentifierOrNil: Swift.String? = nil)
+}
+public protocol AsyncTaskService {
+  @discardableResult
+  func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  @discardableResult
+  func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+}
+extension AsyncTaskService {
+  public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
 }
 public enum HTTPMethod : Swift.String {
   case get
@@ -1411,12 +1561,6 @@ public enum AppConfigurationContext {
 extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
-public protocol NetworkService {
-  func request<T>(url: Swift.String, httpMethod: MobileWorkflowCore.HTTPMethod, using session: MobileWorkflowCore.Session, requiresAuthentication: Swift.Bool, parsePublisher: @escaping MobileWorkflowCore.ParsePublisher<T>, completionQueue: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) -> Combine.AnyCancellable?
-  func postSession(to url: Swift.String, using session: MobileWorkflowCore.Session, completionQueue: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<Foundation.Data, Swift.Error>) -> Swift.Void) -> Combine.AnyCancellable?
-  func upload(urls: [MobileWorkflowCore.NetworkStepBinaryResponse], using session: MobileWorkflowCore.Session, completionQueue: Dispatch.DispatchQueue, completion: @escaping (MobileWorkflowCore.FileUploadUpdate) -> Swift.Void) -> Combine.AnyCancellable?
-  func authenticateWithProvider(_ authProvider: MobileWorkflowCore.AuthProvider, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
-}
 public struct LocalizationService {
   public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
 }
@@ -1496,6 +1640,16 @@ public enum ViewOrder {
 extension UIView {
   public func addPinnedSubview(_ view: UIKit.UIView, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
 }
+public enum ButtonStyle : Swift.String, Swift.Codable {
+  case primary
+  case danger
+  case outline
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
 extension NumberFormatter {
   public func string(from doubleValue: Swift.Double?) -> Swift.String?
 }
@@ -1526,9 +1680,18 @@ extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Equatable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.Hashable {}
 extension MobileWorkflowCore.CurrencyLocale : Swift.RawRepresentable {}
+extension MobileWorkflowCore.SuccessAction : Swift.Equatable {}
+extension MobileWorkflowCore.SuccessAction : Swift.Hashable {}
+extension MobileWorkflowCore.SuccessAction : Swift.RawRepresentable {}
 extension MobileWorkflowCore.Currency : Swift.Equatable {}
 extension MobileWorkflowCore.Currency : Swift.Hashable {}
 extension MobileWorkflowCore.Currency : Swift.RawRepresentable {}
+extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Equatable {}
+extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Hashable {}
+extension MobileWorkflowCore.DisplayItem.ItemType : Swift.RawRepresentable {}
+extension MobileWorkflowCore.URLTaskInput.URLTaskMethod : Swift.Equatable {}
+extension MobileWorkflowCore.URLTaskInput.URLTaskMethod : Swift.Hashable {}
+extension MobileWorkflowCore.URLTaskInput.URLTaskMethod : Swift.RawRepresentable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
@@ -1536,3 +1699,6 @@ extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
 extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
 extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
+extension MobileWorkflowCore.ButtonStyle : Swift.Equatable {}
+extension MobileWorkflowCore.ButtonStyle : Swift.Hashable {}
+extension MobileWorkflowCore.ButtonStyle : Swift.RawRepresentable {}

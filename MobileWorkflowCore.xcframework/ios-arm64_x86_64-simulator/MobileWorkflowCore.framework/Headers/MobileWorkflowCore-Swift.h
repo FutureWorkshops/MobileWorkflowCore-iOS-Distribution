@@ -287,6 +287,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
+@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore11DisplayItem")
+@interface DisplayItem : NSObject <NSCopying, NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
@@ -294,7 +308,25 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnu
 + (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
 @end
 
-@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore12ListStepItem")
+@interface ListStepItem : NSObject <NSCopying, NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore16LoadingStateView")
 @interface LoadingStateView : UIView
@@ -653,6 +685,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
+@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore11DisplayItem")
+@interface DisplayItem : NSObject <NSCopying, NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
@@ -660,7 +706,25 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnu
 + (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
 @end
 
-@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore12ListStepItem")
+@interface ListStepItem : NSObject <NSCopying, NSSecureCoding>
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
+@end
+
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore16LoadingStateView")
 @interface LoadingStateView : UIView
