@@ -125,9 +125,9 @@ extension UIViewController {
 }
 public protocol RemoteContentStep {
   associatedtype ResponseType
+  var stepContext: MobileWorkflowCore.StepContext { get }
   var services: MobileWorkflowCore.MobileWorkflowServices { get }
   var contentURL: Swift.String? { get }
-  var authenticationWorkflowId: Swift.Int? { get }
   func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
 extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
@@ -180,10 +180,8 @@ public enum FileUploadUpdate {
 }
 public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
   public init(credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
-  @discardableResult
-  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  @discardableResult
-  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
 }
 public protocol BinaryProvider : MobileWorkflowCore.SessionProvider {
@@ -210,8 +208,8 @@ public enum WorkflowPresentationError : Foundation.LocalizedError {
 }
 public typealias OnWorkflowDismiss = (MobileWorkflowCore.ORKTaskViewControllerFinishReason) -> Swift.Void
 public protocol WorkflowPresentationDelegate : AnyObject {
-  func presentWorkflowWithName(_ name: Swift.String, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
-  func presentWorkflowWithId(_ id: Swift.Int, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
+  func presentWorkflowWithName(_ name: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
+  func presentWorkflowWithId(_ id: Swift.Int, isDiscardable: Swift.Bool, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
 }
 public protocol WorkflowPresentationDelegator : AnyObject {
   var workflowPresentationDelegate: MobileWorkflowCore.WorkflowPresentationDelegate? { get set }
@@ -1049,7 +1047,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol? = nil, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, supportServices: [MobileWorkflowCore.AsyncTaskService])
+  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol? = nil, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService])
   @objc deinit
 }
 public protocol CredentialsStoreProtocol {
@@ -1397,10 +1395,10 @@ public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public typealias Input = MobileWorkflowCore.URLTaskInput
 }
 extension URLAsyncTask {
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential? = nil, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
-  public static func build(urlString: Swift.String, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential?) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+  public static func build(urlString: Swift.String, session: MobileWorkflowCore.Session, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
@@ -1434,10 +1432,8 @@ extension UIFont {
 }
 public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public init(urlSession: Foundation.URLSession = .shared)
-  @discardableResult
-  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  @discardableResult
-  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
 }
 extension ORKPredicateStepNavigationRule {
@@ -1445,9 +1441,12 @@ extension ORKPredicateStepNavigationRule {
 }
 public protocol AsyncTaskService {
   @discardableResult
-  func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  @discardableResult
-  func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
+  func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+}
+extension AsyncTaskService {
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
 }
 extension AsyncTaskService {
   public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
@@ -1508,6 +1507,7 @@ public struct StepContext {
   public let appName: Swift.String?
   public let workflowName: Swift.String?
   public let systemTintColor: UIKit.UIColor
+  public let authenticationWorkflowId: Swift.Int?
 }
 public struct StepInfo {
   public let data: MobileWorkflowCore.StepData
