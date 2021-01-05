@@ -47,6 +47,8 @@ NS_ASSUME_NONNULL_BEGIN
 ORK_CLASS_AVAILABLE
 @interface ORKInstructionStepViewController : ORKStepViewController
 
+@property (readonly, nullable) UIImageView *imageView;
+
 - (void)buildInNextBodyItem;
 
 @end
