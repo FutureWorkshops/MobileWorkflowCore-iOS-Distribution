@@ -192,7 +192,7 @@ public protocol BinaryProvider : MobileWorkflowCore.SessionProvider {
   func load(using fileManager: Foundation.FileManager) -> Foundation.Data?
 }
 public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
-  public typealias Response = MobileWorkflowCore.AuthFlowResumer
+  public typealias Response = Swift.Void
   public let input: MobileWorkflowCore.AuthProvider
   public init(input: MobileWorkflowCore.AuthProvider)
   public typealias Input = MobileWorkflowCore.AuthProvider
@@ -249,6 +249,9 @@ public protocol AsyncTask {
   associatedtype Response
   associatedtype Input
   var input: Self.Input { get }
+}
+public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask {
+  var credential: MobileWorkflowCore.Credential? { get }
 }
 final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   public init()
@@ -1218,9 +1221,10 @@ final public class CredentialsStore : MobileWorkflowCore.CredentialsStoreProtoco
   final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
 }
-public struct NetworkDisplayItemTask : MobileWorkflowCore.AsyncTask {
+public struct NetworkDisplayItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
   public typealias Response = [MobileWorkflowCore.DisplayItem]
   public let input: Foundation.URL
+  public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
 }
 public struct ValueFormatter {
@@ -1272,6 +1276,12 @@ extension UITextField {
   }
   public func setInitialSelectedTextRange()
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
+}
+public protocol URLAsyncTaskConvertible {
+  func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.Session) -> T? where T : MobileWorkflowCore.AsyncTask
+}
+extension URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
+  public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.Session) -> T? where T : MobileWorkflowCore.AsyncTask
 }
 public enum Event {
   case notification(name: Foundation.NSNotification.Name)
@@ -1341,9 +1351,10 @@ extension ListStepItem : MobileWorkflowCore.ValueProvider {
     get
   }
 }
-public struct NetworkListItemTask : MobileWorkflowCore.AsyncTask {
+public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
   public typealias Response = [MobileWorkflowCore.ListStepItem]
   public let input: Foundation.URL
+  public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
 }
 public protocol CurrencyString {
