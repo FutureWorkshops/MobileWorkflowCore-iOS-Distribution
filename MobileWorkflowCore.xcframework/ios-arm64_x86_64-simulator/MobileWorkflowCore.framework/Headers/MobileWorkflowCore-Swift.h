@@ -341,6 +341,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore16MessageStateView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowButtonTableViewCell")
+@interface MobileWorkflowButtonTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
 @class UITraitCollection;
 @class ORKStep;
 
@@ -737,6 +744,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore16MessageStateView")
 @interface MessageStateView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowButtonTableViewCell")
+@interface MobileWorkflowButtonTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
 @class UITraitCollection;

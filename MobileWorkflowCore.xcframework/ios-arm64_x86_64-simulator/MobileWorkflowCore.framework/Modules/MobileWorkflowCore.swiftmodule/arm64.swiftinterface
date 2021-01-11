@@ -230,6 +230,14 @@ public enum CredentialType : Swift.String, Swift.CaseIterable {
     get
   }
 }
+public protocol MobileWorkflowButtonTableViewCellDelegate : AnyObject {
+  func buttonCell(_ cell: MobileWorkflowCore.MobileWorkflowButtonTableViewCell, didTapButton button: UIKit.UIButton)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MobileWorkflowButtonTableViewCell : UIKit.UITableViewCell {
+  public var delegate: MobileWorkflowCore.MobileWorkflowButtonTableViewCellDelegate?
+  public func configureButton(label: Swift.String?, style: MobileWorkflowCore.ButtonStyle)
+  @objc deinit
+}
 public struct URLFormatter {
   public static let DefaultURLComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultURLComposerRegex)
