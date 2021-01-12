@@ -33,6 +33,16 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
     get
   }
 }
+public struct AppConfigurationDependencies {
+  public var plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type]
+  public var fileManager: Foundation.FileManager
+  public var credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol?
+  public var networkService: MobileWorkflowCore.AsyncTaskService
+  public var eventService: MobileWorkflowCore.EventService
+  public var asyncServices: [MobileWorkflowCore.AsyncTaskService]
+  public init(plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol?, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService])
+  public static func `default`(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?) -> MobileWorkflowCore.AppConfigurationDependencies
+}
 extension FileManager {
   @objc(mw_sharedManager) public static var shared: Foundation.FileManager
 }
@@ -132,6 +142,17 @@ public protocol RemoteContentStep {
 }
 extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
   public func perform<T>(url: Swift.String, method: MobileWorkflowCore.URLTaskInput.URLTaskMethod, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
+}
+@objc @_inheritsConvenienceInitializers open class MobileWorkflowSceneDelegate : UIKit.UIResponder, UIKit.UIWindowSceneDelegate {
+  @objc public var window: UIKit.UIWindow?
+  public var urlSchemeManagers: [MobileWorkflowCore.URLSchemeManager]
+  public var dependencies: MobileWorkflowCore.AppConfigurationDependencies
+  public var rootViewController: MobileWorkflowCore.MobileWorkflowRootViewController!
+  @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
+  @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+  open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
+  @objc deinit
+  @objc override dynamic public init()
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
@@ -1058,7 +1079,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol? = nil, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService])
+  convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies)
   @objc deinit
 }
 public protocol CredentialsStoreProtocol {
@@ -1307,7 +1328,7 @@ public enum Event {
   case notification(name: Foundation.NSNotification.Name)
   case apnsTokenRegistered
 }
-public protocol EventService : MobileWorkflowCore.AppDelegateEventDelegate, MobileWorkflowCore.AuthRedirector {
+public protocol EventService : MobileWorkflowCore.AppEventDelegate, MobileWorkflowCore.AuthRedirector {
   func publisher<T>(for event: MobileWorkflowCore.Event) -> Combine.AnyPublisher<T?, Swift.Error>
 }
 public class EventServiceImplementation : MobileWorkflowCore.EventService {
@@ -1321,7 +1342,10 @@ public protocol APNSRegister {
 }
 extension UIApplication : MobileWorkflowCore.APNSRegister {
 }
-public protocol AppDelegateEventDelegate : AnyObject {
+public protocol AppEventDelegator : AnyObject {
+  var eventDelegate: MobileWorkflowCore.AppEventDelegate? { get set }
+}
+public protocol AppEventDelegate : AnyObject {
   func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
   func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
   func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
@@ -1338,8 +1362,8 @@ extension EventServiceImplementation {
   @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, didFinishWith reason: MobileWorkflowCore.ORKTaskViewControllerFinishReason, error: Swift.Error?)
   @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.ORKStepViewController)
   @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.ORKStepViewController, navigationDirection direction: MobileWorkflowCore.ORKStepViewControllerNavigationDirection)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
 }
 @objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {

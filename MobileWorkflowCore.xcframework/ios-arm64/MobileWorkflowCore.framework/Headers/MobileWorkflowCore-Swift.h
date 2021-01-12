@@ -319,13 +319,15 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
 
 
 
-
+/// Loading UIView that can display an UIActivityIndicator, a UILabel as a big bold title and a UILabel as a subtitle.
+/// By default, both titles are hiddden.
 SWIFT_CLASS("_TtC18MobileWorkflowCore16LoadingStateView")
 @interface LoadingStateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -374,6 +376,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillDisappear:(ORKStepViewController * _Nonnull)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class UIWindow;
+@class UIScene;
+@class UISceneSession;
+@class UISceneConnectionOptions;
+@class UIOpenURLContext;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
+@interface MobileWorkflowSceneDelegate : UIResponder <UIWindowSceneDelegate>
+@property (nonatomic, strong) UIWindow * _Nullable window;
+- (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
+- (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
