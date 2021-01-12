@@ -356,6 +356,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
+@interface MobileWorkflowImageTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
 @class ORKTaskViewController;
 @class NSBundle;
 

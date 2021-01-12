@@ -1244,6 +1244,18 @@ public protocol ImageLoadingService {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
+public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
+  func imageCell(_ cell: MobileWorkflowCore.MobileWorkflowImageTableViewCell, didTapButton button: UIKit.UIButton)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MobileWorkflowImageTableViewCell : UIKit.UITableViewCell {
+  public var delegate: MobileWorkflowCore.MobileWorkflowImageTableViewCellDelegate?
+  public var backgroundImage: UIKit.UIImage? {
+    get
+    set
+  }
+  public func configure()
+  @objc deinit
+}
 @objc public class DisplayItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
     @objc get
