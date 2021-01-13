@@ -152,7 +152,6 @@ extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
   @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
-  public func extractAsyncService<T>(ofType type: T.Type, atKey key: Swift.String = "networkService", inJSONAtFilePath filePath: Swift.String) throws -> T where T : MobileWorkflowCore.AsyncTaskService, T : Swift.Decodable
   @objc deinit
   @objc override dynamic public init()
 }
