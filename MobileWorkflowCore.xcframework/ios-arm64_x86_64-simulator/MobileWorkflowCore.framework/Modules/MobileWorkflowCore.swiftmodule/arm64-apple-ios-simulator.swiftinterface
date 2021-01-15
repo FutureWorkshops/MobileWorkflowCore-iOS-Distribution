@@ -37,10 +37,9 @@ public struct AppConfigurationDependencies {
   public var plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type]
   public var fileManager: Foundation.FileManager
   public var credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol?
-  public var networkService: MobileWorkflowCore.AsyncTaskService
   public var eventService: MobileWorkflowCore.EventService
   public var asyncServices: [MobileWorkflowCore.AsyncTaskService]
-  public init(plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol?, networkService: MobileWorkflowCore.AsyncTaskService, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService])
+  public init(plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol?, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService])
   public static func `default`(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?) -> MobileWorkflowCore.AppConfigurationDependencies
 }
 extension FileManager {
@@ -1467,6 +1466,13 @@ extension Decodable {
   public static func decodeParse(decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.Parse<Self>
   public static func parsePublisher(_ parse: @escaping MobileWorkflowCore.Parse<Self> = Self.decodeParse()) -> MobileWorkflowCore.ParsePublisher<Self>
 }
+public struct ServiceConfiguration : Swift.Codable {
+  public let type: Swift.String
+  public let properties: [Swift.String : Any]
+  public init(from decoder: Swift.Decoder) throws
+  public init(type: Swift.String, properties: [Swift.String : Any])
+  public func encode(to encoder: Swift.Encoder) throws
+}
 public protocol RemoteContentStepViewController : UIKit.UIViewController, MobileWorkflowCore.WorkflowPresentationDelegator {
   associatedtype StepType : MobileWorkflowCore.RemoteContentStep
   var remoteContentStep: Self.StepType! { get }
@@ -1487,8 +1493,9 @@ extension RemoteContentStepViewController where Self.StepType.ResponseType : Swi
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
-public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
+public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService, Swift.Decodable {
   public init(urlSession: Foundation.URLSession = .shared)
+  required convenience public init(from decoder: Swift.Decoder) throws
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   public func perform<T>(task: T, session: MobileWorkflowCore.Session, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
@@ -1549,16 +1556,31 @@ extension CurrencyUITextFieldDelegate : UIKit.UITextFieldDelegate {
   @discardableResult
   @objc dynamic public func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
 }
+public protocol NamedType {
+  var typeName: Swift.String { get }
+}
+public protocol MobileWorkflowStepType : MobileWorkflowCore.NamedType {
+  var stepClass: MobileWorkflowCore.MobileWorkflowStep.Type { get }
+}
+public protocol MobileWorkflowServiceType : MobileWorkflowCore.NamedType {
+  func buildService(with config: MobileWorkflowCore.ServiceConfiguration) throws -> MobileWorkflowCore.AsyncTaskService?
+}
 public protocol MobileWorkflowPlugin {
   static var allStepsTypes: [MobileWorkflowCore.MobileWorkflowStepType] { get }
+  static var networkServiceType: MobileWorkflowCore.MobileWorkflowServiceType { get }
 }
-public protocol MobileWorkflowStepType : MobileWorkflowCore.StepType {
-  var stepClass: MobileWorkflowCore.MobileWorkflowStep.Type { get }
+extension MobileWorkflowPlugin {
+  public static var allStepsTypes: [MobileWorkflowCore.MobileWorkflowStepType] {
+    get
+  }
+  public static var networkServiceType: MobileWorkflowCore.MobileWorkflowServiceType {
+    get
+  }
 }
 public protocol MobileWorkflowStep : MobileWorkflowCore.BuildableStep {
 }
-public protocol StepType {
-  var typeName: Swift.String { get }
+extension MobileWorkflowServiceType {
+  public func buildDecodableService<T>(type: T.Type, with config: MobileWorkflowCore.ServiceConfiguration) throws -> T where T : MobileWorkflowCore.AsyncTaskService, T : Swift.Decodable
 }
 public struct StepContext {
   public let appName: Swift.String?
