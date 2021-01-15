@@ -1727,6 +1727,7 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
   case primary
   case danger
   case outline
+  case textOnly
   public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
