@@ -187,7 +187,11 @@ public protocol BuildableStep : MobileWorkflowCore.ORKStep {
   static func build(step: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.ORKStep
 }
 @objc @_inheritsConvenienceInitializers open class MobileWorkflowButtonViewController : MobileWorkflowCore.ORKStepViewController {
+  public struct ButtonConfig {
+    public init(title: Swift.String, action: @escaping () -> Swift.Void)
+  }
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
+  public func configureWithTitle(_ title: Swift.String, body: Swift.String, primaryConfig: MobileWorkflowCore.MobileWorkflowButtonViewController.ButtonConfig, secondaryConfig: MobileWorkflowCore.MobileWorkflowButtonViewController.ButtonConfig?)
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   public func showLoading()
   public func hideLoading()
