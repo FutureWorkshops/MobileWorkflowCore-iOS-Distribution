@@ -284,8 +284,10 @@ public protocol AsyncTask {
   associatedtype Input
   var input: Self.Input { get }
 }
-public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask {
+public protocol Credentialized {
   var credential: MobileWorkflowCore.Credential? { get }
+}
+public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.Credentialized {
 }
 final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   public init()
@@ -1298,7 +1300,7 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
     }
   }
   final public let type: MobileWorkflowCore.DisplayItem.ItemType
-  final public let label: Swift.String?
+  public var label: Swift.String?
   final public let text: Swift.String?
   final public let previewURL: Swift.String?
   final public let url: Swift.String?
