@@ -421,6 +421,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
 
 
 
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -821,6 +822,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

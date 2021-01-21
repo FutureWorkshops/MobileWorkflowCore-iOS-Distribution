@@ -1363,7 +1363,7 @@ extension EventServiceImplementation {
   public func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
 @objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController, MobileWorkflowCore.ORKTaskViewControllerDelegate {
-  public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [])
+  public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard)
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
   @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, didFinishWith reason: MobileWorkflowCore.ORKTaskViewControllerFinishReason, error: Swift.Error?)

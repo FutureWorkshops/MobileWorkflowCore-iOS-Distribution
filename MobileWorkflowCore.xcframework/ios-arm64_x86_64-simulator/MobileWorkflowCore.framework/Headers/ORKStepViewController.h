@@ -410,9 +410,9 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, readonly) BOOL hasBeenPresented;
 
 /**
- Disables cancel button regardless of discardable flag, and disables continue button if no next step.
+ Disables cancel button regardless of discardable flag.
  */
-- (void)disableButtonItemNavigation;
+- (void)disableCancel;
 
 /**
  Completely hides the navigationFooterView.
