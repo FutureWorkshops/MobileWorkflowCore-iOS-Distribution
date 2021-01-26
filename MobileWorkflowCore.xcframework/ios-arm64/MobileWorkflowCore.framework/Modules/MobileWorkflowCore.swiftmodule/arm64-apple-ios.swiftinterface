@@ -1300,7 +1300,8 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
     }
   }
   final public let type: MobileWorkflowCore.DisplayItem.ItemType
-  public var label: Swift.String?
+  public var name: Swift.String?
+  final public let label: Swift.String?
   final public let text: Swift.String?
   final public let previewURL: Swift.String?
   final public let url: Swift.String?
@@ -1309,7 +1310,7 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   final public let modalWorkflow: Swift.String?
   final public let buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?
   @objc required convenience public init?(coder: Foundation.NSCoder)
-  public init(type: MobileWorkflowCore.DisplayItem.ItemType, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?) throws
+  public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?) throws
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc deinit
