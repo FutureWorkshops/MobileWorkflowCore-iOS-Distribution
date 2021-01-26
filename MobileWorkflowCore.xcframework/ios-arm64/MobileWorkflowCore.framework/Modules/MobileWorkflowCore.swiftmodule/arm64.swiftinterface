@@ -1376,17 +1376,17 @@ extension EventServiceImplementation {
   @objc public static var supportsSecureCoding: Swift.Bool {
     @objc get
   }
-  final public let id: Swift.Int
+  final public let id: Swift.String
   final public let text: Swift.String
   final public let detailText: Swift.String?
   final public let sfSymbolName: Swift.String?
   final public let imageURL: Swift.String?
   @objc required convenience public init?(coder: Foundation.NSCoder)
-  public init(id: Swift.Int, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?)
+  required public init(from decoder: Swift.Decoder) throws
+  public init(id: Swift.String, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?)
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
