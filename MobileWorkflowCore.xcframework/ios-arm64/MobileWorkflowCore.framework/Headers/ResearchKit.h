@@ -33,9 +33,6 @@
 #import <MobileWorkflowCore/ORKTypes.h>
 
 #import <MobileWorkflowCore/ORKStep.h>
-#import <MobileWorkflowCore/ORKActiveStep.h>
-#import <MobileWorkflowCore/ORKConsentReviewStep.h>
-#import <MobileWorkflowCore/ORKConsentSharingStep.h>
 #import <MobileWorkflowCore/ORKFormStep.h>
 #import <MobileWorkflowCore/ORKImageCaptureStep.h>
 #import <MobileWorkflowCore/ORKInstructionStep.h>
@@ -49,17 +46,13 @@
 #import <MobileWorkflowCore/ORKReviewStep.h>
 #import <MobileWorkflowCore/ORKSignatureStep.h>
 #import <MobileWorkflowCore/ORKTableStep.h>
-#import <MobileWorkflowCore/ORKTouchAnywhereStep.h>
 #import <MobileWorkflowCore/ORKVerificationStep.h>
 #import <MobileWorkflowCore/ORKVideoCaptureStep.h>
-#import <MobileWorkflowCore/ORKVisualConsentStep.h>
 #import <MobileWorkflowCore/ORKWaitStep.h>
 #import <MobileWorkflowCore/ORKVideoInstructionStep.h>
-#import <MobileWorkflowCore/ORKFrontFacingCameraStep.h>
 #import <MobileWorkflowCore/ORKWebViewStep.h>
 #import <MobileWorkflowCore/ORKCustomStep.h>
 #import <MobileWorkflowCore/ORKLearnMoreInstructionStep.h>
-#import <MobileWorkflowCore/ORKSecondaryTaskStep.h>
 #import <MobileWorkflowCore/ORKRequestPermissionsStep.h>
 
 
@@ -74,8 +67,6 @@
 #import <MobileWorkflowCore/ORKResult.h>
 #import <MobileWorkflowCore/ORKActiveTaskResult.h>
 #import <MobileWorkflowCore/ORKCollectionResult.h>
-#import <MobileWorkflowCore/ORKConsentSignatureResult.h>
-#import <MobileWorkflowCore/ORKFrontFacingCameraStepResult.h>
 #import <MobileWorkflowCore/ORKPasscodeResult.h>
 #import <MobileWorkflowCore/ORKQuestionResult.h>
 #import <MobileWorkflowCore/ORKSignatureResult.h>
@@ -89,7 +80,6 @@
 #import <MobileWorkflowCore/ORKPlaybackButton.h>
 
 #import <MobileWorkflowCore/ORKStepViewController.h>
-#import <MobileWorkflowCore/ORKActiveStepViewController.h>
 #import <MobileWorkflowCore/ORKCompletionStepViewController.h>
 #import <MobileWorkflowCore/ORKFormStepViewController.h>
 #import <MobileWorkflowCore/ORKInstructionStepViewController.h>
@@ -100,26 +90,13 @@
 #import <MobileWorkflowCore/ORKQuestionStepViewController.h>
 #import <MobileWorkflowCore/ORKTableStepViewController.h>
 #import <MobileWorkflowCore/ORKTaskViewController.h>
-#import <MobileWorkflowCore/ORKTouchAnywhereStepViewController.h>
 #import <MobileWorkflowCore/ORKVerificationStepViewController.h>
 #import <MobileWorkflowCore/ORKWaitStepViewController.h>
 #import <MobileWorkflowCore/ORKWebViewStepViewController.h>
 #import <MobileWorkflowCore/ORKReviewViewController.h>
 #import <MobileWorkflowCore/ORKCustomStepViewController.h>
 
-#import <MobileWorkflowCore/ORKRecorder.h>
-
-#import <MobileWorkflowCore/ORKConsentDocument.h>
-#import <MobileWorkflowCore/ORKConsentSection.h>
-#import <MobileWorkflowCore/ORKConsentSignature.h>
-
 #import <MobileWorkflowCore/ORKKeychainWrapper.h>
-
-#import <MobileWorkflowCore/ORKChartTypes.h>
-#import <MobileWorkflowCore/ORKBarGraphChartView.h>
-#import <MobileWorkflowCore/ORKDiscreteGraphChartView.h>
-#import <MobileWorkflowCore/ORKLineGraphChartView.h>
-#import <MobileWorkflowCore/ORKPieChartView.h>
 
 #import <MobileWorkflowCore/ORKBodyItem.h>
 #import <MobileWorkflowCore/ORKLearnMoreItem.h>
