@@ -65,7 +65,7 @@
 #import <MobileWorkflowCore/ORKAnswerFormat.h>
 
 #import <MobileWorkflowCore/ORKResult.h>
-#import <MobileWorkflowCore/ORKActiveTaskResult.h>
+#import <MobileWorkflowCore/ORKFileResult.h>
 #import <MobileWorkflowCore/ORKCollectionResult.h>
 #import <MobileWorkflowCore/ORKPasscodeResult.h>
 #import <MobileWorkflowCore/ORKQuestionResult.h>

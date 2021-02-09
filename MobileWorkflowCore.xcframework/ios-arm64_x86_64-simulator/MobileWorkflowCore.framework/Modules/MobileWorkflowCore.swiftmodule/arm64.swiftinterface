@@ -204,6 +204,30 @@ public enum FileUploadUpdate {
   case uploaded(identifier: Swift.String)
   case completed
 }
+public enum LocationServiceError : Foundation.LocalizedError {
+  case significantLocationChangeMonitoringUnavailable
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var localizedDescription: Swift.String {
+    get
+  }
+  public static func == (a: MobileWorkflowCore.LocationServiceError, b: MobileWorkflowCore.LocationServiceError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@objc public class LocationService : ObjectiveC.NSObject {
+  public init(userDefaults: Foundation.UserDefaults = .standard)
+  public func significantLocationChangesPublisher() -> Combine.AnyPublisher<[CoreLocation.CLLocation], Swift.Error>
+  @objc deinit
+  @objc override dynamic public init()
+}
+extension LocationService : CoreLocation.CLLocationManagerDelegate {
+  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
+  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
+}
 public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
   public init(credentialsStore: MobileWorkflowCore.CredentialsStoreProtocol, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
@@ -1248,6 +1272,36 @@ extension ORKFileResult : MobileWorkflowCore.BinaryProvider {
   }
   public func load(using fileManager: Foundation.FileManager) -> Foundation.Data?
 }
+public class LocationUploadService {
+  public init(session: MobileWorkflowCore.Session, networkService: MobileWorkflowCore.AsyncTaskService = NetworkAsyncTaskService(), eventService: MobileWorkflowCore.EventService)
+  @objc deinit
+}
+extension CLLocation : Swift.Encodable {
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case latitude
+    case longitude
+    case altitude
+    case horizontalAccuracy
+    case verticalAccuracy
+    case speed
+    case course
+    case timestamp
+    public typealias RawValue = Swift.String
+    public init?(rawValue: Swift.String)
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+    public init?(stringValue: Swift.String)
+    public var intValue: Swift.Int? {
+      get
+    }
+    public init?(intValue: Swift.Int)
+  }
+  public func encode(to encoder: Swift.Encoder) throws
+}
 final public class CredentialsStore : MobileWorkflowCore.CredentialsStoreProtocol {
   public init(securityStore: MobileWorkflowCore.SecurityStoreProtocol = SecurityStore())
   final public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
@@ -1335,6 +1389,7 @@ extension URLAsyncTaskConvertible where Self : MobileWorkflowCore.Credentialized
 public enum Event {
   case notification(name: Foundation.NSNotification.Name)
   case apnsTokenRegistered
+  case significantLocationChanges
 }
 public protocol EventService : MobileWorkflowCore.AppEventDelegate, MobileWorkflowCore.AuthRedirector {
   func publisher<T>(for event: MobileWorkflowCore.Event) -> Combine.AnyPublisher<T?, Swift.Error>
@@ -1761,6 +1816,8 @@ extension AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
+extension MobileWorkflowCore.LocationServiceError : Swift.Equatable {}
+extension MobileWorkflowCore.LocationServiceError : Swift.Hashable {}
 extension MobileWorkflowCore.CredentialType : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
 extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
@@ -1773,6 +1830,9 @@ extension MobileWorkflowCore.SuccessAction : Swift.RawRepresentable {}
 extension MobileWorkflowCore.Currency : Swift.Equatable {}
 extension MobileWorkflowCore.Currency : Swift.Hashable {}
 extension MobileWorkflowCore.Currency : Swift.RawRepresentable {}
+extension CoreLocation.CLLocation.CodingKeys : Swift.Equatable {}
+extension CoreLocation.CLLocation.CodingKeys : Swift.Hashable {}
+extension CoreLocation.CLLocation.CodingKeys : Swift.RawRepresentable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Equatable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Hashable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.RawRepresentable {}
