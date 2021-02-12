@@ -1759,6 +1759,9 @@ public enum AppConfigurationContext {
 extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
+public protocol HasSecondaryWorkflows : AnyObject {
+  var secondaryWorkflowIDs: [Swift.Int] { get }
+}
 public struct LocalizationService {
   public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
 }
