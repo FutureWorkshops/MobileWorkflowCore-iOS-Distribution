@@ -3,6 +3,7 @@
 // swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
+import AuthenticationServices
 import Combine
 import CoreLocation
 import CryptoKit
@@ -46,12 +47,11 @@ extension FileManager {
   @objc(mw_sharedManager) public static var shared: Foundation.FileManager
 }
 public struct MobileWorkflowServices {
-  public let session: MobileWorkflowCore.Session
   public let credentialStore: MobileWorkflowCore.CredentialsStoreProtocol
   public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
   public let localizationService: MobileWorkflowCore.LocalizationService
   public let eventService: MobileWorkflowCore.EventService
-  public func perform<T>(task: T, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
 }
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
@@ -135,6 +135,7 @@ extension UIViewController {
 public protocol RemoteContentStep {
   associatedtype ResponseType
   var stepContext: MobileWorkflowCore.StepContext { get }
+  var session: MobileWorkflowCore.Session { get }
   var services: MobileWorkflowCore.MobileWorkflowServices { get }
   var contentURL: Swift.String? { get }
   func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
@@ -270,6 +271,7 @@ public protocol PresentedWorkflow : AnyObject {
 public enum CredentialType : Swift.String, Swift.CaseIterable {
   case token
   case refreshToken
+  case appleIdCredentialUser
   public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
   public var rawValue: Swift.String {
@@ -1119,6 +1121,30 @@ public protocol CredentialsStoreProtocol {
   func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
 }
+public protocol NibLoadable : AnyObject {
+  static var nibName: Swift.String { get }
+  static var nib: UIKit.UINib { get }
+  static func nib(bundle: Foundation.Bundle?) -> UIKit.UINib
+  static func loadFromNib() -> Self
+  static func loadFromNib(bundle: Foundation.Bundle?) -> Self
+}
+extension NibLoadable {
+  public static var nibName: Swift.String {
+    get
+  }
+  public static var nib: UIKit.UINib {
+    get
+  }
+  public static func nib(bundle: Foundation.Bundle?) -> UIKit.UINib
+}
+extension NibLoadable where Self : UIKit.UIView {
+  public static func loadFromNib() -> Self
+  public static func loadFromNib(bundle: Foundation.Bundle?) -> Self
+}
+extension NibLoadable where Self : UIKit.UIViewController {
+  public static func loadFromNib() -> Self
+  public static func loadFromNib(bundle: Foundation.Bundle?) -> Self
+}
 extension String {
   public func fw_attributedString(baseAttributes: [Foundation.NSAttributedString.Key : Any], substringsAttributes: [(substrings: [Swift.String], attributes: [Foundation.NSAttributedString.Key : Any])] = []) -> Foundation.NSAttributedString
   public var fw_firstCapitalized: Swift.String {
@@ -1321,6 +1347,37 @@ public struct ValueFormatter {
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.Session?) -> Swift.String?
+}
+public protocol ReusableView : AnyObject {
+  static var defaultReuseIdentifier: Swift.String { get }
+}
+extension ReusableView where Self : UIKit.UIView {
+  public static var defaultReuseIdentifier: Swift.String {
+    get
+  }
+}
+extension UICollectionViewCell : MobileWorkflowCore.ReusableView {
+}
+extension UICollectionView {
+  public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell
+  public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell, T : MobileWorkflowCore.NibLoadable
+  public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionViewCell
+  public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
+  public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.NibLoadable, T : MobileWorkflowCore.ReusableView
+  public func dequeueReusableSupplementaryViewOfKind<T>(_ elementKind: Swift.String, forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
+}
+extension UITableViewCell : MobileWorkflowCore.ReusableView {
+}
+extension UITableView {
+  public func register<T>(_: T.Type) where T : UIKit.UITableViewCell
+  public func register<T>(_: T.Type) where T : UIKit.UITableViewCell, T : MobileWorkflowCore.NibLoadable
+  public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UITableViewCell
+}
+extension UITableViewHeaderFooterView : MobileWorkflowCore.ReusableView {
+}
+extension UITableView {
+  public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView, T : MobileWorkflowCore.NibLoadable
+  public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
 public protocol ImageLoadingService {
   func syncLoad(image: Swift.String) -> UIKit.UIImage?
@@ -1653,6 +1710,7 @@ public struct StepContext {
 public struct StepInfo {
   public let data: MobileWorkflowCore.StepData
   public let context: MobileWorkflowCore.StepContext
+  public let session: MobileWorkflowCore.Session
 }
 public struct StepData : Swift.Codable {
   public let type: Swift.String
@@ -1664,13 +1722,12 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-@objc @_hasMissingDesignatedInitializers public class MessageStateView : UIKit.UIView {
-  public init(frame: CoreGraphics.CGRect, message: Swift.String)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class StateView : UIKit.UIView {
+  public struct ButtonConfig {
+  }
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc deinit
-}
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LoadingStateView : UIKit.UIView {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil)
   @objc deinit
 }
 extension ORKSignatureResult : MobileWorkflowCore.BinaryProvider {
@@ -1722,6 +1779,18 @@ public enum CredentialError : Swift.Error {
     get
   }
   public func hash(into hasher: inout Swift.Hasher)
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MobileWorkflowSubtitleTableViewCell : UIKit.UITableViewCell {
+  public struct ViewData {
+  }
+  public var viewData: MobileWorkflowCore.MobileWorkflowSubtitleTableViewCell.ViewData? {
+    get
+    set
+  }
+  @objc override dynamic public func layoutSubviews()
+  public func updateImage(_ image: UIKit.UIImage?)
+  public func configureStyle(titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular))
+  @objc deinit
 }
 public struct Server : Swift.Codable {
   public let id: Swift.Int

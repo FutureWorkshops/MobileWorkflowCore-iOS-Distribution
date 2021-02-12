@@ -328,15 +328,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 
 
-/// Loading UIView that can display an UIActivityIndicator, a UILabel as a big bold title and a UILabel as a subtitle.
-/// By default, both titles are hiddden.
-SWIFT_CLASS("_TtC18MobileWorkflowCore16LoadingStateView")
-@interface LoadingStateView : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-
 SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -349,13 +340,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService (SWIFT_EXTENSION(MobileWorkflowCore)) <CLLocationManagerDelegate>
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore16MessageStateView")
-@interface MessageStateView : UIView
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
 
@@ -410,6 +394,12 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
+@interface MobileWorkflowSubtitleTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+@end
 
 
 
@@ -417,6 +407,22 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
 
 
 
+
+
+
+
+
+
+
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
+@interface StateView : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
 
 
 
