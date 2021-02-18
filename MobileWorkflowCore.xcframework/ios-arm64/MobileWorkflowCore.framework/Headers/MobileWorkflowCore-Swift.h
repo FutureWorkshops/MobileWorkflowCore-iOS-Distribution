@@ -191,6 +191,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import CoreGraphics;
 @import CoreLocation;
 @import Foundation;
+@import MessageUI;
 @import ObjectiveC;
 @import UIKit;
 #endif
@@ -321,10 +322,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
 
 
 
@@ -357,6 +358,29 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore23MobileWorkflowEmailStep")
+@interface MobileWorkflowEmailStep : ORKStep
+- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+- (Class _Nonnull)stepViewControllerClass SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
+@end
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowEmailViewController")
+@interface MobileWorkflowEmailViewController : MobileWorkflowButtonViewController
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class MFMailComposeViewController;
+
+@interface MobileWorkflowEmailViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <MFMailComposeViewControllerDelegate>
+- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
 @end
 
 
