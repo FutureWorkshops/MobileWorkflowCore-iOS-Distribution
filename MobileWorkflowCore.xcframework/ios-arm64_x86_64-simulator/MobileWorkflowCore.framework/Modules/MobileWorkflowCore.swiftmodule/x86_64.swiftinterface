@@ -1822,11 +1822,9 @@ public struct Server : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-public struct Attachment {
-  public let data: Foundation.Data
-  public let mimeType: Swift.String
-  public let fileName: Swift.String
-  public let filePath: Swift.String
+public enum Attachment {
+  case filePath(_: Swift.String)
+  case data(_: Foundation.Data, mimeType: Swift.String, fileName: Swift.String)
 }
 @objc @_inheritsConvenienceInitializers open class MobileWorkflowEmailViewController : MobileWorkflowCore.MobileWorkflowButtonViewController {
   public var emailStep: (MobileWorkflowCore.ORKStep & MobileWorkflowCore.EmailStep)! {
