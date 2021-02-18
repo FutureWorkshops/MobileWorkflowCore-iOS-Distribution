@@ -1824,7 +1824,10 @@ public struct Server : Swift.Codable {
 }
 public struct Attachment {
 }
-@objc @_inheritsConvenienceInitializers public class MobileWorkflowEmailViewController : MobileWorkflowCore.MobileWorkflowButtonViewController {
+@objc @_inheritsConvenienceInitializers open class MobileWorkflowEmailViewController : MobileWorkflowCore.MobileWorkflowButtonViewController {
+  public var emailStep: (MobileWorkflowCore.ORKStep & MobileWorkflowCore.EmailStep)! {
+    get
+  }
   @objc override dynamic public func viewDidLoad()
   public func openEmailComposer(attachments: [MobileWorkflowCore.Attachment])
   @objc deinit
