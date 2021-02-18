@@ -1833,6 +1833,7 @@ public struct Attachment {
     get
   }
   @objc override dynamic public func viewDidLoad()
+  open func extractAttachements(completion: @escaping (Swift.Result<[MobileWorkflowCore.Attachment], Swift.Error>) -> Swift.Void)
   public func extractAnswerContent() -> Swift.String?
   open func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
   @objc deinit
