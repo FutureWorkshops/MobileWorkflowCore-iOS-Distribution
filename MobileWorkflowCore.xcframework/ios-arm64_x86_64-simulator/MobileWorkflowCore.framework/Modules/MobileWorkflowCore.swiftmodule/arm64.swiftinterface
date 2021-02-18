@@ -1830,7 +1830,7 @@ public struct Attachment {
   }
   @objc override dynamic public func viewDidLoad()
   public func extractAnswerContent() -> Swift.String?
-  public func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
+  open func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
   @objc deinit
   @objc override dynamic public init(step: MobileWorkflowCore.ORKStep?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
