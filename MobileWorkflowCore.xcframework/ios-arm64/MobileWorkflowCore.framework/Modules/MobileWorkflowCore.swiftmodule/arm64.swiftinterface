@@ -160,6 +160,9 @@ extension UIViewController {
 extension UIViewController {
   public func addCovering(childViewController: UIKit.UIViewController)
 }
+extension UIViewController {
+  public func performSystemAction(_ systemAction: MobileWorkflowCore.SystemAction)
+}
 public protocol RemoteContentStep {
   associatedtype ResponseType
   var stepContext: MobileWorkflowCore.StepContext { get }
@@ -180,7 +183,6 @@ extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
   @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
-  public func extractAsyncService<T>(ofType type: T.Type, atKey key: Swift.String = "networkService", inJSONAtFilePath filePath: Swift.String) throws -> T where T : MobileWorkflowCore.AsyncTaskService, T : Swift.Decodable
   @objc deinit
   @objc override dynamic public init()
 }
@@ -332,7 +334,13 @@ public struct URLFormatter {
   public func parse(baseURL: Foundation.URL, complement: Swift.String, using session: MobileWorkflowCore.Session?) -> Foundation.URL?
 }
 public struct Credential : Swift.Codable {
+  public let type: Swift.String
+  public let value: Swift.String
+  public let expirationDate: Foundation.Date
   public init(type: Swift.String, value: Swift.String, expirationDate: Foundation.Date)
+  public var credentialType: MobileWorkflowCore.CredentialType? {
+    get
+  }
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1138,6 +1146,7 @@ extension Session : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
+  public func jsonContent(filteredBy identifiers: [Swift.String]) -> Swift.String?
 }
 public enum Currency : Swift.String {
   case afghani, algerianDinar, argentinePeso, armenianDram, arubanFlorin, australianDollar, azerbaijanManat, bahamianDollar, bahrainiDinar, baht, balboa, barbadosDollar, belarusianRuble, belizeDollar, bermudianDollar, boliviano, bolívar, brazilianReal, bruneiDollar, bulgarianLev, burundiFranc, caboVerdeEscudo, canadianDollar, caymanIslandsDollar, chileanPeso, colombianPeso, comorianFranc, congoleseFranc, convertibleMark, cordobaOro, costaRicanColon, cubanPeso, czechKoruna, dalasi, danishKrone, denar, djiboutiFranc, dobra, dollar, dominicanPeso, dong, eastCaribbeanDollar, egyptianPound, elSalvadorColon, ethiopianBirr, euro, falklandIslandsPound, fijiDollar, forint, ghanaCedi, gibraltarPound, gourde, guarani, guineanFranc, guyanaDollar, hongKongDollar, hryvnia, icelandKrona, indianRupee, iranianRial, iraqiDinar, jamaicanDollar, jordanianDinar, kenyanShilling, kina, kuna, kuwaitiDinar, kwanza, kyat, laoKip, lari, lebanesePound, lek, lempira, leone, liberianDollar, libyanDinar, lilangeni, loti, malagasyAriary, malawiKwacha, malaysianRinggit, mauritiusRupee, mexicanPeso, mexicanUnidadDeInversion, moldovanLeu, moroccanDirham, mozambiqueMetical, mvdol, naira, nakfa, namibiaDollar, nepaleseRupee, netherlandsAntilleanGuilder, newIsraeliSheqel, newTaiwanDollar, newZealandDollar, ngultrum, northKoreanWon, norwegianKrone, ouguiya, paanga, pakistanRupee, pataca, pesoConvertible, pesoUruguayo, philippinePiso, poundSterling, pula, qatariRial, quetzal, rand, rialOmani, riel, romanianLeu, rufiyaa, rupiah, russianRuble, rwandaFranc, saintHelenaPound, saudiRiyal, serbianDinar, seychellesRupee, singaporeDollar, sol, solomonIslandsDollar, som, somaliShilling, somoni, southSudanesePound, sriLankaRupee, sudanesePound, surinamDollar, swedishKrona, swissFranc, syrianPound, taka, tala, tanzanianShilling, tenge, trinidadAndTobagoDollar, tugrik, tunisianDinar, turkishLira, turkmenistanNewManat, uaeDirham, ugandaShilling, unidadDeFomento, unidadDeValorReal, uruguayPesoEnUnidadesIndexadas, uzbekistanSum, vatu, wirEuro, wirFranc, won, yemeniRial, yen, yuanRenminbi, zambianKwacha, zimbabweDollar, zloty, none
@@ -1411,8 +1420,12 @@ extension UITableView {
   public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
 public protocol ImageLoadingService {
-  func syncLoad(image: Swift.String) -> UIKit.UIImage?
-  func asyncLoad(image: Swift.String, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
+  func syncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential?) -> UIKit.UIImage?
+  func asyncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential?, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
+}
+extension ImageLoadingService {
+  public func syncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential? = nil) -> UIKit.UIImage?
+  public func asyncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential? = nil, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
 public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   func imageCell(_ cell: MobileWorkflowCore.MobileWorkflowImageTableViewCell, didTapButton button: UIKit.UIButton)
@@ -1424,6 +1437,7 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
     set
   }
   public func configure()
+  public func setContentMode(_ contentMode: UIKit.UIView.ContentMode)
   @objc deinit
 }
 @objc public class DisplayItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
@@ -1451,8 +1465,10 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   final public let onSuccess: MobileWorkflowCore.SuccessAction?
   final public let modalWorkflow: Swift.String?
   final public let buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?
+  final public let contentMode: MobileWorkflowCore.ContentMode?
+  final public let systemURL: Swift.String?
   @objc required convenience public init?(coder: Foundation.NSCoder)
-  public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?) throws
+  public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil) throws
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc deinit
@@ -1461,6 +1477,16 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   public func encode(to encoder: Swift.Encoder) throws
 }
 public typealias DisplayItemButtonStyle = MobileWorkflowCore.ButtonStyle
+public enum ContentMode : Swift.String, Swift.Codable {
+  case scaleAspectFit
+  case scaleAspectFill
+  public typealias RawValue = Swift.String
+  public init?(rawValue: Swift.String)
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public typealias SystemAction = Swift.String
 extension UITextField {
   public var selectedTextRangeOffsetFromEnd: Swift.Int {
     get
@@ -1474,12 +1500,21 @@ public protocol URLAsyncTaskConvertible {
 extension URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
   public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.Session) -> T? where T : MobileWorkflowCore.AsyncTask
 }
+public struct ResultsUploadTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.Credentialized {
+  public typealias Response = Foundation.Data
+  public typealias UrlString = Swift.String
+  public typealias Input = MobileWorkflowCore.ResultsUploadTask.UrlString
+  public let input: MobileWorkflowCore.ResultsUploadTask.UrlString
+  public let requestPropertyIdentifiers: [Swift.String]
+  public let credential: MobileWorkflowCore.Credential?
+}
 public enum Event {
   case notification(name: Foundation.NSNotification.Name)
   case apnsTokenRegistered
   case significantLocationChanges
+  case applicationOpensURL
 }
-public protocol EventService : MobileWorkflowCore.AppEventDelegate, MobileWorkflowCore.AuthRedirector {
+public protocol EventService : MobileWorkflowCore.AppEventDelegate, MobileWorkflowCore.AuthRedirector, MobileWorkflowCore.SceneEventDelegate {
   func publisher<T>(for event: MobileWorkflowCore.Event) -> Combine.AnyPublisher<T?, Swift.Error>
 }
 public class EventServiceImplementation : MobileWorkflowCore.EventService {
@@ -1501,20 +1536,29 @@ public protocol AppEventDelegate : AnyObject {
   func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
   func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
+public protocol SceneEventDelegate : AnyObject {
+  func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+}
 extension EventServiceImplementation {
   public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
   public func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
   public func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
-@objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController, MobileWorkflowCore.ORKTaskViewControllerDelegate {
+extension EventServiceImplementation {
+  public func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+}
+@objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController {
   public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard)
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
-  @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, didFinishWith reason: MobileWorkflowCore.ORKTaskViewControllerFinishReason, error: Swift.Error?)
-  @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.ORKStepViewController)
-  @objc public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.ORKStepViewController, navigationDirection direction: MobileWorkflowCore.ORKStepViewControllerNavigationDirection)
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc deinit
+}
+extension MobileWorkflowRootViewController : MobileWorkflowCore.ORKTaskViewControllerDelegate {
+  @objc dynamic public func taskViewControllerShouldConfirmCancel(_ taskViewController: MobileWorkflowCore.ORKTaskViewController) -> Swift.Bool
+  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, didFinishWith reason: MobileWorkflowCore.ORKTaskViewControllerFinishReason, error: Swift.Error?)
+  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.ORKStepViewController)
+  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.ORKStepViewController, navigationDirection direction: MobileWorkflowCore.ORKStepViewControllerNavigationDirection)
 }
 @objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
@@ -1593,7 +1637,7 @@ extension URLAsyncTask {
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.Session, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
-  public static func build(urlString: Swift.String, session: MobileWorkflowCore.Session, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+  public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.Session, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
@@ -1750,6 +1794,9 @@ public struct StepData : Swift.Codable {
   public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil)
   @objc deinit
 }
+extension URLRequest {
+  public func curlString() -> Swift.String
+}
 extension ORKSignatureResult : MobileWorkflowCore.BinaryProvider {
   public var binaryIdentifier: Swift.String {
     get
@@ -1812,7 +1859,7 @@ public enum CredentialError : Swift.Error {
   }
   @objc override dynamic public func layoutSubviews()
   public func updateImage(_ image: UIKit.UIImage?)
-  public func configureStyle(titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular))
+  public func configureStyle(titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = .label, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = .secondaryLabel)
   @objc deinit
 }
 public struct Server : Swift.Codable {
@@ -1947,6 +1994,9 @@ extension CoreLocation.CLLocation.CodingKeys : Swift.RawRepresentable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Equatable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.Hashable {}
 extension MobileWorkflowCore.DisplayItem.ItemType : Swift.RawRepresentable {}
+extension MobileWorkflowCore.ContentMode : Swift.Equatable {}
+extension MobileWorkflowCore.ContentMode : Swift.Hashable {}
+extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}

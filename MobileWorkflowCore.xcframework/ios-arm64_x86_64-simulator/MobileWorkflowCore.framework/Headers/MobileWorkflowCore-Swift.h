@@ -324,10 +324,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
-
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 
@@ -392,17 +392,22 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
-@class ORKTaskViewController;
 @class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
-@interface MobileWorkflowRootViewController : UIViewController <ORKTaskViewControllerDelegate>
+@interface MobileWorkflowRootViewController : UIViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class ORKTaskViewController;
+
+@interface MobileWorkflowRootViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <ORKTaskViewControllerDelegate>
+- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController * _Nonnull)taskViewController SWIFT_WARN_UNUSED_RESULT;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError * _Nullable)error;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillDisappear:(ORKStepViewController * _Nonnull)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
 @class UIWindow;
@@ -449,6 +454,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
 
 
 
@@ -800,10 +806,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
-
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 
@@ -868,17 +874,22 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
-@class ORKTaskViewController;
 @class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
-@interface MobileWorkflowRootViewController : UIViewController <ORKTaskViewControllerDelegate>
+@interface MobileWorkflowRootViewController : UIViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class ORKTaskViewController;
+
+@interface MobileWorkflowRootViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <ORKTaskViewControllerDelegate>
+- (BOOL)taskViewControllerShouldConfirmCancel:(ORKTaskViewController * _Nonnull)taskViewController SWIFT_WARN_UNUSED_RESULT;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController didFinishWithReason:(ORKTaskViewControllerFinishReason)reason error:(NSError * _Nullable)error;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
 - (void)taskViewController:(ORKTaskViewController * _Nonnull)taskViewController stepViewControllerWillDisappear:(ORKStepViewController * _Nonnull)stepViewController navigationDirection:(ORKStepViewControllerNavigationDirection)direction;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
 @class UIWindow;
@@ -925,6 +936,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
 
 
 
