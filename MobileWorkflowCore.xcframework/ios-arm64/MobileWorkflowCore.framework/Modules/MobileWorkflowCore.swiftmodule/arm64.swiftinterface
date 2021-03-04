@@ -1136,6 +1136,8 @@ public protocol SessionProvider {
   public var environment: MobileWorkflowCore.Server?
   public var preferredLanguage: Swift.String?
   public func fetchBinaries() -> [MobileWorkflowCore.BinaryProvider]
+  public func loadBinary(valueString: Swift.String) -> MobileWorkflowCore.BinaryResource?
+  public func loadBinaries() -> [MobileWorkflowCore.BinaryResource]
   public func checkAndConvertBinaries(completion: @escaping ((Swift.Error?) -> Swift.Void))
   public func fetchValue(resource: Swift.String) -> Any?
   public func resolve(value: Swift.String) -> Swift.String
@@ -1386,6 +1388,7 @@ public struct NetworkDisplayItemTask : MobileWorkflowCore.CredentializedAsyncTas
 public struct ValueFormatter {
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
+  public func parseIdentifier(valueString: Swift.String, using session: MobileWorkflowCore.Session?) -> Swift.String?
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.Session?) -> Swift.String?
 }
 public protocol ReusableView : AnyObject {
@@ -1420,12 +1423,12 @@ extension UITableView {
   public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
 public protocol ImageLoadingService {
-  func syncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential?) -> UIKit.UIImage?
-  func asyncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential?, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
+  func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
+  func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
 extension ImageLoadingService {
-  public func syncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential? = nil) -> UIKit.UIImage?
-  public func asyncLoad(image: Swift.String, credential: MobileWorkflowCore.Credential? = nil, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
+  public func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
+  public func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
 public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   func imageCell(_ cell: MobileWorkflowCore.MobileWorkflowImageTableViewCell, didTapButton button: UIKit.UIButton)
@@ -1493,6 +1496,13 @@ extension UITextField {
   }
   public func setInitialSelectedTextRange()
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
+}
+public struct BinaryResource : Swift.Codable {
+  public let idenfifer: Swift.String
+  public let fileType: Swift.String?
+  public let data: Foundation.Data
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
 }
 public protocol URLAsyncTaskConvertible {
   func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.Session) -> T? where T : MobileWorkflowCore.AsyncTask
