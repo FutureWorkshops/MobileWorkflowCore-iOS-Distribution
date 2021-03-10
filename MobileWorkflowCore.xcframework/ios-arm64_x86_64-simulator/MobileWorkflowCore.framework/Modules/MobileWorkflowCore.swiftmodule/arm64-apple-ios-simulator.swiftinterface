@@ -1346,7 +1346,7 @@ extension ORKFileResult : MobileWorkflowCore.BinaryProvider {
   public func load(using fileManager: Foundation.FileManager) -> Foundation.Data?
 }
 public class LocationUploadService {
-  public init?(config: MobileWorkflowCore.LocationUploadServiceConfiguration, session: MobileWorkflowCore.Session, networkService: MobileWorkflowCore.AsyncTaskService = NetworkAsyncTaskService(), credentialStore: MobileWorkflowCore.CredentialStoreProtocol, eventService: MobileWorkflowCore.EventService)
+  public init?(config: MobileWorkflowCore.LocationUploadServiceConfiguration, session: MobileWorkflowCore.Session, networkService: MobileWorkflowCore.AsyncTaskService, credentialStore: MobileWorkflowCore.CredentialStoreProtocol, eventService: MobileWorkflowCore.EventService)
   @objc deinit
 }
 extension CLLocation : Swift.Encodable {
