@@ -33,6 +33,7 @@
 
 #import <MobileWorkflowCore/ORKHelpers_Private.h>
 #import <MobileWorkflowCore/ORKHelpers_Internal.h>
+#import <MobileWorkflowCore/MWFileStreamManager.h>
 
 // Active step support
 #import <MobileWorkflowCore/ORKErrors.h>

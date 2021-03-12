@@ -304,11 +304,29 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+@class NSInputStream;
+@class NSOutputStream;
+
+SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
+@protocol StreamProvider
+- (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
+- (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
+- (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
+- (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+@end
+
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
 + (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
 + (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _Nonnull mw_streamProvider;)
++ (id <StreamProvider> _Nonnull)mw_streamProvider SWIFT_WARN_UNUSED_RESULT;
++ (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
 @end
 
 
@@ -324,10 +342,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
 
 
 
@@ -448,12 +466,44 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
+@interface QueueControllerNetworkAsyncTaskService : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@class NSURLSession;
+@class NSURLAuthenticationChallenge;
+@class NSURLCredential;
+@class NSURLSessionTask;
+@class NSHTTPURLResponse;
+@class NSURLSessionTaskMetrics;
+
+@interface QueueControllerNetworkAsyncTaskService (SWIFT_EXTENSION(MobileWorkflowCore)) <NSURLSessionTaskDelegate>
+- (void)URLSession:(NSURLSession * _Nonnull)session didBecomeInvalidWithError:(NSError * _Nullable)error;
+- (void)URLSession:(NSURLSession * _Nonnull)session didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession * _Nonnull)session;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willBeginDelayedRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLSessionDelayedRequestDisposition, NSURLRequest * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session taskIsWaitingForConnectivity:(NSURLSessionTask * _Nonnull)task;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task needNewBodyStream:(void (^ _Nonnull)(NSInputStream * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 @interface StateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
+
 
 
 
@@ -786,11 +836,29 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+@class NSInputStream;
+@class NSOutputStream;
+
+SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
+@protocol StreamProvider
+- (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
+- (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
+- (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
+- (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+@end
+
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
 SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
 + (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
 + (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _Nonnull mw_streamProvider;)
++ (id <StreamProvider> _Nonnull)mw_streamProvider SWIFT_WARN_UNUSED_RESULT;
++ (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
 @end
 
 
@@ -806,10 +874,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
 
 
 
@@ -930,12 +998,44 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
+@interface QueueControllerNetworkAsyncTaskService : NSObject
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@class NSURLSession;
+@class NSURLAuthenticationChallenge;
+@class NSURLCredential;
+@class NSURLSessionTask;
+@class NSHTTPURLResponse;
+@class NSURLSessionTaskMetrics;
+
+@interface QueueControllerNetworkAsyncTaskService (SWIFT_EXTENSION(MobileWorkflowCore)) <NSURLSessionTaskDelegate>
+- (void)URLSession:(NSURLSession * _Nonnull)session didBecomeInvalidWithError:(NSError * _Nullable)error;
+- (void)URLSession:(NSURLSession * _Nonnull)session didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession * _Nonnull)session;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willBeginDelayedRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLSessionDelayedRequestDisposition, NSURLRequest * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session taskIsWaitingForConnectivity:(NSURLSessionTask * _Nonnull)task;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task willPerformHTTPRedirection:(NSHTTPURLResponse * _Nonnull)response newRequest:(NSURLRequest * _Nonnull)request completionHandler:(void (^ _Nonnull)(NSURLRequest * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task needNewBodyStream:(void (^ _Nonnull)(NSInputStream * _Nullable))completionHandler;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
+- (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 @interface StateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
+
 
 
 
