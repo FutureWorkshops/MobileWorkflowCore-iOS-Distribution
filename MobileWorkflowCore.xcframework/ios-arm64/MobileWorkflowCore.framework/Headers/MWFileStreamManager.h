@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_SWIFT_NAME(FileStreamManager)
 @interface MWFileStreamManager : NSObject
 
+- (instancetype) init NS_UNAVAILABLE;
 - (instancetype) initWithOrigin:(NSFileManager *)origin
                  andDestination:(NSFileManager *)destionation
 NS_DESIGNATED_INITIALIZER NS_SWIFT_NAME(init(origin:destination:));

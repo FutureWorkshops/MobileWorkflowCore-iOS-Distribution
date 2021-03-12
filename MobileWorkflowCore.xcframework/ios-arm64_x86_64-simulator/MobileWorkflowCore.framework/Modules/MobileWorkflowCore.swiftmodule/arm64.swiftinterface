@@ -274,7 +274,7 @@ extension LocationService : CoreLocation.CLLocationManagerDelegate {
   @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
   @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
 }
-@objc public class QueueControllerNetworkAsyncTaskService : ObjectiveC.NSObject {
+@objc @_inheritsConvenienceInitializers public class QueueControllerNetworkAsyncTaskService : ObjectiveC.NSObject {
   public static let kQueuedSessionIdentifier: Swift.String
   public enum Exceptions : Swift.Error {
     case ItemEnqueued
@@ -284,14 +284,14 @@ extension LocationService : CoreLocation.CLLocationManagerDelegate {
     }
     public func hash(into hasher: inout Swift.Hasher)
   }
-  public init(sessionIdentifier: Swift.String = QueueControllerNetworkAsyncTaskService.kQueuedSessionIdentifier, configuration: MobileWorkflowCore.QueueControllerConfiguration = .disabled, credentialStore: MobileWorkflowCore.CredentialStore = CredentialStore(), shadowNetworkService: MobileWorkflowCore.AsyncTaskService? = nil, reachability: MobileWorkflowCore.Reachability = Reachability())
+  @objc convenience override dynamic public init()
+  required public init(sessionIdentifier: Swift.String = QueueControllerNetworkAsyncTaskService.kQueuedSessionIdentifier, configuration: MobileWorkflowCore.QueueControllerConfiguration = .disabled, credentialStore: MobileWorkflowCore.CredentialStore = CredentialStore(), shadowNetworkService: MobileWorkflowCore.AsyncTaskService? = nil, reachability: MobileWorkflowCore.Reachability = Reachability())
   @discardableResult
   public func handleEvents(sessionIdentifier: Swift.String, completion: @escaping () -> Swift.Void) -> Swift.Bool
   public func loadConfiguration(configuration: MobileWorkflowCore.ServiceConfiguration)
   public func updateShadowNetworkService(shadowNetworkService: MobileWorkflowCore.AsyncTaskService)
   public func updateCredentialStore(credentialStore: MobileWorkflowCore.CredentialStoreProtocol)
   @objc deinit
-  @objc override dynamic public init()
 }
 extension QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
