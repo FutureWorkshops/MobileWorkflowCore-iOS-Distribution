@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class ORKNavigationContainerView;
 
-@interface ORKStepViewController () <UIViewControllerRestoration> {
+@interface ORKStepViewController () {
     @protected ORKNavigationContainerView *_navigationFooterView;
 }
 
@@ -59,18 +59,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy, nullable) NSDate *presentedDate;
 @property (nonatomic, copy, nullable) NSDate *dismissedDate;
 
-@property (nonatomic, copy, nullable) NSString *restoredStepIdentifier;
 @property (nonatomic, assign) BOOL shouldIgnoreiPadDesign;
-@property (nonatomic) BOOL shouldPresentInReview;
 
 + (UIInterfaceOrientationMask)supportedInterfaceOrientations;
-
-// this property is set to `YES` when the step is part of a standalone review step. If set to `YES it will prevent any user input that might change the step result.
-@property (nonatomic, readonly) BOOL readOnlyMode;
-
-@property (nonatomic, readonly) BOOL isBeingReviewed;
-
-@property (nonatomic, nullable) ORKReviewStep* parentReviewStep;
 
 - (void)willNavigateDirection:(ORKStepViewControllerNavigationDirection)direction;
 

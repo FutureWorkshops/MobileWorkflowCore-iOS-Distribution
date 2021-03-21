@@ -30,14 +30,12 @@
 
 
 #import <MobileWorkflowCore/ORKTaskViewController_Private.h>
-#import <MobileWorkflowCore/ORKReviewStepViewController.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class ORKLearnMoreInstructionStep;
 
-@interface ORKTaskViewController () <ORKReviewStepViewControllerDelegate, UIViewControllerRestoration>
+@interface ORKTaskViewController ()
 
 // Any StepVC contains a vertical scroll view should register here.
 // So taskVC can monitor scroll view's content offset and update hairline's alpha.

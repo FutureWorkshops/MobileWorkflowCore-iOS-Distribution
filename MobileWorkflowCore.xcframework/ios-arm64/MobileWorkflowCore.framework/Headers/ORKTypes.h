@@ -47,12 +47,6 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeNone,
     
     /**
-     The scale question type asks participants to place a mark at an appropriate position on a
-     continuous or discrete line.
-     */
-    ORKQuestionTypeScale,
-    
-    /**
      In a single choice question, the participant can pick only one predefined option.
      */
     ORKQuestionTypeSingleChoice,
@@ -105,29 +99,9 @@ typedef NS_ENUM(NSInteger, ORKQuestionType) {
     ORKQuestionTypeDate,
     
     /**
-     In a time interval question, the participant can enter a time span by using a picker.
-     */
-    ORKQuestionTypeTimeInterval,
-    
-    /**
-     In a height question, the participant can enter a height by using a height picker.
-     */
-    ORKQuestionTypeHeight,
-
-    /**
-     In a weight question, the participant can enter a weight by using a weight picker.
-     */
-    ORKQuestionTypeWeight,
-    
-    /**
      In a location question, the participant can enter a location using a map view.
      */
     ORKQuestionTypeLocation,
-    
-    /**
-     In a socio-economic ladder, participant can pick their socio economic status.
-     */
-    ORKQuestionTypeSES,
     
     /**
      In a currency question, participant can enter a currency amount.
@@ -354,22 +328,6 @@ typedef NS_ENUM(NSInteger, ORKProgressIndicatorType) {
 
 
 /**
- Measurement system.
- 
- Used by ORKHeightAnswerFormat and ORKWeightAnswerFormat.
- */
-typedef NS_ENUM(NSInteger, ORKMeasurementSystem) {
-    /// Measurement system in use by the current locale.
-    ORKMeasurementSystemLocal = 0,
-    
-    /// Metric measurement system.
-    ORKMeasurementSystemMetric,
-
-    /// United States customary system.
-    ORKMeasurementSystemUSC,
-} ORK_ENUM_AVAILABLE;
-
-/**
  Route Identifiers for supported headphone types.
  */
 typedef NSString *ORKHeadphoneTypeIdentifier NS_STRING_ENUM;
@@ -439,42 +397,6 @@ typedef NS_OPTIONS(NSUInteger, ORKPDFViewerActionBarOption) {
     ORKPDFViewerActionBarOptionExcludeShare = 1 << 3,
 }ORK_ENUM_AVAILABLE;
 
-
-/**
- Numeric precision.
- 
- Used by ORKWeightAnswerFormat.
- */
-typedef NS_ENUM(NSInteger, ORKNumericPrecision) {
-    /// Default numeric precision.
-    ORKNumericPrecisionDefault = 0,
-    
-    /// Low numeric precision.
-    ORKNumericPrecisionLow,
-    
-    /// High numeric preicision.
-    ORKNumericPrecisionHigh,
-} ORK_ENUM_AVAILABLE;
-
-/**
- Eye side for amsler grid
- */
-typedef NS_ENUM(NSInteger, ORKAmslerGridEyeSide) {
-    /**
-     Not Specified
-     */
-    ORKAmslerGridEyeSideNotSpecified = 0,
-    
-    /**
-     Left Eye
-     */
-    ORKAmslerGridEyeSideLeft,
-    
-    /**
-     Right Eye
-     */
-    ORKAmslerGridEyeSideRight
-} ORK_ENUM_AVAILABLE;
 
 /**
  An enumeration of the types of button styles for Navigation Containers.

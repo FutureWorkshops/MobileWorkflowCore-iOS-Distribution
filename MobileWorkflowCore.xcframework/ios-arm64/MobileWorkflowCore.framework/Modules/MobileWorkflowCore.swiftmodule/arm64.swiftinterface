@@ -338,10 +338,10 @@ public enum WorkflowPresentationError : Foundation.LocalizedError {
     get
   }
 }
-public typealias OnWorkflowDismiss = (MobileWorkflowCore.ORKTaskViewControllerFinishReason) -> Swift.Void
+public typealias OnWorkflowDismiss = (MobileWorkflowCore.WorkflowFinishReason) -> Swift.Void
 public protocol WorkflowPresentationDelegate : AnyObject {
   func presentWorkflowWithName(_ name: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
-  func presentWorkflowWithId(_ id: Swift.Int, isDiscardable: Swift.Bool, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
+  func presentWorkflowWithId(_ id: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, onDismiss: MobileWorkflowCore.OnWorkflowDismiss?)
 }
 public protocol WorkflowPresentationDelegator : AnyObject {
   var workflowPresentationDelegate: MobileWorkflowCore.WorkflowPresentationDelegate? { get set }
@@ -1264,6 +1264,9 @@ extension NibLoadable where Self : UIKit.UIViewController {
   public static func loadFromNib() -> Self
   public static func loadFromNib(bundle: Foundation.Bundle?) -> Self
 }
+extension Dictionary where Key == Swift.String {
+  public func getString(key: Swift.String) -> Swift.String?
+}
 extension String {
   public func fw_attributedString(baseAttributes: [Foundation.NSAttributedString.Key : Any], substringsAttributes: [(substrings: [Swift.String], attributes: [Foundation.NSAttributedString.Key : Any])] = []) -> Foundation.NSAttributedString
   public var fw_firstCapitalized: Swift.String {
@@ -1645,12 +1648,6 @@ extension EventServiceImplementation {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc deinit
 }
-extension MobileWorkflowRootViewController : MobileWorkflowCore.ORKTaskViewControllerDelegate {
-  @objc dynamic public func taskViewControllerShouldConfirmCancel(_ taskViewController: MobileWorkflowCore.ORKTaskViewController) -> Swift.Bool
-  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, didFinishWith reason: MobileWorkflowCore.ORKTaskViewControllerFinishReason, error: Swift.Error?)
-  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.ORKStepViewController)
-  @objc dynamic public func taskViewController(_ taskViewController: MobileWorkflowCore.ORKTaskViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.ORKStepViewController, navigationDirection direction: MobileWorkflowCore.ORKStepViewControllerNavigationDirection)
-}
 @objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
     @objc get
@@ -1872,7 +1869,7 @@ public struct StepContext {
   public let appName: Swift.String?
   public let workflowName: Swift.String?
   public let systemTintColor: UIKit.UIColor
-  public let authenticationWorkflowId: Swift.Int?
+  public let authenticationWorkflowId: Swift.String?
 }
 public struct StepInfo {
   public let data: MobileWorkflowCore.StepData
@@ -1930,13 +1927,13 @@ extension ORKImageCaptureStep : MobileWorkflowCore.MobileWorkflowStep {
 public enum AppConfigurationContext {
   case remote(url: Swift.String, serverId: Swift.Int?)
   case cached
-  case file(path: Swift.String, serverId: Swift.Int?, workflowId: Swift.Int?, sessionValues: [Swift.String : Any]? = nil)
+  case file(path: Swift.String, serverId: Swift.Int?, workflowId: Swift.String?, sessionValues: [Swift.String : Any]? = nil)
 }
 extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
 public protocol HasSecondaryWorkflows : AnyObject {
-  var secondaryWorkflowIDs: [Swift.Int] { get }
+  var secondaryWorkflowIDs: [Swift.String] { get }
 }
 public struct LocalizationService {
   public func translate(_ stringToTranslate: Swift.String?) -> Swift.String?
@@ -2047,6 +2044,12 @@ public enum ViewOrder {
 }
 extension UIView {
   public func addPinnedSubview(_ view: UIKit.UIView, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
+}
+public enum WorkflowFinishReason : Swift.Equatable {
+  case discarded
+  case completed
+  case failed(error: Swift.Error?)
+  public static func == (lhs: MobileWorkflowCore.WorkflowFinishReason, rhs: MobileWorkflowCore.WorkflowFinishReason) -> Swift.Bool
 }
 public enum ButtonStyle : Swift.String, Swift.Codable {
   case primary

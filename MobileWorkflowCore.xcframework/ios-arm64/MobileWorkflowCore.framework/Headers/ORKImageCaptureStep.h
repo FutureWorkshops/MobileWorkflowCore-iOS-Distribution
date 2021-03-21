@@ -90,6 +90,11 @@ ORK_CLASS_AVAILABLE
 @property (nonatomic, copy) NSString *accessibilityHint;
 
 /**
+ The accessibility hint for the image picker button.
+ */
+@property (nonatomic, copy) NSString *accessibilityImagePickerHint;
+
+/**
  A boolean value indicating whether or not RAW image data should be captured.
  
  The default value of this property is 'NO'. If set to YES, the step will capture in RAW and
@@ -111,6 +116,13 @@ ORK_CLASS_AVAILABLE
  The default value is '1.0', which corresponds to best available quality.
  */
 @property (nonatomic, assign) CGFloat compressionQuality;
+
+/**
+ A boolean value indicating whether or not import image from library should be enabled.
+ 
+ The default value of this property is 'NO'. If set to YES, the step will enable the user to import images from the image library
+ */
+@property (nonatomic, assign) BOOL showGalleryOption;
 
 @end
 

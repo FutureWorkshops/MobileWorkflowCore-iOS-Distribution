@@ -326,7 +326,7 @@ task view controller and pass that data to `initWithTask:restorationData:` when 
  objects in the result hierarchy.
  */
 ORK_CLASS_AVAILABLE
-@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate, UIViewControllerRestoration>
+@interface ORKTaskViewController : UIViewController <ORKStepViewControllerDelegate>
 
 /**
  Returns a newly initialized task view controller.
