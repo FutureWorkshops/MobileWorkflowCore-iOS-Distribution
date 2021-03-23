@@ -457,6 +457,10 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 
 
+
+
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 @interface QueueControllerNetworkAsyncTaskService : NSObject
 - (nonnull instancetype)init;
@@ -963,6 +967,10 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
 @end
+
+
+
+
 
 
 

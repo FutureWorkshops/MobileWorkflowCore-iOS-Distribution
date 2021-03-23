@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		pGtoaRXP/ZJKtZCt7Url5SnpEtY=
+		jeeNROLU3/PkpyEaJ3WWVORoe4k=
 		</data>
 		<key>Headers/MWFileStreamManager.h</key>
 		<data>
@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		DzfjJTf/U6smcQwpeZaolV0Vgnk=
+		yRItgpx8efnx3pqFE1JcStCR1ig=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
@@ -478,11 +478,11 @@
 		</data>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<data>
-		SkqdeHwRXjhcio6VyK81m9JSvGQ=
+		ucG55mwik0V3fH6JGTknahRN2AA=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<data>
-		MkQ4xXNHSofJ9Qd9cT/Zqo0G+1Q=
+		cyihwrUosTL5kWqfrUi9Bh9WpYA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -490,11 +490,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Gp8cbxR0MTZowFWxCVBrHmV9ikk=
+		wNTB9tnJgL5SGhol6hiKanMGcI8=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		5qL1pu1sV5ozVd/tlJ8Dg3vQFmo=
+		wSUpQI+vLQuARv6RZaodODHO+NE=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -502,11 +502,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		Gp8cbxR0MTZowFWxCVBrHmV9ikk=
+		wNTB9tnJgL5SGhol6hiKanMGcI8=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		5qL1pu1sV5ozVd/tlJ8Dg3vQFmo=
+		wSUpQI+vLQuARv6RZaodODHO+NE=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -514,11 +514,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		PHF6Bj6ngAqkZ5A+6m8v3KbXVYM=
+		VbbPNeHxe1iFd+NdlWG/tqX+zc4=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		MpWS5aFx5O2jpQVP1uRyEG7P2g8=
+		g8qbgAUaO4UgOCo1DlqlxHIjPx4=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -526,11 +526,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		PHF6Bj6ngAqkZ5A+6m8v3KbXVYM=
+		VbbPNeHxe1iFd+NdlWG/tqX+zc4=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		MpWS5aFx5O2jpQVP1uRyEG7P2g8=
+		g8qbgAUaO4UgOCo1DlqlxHIjPx4=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -567,96 +567,6 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ca.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			exT5QnGmJcYyEjbBOcjahAgKrPU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ca.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dPW3KWrkI4n4CQRxYLFfiV4o7gg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>cs.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			K5543WaLtmQ7X5DC/WZqpQGpal0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>cs.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FjLU0LLHxPlIMGninAP/Ccgh+7Y=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>da.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			XHDjd+dMjBLOX1qMqUXzN9Wqo2E=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>da.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			/GRw+Ykow5GZFH4pDvjxlfiUp/0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>de.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			627yoi2PTFMm8BIGOiV0kLQARks=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>de.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			y9PrWtL9IU3laql2Vaa7mLPKVp4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>el.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			i4stBcnErXSlsBMw7hbkKEcQ6QA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>el.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			pfpx07baX9HaMOhZmleDgsyKQhc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
 		<key>en.lproj/Localizations.strings</key>
 		<dict>
 			<key>hash</key>
@@ -684,582 +594,6 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>en_AU.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ike9WvyuwTdvRhCP+6WyBHlFCNQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_AU.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dPW3KWrkI4n4CQRxYLFfiV4o7gg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_GB.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			EWh4TkuLdRLm7ujLBRYQqoGda/M=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_GB.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dPW3KWrkI4n4CQRxYLFfiV4o7gg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			5Oi3ZFWZkI+clcn6hS+Ffjx/gSI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dj7tgN88rsyes+WiFG1mHAyNYvI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es_419.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			voK5flgDgrP9KlQT+jun3VoSAAo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es_419.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dj7tgN88rsyes+WiFG1mHAyNYvI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			qr03YANf+kBwwojeBINi/S3LgAw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4uYCdtvjtY7zNU9QbC826jGJIkU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			vYv2pC20bvAAWohGJG7CpZa0Bo0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			j6Ec3Eh4IiB67jdlslBskqk4spw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr_CA.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			U2kDfBoqH4/AcFMnsqwbTm59V0A=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr_CA.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			j6Ec3Eh4IiB67jdlslBskqk4spw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>he.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			9lzpp6wiND0VHxQcP/NiLtdAdPc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>he.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			kZJyNpY+jHG3Xysi0kIrJGPdW4o=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			gMLAvp1lD5y2OoasUQPcbOtbR6Q=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+bDywM9oaDK8DxQVfchsMWU+Alc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			NX4I9/BFfNjIog9dx4mUNhBd8x4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			oGeBKX+YIQet+2BEq8bU667Ry24=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hu.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			r0+yx2hVYcpX84Ggx7895n+aO5k=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hu.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+Q3Zhd14TwgthQW+ibzL75KjU+M=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>id.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			G78TG49BWv2Q0Q00vpdes8TbwO0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>id.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			eWcd7/Ok7vtrg3SkNsqjpuLS6/I=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>it.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			XaupdhJJlhfflOLlIY5frK1jglU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>it.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sfsMJwqakUnp09gFp46I8gWsx88=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ja.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			n06vizj2bIJ1ZHzj3ZGnwzmLU/Y=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ja.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			P1sse2gXETp1anI2SUZM8nnq+G8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ko.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			+IFhyb5FbQBNzWb5mUzkizvljyM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ko.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			lMOkw5qsYc4uQrfoqbeUzUyG6H4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ms.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			o46+q3s2X/6E/aPXS1muCM3bhpE=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ms.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			zCE0riJhFTa6IzpODYVEglJ0TKM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>nl.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			RiW8VVeFe+5CX6H0TWA2Ex+qEV8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>nl.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			YQBHxObDwiUyAFefPRhfJ+/3tYk=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>no.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			206L7KQTp986PX16mWtiyBlGbyY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>no.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			bhJWqu0I6aDkFsWFsgDvesz9vpA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pl.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			fmoDqATNPcbupcXq1tH4tcxN9LI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pl.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			2i3C9xu/HLg7XvRsPtzfwIj2RxM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_BR.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			hoGAXoq0u+2tUZsgq6L2+rCR7Kk=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_BR.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			cSWPe96N+30qJEiz8eit2c7mAbs=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_PT.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4BBTS8eVA9hsaefd4A+L2A8wjyo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_PT.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			cSWPe96N+30qJEiz8eit2c7mAbs=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ro.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			CIM4Iv5lwQKrPaFsT0iB1UvzBI8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ro.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ju4+621LfwiuiLsF773ZVvKh2a8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ru.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			RyjMeoADHfN85xrDEUCR9p7J5XI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ru.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			Jhm+RXCKGI6UnFdQzgBMNISLecg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sk.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			KCzopTWTNFSqkF2SCbX1x/TYIbY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sk.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			0Rs3uC2LTRsSBLFhPrHgDQVzPwA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sv.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			KOHA3/hAUVitdbi+bAheR0istn8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sv.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			B5A+UqXpC5k85N36FbAwwj3aNok=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>th.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			V5XTDJZi5sS9GPWhZMMLmPbejzY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>th.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			OxX7oEOAEtPUUH0s4ZZubC3uUxk=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>tr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			oKAkdIRDheJHaC+5kA78CoW69iw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>tr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			p18OC5RZBYbzLjDZaIoTDj4WloI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>uk.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			tqlP3d5oSmIfLr4tpqZuCPP+a90=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>uk.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			QYiNtAOymU3Epc7yLq9jX17zFYg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>vi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			VRm+ISZQhl3D4cMs683ywyzXA1c=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>vi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sYVOWvvO36xwGacCw3DoCLCOovE=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_CN.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			elfCgC4q1phm5zXCdLfqoezgyrY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_CN.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			sYxg1fTpGyXSqJ/+GkylPZB0prQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_HK.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			pM66X1IPkLmBlYll6zJWxzc7STE=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_HK.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			G2FB17emw0b/HEVvyPlzcvYAWBM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_TW.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			FIhfvQ7zmhGaz+b6npdUdXvFoag=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_TW.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			G2FB17emw0b/HEVvyPlzcvYAWBM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
 	</dict>
 	<key>files2</key>
 	<dict>
@@ -1267,7 +601,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			ta+CMNLawQHq/lchGWTqLNZVIn9L2WJO3J422wQ+3oU=
+			InjaRVYALNbp5r8DPjts/2haZl2aoAMoPC4C92Jf5VQ=
 			</data>
 		</dict>
 		<key>Headers/MWFileStreamManager.h</key>
@@ -1281,7 +615,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sa7mGmmiXAq3cbDTtPyD9KAHiuvyrBUNW7LYXQMOM4Q=
+			B2FEu4uNCsDtIqHiUkntN9au6aL2W1cPzqudv1UY1NU=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
@@ -2086,14 +1420,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yhuId6Hyw75BteJPFgDMhu09gqFNE1Fxry39pIsxWes=
+			8kPrIJOsmNLQ9PfOVhMlcAhqfgON/4P052IGsenRP0k=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Y2EkYGZS8TPGOv2Lb2zNy1QrR7aqdgAUS1XHRVyxEJ0=
+			A2ahnQUsX1NQ063bXZYFrqcLsvWbH/VtsKniD7oi56Y=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -2107,14 +1441,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2Hryp79dKIBPBi8UfM/kq6TXMCPKiqMMxKPRdlabxsg=
+			WRgyTgQPgyPh8DAR3BUKnJNa3H7+6SWJvicZdh2PQMY=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/hqJmSuAjckpN92DHhXzksxcz6nTqCMPsXXoCX03Hqk=
+			OQ9xobpzhvZwysFGDXmiKv3g0Ok5yDoLIXr46f/YCrA=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -2128,14 +1462,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2Hryp79dKIBPBi8UfM/kq6TXMCPKiqMMxKPRdlabxsg=
+			WRgyTgQPgyPh8DAR3BUKnJNa3H7+6SWJvicZdh2PQMY=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			/hqJmSuAjckpN92DHhXzksxcz6nTqCMPsXXoCX03Hqk=
+			OQ9xobpzhvZwysFGDXmiKv3g0Ok5yDoLIXr46f/YCrA=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -2149,14 +1483,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yVAaTboilxYEBTLoJmNgb58wdpQQnw10wXXz9evmd98=
+			tF74+StMsvidC+/fzocNgNG8+8AsYukiB4i13zHsRgo=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jyLbXT29LgqovbB9SmlWPwCEMNrmG269+P+rC228qow=
+			F8ktqGQUS/GPgpSP2oun6H2M+GmKmm1aPcanVwiH51A=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -2170,14 +1504,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			yVAaTboilxYEBTLoJmNgb58wdpQQnw10wXXz9evmd98=
+			tF74+StMsvidC+/fzocNgNG8+8AsYukiB4i13zHsRgo=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jyLbXT29LgqovbB9SmlWPwCEMNrmG269+P+rC228qow=
+			F8ktqGQUS/GPgpSP2oun6H2M+GmKmm1aPcanVwiH51A=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -2221,96 +1555,6 @@
 			<key>optional</key>
 			<true/>
 		</dict>
-		<key>ca.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/bIwStTtivoNweO+13eJZpGpGgmh+GMVdeq/TiEbyAc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ca.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>cs.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			9xnPrga4fJULbpP/yNeNs8dK/01WUAL91sBDLG1cPgE=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>cs.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			yu6r+shnevRHP/0jsS6Zw5vpnEnGWO949YRBa+m0Xkk=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>da.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wORny7Q9d6PgYAN28hUlbNF8etSfdOSGfGepVAGR0P8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>da.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0MVnRxeH1ZTxEa84TMTTfK42qlOzYRUaiQ8ELQQ0lgA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>de.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			J9l0VDUn/oXKfqTNcuDcHLd16ygehLNFEOy1N3hqisc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>de.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			s7s5PNeFvwt5LxylN8YYsJ3LaPGRZ704yjCtxlfO1ts=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>el.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			hyWzGkMosLUIEC/mUSBA8i2x1mMuLzLSyVwWojuLtH0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>el.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8DiJkxQB6Wv2XDR3lXs1IK7jJq4/mDJNbVtrd4pfYgA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
 		<key>en.lproj/Localizations.strings</key>
 		<dict>
 			<key>hash2</key>
@@ -2334,582 +1578,6 @@
 			<key>hash2</key>
 			<data>
 			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_AU.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			kwB1Oiine4OWk9WG5NT8caCX72QfNVs4UwUWioGd0Jg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_AU.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_GB.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			vOwFrDFGLdHTLpFw5NAnLrf8lGB2FxdbDfPd/jBVEGw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en_GB.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			EN6CwlbekJoLZekIQPoEpegt2PKtJsBId7IaQx+tTVg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			PJnxWF/MMkPKDB9B1GeBsEslDd5JaGbLoIn5kdGU8CQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es_419.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6AjWIHVRi75qetpYIm0XPIxJQ2839fF+sfQ9/xlgmyU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>es_419.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			PJnxWF/MMkPKDB9B1GeBsEslDd5JaGbLoIn5kdGU8CQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			F/FjnWpn+Kf2iBcOERiEFasqdaxq/RXQT7hlulZKU2A=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			UW2nzLviZgEJSQj0XsfNowOOvpZ5xKotd2v/FmA76LI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Y5y6iR8VarWQNOK97nXf+ipuIFSzKRHC6GfTgXiwSOc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0PGckKiuclHosqzHZyhQWW4BFoIlHuAUqEwXo+tZIiA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr_CA.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			p3gRMOa9ZCDulUkBX5S88bSt8+xKoeBOhO/321SpANA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>fr_CA.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			0PGckKiuclHosqzHZyhQWW4BFoIlHuAUqEwXo+tZIiA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>he.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			5OJ038aEevJoEOsiCl8VoI1cqBWu3JDeUj6UfafqpZM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>he.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GM4Wb9ma84fWev4BDCDXWmpcsK8Jq21s1s0pkCAcnJE=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+yp12XB/u1AhMq0UfHhWD9K5wy9CZI7HCR+psOy3iM0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			oWPMQcgsegHmpF1ZZDUh+Zzks+hNuM8gkboPAcwlseA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			u38VHy7thsHpZLPCNmwI+XYh2T97i+QHNDccS8/R4F8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			nGIFMzX4UlVNOc9FITuTYqbVw3dRSeDBRd7mapR7xBY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hu.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			7E5SdA3E/aGlB6JhyPCRpxjeCqWIfVSNP45Qs8+C/y4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>hu.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mMuox4ghgvveOccQqlbGdWaNhgbs5z9MylDo/BHbb9g=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>id.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4jzTsCV1rtUUlfMAMGRg2UDzRtTa01g9L3R07hr+oWg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>id.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wh0C/YH96Bkf7r79bb25ZtGIf+cmPA9htDCtMhn6/Ek=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>it.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			u9x18rfR+F5V0w9KQtRvH5/oCnc2m0xMbi3PN69I8DQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>it.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dEbseUBX3R21kzZPquAbCeu1fACydCosRcv1f9w0j74=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ja.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			lIgOuXXUKqeiMIfX9NSnWHWPSSX2ATgsl7TyakYagTU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ja.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dM7d6OyuP2Wp8ProWY5r3Fwr14rQwo3B+5OmCmPSFVI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ko.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wIed5u7xb2qCz6dHtYrBMeJE58jBtPsIpPe63I7GPJM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ko.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			g3itlVKJRPEL1eOOCjbd+IHd4PwYd8mCuBnOvN0LL0M=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ms.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/3SNvXXdHsYpRz8QwP1Y7/2Efr5Snu/uF5FCjFklXWk=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ms.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			VCfgjjf3m+jGypxLWCdqsz5RiGdED/Zwi5F2NANQBT0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>nl.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Z8oup7MQQFXCTNkZvoay+M3Potq/SXLxOxOrTUmr4hc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>nl.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			uuY2ygboAVG22HIotV7FL8bQoYkio1qGDg3qg0+N0mY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>no.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			QqsmcaGf9QzjHNp/6/3dmgckRB8rpVHQ6O5RkHok7uo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>no.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ryxzXd2hi0gj1amxZ8puoNtlx4z5H67AKP3bgi95RTI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pl.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			l5CACOl5wZoGGNFIBPLChf2UNxJbQiVmeRg8wf0OxhI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pl.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			uT1zDvlhcQTf4tP7F/vGiP3PIKfADDy0BdA5Anmz9ME=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_BR.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ukmeM1BBit/oyQgbcm+j3TTFbeZL31hjEFOGbUeBAmc=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_BR.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			MuxEAohL7rW6NOLN+gH9+cijBTJ7o5gJT6NeiVfUBks=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_PT.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			NfhkJSUXJMw38xoMo7N3dpCn9TCx+KQ5lK7aL22sjUo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>pt_PT.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			MuxEAohL7rW6NOLN+gH9+cijBTJ7o5gJT6NeiVfUBks=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ro.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			txD4Iwfy/1Jjv/Wv4iUdswTwd7Gs5gIBJ2qZwWP2BzY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ro.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Pug+8zFwamgascdlrI71aJVz3KNrWDi6ZEEWJ7SavrY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ru.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			pn8GXc/yNQW97SSdinBlBpCHlQKbKvU70l/m9x1w0Qw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ru.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6yttUK0xuouNaJHZXvAwfZoPY9cTOeBTFhnhxbrxRPo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sk.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			qDDylIPOuQiNeqa6YXFZRwhIJMmFWwkaIZPQZhNhYqY=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sk.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wvrMcxG1ZP/u144I3D2nyrS/HtKUxUcqvcAQRDLXnCo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sv.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			fwzSc3Hv/oi0PNartA4uJlAQnYasiiE+9npAk06aIJw=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>sv.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			FlmreVLFGVGTJK9laU4iNriQqEPC0Cpb8ZuXIppu0c4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>th.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			XzAYPuvbbWJJInApm8zW6CqBChbLqjlCZOn5oCqrRrg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>th.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			U7aIKjFp8GIijuUf+I8dQfOHrmF2Nv2/47mJrmLbAXo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>tr.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mK80ro6wh6guP5debF1yd5nbBNAgnpHUiUY0DknJl2M=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>tr.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			X2B23zbxFNho9p5RfOrxCwg8rEdoEaqHnFj7RjKDna8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>uk.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			MxvNxGJaCmpHLGMM2dVutr8RQhg0DZsh2zI/W539KY0=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>uk.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			sbs//0eFWwStLaAKdAYZI9GpUwNXhsrC03Cont2qMMg=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>vi.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			50j7g5Zd3K9YNxA7A7Y6gpbhLDtt5QgG5gIpp1Cjyks=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>vi.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			9q+SOeh9mxJGWHMo4jkjwfwbcapi/N6EgvAT60jkxzM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_CN.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			rrISW4WG01YeaX03bHl+oSzslNj59luXgIAYBShs8lI=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_CN.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			WlGGLArNUVCpUtLGawqqnkuz2bwHdfw0W6+oHXXwyEo=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_HK.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			BMymT+vsJ4DvoWRv+KSr84c6j0b8bvWFLXHGGJa3SuU=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_HK.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mHhgwHCJ5jc+e+IyMgSrJ8xGP2996xNbuYB40rs0bKQ=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_TW.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cWO7qQXqsyfeAfgDCGDVXVQTvLOc6yZMNn98M3XRVi8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>zh_TW.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mHhgwHCJ5jc+e+IyMgSrJ8xGP2996xNbuYB40rs0bKQ=
 			</data>
 			<key>optional</key>
 			<true/>
