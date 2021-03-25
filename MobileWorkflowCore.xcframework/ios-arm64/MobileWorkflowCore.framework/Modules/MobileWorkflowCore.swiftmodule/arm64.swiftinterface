@@ -2061,6 +2061,24 @@ public enum WorkflowFinishReason : Swift.Equatable {
   case failed(error: Swift.Error?)
   public static func == (lhs: MobileWorkflowCore.WorkflowFinishReason, rhs: MobileWorkflowCore.WorkflowFinishReason) -> Swift.Bool
 }
+public enum PDFImageRenderError : Foundation.LocalizedError {
+  case pathNotFound
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public var localizedDescription: Swift.String {
+    get
+  }
+  public static func == (a: MobileWorkflowCore.PDFImageRenderError, b: MobileWorkflowCore.PDFImageRenderError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+}
+@_hasMissingDesignatedInitializers public class PDFImageRenderer {
+  public func renderImages(_ images: [UIKit.UIImage], fileNamePrefix: Swift.String) throws -> Foundation.URL?
+  @objc deinit
+}
 public enum ButtonStyle : Swift.String, Swift.Codable {
   case primary
   case danger
@@ -2149,6 +2167,8 @@ extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
 extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
 extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
+extension MobileWorkflowCore.PDFImageRenderError : Swift.Equatable {}
+extension MobileWorkflowCore.PDFImageRenderError : Swift.Hashable {}
 extension MobileWorkflowCore.ButtonStyle : Swift.Equatable {}
 extension MobileWorkflowCore.ButtonStyle : Swift.Hashable {}
 extension MobileWorkflowCore.ButtonStyle : Swift.RawRepresentable {}
