@@ -2075,7 +2075,8 @@ public enum PDFImageRenderError : Foundation.LocalizedError {
   }
   public func hash(into hasher: inout Swift.Hasher)
 }
-@_hasMissingDesignatedInitializers public class PDFImageRenderer {
+public class PDFImageRenderer {
+  public init()
   public func renderImages(_ images: [UIKit.UIImage], fileNamePrefix: Swift.String) throws -> Foundation.URL?
   @objc deinit
 }
