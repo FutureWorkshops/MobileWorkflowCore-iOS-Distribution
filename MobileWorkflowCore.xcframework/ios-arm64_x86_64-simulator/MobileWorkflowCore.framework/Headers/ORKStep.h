@@ -33,6 +33,7 @@
 @import UIKit;
 #import <MobileWorkflowCore/ORKTypes.h>
 
+@class MWSession;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -99,6 +100,11 @@ ORK_CLASS_AVAILABLE
  @return A new step.
  */
 - (instancetype)copyWithIdentifier:(NSString *)identifier;
+
+/**
+ Reference to the MobileWorkflow session assoicated with this step.
+*/
+@property (nonatomic, strong, nullable) MWSession *mwSession;
 
 /**
  A short string that uniquely identifies the step within the task.

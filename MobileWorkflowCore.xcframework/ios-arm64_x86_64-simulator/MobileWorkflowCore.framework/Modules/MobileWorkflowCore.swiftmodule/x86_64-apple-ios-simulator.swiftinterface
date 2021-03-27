@@ -403,6 +403,13 @@ public protocol SecurityStoreProtocol {
   func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
 }
+public protocol ErrorResponse : Swift.Decodable {
+  var message: Swift.String { get }
+}
+public struct SimpleErrorResponse : MobileWorkflowCore.ErrorResponse {
+  public let message: Swift.String
+  public init(from decoder: Swift.Decoder) throws
+}
 public protocol AsyncTask {
   associatedtype Response
   associatedtype Input
@@ -1194,7 +1201,7 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
   func resolve(url: Swift.String) -> Foundation.URL?
   func fetchValue(resource: Swift.String) -> Any?
 }
-@_hasMissingDesignatedInitializers public class Session {
+@_hasMissingDesignatedInitializers @objc(MWSession) public class Session : ObjectiveC.NSObject {
   public var fileManager: Foundation.FileManager {
     get
   }
@@ -1211,12 +1218,13 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
   public func loadBinaries() -> [MobileWorkflowCore.BinaryResource]
   public func checkAndConvertBinaries(completion: @escaping ((Swift.Error?) -> Swift.Void))
   @objc deinit
+  @objc override dynamic public init()
 }
 extension Session : MobileWorkflowCore.ContentProvider {
   public func fetchValue(resource: Swift.String) -> Any?
   public func fetchBinaries() -> [MobileWorkflowCore.BinaryProvider]
-  public func resolve(value: Swift.String) -> Swift.String
-  public func resolve(url: Swift.String) -> Foundation.URL?
+  @objc(resolveValue:) dynamic public func resolve(value: Swift.String) -> Swift.String
+  @objc(resolveUrl:) dynamic public func resolve(url: Swift.String) -> Foundation.URL?
   public var jsonContent: Swift.String? {
     get
   }
@@ -1727,15 +1735,17 @@ public struct URLTaskInput {
 public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public typealias Response = T
   public typealias URLTaskParser = (Foundation.Data) throws -> T
+  public typealias URLTaskErrorParser = (Foundation.Data) -> Swift.Error?
   public let input: MobileWorkflowCore.URLTaskInput
   public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
+  public let errorParser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskErrorParser?
   public typealias Input = MobileWorkflowCore.URLTaskInput
 }
 extension URLAsyncTask {
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
-  public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+  public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
