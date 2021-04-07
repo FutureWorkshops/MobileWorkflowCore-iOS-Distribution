@@ -306,6 +306,8 @@ ORK_CLASS_AVAILABLE
  */
 @property (nonatomic, strong, nullable) UIBarButtonItem *cancelButtonItem;
 
+@property (nonatomic, strong, nullable) UIBarButtonItem *utilityButtonItem;
+
 /**
  The current state of the result. (read-only)
  

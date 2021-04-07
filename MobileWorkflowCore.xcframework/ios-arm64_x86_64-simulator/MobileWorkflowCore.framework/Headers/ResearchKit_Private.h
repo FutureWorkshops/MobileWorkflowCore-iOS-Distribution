@@ -67,6 +67,7 @@
 // For custom steps
 #import <MobileWorkflowCore/ORKStepView_Private.h>
 #import <MobileWorkflowCore/ORKCustomStepView.h>
+#import <MobileWorkflowCore/ORKCheckmarkView.h>
 #import <MobileWorkflowCore/ORKVerticalContainerView.h>
 #import <MobileWorkflowCore/ORKVerticalContainerView_Internal.h>
 #import <MobileWorkflowCore/ORKStepContainerView.h>

@@ -71,14 +71,16 @@ public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertibl
   }
 }
 public struct AppConfigurationDependencies {
+  public var appId: Swift.String
   public var plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type]
   public var fileManager: Foundation.FileManager
   public var credentialStore: MobileWorkflowCore.CredentialStoreProtocol?
   public var eventService: MobileWorkflowCore.EventService
   public var asyncServices: [MobileWorkflowCore.AsyncTaskService]
   public var queueController: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService?
-  public init(plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialStore: MobileWorkflowCore.CredentialStoreProtocol?, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService], queueController: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService?)
-  public static func `default`(withPlugins plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?, queueControllerProvider: MobileWorkflowCore.QueueControllerProvider?) -> MobileWorkflowCore.AppConfigurationDependencies
+  public var responseErrorTypes: [MobileWorkflowCore.ResponseError.Type]
+  public init(appId: Swift.String, plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], fileManager: Foundation.FileManager, credentialStore: MobileWorkflowCore.CredentialStoreProtocol?, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService], queueController: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService?, responseErrorTypes: [MobileWorkflowCore.ResponseError.Type])
+  public static func `default`(withAppId appId: Swift.String = Bundle.main.bundleIdentifier ?? "", plugins: [MobileWorkflowCore.MobileWorkflowPlugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?, queueControllerProvider: MobileWorkflowCore.QueueControllerProvider?) -> MobileWorkflowCore.AppConfigurationDependencies
 }
 @objc public protocol StreamProvider {
   @objc func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
@@ -199,8 +201,11 @@ extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
   @objc public var window: UIKit.UIWindow?
   public var urlSchemeManagers: [MobileWorkflowCore.URLSchemeManager]
   public var dependencies: MobileWorkflowCore.AppConfigurationDependencies
-  public var rootViewController: MobileWorkflowCore.MobileWorkflowRootViewController!
+  public var rootViewController: UIKit.UIViewController!
   public var bundleJSONPath: Swift.String?
+  open var licensePath: Swift.String? {
+    get
+  }
   @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
@@ -403,11 +408,17 @@ public protocol SecurityStoreProtocol {
   func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
 }
-public protocol ErrorResponse : Swift.Decodable {
-  var message: Swift.String { get }
+public protocol ResponseError : Foundation.LocalizedError, Swift.Decodable {
+  static func build(data: Foundation.Data) throws -> Foundation.LocalizedError
 }
-public struct SimpleErrorResponse : MobileWorkflowCore.ErrorResponse {
+extension ResponseError {
+  public static func build(data: Foundation.Data) throws -> Foundation.LocalizedError
+}
+public struct SimpleResponseError : MobileWorkflowCore.ResponseError {
   public let message: Swift.String
+  public var errorDescription: Swift.String? {
+    get
+  }
   public init(from decoder: Swift.Decoder) throws
 }
 public protocol AsyncTask {
@@ -1561,8 +1572,10 @@ public protocol MobileWorkflowImageTableViewCellDelegate : AnyObject {
   final public let buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?
   final public let contentMode: MobileWorkflowCore.ContentMode?
   final public let systemURL: Swift.String?
+  final public let confirmTitle: Swift.String?
+  final public let confirmText: Swift.String?
   @objc required convenience public init?(coder: Foundation.NSCoder)
-  public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil) throws
+  public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil) throws
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
   @objc deinit
@@ -1659,12 +1672,15 @@ extension EventServiceImplementation {
 extension EventServiceImplementation {
   public func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
 }
+extension UIViewController {
+  public func load(context: MobileWorkflowCore.AppConfigurationContext) -> Swift.Bool
+}
 @objc @_hasMissingDesignatedInitializers public class MobileWorkflowRootViewController : UIKit.UIViewController {
-  public init(manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard)
+  public static func build(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard) -> UIKit.UIViewController
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc deinit
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
 @objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
@@ -1735,14 +1751,12 @@ public struct URLTaskInput {
 public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public typealias Response = T
   public typealias URLTaskParser = (Foundation.Data) throws -> T
-  public typealias URLTaskErrorParser = (Foundation.Data) -> Swift.Error?
   public let input: MobileWorkflowCore.URLTaskInput
   public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
-  public let errorParser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskErrorParser?
   public typealias Input = MobileWorkflowCore.URLTaskInput
 }
 extension URLAsyncTask {
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
   public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
@@ -1985,6 +1999,7 @@ public enum CredentialError : Swift.Error {
   }
   @objc override dynamic public func layoutSubviews()
   public func updateImage(_ image: UIKit.UIImage?)
+  public func updatePlaceholderImage()
   public func configureStyle(titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = .label, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = .secondaryLabel)
   @objc deinit
 }

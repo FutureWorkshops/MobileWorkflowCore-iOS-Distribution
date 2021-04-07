@@ -533,6 +533,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 
 
 
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -1050,6 +1051,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
 
 
 
