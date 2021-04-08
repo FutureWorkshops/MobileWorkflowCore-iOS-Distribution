@@ -14,7 +14,7 @@
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		zFt2L4n9SPd4Y61LG1KvNz/AoXo=
+		VcX505KZJgWTxc8tXukyTQoLJTQ=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
@@ -58,11 +58,11 @@
 		</data>
 		<key>Headers/ORKCollectionResult.h</key>
 		<data>
-		hY38MEBCWreNMZoWBYdP7e50KeY=
+		wreukhtJvFbjvRTBkj0dgUiYfLI=
 		</data>
 		<key>Headers/ORKCollectionResult_Private.h</key>
 		<data>
-		CNe5FhzEvxSVkBL5rt2xuNfezgI=
+		ei6F49QjY0iXGpUWy4bnNF+NJDc=
 		</data>
 		<key>Headers/ORKCompletionStep.h</key>
 		<data>
@@ -192,14 +192,6 @@
 		<data>
 		3cwE9WhblLacMS6gtg/VZZRp+88=
 		</data>
-		<key>Headers/ORKNavigableOrderedTask.h</key>
-		<data>
-		eHZLwoUciznqieWr1swd329AAlU=
-		</data>
-		<key>Headers/ORKNavigablePageStep.h</key>
-		<data>
-		TkmN5qDFneUPVavhuKairNw9Biw=
-		</data>
 		<key>Headers/ORKNavigationContainerView.h</key>
 		<data>
 		ZyaumudJYMjBtkON3l0mni5YMJM=
@@ -208,18 +200,6 @@
 		<data>
 		9nsZg/X2jhnXkN7XRbE0svzJ8mg=
 		</data>
-		<key>Headers/ORKOrderedTask+ORKPredefinedActiveTask.h</key>
-		<data>
-		kHR8OyAPb1FG1txktCAGfzvhaco=
-		</data>
-		<key>Headers/ORKOrderedTask.h</key>
-		<data>
-		f8EvtadMhkpDkCqjd877l3l2ETI=
-		</data>
-		<key>Headers/ORKOrderedTask_Private.h</key>
-		<data>
-		B1ZIZ2oe7z5Z7/fSJmr0WsV7ncA=
-		</data>
 		<key>Headers/ORKPDFViewerStep.h</key>
 		<data>
 		wWSO1lw9Xkrfspnw6Z7emCD20o4=
@@ -227,18 +207,6 @@
 		<key>Headers/ORKPDFViewerStepViewController.h</key>
 		<data>
 		lJ3l9J65/RaCLKHiqVwbPlGQbdE=
-		</data>
-		<key>Headers/ORKPageStep.h</key>
-		<data>
-		A6tV0rbAA25LQv5g6eKZBgRnFUs=
-		</data>
-		<key>Headers/ORKPageStepViewController.h</key>
-		<data>
-		kdgmIx4YlC6qyZLQuJpBaucyzMg=
-		</data>
-		<key>Headers/ORKPageStep_Private.h</key>
-		<data>
-		Z4Yz7p8PvrVp9AufcaRVomTJBKg=
 		</data>
 		<key>Headers/ORKPermissionType.h</key>
 		<data>
@@ -254,7 +222,7 @@
 		</data>
 		<key>Headers/ORKQuestionResult.h</key>
 		<data>
-		8h7kafTg4WYq7f/FL3cmPNAEJQk=
+		1MTXDNA/tBw3IFJBmcMYbM7rAJg=
 		</data>
 		<key>Headers/ORKQuestionResult_Private.h</key>
 		<data>
@@ -326,7 +294,7 @@
 		</data>
 		<key>Headers/ORKStep.h</key>
 		<data>
-		ZvEJa5OfD147MYbAhWoczYcRGlI=
+		Ofa5M/DwwWlLE1X63Fsr0XV8CZ8=
 		</data>
 		<key>Headers/ORKStepContainerView.h</key>
 		<data>
@@ -344,21 +312,13 @@
 		<data>
 		qPkxMYngyTMDaBWaINtU5+5wcso=
 		</data>
-		<key>Headers/ORKStepNavigationRule.h</key>
-		<data>
-		YdnH43yH942IZvsodlzEuvoe99U=
-		</data>
-		<key>Headers/ORKStepNavigationRule_Private.h</key>
-		<data>
-		3S+DJBUEZi894yzzSMhukAOrMLY=
-		</data>
 		<key>Headers/ORKStepView.h</key>
 		<data>
 		7xpsLxlnIDQlDekf7jGb+Hm0Ht0=
 		</data>
 		<key>Headers/ORKStepViewController.h</key>
 		<data>
-		SAqLSoO8OC2lQiMcSfCgzNgBPgQ=
+		3XGYpIs9kRXw8jmyesLOcpEYE9E=
 		</data>
 		<key>Headers/ORKStepViewController_Internal.h</key>
 		<data>
@@ -383,26 +343,6 @@
 		<key>Headers/ORKTableStepViewController.h</key>
 		<data>
 		ddWajfff/+jW8Xm5ZsoI1Groqho=
-		</data>
-		<key>Headers/ORKTapCountLabel.h</key>
-		<data>
-		R7CNxSvHpNEEKzsCd8FEdmvvDFc=
-		</data>
-		<key>Headers/ORKTask.h</key>
-		<data>
-		0QSfV/QZOSZ6TBBdbFCQZcGz/Bo=
-		</data>
-		<key>Headers/ORKTaskViewController.h</key>
-		<data>
-		xuqohqCVQjjW5ZBh4ZFt2hn78nI=
-		</data>
-		<key>Headers/ORKTaskViewController_Internal.h</key>
-		<data>
-		Osm8c6zBijmri8OcPcIoYc4CQt8=
-		</data>
-		<key>Headers/ORKTaskViewController_Private.h</key>
-		<data>
-		MjyHDRhkqdHoyY3S9LKPnNq/ZIg=
 		</data>
 		<key>Headers/ORKTextButton.h</key>
 		<data>
@@ -470,11 +410,11 @@
 		</data>
 		<key>Headers/ResearchKit.h</key>
 		<data>
-		89W4NOhH4BL95PPxTG0N6Jb8eGA=
+		KFG9+KbS0D5RfUTkt2pO9qhS6Hw=
 		</data>
 		<key>Headers/ResearchKit_Private.h</key>
 		<data>
-		OZ2ZidVO+xGPwxuuvG/Vszxjlaw=
+		n95CIOrjJGaUdLq1ZKw3Uq4B6GE=
 		</data>
 		<key>Info.plist</key>
 		<data>
@@ -482,11 +422,11 @@
 		</data>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<data>
-		JrGfcb/Mgxf9UA5ak+r8FeIj6q4=
+		WtyrI+LPGoW20k5mJjOTQfEaqFY=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<data>
-		8KKV+9SsXkE4/2s8EG4OIFRfYPw=
+		9CyyQbd0ODct/9kVQm7XDE484vk=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -494,11 +434,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		UyrqzuCM6MUOJEWE4TyW5LRxGfg=
+		8S3lnKjyEOL6Bl8BY4W7Yq7NZUc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		GGVAPNdFkErN2uxbBLr5zMMGjBk=
+		BmJuKM9xWed8KfE/0Cjkw79IDFA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -506,11 +446,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		UyrqzuCM6MUOJEWE4TyW5LRxGfg=
+		8S3lnKjyEOL6Bl8BY4W7Yq7NZUc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		GGVAPNdFkErN2uxbBLr5zMMGjBk=
+		BmJuKM9xWed8KfE/0Cjkw79IDFA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -518,11 +458,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		YE9ZaX3w0r06yUFxzzlm6GFWO88=
+		C9jebrqa9/wK5WdntJ7Hh0GrmLQ=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		LKTQnDhyoQO/EXWaQfqOLFBjvOw=
+		QiGsgN5amDmH025nc4ZmfgOKprw=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -530,11 +470,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		YE9ZaX3w0r06yUFxzzlm6GFWO88=
+		C9jebrqa9/wK5WdntJ7Hh0GrmLQ=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		LKTQnDhyoQO/EXWaQfqOLFBjvOw=
+		QiGsgN5amDmH025nc4ZmfgOKprw=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -548,7 +488,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			UkWvt1G3dS5gKwMiaCBQkBfMBGQ=
+			Fvv/WmwfmmZAR5XID+fKcm4gxKs=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -575,7 +515,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KL1CG6SJOlUBPLvNFTwOPRmtNeM=
+			3bUoEw7s0Kx+fco1Mp3JN8okw3Y=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -619,7 +559,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			DYkFPueojQhSKnGcPiIUjGQ+KKrFUQhxVJeY6MrS2G8=
+			AAJhCwn99JtptrqUuTF73RtuTuhXEQcL6q83H7B91Yg=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
@@ -696,14 +636,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			m/CcOVsWU39zA8gi74hX6RDuzE1y6Z2qOU8/HRynMHA=
+			602y69bwjqyaRD+KTzX9zlvk52m2xt2qQOhaMnzTaiY=
 			</data>
 		</dict>
 		<key>Headers/ORKCollectionResult_Private.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			3hHwNwyqyW00HDng5UH23dlmWSrzI2pVkqZs6QOy4+w=
+			E1JzvxzQG6olKYoJvThKiPU89J4twUWQWQC/qsMPFYg=
 			</data>
 		</dict>
 		<key>Headers/ORKCompletionStep.h</key>
@@ -930,20 +870,6 @@
 			Kt+GddWuzKrTitf4rl3O9uf83sQ0xMvn14iSPVVWlRk=
 			</data>
 		</dict>
-		<key>Headers/ORKNavigableOrderedTask.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cWT/5K+3RtEqpchn9pI7jtH8cPOIHPdrA9khRudrtiA=
-			</data>
-		</dict>
-		<key>Headers/ORKNavigablePageStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			qh44wuFgi8m2uxLoQsUitbVUsBhWcSHJvvHN8H85Aio=
-			</data>
-		</dict>
 		<key>Headers/ORKNavigationContainerView.h</key>
 		<dict>
 			<key>hash2</key>
@@ -958,27 +884,6 @@
 			cvGCyC39ailIjZz4GEmBw50R5JZDuMqeN7FEn7WGSv0=
 			</data>
 		</dict>
-		<key>Headers/ORKOrderedTask+ORKPredefinedActiveTask.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HJGhPYG09PEosRJ/yiKro9jtpNk9mo9MmpZVwGQCBWE=
-			</data>
-		</dict>
-		<key>Headers/ORKOrderedTask.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			yiB3gcDGkDjIKLJkuqMJIN1yRmm6/wJL0R7LGmfUG4k=
-			</data>
-		</dict>
-		<key>Headers/ORKOrderedTask_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wj0sr0iVcRGJMfsqyF7QQQaKKwclLxhsnze2TqJmqv8=
-			</data>
-		</dict>
 		<key>Headers/ORKPDFViewerStep.h</key>
 		<dict>
 			<key>hash2</key>
@@ -991,27 +896,6 @@
 			<key>hash2</key>
 			<data>
 			tcSbM2qofXDn0FIM/Do6ShxdRl3H/bPjcJcIBjcvmuA=
-			</data>
-		</dict>
-		<key>Headers/ORKPageStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Haq5UVP6Oy8Tz94GAvH5V4Hfnv7yQJ3f9H7DcZxLHPw=
-			</data>
-		</dict>
-		<key>Headers/ORKPageStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			+6/Cr1KPAfrCea38O+D8vl5wMuuUfFyfTP9ikqj6gaY=
-			</data>
-		</dict>
-		<key>Headers/ORKPageStep_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ZTz2BYcZoDR9CzZdK8QCsDeKP/OoHaygSYX4os3mLsw=
 			</data>
 		</dict>
 		<key>Headers/ORKPermissionType.h</key>
@@ -1039,7 +923,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UwiHnGG+UtaU/HrKDvudsa6MnFTqy1WZkYdZ8d5TW3I=
+			Can5Wl6jzXAXyxOTswrxyq8HJYZXEVxO10TvyU0/1To=
 			</data>
 		</dict>
 		<key>Headers/ORKQuestionResult_Private.h</key>
@@ -1165,7 +1049,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			FS8+Hvf6+gNBA1nGp77YvJSz0WwWwt2TU1UTGUf8T/g=
+			bHRxUxL1UI0VoLfegi0LT/7rbEl73VDfZcedHRhR0MI=
 			</data>
 		</dict>
 		<key>Headers/ORKStepContainerView.h</key>
@@ -1196,20 +1080,6 @@
 			8Y5n52pB0cBwjj/lTMsJQKY+pzEW7XF+dWScoJYXg3I=
 			</data>
 		</dict>
-		<key>Headers/ORKStepNavigationRule.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			XmMeNnX7ifDRyMyHFiHY8cbu8SK4qMpN5WyvyJUnMfA=
-			</data>
-		</dict>
-		<key>Headers/ORKStepNavigationRule_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			beJ6LuwPe4tg5EeS6YPK4oCuePWippqgny2kLsgKphI=
-			</data>
-		</dict>
 		<key>Headers/ORKStepView.h</key>
 		<dict>
 			<key>hash2</key>
@@ -1221,7 +1091,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			I3eR/UFUt6m5A/LXi48BCT1+X3SHonBmRmUMhSL1sJE=
+			bvdqOX5t100ZmOgzgJIF2Iwn9WJat/iNeeE6QNFWDaI=
 			</data>
 		</dict>
 		<key>Headers/ORKStepViewController_Internal.h</key>
@@ -1264,41 +1134,6 @@
 			<key>hash2</key>
 			<data>
 			/1+Tg3ouD54nhL/+em+URzZ5eRVKmZRVAY9FPnRzaTU=
-			</data>
-		</dict>
-		<key>Headers/ORKTapCountLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			mRxz1oL/WDGAKs/h7y379awltOGUhK6nhHYluPTMc0o=
-			</data>
-		</dict>
-		<key>Headers/ORKTask.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			a0DWNwXuAcjG3uo5Fn/qbfQfsX6jfk96WqDtXSUdk8o=
-			</data>
-		</dict>
-		<key>Headers/ORKTaskViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			w8X4fniuOyHZm6ODUeja8DnURzgcLA3ZwRs+mwfpA/o=
-			</data>
-		</dict>
-		<key>Headers/ORKTaskViewController_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			iQWe34gxz1CDw3DuFbZRNvZKS+ZaKvuxhYQOph3AVag=
-			</data>
-		</dict>
-		<key>Headers/ORKTaskViewController_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			eIrnFkxjRIniOq0VwTlPR2wGO7XIezKtbV6TV/v+bQA=
 			</data>
 		</dict>
 		<key>Headers/ORKTextButton.h</key>
@@ -1417,28 +1252,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Cy/hVzbl23GVBJ/5wASbx6owes/B7LgrntRz9/hbkT8=
+			Jj4gL34nM3TruGfDBpbjV11FZRJNc23vSdsz7lCXjyQ=
 			</data>
 		</dict>
 		<key>Headers/ResearchKit_Private.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UrD5BgrygVTJtWj23MLfAQ71MKaow1ZI9MqdGO9wuEw=
+			OkJXI4tqhcYJkQltGtW14u8diHWr59AWE4/VVxLduuA=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			ymIA7rrUijvYVPyvyxlPZw9I5u4oDFw9VW6AkisRkdU=
+			CiPuSzF+F9HBtZN7wtJWITKp0b25o+VjOUXDWYW6yBE=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			48jrtJ6UEXgxA2W15vY6zwu8wVJlDHdekiaf6XuLCWA=
+			xS9KUYGMA77grHK+gjJti+/80qI7A2ytfyfLWPtEBS0=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -1452,14 +1287,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			D0Dk8q2IZ8YxdnVpUW+7zpWR4Ok+HmJeAAydpJuwFTo=
+			H0GTClbjS4UaCGnBY1CqhM9/RXk5MOAjlzZwHyPUFIA=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KYhc2jgudwBNtHF0WrE30axV7k6OAltqqvhazaXlQSk=
+			vUwhnBO3jPN/UxuVzbYZ5wAgz1r8xR14JPyxZ2udVNs=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -1473,14 +1308,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			D0Dk8q2IZ8YxdnVpUW+7zpWR4Ok+HmJeAAydpJuwFTo=
+			H0GTClbjS4UaCGnBY1CqhM9/RXk5MOAjlzZwHyPUFIA=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			KYhc2jgudwBNtHF0WrE30axV7k6OAltqqvhazaXlQSk=
+			vUwhnBO3jPN/UxuVzbYZ5wAgz1r8xR14JPyxZ2udVNs=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -1494,14 +1329,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2u3aOy6Ab3zLy5T9bEVcwKLQwJexIeayECL0ViDkjh0=
+			POwnHRmFUNEiQXgOfd9uThlm7uvYH62ANEc9AkqCRKU=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Dk31wdy27sFN0lqSdwwIF78uzEGYxO6/rRIIEtbxMO8=
+			Miw1rXOT6nPsbx3WN8QOFU4lXxaClngIwOgkGZO3bCg=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -1515,14 +1350,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			2u3aOy6Ab3zLy5T9bEVcwKLQwJexIeayECL0ViDkjh0=
+			POwnHRmFUNEiQXgOfd9uThlm7uvYH62ANEc9AkqCRKU=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			Dk31wdy27sFN0lqSdwwIF78uzEGYxO6/rRIIEtbxMO8=
+			Miw1rXOT6nPsbx3WN8QOFU4lXxaClngIwOgkGZO3bCg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -1543,7 +1378,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			M3/gyN9zGxjrTPfs7PP3q+4rHasQaNU7gwmyquajEAc=
+			POK5RPl/7itTBFT+G594/Qaj9cit/ZR1h535ip6tdBI=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1570,7 +1405,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			c3H2ZDRkvj1BmGxtG7QuVsDbuE6QOU5KU2WJ0pSxxno=
+			XyL8XrHhBYEbpYzCLIGmsIcSzWqQMEOqPSy/dY2NUAw=
 			</data>
 			<key>optional</key>
 			<true/>

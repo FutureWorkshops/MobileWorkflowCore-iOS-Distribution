@@ -340,10 +340,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
-
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 
@@ -359,6 +359,30 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService (SWIFT_EXTENSION(MobileWorkflowCore)) <CLLocationManagerDelegate>
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didUpdateLocations:(NSArray<CLLocation *> * _Nonnull)locations;
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
+@end
+
+@class UIViewController;
+@class NSBundle;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
+@interface MWWorkflowViewController : UINavigationController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+@class ORKStepViewController;
+
+@interface MWWorkflowViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <ORKStepViewControllerDelegate>
+- (void)stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
+- (void)stepViewController:(ORKStepViewController * _Nonnull)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction;
+- (void)stepViewControllerDidFail:(ORKStepViewController * _Nonnull)stepViewController withError:(NSError * _Nullable)error;
+- (void)stepViewControllerResultDidChange:(ORKStepViewController * _Nonnull)stepViewController;
+- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -408,7 +432,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
-@class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 @interface MobileWorkflowRootViewController : UIViewController
@@ -439,7 +462,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)layoutSubviews;
 @end
-
 
 
 

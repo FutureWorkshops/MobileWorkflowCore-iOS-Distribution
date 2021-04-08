@@ -31,7 +31,6 @@
 
 @import UIKit;
 #import <MobileWorkflowCore/ORKDefines.h>
-#import <MobileWorkflowCore/ORKTask.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -43,7 +42,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ORKStep;
 @class ORKStepResult;
 @class ORKStepViewController;
-@class ORKTaskViewController;
 
 /**
  An enumeration of values used in `ORKStepViewControllerDelegate` to indicate the direction of navigation
@@ -108,18 +106,6 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  */
 - (void)stepViewControllerDidFail:(ORKStepViewController *)stepViewController withError:(nullable NSError *)error;
 
-/**
- Tells the delegate when a recorder error has been detected during the step.
- 
- Recorder errors can occur during active steps, usually due to the
- unavailability of sensor data or disk space in which to record results.
- 
- @param stepViewController     The step view controller providing the callback.
- @param recorder               The recorder that detected the error.
- @param error                  The error detected.
- */
-- (void)stepViewController:(ORKStepViewController *)stepViewController recorder:(ORKRecorder *)recorder didFailWithError:(NSError *)error;
-
 @optional
 /**
  Tells the delegate that the step view controller's view is about to appear.
@@ -155,20 +141,6 @@ typedef NS_ENUM(NSInteger, ORKStepViewControllerNavigationDirection) {
  @return `YES` if there is a step following the current one; otherwise, `NO`.
  */
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController *)stepViewController;
-
-/**
- Asks the delegate for the total amount of questions for the entire task and the position of the current step.
- 
- Depending on the result of the step, the step view controller can adjust the language for the
- Next button.
- 
- @param stepViewController     The step view controller providing the callback.
- 
- @param currentStep     The current step that is being presented.
- 
- @return a struct 
- */
-- (ORKTaskTotalProgress)stepViewControllerTotalProgressInfoForStep:(ORKStepViewController *)stepViewController currentStep:(ORKStep *)currentStep;
 
 @end
 
@@ -371,11 +343,6 @@ ORK_CLASS_AVAILABLE
  @return `YES` if there is a next step; otherwise, `NO`.
  */
 - (BOOL)hasNextStep;
-
-/**
- The presenting task view controller. (read-only)
- */
-@property (nonatomic, weak, readonly, nullable) ORKTaskViewController *taskViewController;
 
 /**
  Navigates forward to the next step.

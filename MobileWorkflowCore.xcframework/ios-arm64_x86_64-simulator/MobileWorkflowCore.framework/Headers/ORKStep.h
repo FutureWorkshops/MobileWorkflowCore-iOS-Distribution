@@ -43,8 +43,6 @@ ORK_EXTERN NSString *const ORKNullStepIdentifier ORK_AVAILABLE_DECL;
 @class ORKResult;
 @class ORKBodyItem;
 
-@protocol ORKTask;
-
 /**
  `ORKStep` is the base class for the steps that can compose a task for presentation
  in an `ORKTaskViewController` object. Each `ORKStep` object represents one logical piece of data
@@ -246,16 +244,6 @@ Whether to show progress for this step when it is presented. The default is YES.
  Whether to use extended outer padding for views
  */
 @property (nonatomic, assign) BOOL useExtendedPadding;
-
-/**
- The task that contains the step.
- 
- The value of `task` is usually set when a step is added to the `ORKOrderedTask` object.
- Although it's a good idea to set this property when you implement a custom task, it's important
- to note that the use of this property is a convenience, and should not be relied
- upon within the ResearchKit framework.
- */
-@property (nonatomic, weak, nullable) id<ORKTask> task;
 
 /**
  The set of access permissions required for the step. (read-only)
