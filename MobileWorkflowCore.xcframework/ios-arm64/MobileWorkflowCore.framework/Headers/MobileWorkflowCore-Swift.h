@@ -188,6 +188,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 #if __has_warning("-Watimport-in-framework-header")
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
+@import AVFoundation;
 @import CoreGraphics;
 @import CoreLocation;
 @import Foundation;
@@ -432,6 +433,26 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
+@protocol UIViewControllerTransitionCoordinator;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore37MobileWorkflowQRScannerViewController")
+@interface MobileWorkflowQRScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface MobileWorkflowQRScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
 @interface MobileWorkflowRootViewController : UIViewController
@@ -479,6 +500,11 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 
 
+@class UINavigationBar;
+
+@interface ORKStepViewController (SWIFT_EXTENSION(MobileWorkflowCore))
+- (void)configureNavigationBar:(UINavigationBar * _Nonnull)navigationBar;
+@end
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
@@ -530,6 +556,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
+
+
 
 
 
