@@ -254,11 +254,11 @@ public protocol BuildableStep : MobileWorkflowCore.Step {
   static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.MobileWorkflowServices) throws -> MobileWorkflowCore.Step
 }
 @objc @_inheritsConvenienceInitializers open class MobileWorkflowQRScannerViewController : MobileWorkflowCore.MobileWorkflowBarcodeScannerViewController {
-  override public var instructionsText: Swift.String {
+  override open var instructionsText: Swift.String {
     get
     set
   }
-  override public var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
+  override open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
     get
     set
   }
@@ -1967,11 +1967,11 @@ extension CurrencyUITextFieldDelegate : UIKit.UITextFieldDelegate {
   @objc dynamic public func textField(_ textField: UIKit.UITextField, shouldChangeCharactersIn range: Foundation.NSRange, replacementString string: Swift.String) -> Swift.Bool
 }
 @objc @_inheritsConvenienceInitializers open class MobileWorkflowBarcodeScannerViewController : UIKit.UIViewController {
-  public var instructionsText: Swift.String {
+  open var instructionsText: Swift.String {
     get
     set
   }
-  public var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
+  open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
     get
     set
   }
