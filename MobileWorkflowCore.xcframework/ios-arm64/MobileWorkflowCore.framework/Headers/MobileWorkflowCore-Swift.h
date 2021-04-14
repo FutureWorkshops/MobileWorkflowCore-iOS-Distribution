@@ -341,10 +341,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
+
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
-
 
 
 
@@ -384,6 +384,26 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (void)stepViewControllerResultDidChange:(ORKStepViewController * _Nonnull)stepViewController;
 - (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
 - (BOOL)stepViewControllerHasNextStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@protocol UIViewControllerTransitionCoordinator;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore42MobileWorkflowBarcodeScannerViewController")
+@interface MobileWorkflowBarcodeScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface MobileWorkflowBarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
@@ -433,24 +453,11 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
 
-@protocol UIViewControllerTransitionCoordinator;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore37MobileWorkflowQRScannerViewController")
-@interface MobileWorkflowQRScannerViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+@interface MobileWorkflowQRScannerViewController : MobileWorkflowBarcodeScannerViewController
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class AVCaptureMetadataOutput;
-@class AVMetadataObject;
-@class AVCaptureConnection;
-
-@interface MobileWorkflowQRScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
-- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
