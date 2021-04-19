@@ -422,11 +422,11 @@
 		</data>
 		<key>MobileWorkflowRootViewController.nib/objects-14.0+.nib</key>
 		<data>
-		tyoSUVLK8iddo6mO0Yx1Ryds36Q=
+		LhpAc3NYWWmp8WY5VtzO1nlTlS0=
 		</data>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<data>
-		LeFuPgMKxVyv2bDHs93UtAcoXJw=
+		1KEVHzlINwp50Nlq3sGuw7Tq37M=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -438,7 +438,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		UOK9aYITp7xLFrV4cJ7YljchYKI=
+		XRAdIns6/ktSNaICMoF0bYmoY5s=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -450,7 +450,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		UOK9aYITp7xLFrV4cJ7YljchYKI=
+		XRAdIns6/ktSNaICMoF0bYmoY5s=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -462,7 +462,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		wIXn4eX/Gep8RgWnAtJSofqXNKA=
+		h5YfEsJL1D7i8IgGD5F14TkENog=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -474,7 +474,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		wIXn4eX/Gep8RgWnAtJSofqXNKA=
+		h5YfEsJL1D7i8IgGD5F14TkENog=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -1266,14 +1266,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F6djsW07IisxkUv3SySBAxwWg6TClblD6eiv6A2DqS8=
+			0KIAdK03kVEy98zKpRikXv+PPuRKedPzaJVozpMgP3w=
 			</data>
 		</dict>
 		<key>MobileWorkflowRootViewController.nib/runtime.nib</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			B9N+KI6Nc0eiAE2AAJ/WtUv3by2ZSiXhRDqqdzjq4Ak=
+			uXoFdREeaWU546mWSfDOMg+oM7SVx8WGCgyJPc0U3UU=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -1294,7 +1294,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wah6OiUOR8JKdbx3f6gK6R5cODIrSCiFnghYjLhqM30=
+			pdft+8JyPl2RJfVHdv2cXjzygv689IGG3kqZHelzyMw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -1315,7 +1315,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wah6OiUOR8JKdbx3f6gK6R5cODIrSCiFnghYjLhqM30=
+			pdft+8JyPl2RJfVHdv2cXjzygv689IGG3kqZHelzyMw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -1336,7 +1336,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zmqUN/pJ8BCpiHmlqil0OoTGsL+EUuHWkabGjdBOEtE=
+			GaF8XEAi4gbVcVY8tQbTB52W6+1n4KuxYL8d0zpRKRE=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -1357,7 +1357,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			zmqUN/pJ8BCpiHmlqil0OoTGsL+EUuHWkabGjdBOEtE=
+			GaF8XEAi4gbVcVY8tQbTB52W6+1n4KuxYL8d0zpRKRE=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
