@@ -578,6 +578,27 @@ public protocol Credentialized {
 }
 public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.Credentialized {
 }
+open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewController, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate where T : MobileWorkflowCore.TableStep {
+  final public let tableView: UIKit.UITableView
+  public var tableStep: T {
+    get
+  }
+  public init(tableStep: T)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc override dynamic open func viewDidLoad()
+  @objc public func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @objc public func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @objc public func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @objc public func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @objc public func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
+  @objc public func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreGraphics.CGFloat
+  @objc public func tableView(_ tableView: UIKit.UITableView, viewForFooterInSection section: Swift.Int) -> UIKit.UIView?
+  @objc public func tableView(_ tableView: UIKit.UITableView, heightForFooterInSection section: Swift.Int) -> CoreGraphics.CGFloat
+  override public init(step: MobileWorkflowCore.Step)
+  @objc deinit
+}
 final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   public init()
   final public func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
@@ -1897,10 +1918,21 @@ extension UIViewController {
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
 }
 extension RootViewController : MobileWorkflowCore.WorkflowViewControllerDelegate {
-  public func workflowViewControllerShouldConfirmCancel(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
+  public func workflowViewControllerCanBeDismissed(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
+}
+public protocol TableStep : AnyObject, MobileWorkflowCore.Step {
+  associatedtype Item
+  var style: UIKit.UITableView.Style { get }
+  var hasNavigationFooterInTableFooter: Swift.Bool { get }
+  var items: [Self.Item] { get }
+  var session: MobileWorkflowCore.Session { get }
+  var services: MobileWorkflowCore.StepServices { get }
+  func reuseIdentifierForTableRow(at indexPath: Foundation.IndexPath) -> Swift.String
+  func registerTableCells(for tableView: UIKit.UITableView)
+  func configureTableCell(_ cell: UIKit.UITableViewCell, indexPath: Foundation.IndexPath, tableView: UIKit.UITableView)
 }
 @objc public class ListStepItem : ObjectiveC.NSObject, Swift.Codable, Foundation.NSCopying, Foundation.NSCoding, Foundation.NSSecureCoding {
   @objc public static var supportsSecureCoding: Swift.Bool {
@@ -2012,7 +2044,7 @@ extension RemoteContentStepViewController {
     get
   }
 }
-extension RemoteContentStepViewController where Self.StepType.ResponseType : Swift.Decodable {
+extension RemoteContentStepViewController {
   public func loadContent()
 }
 public class MWWorkflow : MobileWorkflowCore.Workflow {
@@ -2428,7 +2460,7 @@ public enum WorkflowFinishReason : Swift.Equatable {
   public static func == (lhs: MobileWorkflowCore.WorkflowFinishReason, rhs: MobileWorkflowCore.WorkflowFinishReason) -> Swift.Bool
 }
 public protocol WorkflowViewControllerDelegate : AnyObject {
-  func workflowViewControllerShouldConfirmCancel(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
+  func workflowViewControllerCanBeDismissed(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
