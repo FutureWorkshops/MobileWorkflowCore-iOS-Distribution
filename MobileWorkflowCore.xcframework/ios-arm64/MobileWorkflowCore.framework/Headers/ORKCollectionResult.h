@@ -51,8 +51,7 @@ ORK_CLASS_AVAILABLE
  An array of `ORKResult` objects that are the children of the result.
  
  For `ORKTaskResult`, the array contains `ORKStepResult` objects.
- For `ORKStepResult` the array contains concrete result objects such as `ORKFileResult`
- and `ORKQuestionResult`.
+ For `ORKStepResult` the array contains concrete result objects such as `ORKQuestionResult`.
  */
 @property (nonatomic, copy, nullable) NSArray<ORKResult *> *results;
 

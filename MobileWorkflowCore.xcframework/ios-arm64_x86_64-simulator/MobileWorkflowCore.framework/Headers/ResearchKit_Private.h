@@ -45,7 +45,6 @@
 
 #import <MobileWorkflowCore/ORKCollectionResult_Private.h>
 #import <MobileWorkflowCore/ORKQuestionResult_Private.h>
-#import <MobileWorkflowCore/ORKSignatureResult_Private.h>
 #import <MobileWorkflowCore/ORKResult_Private.h>
 #import <MobileWorkflowCore/ORKStepContainerView_Private.h>
 

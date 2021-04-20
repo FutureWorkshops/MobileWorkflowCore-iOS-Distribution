@@ -51,10 +51,8 @@
 #import <MobileWorkflowCore/ORKAnswerFormat.h>
 
 #import <MobileWorkflowCore/ORKResult.h>
-#import <MobileWorkflowCore/ORKFileResult.h>
 #import <MobileWorkflowCore/ORKCollectionResult.h>
 #import <MobileWorkflowCore/ORKQuestionResult.h>
-#import <MobileWorkflowCore/ORKSignatureResult.h>
 #import <MobileWorkflowCore/ORKVideoInstructionStepResult.h>
 #import <MobileWorkflowCore/ORKWebViewStepResult.h>
 #import <MobileWorkflowCore/ORKResultPredicate.h>

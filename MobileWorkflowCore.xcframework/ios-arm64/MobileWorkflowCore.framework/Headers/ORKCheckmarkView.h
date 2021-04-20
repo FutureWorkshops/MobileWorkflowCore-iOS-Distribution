@@ -34,7 +34,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ORKCheckmarkView : UIImageView;
 
-- (instancetype)initWithRadius:(CGFloat)radius checkedImage:(nullable UIImage *)checkedImage uncheckedImage:(nullable UIImage *)uncheckedImage;
 - (instancetype)initWithDefaults;
 - (instancetype)initWithDefaultsWithoutCircle;
 

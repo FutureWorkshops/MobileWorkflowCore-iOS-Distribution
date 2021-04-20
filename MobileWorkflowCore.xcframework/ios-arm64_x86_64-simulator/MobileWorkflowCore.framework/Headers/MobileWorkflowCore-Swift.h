@@ -216,6 +216,29 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@protocol UIViewControllerTransitionCoordinator;
+@class NSBundle;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
+@interface BarcodeScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)viewWillLayoutSubviews;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface BarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
+
 
 
 
@@ -292,7 +315,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
-@class NSCoder;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore11DisplayItem")
 @interface DisplayItem : NSObject <NSCopying, NSSecureCoding>
@@ -304,6 +326,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 @class NSInputStream;
@@ -331,6 +355,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _N
 + (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
 @end
 
+@class NSURL;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore10FileResult")
+@interface FileResult : ORKResult
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
+/// This convenience method will attempt to use the file extension (based on contentType) as file identifier. If failed, it will return nil
+/// \param identifier The identifier for the result
+///
+/// \param fileURL URL of the file in the device file system. This URL should be accessible through the FileManager.shared
+///
+/// \param contentType Content-Type of the file
+///
+- (nullable instancetype)initWithIdentifier:(NSString * _Nonnull)identifier fileURL:(NSURL * _Nonnull)fileURL contentType:(NSString * _Nonnull)contentType;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) NSUInteger hash;
+- (NSURL * _Nonnull)getFileURL SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12ListStepItem")
 @interface ListStepItem : NSObject <NSCopying, NSSecureCoding>
@@ -344,10 +395,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
-
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 
@@ -365,8 +416,86 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
 @end
 
-@class UIViewController;
-@class NSBundle;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore21MWButtonTableViewCell")
+@interface MWButtonTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
+@interface MWStepViewController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore27MWContentStepViewController")
+@interface MWContentStepViewController : MWStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UITraitCollection;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
+@interface MWInstructionStepViewController : MWContentStepViewController
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
+@interface MWEmailStepViewController : MWInstructionStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class MFMailComposeViewController;
+
+@interface MWEmailStepViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <MFMailComposeViewControllerDelegate>
+- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
+@interface MWImageTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
+@class UIWindow;
+@class UIScene;
+@class UISceneSession;
+@class UISceneConnectionOptions;
+@class UIOpenURLContext;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
+@interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
+@property (nonatomic, strong) UIWindow * _Nullable window;
+- (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
+- (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
+@interface MWSubtitleTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWVideoTableViewCell")
+@interface MWVideoTableViewCell : MWImageTableViewCell
+@end
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 @interface MWWorkflowViewController : UINavigationController
@@ -378,128 +507,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
-@class ORKStepViewController;
 
-@interface MWWorkflowViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <ORKStepViewControllerDelegate>
-- (void)stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
-- (void)stepViewController:(ORKStepViewController * _Nonnull)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction;
-- (void)stepViewControllerDidFail:(ORKStepViewController * _Nonnull)stepViewController withError:(NSError * _Nullable)error;
-- (void)stepViewControllerResultDidChange:(ORKStepViewController * _Nonnull)stepViewController;
-- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
-@end
 
-@protocol UIViewControllerTransitionCoordinator;
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore42MobileWorkflowBarcodeScannerViewController")
-@interface MobileWorkflowBarcodeScannerViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-- (void)viewWillLayoutSubviews;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
+@interface NavigationFooterView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, getter=isHidden) BOOL hidden;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
-
-@class AVCaptureMetadataOutput;
-@class AVMetadataObject;
-@class AVCaptureConnection;
-
-@interface MobileWorkflowBarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
-- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowButtonTableViewCell")
-@interface MobileWorkflowButtonTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-@class UITraitCollection;
-@class ORKStep;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
-@interface MobileWorkflowButtonViewController : ORKStepViewController
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore23MobileWorkflowEmailStep")
-@interface MobileWorkflowEmailStep : ORKStep
-- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (Class _Nonnull)stepViewControllerClass SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-@end
-
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowEmailViewController")
-@interface MobileWorkflowEmailViewController : MobileWorkflowButtonViewController
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class MFMailComposeViewController;
-
-@interface MobileWorkflowEmailViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <MFMailComposeViewControllerDelegate>
-- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
-@interface MobileWorkflowImageTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore37MobileWorkflowQRScannerViewController")
-@interface MobileWorkflowQRScannerViewController : MobileWorkflowBarcodeScannerViewController
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
-@interface MobileWorkflowRootViewController : UIViewController
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
-
-@class UIWindow;
-@class UIScene;
-@class UISceneSession;
-@class UISceneConnectionOptions;
-@class UIOpenURLContext;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
-@interface MobileWorkflowSceneDelegate : UIResponder <UIWindowSceneDelegate>
-@property (nonatomic, strong) UIWindow * _Nullable window;
-- (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
-- (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
-@interface MobileWorkflowSubtitleTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)layoutSubviews;
-@end
-
-
-
-
-
-
 
 
 
@@ -515,6 +535,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 @interface ORKStepViewController (SWIFT_EXTENSION(MobileWorkflowCore))
 - (void)configureNavigationBar:(UINavigationBar * _Nonnull)navigationBar;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
+@interface QRScannerViewController : BarcodeScannerViewController
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -547,6 +574,15 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore18RootViewController")
+@interface RootViewController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+
 SWIFT_CLASS_NAMED("Session")
 @interface MWSession : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -555,9 +591,34 @@ SWIFT_CLASS_NAMED("Session")
 
 
 
+
 @interface MWSession (SWIFT_EXTENSION(MobileWorkflowCore))
 - (NSString * _Nonnull)resolveValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
 - (NSURL * _Nullable)resolveUrl:(NSString * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UIBezierPath;
+@class UIImage;
+@class NSArray;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15SignatureResult")
+@interface SignatureResult : ORKResult
+@property (nonatomic, readonly, copy) NSArray<UIBezierPath *> * _Nonnull signaturePath;
+@property (nonatomic, readonly, copy) NSURL * _Nonnull fileURL;
+- (nullable instancetype)initWithSignatureImage:(UIImage * _Nonnull)signatureImage signaturePath:(NSArray * _Nonnull)signaturePath fileManager:(NSFileManager * _Nonnull)fileManager OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface SignatureResult (SWIFT_EXTENSION(MobileWorkflowCore))
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+@property (nonatomic, readonly) NSUInteger hash;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -568,6 +629,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
 
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
+@interface StepBodyLabel : UILabel
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
+@interface StepTitleLabel : UILabel
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 
@@ -815,6 +889,29 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 # pragma pop_macro("any")
 #endif
 
+@protocol UIViewControllerTransitionCoordinator;
+@class NSBundle;
+@class NSCoder;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
+@interface BarcodeScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)viewWillLayoutSubviews;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface BarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
+@end
+
 
 
 
@@ -891,7 +988,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
-@class NSCoder;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore11DisplayItem")
 @interface DisplayItem : NSObject <NSCopying, NSSecureCoding>
@@ -903,6 +999,8 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
+
+
 
 
 @class NSInputStream;
@@ -930,6 +1028,33 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _N
 + (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
 @end
 
+@class NSURL;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore10FileResult")
+@interface FileResult : ORKResult
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
++ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
+/// This convenience method will attempt to use the file extension (based on contentType) as file identifier. If failed, it will return nil
+/// \param identifier The identifier for the result
+///
+/// \param fileURL URL of the file in the device file system. This URL should be accessible through the FileManager.shared
+///
+/// \param contentType Content-Type of the file
+///
+- (nullable instancetype)initWithIdentifier:(NSString * _Nonnull)identifier fileURL:(NSURL * _Nonnull)fileURL contentType:(NSString * _Nonnull)contentType;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+@property (nonatomic, readonly) NSUInteger hash;
+- (NSURL * _Nonnull)getFileURL SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12ListStepItem")
 @interface ListStepItem : NSObject <NSCopying, NSSecureCoding>
@@ -943,10 +1068,10 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 @end
 
 
-
 @interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 
@@ -964,8 +1089,86 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 - (void)locationManager:(CLLocationManager * _Nonnull)manager didFailWithError:(NSError * _Nonnull)error;
 @end
 
-@class UIViewController;
-@class NSBundle;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore21MWButtonTableViewCell")
+@interface MWButtonTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
+@interface MWStepViewController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore27MWContentStepViewController")
+@interface MWContentStepViewController : MWStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class UITraitCollection;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
+@interface MWInstructionStepViewController : MWContentStepViewController
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
+@interface MWEmailStepViewController : MWInstructionStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class MFMailComposeViewController;
+
+@interface MWEmailStepViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <MFMailComposeViewControllerDelegate>
+- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
+@interface MWImageTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
+@class UIWindow;
+@class UIScene;
+@class UISceneSession;
+@class UISceneConnectionOptions;
+@class UIOpenURLContext;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
+@interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
+@property (nonatomic, strong) UIWindow * _Nullable window;
+- (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
+- (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
+@interface MWSubtitleTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)layoutSubviews;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWVideoTableViewCell")
+@interface MWVideoTableViewCell : MWImageTableViewCell
+@end
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 @interface MWWorkflowViewController : UINavigationController
@@ -977,128 +1180,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
-@class ORKStepViewController;
 
-@interface MWWorkflowViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <ORKStepViewControllerDelegate>
-- (void)stepViewControllerWillAppear:(ORKStepViewController * _Nonnull)stepViewController;
-- (void)stepViewController:(ORKStepViewController * _Nonnull)stepViewController didFinishWithNavigationDirection:(ORKStepViewControllerNavigationDirection)direction;
-- (void)stepViewControllerDidFail:(ORKStepViewController * _Nonnull)stepViewController withError:(NSError * _Nullable)error;
-- (void)stepViewControllerResultDidChange:(ORKStepViewController * _Nonnull)stepViewController;
-- (BOOL)stepViewControllerHasPreviousStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)stepViewControllerHasNextStep:(ORKStepViewController * _Nonnull)stepViewController SWIFT_WARN_UNUSED_RESULT;
-@end
 
-@protocol UIViewControllerTransitionCoordinator;
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore42MobileWorkflowBarcodeScannerViewController")
-@interface MobileWorkflowBarcodeScannerViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-- (void)viewWillLayoutSubviews;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+
+
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
+@interface NavigationFooterView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@property (nonatomic, getter=isHidden) BOOL hidden;
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
-
-@class AVCaptureMetadataOutput;
-@class AVMetadataObject;
-@class AVCaptureConnection;
-
-@interface MobileWorkflowBarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
-- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowButtonTableViewCell")
-@interface MobileWorkflowButtonTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-@class UITraitCollection;
-@class ORKStep;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore34MobileWorkflowButtonViewController")
-@interface MobileWorkflowButtonViewController : ORKStepViewController
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore23MobileWorkflowEmailStep")
-@interface MobileWorkflowEmailStep : ORKStep
-- (nonnull instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
-- (Class _Nonnull)stepViewControllerClass SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-@end
-
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore33MobileWorkflowEmailViewController")
-@interface MobileWorkflowEmailViewController : MobileWorkflowButtonViewController
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithStep:(ORKStep * _Nullable)step OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class MFMailComposeViewController;
-
-@interface MobileWorkflowEmailViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <MFMailComposeViewControllerDelegate>
-- (void)mailComposeController:(MFMailComposeViewController * _Nonnull)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError * _Nullable)error;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowImageTableViewCell")
-@interface MobileWorkflowImageTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore37MobileWorkflowQRScannerViewController")
-@interface MobileWorkflowQRScannerViewController : MobileWorkflowBarcodeScannerViewController
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore32MobileWorkflowRootViewController")
-@interface MobileWorkflowRootViewController : UIViewController
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
-
-@class UIWindow;
-@class UIScene;
-@class UISceneSession;
-@class UISceneConnectionOptions;
-@class UIOpenURLContext;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore27MobileWorkflowSceneDelegate")
-@interface MobileWorkflowSceneDelegate : UIResponder <UIWindowSceneDelegate>
-@property (nonatomic, strong) UIWindow * _Nullable window;
-- (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
-- (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
-@interface MobileWorkflowSubtitleTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)layoutSubviews;
-@end
-
-
-
-
-
-
 
 
 
@@ -1114,6 +1208,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore35MobileWorkflowSubtitleTableViewCell")
 
 @interface ORKStepViewController (SWIFT_EXTENSION(MobileWorkflowCore))
 - (void)configureNavigationBar:(UINavigationBar * _Nonnull)navigationBar;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
+@interface QRScannerViewController : BarcodeScannerViewController
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1146,6 +1247,15 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore18RootViewController")
+@interface RootViewController : UIViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)viewDidLoad;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+
 SWIFT_CLASS_NAMED("Session")
 @interface MWSession : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1154,9 +1264,34 @@ SWIFT_CLASS_NAMED("Session")
 
 
 
+
 @interface MWSession (SWIFT_EXTENSION(MobileWorkflowCore))
 - (NSString * _Nonnull)resolveValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
 - (NSURL * _Nullable)resolveUrl:(NSString * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
+@end
+
+@class UIBezierPath;
+@class UIImage;
+@class NSArray;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15SignatureResult")
+@interface SignatureResult : ORKResult
+@property (nonatomic, readonly, copy) NSArray<UIBezierPath *> * _Nonnull signaturePath;
+@property (nonatomic, readonly, copy) NSURL * _Nonnull fileURL;
+- (nullable instancetype)initWithSignatureImage:(UIImage * _Nonnull)signatureImage signaturePath:(NSArray * _Nonnull)signaturePath fileManager:(NSFileManager * _Nonnull)fileManager OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface SignatureResult (SWIFT_EXTENSION(MobileWorkflowCore))
+- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
+@property (nonatomic, readonly) NSUInteger hash;
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -1167,6 +1302,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
 
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
+@interface StepBodyLabel : UILabel
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
+@interface StepTitleLabel : UILabel
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 

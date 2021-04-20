@@ -46,7 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
  To use a consent signature step, configure it and include it in a task. Then
  present the task in a task view controller.
  
- The result of this step is an `ORKSignatureResult` which will include both the `UIImage` and 
+ The result of this step is an `SignatureResult` which will include both the `UIImage` and 
  the path used to draw the image.
  */
 ORK_CLASS_AVAILABLE

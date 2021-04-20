@@ -45,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
  `NSKeyedArchiver`, because all `ORKResult` objects implement `NSSecureCoding`. If you want to serialize the result object to other formats, you're responsible for implementing this.
  
  The result object hierarchy does not necessarily include all the data collected
- during a task. Some result objects, such as `ORKFileResult`, may refer to files
+ during a task. Some result objects may refer to files
  in the filesystem that were generated during the task. These files are easy to find, because they are all
  located in the output directory of the task view controller.
  
