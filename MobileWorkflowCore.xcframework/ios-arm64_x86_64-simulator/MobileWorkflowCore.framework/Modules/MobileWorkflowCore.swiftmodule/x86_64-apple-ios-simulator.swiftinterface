@@ -73,6 +73,9 @@ open class MWStep : MobileWorkflowCore.Step {
   @objc deinit
 }
 public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
+  public let fileURL: Foundation.URL
+  public let contentType: Swift.String
+  public let identifier: Swift.String
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
@@ -1410,6 +1413,7 @@ public protocol StepViewController : UIKit.UIViewController {
 }
 extension StepViewController {
   public static func configureAsDefaultNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  public static func configureAsDefaultORKNavigationBar(_ navigationBar: UIKit.UINavigationBar)
 }
 public protocol SessionProvider {
 }
