@@ -76,6 +76,7 @@ public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
   public let fileURL: Foundation.URL
   public let contentType: Swift.String
   public let identifier: Swift.String
+  public init(fileURL: Foundation.URL, contentType: Swift.String, identifier: Swift.String)
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
