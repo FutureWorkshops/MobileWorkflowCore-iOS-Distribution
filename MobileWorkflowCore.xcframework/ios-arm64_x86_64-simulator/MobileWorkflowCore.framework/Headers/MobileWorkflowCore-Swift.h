@@ -637,7 +637,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
+SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel") SWIFT_DEPRECATED_MSG("UINavigationBar with largeTitles preferred (default for MWStepViewController)")
 @interface StepTitleLabel : UILabel
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -1310,7 +1310,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
+SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel") SWIFT_DEPRECATED_MSG("UINavigationBar with largeTitles preferred (default for MWStepViewController)")
 @interface StepTitleLabel : UILabel
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
