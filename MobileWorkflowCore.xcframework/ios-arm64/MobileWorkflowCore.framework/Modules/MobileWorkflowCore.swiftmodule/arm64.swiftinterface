@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
 // swift-module-flags: -target arm64-apple-ios13.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
@@ -35,8 +35,8 @@ public protocol EmailStep : MobileWorkflowCore.Step {
   final public let services: MobileWorkflowCore.StepServices
   public init(identifier: Swift.String, body: Swift.String?, subject: Swift.String, sendTo: Swift.String?, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
-  @objc deinit
   override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, uuid: Swift.String? = super)
+  @objc deinit
 }
 extension MWEmailStep : MobileWorkflowCore.BuildableStep {
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
@@ -77,13 +77,13 @@ public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
   public let contentType: Swift.String
   public let identifier: Swift.String
   public init(fileURL: Foundation.URL, contentType: Swift.String, identifier: Swift.String)
-  public init(from decoder: Swift.Decoder) throws
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: MobileWorkflowCore.FileInformation, b: MobileWorkflowCore.FileInformation) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: MobileWorkflowCore.FileInformation, b: MobileWorkflowCore.FileInformation) -> Swift.Bool
+  public init(from decoder: Swift.Decoder) throws
 }
 public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
   case invalidStepData(cause: Swift.String)
@@ -201,6 +201,16 @@ extension Array : MobileWorkflowCore.StringConvertableValue where Element == Mob
     get
   }
 }
+extension NSArray : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
+extension NSDateComponents : MobileWorkflowCore.StringConvertableValue {
+  public var stringValue: Swift.String {
+    get
+  }
+}
 public protocol URLSchemeManager {
   func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
@@ -259,8 +269,8 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
   @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
@@ -305,9 +315,9 @@ public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRSc
     set
   }
   override open func found(code: Swift.String)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @available(*, deprecated, renamed: "MWInstructionStepViewController")
 public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstructionStepViewController
@@ -336,16 +346,16 @@ public enum LocationServiceError : Foundation.LocalizedError {
     get
   }
   public static func == (a: MobileWorkflowCore.LocationServiceError, b: MobileWorkflowCore.LocationServiceError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @objc public class LocationService : ObjectiveC.NSObject {
   public init(userDefaults: Foundation.UserDefaults = .standard)
   public func significantLocationChangesPublisher() -> Combine.AnyPublisher<[CoreLocation.CLLocation], Swift.Error>
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 extension LocationService : CoreLocation.CLLocationManagerDelegate {
   @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
@@ -356,10 +366,10 @@ extension LocationService : CoreLocation.CLLocationManagerDelegate {
   public enum Exceptions : Swift.Error {
     case ItemEnqueued
     public static func == (a: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions, b: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
-    public func hash(into hasher: inout Swift.Hasher)
   }
   @objc convenience override dynamic public init()
   required public init(sessionIdentifier: Swift.String = QueueControllerNetworkAsyncTaskService.kQueuedSessionIdentifier, configuration: MobileWorkflowCore.QueueControllerConfiguration = .disabled, credentialStore: MobileWorkflowCore.CredentialStore = CredentialStore(), shadowNetworkService: MobileWorkflowCore.AsyncTaskService? = nil, reachability: MobileWorkflowCore.Reachability = Reachability())
@@ -483,13 +493,13 @@ public enum CredentialType : Swift.String, Swift.CaseIterable {
   case token
   case refreshToken
   case appleIdCredentialUser
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
-  public var rawValue: Swift.String {
+  public typealias AllCases = [MobileWorkflowCore.CredentialType]
+  public typealias RawValue = Swift.String
+  public static var allCases: [MobileWorkflowCore.CredentialType] {
     get
   }
-  public typealias AllCases = [MobileWorkflowCore.CredentialType]
-  public static var allCases: [MobileWorkflowCore.CredentialType] {
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -510,6 +520,15 @@ public struct URLFormatter {
   public init(regex: Swift.String = DefaultURLComposerRegex)
   public func parse(baseURL: Foundation.URL, complement: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
 }
+public protocol AnalyticsWorker {
+  func logEvent(_ name: Swift.String, parameters: [Swift.String : Any]?)
+}
+public protocol AnalyticsEvent {
+  var name: Swift.String { get }
+  var parameters: [Swift.String : Any]? { get }
+}
+public struct Analytics {
+}
 @objc public class FileResult : MobileWorkflowCore.ORKResult {
   final public let fileInformation: MobileWorkflowCore.FileInformation
   @objc override dynamic public class var supportsSecureCoding: Swift.Bool {
@@ -529,9 +548,9 @@ public struct URLFormatter {
     @objc get
   }
   @objc public func getFileURL() -> Foundation.NSURL
-  @objc deinit
   @objc override dynamic public init(identifier: Swift.String)
   @objc override dynamic public init()
+  @objc deinit
 }
 extension FileResult : MobileWorkflowCore.BinaryProvider {
   public var files: [MobileWorkflowCore.FileInformation] {
@@ -546,8 +565,8 @@ public struct Credential : Swift.Codable {
   public var credentialType: MobileWorkflowCore.CredentialType? {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public protocol QueueableTask {
   var type: Swift.String { get }
@@ -1339,8 +1358,8 @@ public enum CurrencyLocale : Swift.String, MobileWorkflowCore.LocaleConvertible 
   public var locale: Foundation.Locale {
     get
   }
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1361,8 +1380,8 @@ public enum SuccessAction : Swift.String, Swift.Codable {
   case reload
   case backward
   case forward
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1386,10 +1405,10 @@ public enum NavigationDirection {
   case forward
   case backward
   public static func == (a: MobileWorkflowCore.NavigationDirection, b: MobileWorkflowCore.NavigationDirection) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public protocol StepViewControllerDelegate : AnyObject {
   func mwStepViewControllerWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
@@ -1459,8 +1478,8 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
   public func loadBinary(valueString: Swift.String) -> MobileWorkflowCore.BinaryResource?
   public func loadBinaries() -> [MobileWorkflowCore.BinaryResource]
   public func checkAndConvertBinaries(completion: @escaping ((Swift.Error?) -> Swift.Void))
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 extension Session : MobileWorkflowCore.FileKeyResolver {
 }
@@ -1483,13 +1502,13 @@ public struct QueueControllerConfiguration : Swift.Codable {
   public static var disabled: MobileWorkflowCore.QueueControllerConfiguration {
     get
   }
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public enum Currency : Swift.String {
   case afghani, algerianDinar, argentinePeso, armenianDram, arubanFlorin, australianDollar, azerbaijanManat, bahamianDollar, bahrainiDinar, baht, balboa, barbadosDollar, belarusianRuble, belizeDollar, bermudianDollar, boliviano, bolívar, brazilianReal, bruneiDollar, bulgarianLev, burundiFranc, caboVerdeEscudo, canadianDollar, caymanIslandsDollar, chileanPeso, colombianPeso, comorianFranc, congoleseFranc, convertibleMark, cordobaOro, costaRicanColon, cubanPeso, czechKoruna, dalasi, danishKrone, denar, djiboutiFranc, dobra, dollar, dominicanPeso, dong, eastCaribbeanDollar, egyptianPound, elSalvadorColon, ethiopianBirr, euro, falklandIslandsPound, fijiDollar, forint, ghanaCedi, gibraltarPound, gourde, guarani, guineanFranc, guyanaDollar, hongKongDollar, hryvnia, icelandKrona, indianRupee, iranianRial, iraqiDinar, jamaicanDollar, jordanianDinar, kenyanShilling, kina, kuna, kuwaitiDinar, kwanza, kyat, laoKip, lari, lebanesePound, lek, lempira, leone, liberianDollar, libyanDinar, lilangeni, loti, malagasyAriary, malawiKwacha, malaysianRinggit, mauritiusRupee, mexicanPeso, mexicanUnidadDeInversion, moldovanLeu, moroccanDirham, mozambiqueMetical, mvdol, naira, nakfa, namibiaDollar, nepaleseRupee, netherlandsAntilleanGuilder, newIsraeliSheqel, newTaiwanDollar, newZealandDollar, ngultrum, northKoreanWon, norwegianKrone, ouguiya, paanga, pakistanRupee, pataca, pesoConvertible, pesoUruguayo, philippinePiso, poundSterling, pula, qatariRial, quetzal, rand, rialOmani, riel, romanianLeu, rufiyaa, rupiah, russianRuble, rwandaFranc, saintHelenaPound, saudiRiyal, serbianDinar, seychellesRupee, singaporeDollar, sol, solomonIslandsDollar, som, somaliShilling, somoni, southSudanesePound, sriLankaRupee, sudanesePound, surinamDollar, swedishKrona, swissFranc, syrianPound, taka, tala, tanzanianShilling, tenge, trinidadAndTobagoDollar, tugrik, tunisianDinar, turkishLira, turkmenistanNewManat, uaeDirham, ugandaShilling, unidadDeFomento, unidadDeValorReal, uruguayPesoEnUnidadesIndexadas, uzbekistanSum, vatu, wirEuro, wirFranc, won, yemeniRial, yen, yuanRenminbi, zambianKwacha, zimbabweDollar, zloty, none
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1645,8 +1664,8 @@ public protocol CurrencyAdjusting {
   }
   public typealias InitHandler = ((MobileWorkflowCore.CurrencyFormatter) -> (Swift.Void))
   @objc public init(_ handler: MobileWorkflowCore.CurrencyFormatter.InitHandler? = nil)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 extension CurrencyFormatter {
   @objc dynamic public func string(from doubleValue: Swift.Double) -> Swift.String?
@@ -1672,19 +1691,19 @@ extension CLLocation : Swift.Encodable {
     case latitude
     case longitude
     case timestamp
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
     public var rawValue: Swift.String {
       get
     }
     public var stringValue: Swift.String {
       get
     }
-    public init?(stringValue: Swift.String)
-    public var intValue: Swift.Int? {
-      get
-    }
-    public init?(intValue: Swift.Int)
   }
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1750,9 +1769,9 @@ extension ImageLoadingService {
 }
 @objc @_inheritsConvenienceInitializers @available(*, deprecated, message: "UINavigationBar with largeTitles preferred (default for MWStepViewController)")
 public class StepTitleLabel : UIKit.UILabel {
-  @objc deinit
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 @objc @_inheritsConvenienceInitializers public class StepBodyLabel : UIKit.UILabel {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -1791,8 +1810,8 @@ public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTa
     case image
     case video
     case button
-    public typealias RawValue = Swift.String
     public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
       get
     }
@@ -1815,17 +1834,17 @@ public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTa
   public init(type: MobileWorkflowCore.DisplayItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil) throws
   @objc public func encode(with coder: Foundation.NSCoder)
   @objc public func copy(with zone: ObjectiveC.NSZone? = nil) -> Any
-  @objc deinit
   @objc override dynamic public init()
-  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 public typealias DisplayItemButtonStyle = MobileWorkflowCore.ButtonStyle
 public enum ContentMode : Swift.String, Swift.Codable {
   case scaleAspectFit
   case scaleAspectFill
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -1842,8 +1861,8 @@ public struct BinaryResource : Swift.Codable {
   public let identifier: Swift.String
   public let fileType: Swift.String?
   public let data: Foundation.Data
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public protocol URLAsyncTaskConvertible {
   func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
@@ -1868,8 +1887,8 @@ public struct ResultsUploadTask : Swift.Codable, MobileWorkflowCore.QueueableTas
   public let queueNetworkUploads: Swift.Bool
   public func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
   public static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> MobileWorkflowCore.ResultsUploadTask
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public enum Event {
   case notification(name: Foundation.NSNotification.Name)
@@ -1920,8 +1939,8 @@ extension UIViewController {
   public static func build(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard) -> UIKit.UIViewController
   @objc override dynamic public func viewDidLoad()
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
-  @objc deinit
   @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
 }
 extension RootViewController : MobileWorkflowCore.WorkflowViewControllerDelegate {
   public func workflowViewControllerCanBeDismissed(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
@@ -1969,6 +1988,30 @@ extension ListStepItem : MobileWorkflowCore.ValueProvider {
   public var content: [Swift.AnyHashable : Swift.Codable] {
     get
   }
+}
+public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
+  case invalidURL
+  case unableToLoad
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: MobileWorkflowCore.MWPDFStepViewControllerError, b: MobileWorkflowCore.MWPDFStepViewControllerError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@objc @_inheritsConvenienceInitializers open class MWPDFStepViewController : MobileWorkflowCore.MWContentStepViewController {
+  open var pdfView: PDFKit.PDFView!
+  @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
+  open func load()
+  open func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
+  open func documentPublisher(url: Foundation.URL) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
+  override public init(step: MobileWorkflowCore.Step)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
   public typealias Response = [MobileWorkflowCore.ListStepItem]
@@ -2098,11 +2141,11 @@ public enum HTTPMethod : Swift.String {
   case OPTIONS
   case TRACE
   case PATCH
+  public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
-  public init?(rawValue: Swift.String)
 }
 extension QueueControllerNetworkAsyncTaskService : Foundation.URLSessionTaskDelegate {
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
@@ -2235,9 +2278,9 @@ public struct StepData : Swift.Codable {
   @objc final public let fileURL: Foundation.URL
   @objc public init?(signatureImage: UIKit.UIImage, signaturePath: Foundation.NSArray, fileManager: Foundation.FileManager = .shared)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc deinit
   @objc override dynamic public init(identifier: Swift.String)
   @objc override dynamic public init()
+  @objc deinit
 }
 extension SignatureResult : MobileWorkflowCore.BinaryProvider {
   public var files: [MobileWorkflowCore.FileInformation] {
@@ -2265,7 +2308,8 @@ extension SignatureResult {
   final public let workflow: MobileWorkflowCore.Workflow
   public var isDiscardable: Swift.Bool
   public var outputDirectory: Foundation.URL?
-  public init(workflow: MobileWorkflowCore.Workflow)
+  final public let analytics: MobileWorkflowCore.Analytics?
+  public init(workflow: MobileWorkflowCore.Workflow, analytics: MobileWorkflowCore.Analytics? = nil)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic public func viewDidLoad()
   @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -2349,8 +2393,8 @@ public struct NetworkStepBinaryResponse : Swift.Codable {
   public let identifier: Swift.String
   public let url: Swift.String
   public let method: Swift.String
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public enum CredentialError : Swift.Error {
   case invalidInputData
@@ -2358,10 +2402,10 @@ public enum CredentialError : Swift.Error {
   case requiredButNotFound
   case unexpected
   public static func == (a: MobileWorkflowCore.CredentialError, b: MobileWorkflowCore.CredentialError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 @available(*, deprecated, renamed: "MWSubtitleTableViewCell")
 public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubtitleTableViewCell
@@ -2382,8 +2426,8 @@ public struct Server : Swift.Codable {
   public let id: Swift.Int
   public let url: Foundation.URL
   public init(id: Swift.Int, url: Foundation.URL)
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 extension Collection {
   public subscript(safe index: Self.Index) -> Self.Iterator.Element? {
@@ -2411,8 +2455,8 @@ extension MWEmailStepViewController : MessageUI.MFMailComposeViewControllerDeleg
   @objc dynamic public func mailComposeController(_ controller: MessageUI.MFMailComposeViewController, didFinishWith result: MessageUI.MFMailComposeResult, error: Swift.Error?)
 }
 public struct NavigationRule : Swift.Codable {
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   var content: [Swift.AnyHashable : Swift.Codable] { get }
@@ -2439,10 +2483,10 @@ public enum SyncResult {
   case alreadyInSync
   case didSync
   public static func == (a: MobileWorkflowCore.SyncResult, b: MobileWorkflowCore.SyncResult) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public protocol SyncableContentSource : AnyObject {
   var resolvedURL: Foundation.URL? { get set }
@@ -2497,10 +2541,10 @@ public enum PDFImageRenderError : Foundation.LocalizedError {
     get
   }
   public static func == (a: MobileWorkflowCore.PDFImageRenderError, b: MobileWorkflowCore.PDFImageRenderError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
   }
-  public func hash(into hasher: inout Swift.Hasher)
 }
 public class PDFImageRenderer {
   public init()
@@ -2512,8 +2556,8 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
   case danger
   case outline
   case textOnly
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2546,8 +2590,8 @@ public enum ReachabilityStatus : Swift.String {
   case offline
   case online
   case unknown
-  public typealias RawValue = Swift.String
   public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
     get
   }
@@ -2589,6 +2633,8 @@ extension MobileWorkflowCore.DisplayItem.ItemType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ContentMode : Swift.Equatable {}
 extension MobileWorkflowCore.ContentMode : Swift.Hashable {}
 extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}
+extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Equatable {}
+extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
