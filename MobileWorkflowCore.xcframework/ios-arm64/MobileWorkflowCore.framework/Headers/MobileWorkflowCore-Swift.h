@@ -315,19 +315,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore11DisplayItem")
-@interface DisplayItem : NSObject <NSCopying, NSSecureCoding>
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
-+ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
 
 @class NSInputStream;
 @class NSOutputStream;
@@ -382,25 +369,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore12ListStepItem")
-@interface ListStepItem : NSObject <NSCopying, NSSecureCoding>
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
-+ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder;
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface ListStepItem (SWIFT_EXTENSION(MobileWorkflowCore))
-@property (nonatomic, readonly, copy) NSString * _Nonnull description;
-@end
-
-
-
-
 SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -442,8 +410,9 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MWContentStepViewController")
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @interface MWInstructionStepViewController : MWContentStepViewController
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
 
 
@@ -465,6 +434,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 @end
+
 
 
 
@@ -647,7 +617,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel") SWIFT_DEPRECATED_MSG("UINavigationBar with largeTitles preferred (default for MWStepViewController)")
+SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @interface StepTitleLabel : UILabel
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
