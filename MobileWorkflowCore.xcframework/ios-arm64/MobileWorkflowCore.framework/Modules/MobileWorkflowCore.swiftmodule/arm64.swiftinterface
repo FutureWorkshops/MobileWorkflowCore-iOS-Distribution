@@ -299,7 +299,7 @@ public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRSc
 }
 @available(*, deprecated, renamed: "MWInstructionStepViewController")
 public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstructionStepViewController
-@objc open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
+@objc @_inheritsConvenienceInitializers open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
   public var imageView: UIKit.UIImageView! {
     get
   }
@@ -313,13 +313,14 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
     get
   }
   public init(instructionStep: MobileWorkflowCore.InstructionStep)
+  @available(*, unavailable, message: "init(instructionStep:) must be used instead")
+  override public init(step: MobileWorkflowCore.Step)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic open func viewDidLoad()
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   public func showLoading()
   public func hideLoading()
-  override public init(step: MobileWorkflowCore.Step)
   @objc deinit
 }
 extension MWInstructionStepViewController {
