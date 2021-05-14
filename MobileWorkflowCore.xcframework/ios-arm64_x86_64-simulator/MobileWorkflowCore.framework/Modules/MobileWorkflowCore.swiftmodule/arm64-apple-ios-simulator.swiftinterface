@@ -2147,13 +2147,18 @@ public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
 }
-public protocol SelectionItem : MobileWorkflowCore.ValueProvider, Swift.Decodable, Swift.Encodable {
+public protocol Selection {
   var resultKey: Swift.String? { get }
 }
-open class SelectionResult<Item> : MobileWorkflowCore.StepResult, Swift.Codable where Item : MobileWorkflowCore.SelectionItem {
+public protocol SelectionItem : MobileWorkflowCore.Selection, MobileWorkflowCore.ValueProvider, Swift.Decodable, Swift.Encodable {
+}
+open class SelectionResult<Item> : MobileWorkflowCore.StepResult, MobileWorkflowCore.Selection, Swift.Codable where Item : MobileWorkflowCore.SelectionItem {
   public var identifier: Swift.String
   final public let selected: Item?
   public init(identifier: Swift.String, selected: Item?)
+  public var resultKey: Swift.String? {
+    get
+  }
   @objc deinit
   open func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
@@ -2495,17 +2500,18 @@ public enum Attachment {
   case filePath(_: Swift.String)
   case data(_: Foundation.Data, mimeType: Swift.String, fileName: Swift.String)
 }
-@objc @_inheritsConvenienceInitializers open class MWEmailStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
+@objc open class MWEmailStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
   public var emailStep: MobileWorkflowCore.EmailStep {
     get
   }
+  public init(emailStep: MobileWorkflowCore.EmailStep)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic public func viewDidLoad()
   override public func hideNavigationFooterView()
   open func extractAttachements(completion: @escaping (Swift.Result<[MobileWorkflowCore.Attachment], Swift.Error>) -> Swift.Void)
   public func extractAnswerContent() -> Swift.String?
   open func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
   override public init(instructionStep: MobileWorkflowCore.InstructionStep)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 extension MWEmailStepViewController : MessageUI.MFMailComposeViewControllerDelegate {
