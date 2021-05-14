@@ -300,6 +300,9 @@ public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRSc
 @available(*, deprecated, renamed: "MWInstructionStepViewController")
 public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstructionStepViewController
 @objc @_inheritsConvenienceInitializers open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
+  override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    get
+  }
   public var imageView: UIKit.UIImageView! {
     get
   }
@@ -416,6 +419,9 @@ extension FileManager {
   public var mwResult: MobileWorkflowCore.StepResult? {
     get
   }
+  open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    get
+  }
   public var outputDirectory: Foundation.URL?
   public var cancelButtonItem: UIKit.UIBarButtonItem? {
     get
@@ -443,7 +449,7 @@ extension FileManager {
   public func addStepResult(_ result: MobileWorkflowCore.StepResult)
   public func disableCancel()
   public func hideNavigationFooterView()
-  public func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  open func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
   public func goForward()
   public func goBackward()
   public func hasNextStep() -> Swift.Bool
@@ -504,6 +510,9 @@ extension ORKStepViewController : MobileWorkflowCore.StepViewController {
     get
   }
   public var mwResult: MobileWorkflowCore.StepResult? {
+    get
+  }
+  public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
     get
   }
   @objc dynamic public func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
@@ -1446,10 +1455,21 @@ public protocol StepViewControllerDelegate : AnyObject {
   func mwStepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   func mwStepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
+public enum StepViewControllerTitleMode {
+  case largeTitle
+  case smallTitle
+  case customOrNone
+  public static func == (a: MobileWorkflowCore.StepViewControllerTitleMode, b: MobileWorkflowCore.StepViewControllerTitleMode) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 public protocol StepViewController : UIKit.UIViewController {
   var mwDelegate: MobileWorkflowCore.StepViewControllerDelegate? { get set }
   var mwStep: MobileWorkflowCore.Step { get }
   var mwResult: MobileWorkflowCore.StepResult? { get }
+  var titleMode: MobileWorkflowCore.StepViewControllerTitleMode { get }
   var outputDirectory: Foundation.URL? { get set }
   var cancelButtonItem: UIKit.UIBarButtonItem? { get set }
   var utilityButtonItem: UIKit.UIBarButtonItem? { get set }
@@ -2012,6 +2032,9 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
   }
 }
 @objc @_inheritsConvenienceInitializers open class MWPDFStepViewController : MobileWorkflowCore.MWContentStepViewController {
+  override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    get
+  }
   open var pdfView: PDFKit.PDFView!
   @objc override dynamic open func viewDidLoad()
   @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
@@ -2689,6 +2712,8 @@ extension MobileWorkflowCore.SuccessAction : Swift.Hashable {}
 extension MobileWorkflowCore.SuccessAction : Swift.RawRepresentable {}
 extension MobileWorkflowCore.NavigationDirection : Swift.Equatable {}
 extension MobileWorkflowCore.NavigationDirection : Swift.Hashable {}
+extension MobileWorkflowCore.StepViewControllerTitleMode : Swift.Equatable {}
+extension MobileWorkflowCore.StepViewControllerTitleMode : Swift.Hashable {}
 extension MobileWorkflowCore.Currency : Swift.Equatable {}
 extension MobileWorkflowCore.Currency : Swift.Hashable {}
 extension MobileWorkflowCore.Currency : Swift.RawRepresentable {}
