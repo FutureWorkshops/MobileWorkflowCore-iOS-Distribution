@@ -418,6 +418,16 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore30MWCompletionStepViewController")
+@interface MWCompletionStepViewController : MWInstructionStepViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidAppear:(BOOL)animated;
+@end
+
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
 @interface MWEmailStepViewController : MWInstructionStepViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -502,6 +512,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @property (nonatomic, getter=isHidden) BOOL hidden;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
+
 
 
 
@@ -1073,6 +1084,16 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore30MWCompletionStepViewController")
+@interface MWCompletionStepViewController : MWInstructionStepViewController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewDidAppear:(BOOL)animated;
+@end
+
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
 @interface MWEmailStepViewController : MWInstructionStepViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
@@ -1157,6 +1178,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @property (nonatomic, getter=isHidden) BOOL hidden;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
+
 
 
 

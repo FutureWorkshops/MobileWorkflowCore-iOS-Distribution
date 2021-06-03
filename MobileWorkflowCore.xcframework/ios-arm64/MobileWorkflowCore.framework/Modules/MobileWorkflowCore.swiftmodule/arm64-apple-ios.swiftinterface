@@ -210,6 +210,19 @@ extension UIViewController {
 extension UIViewController {
   public func showFilterSheet(options: [Swift.String], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
+public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
+  public var imageURL: Swift.String?
+  public var image: UIKit.UIImage?
+  final public let session: MobileWorkflowCore.Session
+  final public let services: MobileWorkflowCore.StepServices
+  public init(identifier: Swift.String, text: Swift.String?, image: UIKit.UIImage?, imageURL: Swift.String?, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices)
+  override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
+  override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, uuid: Swift.String? = super)
+  @objc deinit
+}
+extension MWCompletionStep : MobileWorkflowCore.BuildableStep {
+  public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
+}
 public enum BinaryContentType {
   public enum Image {
     public static let heif: Swift.String
@@ -301,6 +314,9 @@ public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRSc
 public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstructionStepViewController
 @objc @_inheritsConvenienceInitializers open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
   override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    get
+  }
+  public var contentStackView: UIKit.UIStackView! {
     get
   }
   public var imageView: UIKit.UIImageView! {
@@ -1481,8 +1497,8 @@ public protocol StepViewController : UIKit.UIViewController {
   func hasNextStep() -> Swift.Bool
 }
 extension StepViewController {
-  public static func configureAsDefaultNavigationBar(_ navigationBar: UIKit.UINavigationBar)
-  public static func configureAsDefaultORKNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  public static func configureAsDefaultNavigationBar(_ navigationBar: UIKit.UINavigationBar, barTintColor: UIKit.UIColor)
+  public static func configureAsDefaultORKNavigationBar(_ navigationBar: UIKit.UINavigationBar, barTintColor: UIKit.UIColor)
 }
 public protocol SessionProvider {
 }
@@ -1571,6 +1587,9 @@ public protocol CredentialStoreProtocol {
   func retrieveCredential(_ credentialType: MobileWorkflowCore.CredentialType, isRequired: Swift.Bool) -> Swift.Result<MobileWorkflowCore.Credential?, MobileWorkflowCore.CredentialError>
   func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+}
+extension NotificationCenter {
+  public func buildKeyboardPublisher(heightMapping: @escaping (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat) -> Combine.AnyPublisher<CoreGraphics.CGFloat, Swift.Never>
 }
 public protocol NibLoadable : AnyObject {
   static var nibName: Swift.String { get }
@@ -1755,6 +1774,18 @@ extension CLLocation : Swift.Encodable {
     }
   }
   public func encode(to encoder: Swift.Encoder) throws
+}
+@objc public class MWCompletionStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
+  public var completionStep: MobileWorkflowCore.MWCompletionStep {
+    get
+  }
+  public init(completionStep: MobileWorkflowCore.MWCompletionStep)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc override dynamic public func viewDidLoad()
+  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  override public init(instructionStep: MobileWorkflowCore.InstructionStep)
+  @objc deinit
 }
 final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol {
   public init(securityStore: MobileWorkflowCore.SecurityStoreProtocol = SecurityStore())
