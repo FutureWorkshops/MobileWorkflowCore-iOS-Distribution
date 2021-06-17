@@ -18,6 +18,7 @@ import Swift
 import SystemConfiguration
 import UIKit
 import VisionKit
+import WebKit
 public protocol EmailStep : MobileWorkflowCore.InstructionStep {
   var body: Swift.String? { get }
   var subject: Swift.String { get }
@@ -107,12 +108,13 @@ extension FileManager : MobileWorkflowCore.StreamProvider {
 }
 @available(*, deprecated, renamed: "StepServices")
 public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
-public struct StepServices {
-  public let credentialStore: MobileWorkflowCore.CredentialStoreProtocol
-  public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
-  public let localizationService: MobileWorkflowCore.LocalizationService
-  public let eventService: MobileWorkflowCore.EventService
-  public func perform<T>(task: T, session: MobileWorkflowCore.Session, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+@_hasMissingDesignatedInitializers public class StepServices : MobileWorkflowCore.TaskExecutor {
+  final public let credentialStore: MobileWorkflowCore.CredentialStoreProtocol
+  final public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
+  final public let localizationService: MobileWorkflowCore.LocalizationService
+  final public let eventService: MobileWorkflowCore.EventService
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  @objc deinit
 }
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
@@ -338,6 +340,7 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
   @objc override dynamic open func viewDidLoad()
   public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  override public func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
   public func showLoading()
   public func hideLoading()
   @objc deinit
@@ -612,6 +615,7 @@ public struct Credential : Swift.Codable {
   public let value: Swift.String
   public let expirationDate: Foundation.Date
   public init(type: Swift.String, value: Swift.String, expirationDate: Foundation.Date)
+  public init(type: MobileWorkflowCore.CredentialType, value: Swift.String, expirationDate: Foundation.Date = .distantFuture)
   public var credentialType: MobileWorkflowCore.CredentialType? {
     get
   }
@@ -2138,7 +2142,26 @@ public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
   public typealias Input = MobileWorkflowCore.URLTaskInput
 }
+public enum JSONParsingError : Foundation.LocalizedError {
+  case keyNotFound(key: Swift.CodingKey, codingPath: [Swift.CodingKey])
+  case dataCorrupted
+  case valueNotFound(value: Any.Type, codingPath: [Swift.CodingKey])
+  case invalidValue(value: Any, codingPath: [Swift.CodingKey])
+  case typeMismatch(type: Any.Type, codingPath: [Swift.CodingKey])
+  case unknownError(error: Swift.Error)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension JSONEncoder {
+  public func encodeParsingException<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
+}
+extension JSONDecoder {
+  public func decodeParsingException<T>(data: Foundation.Data) throws -> T where T : Swift.Decodable
+}
 extension URLAsyncTask {
+  public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = JSONEncoder(), decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
@@ -2234,14 +2257,18 @@ extension SelectionResult : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
-public protocol AsyncTaskService {
+public protocol TaskExecutor {
+  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+}
+public protocol AsyncTaskService : MobileWorkflowCore.TaskExecutor {
   @discardableResult
   func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
-  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  func configure(stepServices: MobileWorkflowCore.StepServices?)
 }
 extension AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  public func configure(stepServices: MobileWorkflowCore.StepServices?)
 }
 extension AsyncTaskService {
   public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
@@ -2337,17 +2364,30 @@ public typealias MobileWorkflowServiceType = MobileWorkflowCore.ServiceType
 public protocol ServiceType : MobileWorkflowCore.NamedType {
   func buildService(with config: MobileWorkflowCore.ServiceConfiguration) throws -> MobileWorkflowCore.AsyncTaskService?
 }
+public protocol BackgroundService : MobileWorkflowCore.NamedType {
+  func provide(services: MobileWorkflowCore.StepServices)
+  func restore(configuration: Any)
+  func saveConfiguration() -> Any
+}
 @available(*, deprecated, renamed: "Plugin")
 public typealias MobileWorkflowPlugin = MobileWorkflowCore.Plugin
 public protocol Plugin {
   static var allStepsTypes: [MobileWorkflowCore.StepType] { get }
   static var networkServiceType: MobileWorkflowCore.ServiceType { get }
+  static var asyncTaskServices: [MobileWorkflowCore.AsyncTaskService] { get }
+  static var backgroundServices: [MobileWorkflowCore.BackgroundService] { get }
 }
 extension Plugin {
   public static var allStepsTypes: [MobileWorkflowCore.StepType] {
     get
   }
   public static var networkServiceType: MobileWorkflowCore.ServiceType {
+    get
+  }
+  public static var asyncTaskServices: [MobileWorkflowCore.AsyncTaskService] {
+    get
+  }
+  public static var backgroundServices: [MobileWorkflowCore.BackgroundService] {
     get
   }
 }
@@ -2667,6 +2707,9 @@ public class PDFImageRenderer {
   public init()
   public func renderImages(_ images: [UIKit.UIImage], fileNamePrefix: Swift.String) throws -> Foundation.URL?
   @objc deinit
+}
+extension WKWebView {
+  @objc(mw_configureAppBoundDomains) dynamic public func configureAppBoundDomains()
 }
 public enum ButtonStyle : Swift.String, Swift.Codable {
   case primary
