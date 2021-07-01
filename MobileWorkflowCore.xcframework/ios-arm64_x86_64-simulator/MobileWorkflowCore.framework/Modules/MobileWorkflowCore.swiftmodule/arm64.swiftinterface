@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
@@ -93,6 +93,10 @@ public struct AppConfigurationDependencies {
   public var responseErrorTypes: [MobileWorkflowCore.ResponseError.Type]
   public init(appId: Swift.String, plugins: [MobileWorkflowCore.Plugin.Type], fileManager: Foundation.FileManager, credentialStore: MobileWorkflowCore.CredentialStoreProtocol?, eventService: MobileWorkflowCore.EventService, asyncServices: [MobileWorkflowCore.AsyncTaskService], queueController: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService?, responseErrorTypes: [MobileWorkflowCore.ResponseError.Type])
   public static func `default`(withAppId appId: Swift.String = Bundle.main.bundleIdentifier ?? "", plugins: [MobileWorkflowCore.Plugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?, queueControllerProvider: MobileWorkflowCore.QueueControllerProvider?) -> MobileWorkflowCore.AppConfigurationDependencies
+}
+public protocol AsyncTaskInterceptor {
+  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, completion: (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
+  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 @objc public protocol StreamProvider {
   @objc func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
@@ -208,6 +212,7 @@ extension UIViewController {
 }
 extension UIViewController {
   public func performSystemAction(_ systemAction: MobileWorkflowCore.SystemAction) throws
+  public func presentActivitySheet(with activityItems: [Any], sourceRect: CoreGraphics.CGRect)
 }
 extension UIViewController {
   public func showFilterSheet(options: [Swift.String], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
@@ -2134,12 +2139,18 @@ public struct URLTaskInput {
   public let body: Foundation.Data?
   public let headers: [Swift.String : Swift.String]
   public init(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, headers: [Swift.String : Swift.String] = [:])
+  public func setting(url: Foundation.URL) -> MobileWorkflowCore.URLTaskInput
+  public func replacing(body: Foundation.Data?) -> MobileWorkflowCore.URLTaskInput
+  public func adding(headers: [Swift.String : Swift.String]) -> MobileWorkflowCore.URLTaskInput
 }
 public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public typealias Response = T
   public typealias URLTaskParser = (Foundation.Data) throws -> T
   public let input: MobileWorkflowCore.URLTaskInput
   public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
+  public func setting(url: Foundation.URL) -> MobileWorkflowCore.URLAsyncTask<T>
+  public func replacing(body: Foundation.Data?) -> MobileWorkflowCore.URLAsyncTask<T>
+  public func adding(headers: [Swift.String : Swift.String]) -> MobileWorkflowCore.URLAsyncTask<T>
   public typealias Input = MobileWorkflowCore.URLTaskInput
 }
 public enum JSONParsingError : Foundation.LocalizedError {
@@ -2218,8 +2229,14 @@ public class MWWorkflow : MobileWorkflowCore.Workflow {
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
-public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
+public protocol CustomisableErrorTypes {
+  func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
+  var responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type] { get }
+}
+public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService, MobileWorkflowCore.CustomisableErrorTypes {
+  public var responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type]
   public init(urlSession: Foundation.URLSession = .shared)
+  public func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
@@ -2376,6 +2393,7 @@ public protocol Plugin {
   static var networkServiceType: MobileWorkflowCore.ServiceType { get }
   static var asyncTaskServices: [MobileWorkflowCore.AsyncTaskService] { get }
   static var backgroundServices: [MobileWorkflowCore.BackgroundService] { get }
+  static func buildInterceptors(credentialStore: MobileWorkflowCore.CredentialStoreProtocol) -> [MobileWorkflowCore.AsyncTaskInterceptor]
 }
 extension Plugin {
   public static var allStepsTypes: [MobileWorkflowCore.StepType] {
@@ -2390,6 +2408,7 @@ extension Plugin {
   public static var backgroundServices: [MobileWorkflowCore.BackgroundService] {
     get
   }
+  public static func buildInterceptors(credentialStore: MobileWorkflowCore.CredentialStoreProtocol) -> [MobileWorkflowCore.AsyncTaskInterceptor]
 }
 @available(*, deprecated, renamed: "BuildableStep")
 public typealias MobileWorkflowStep = MobileWorkflowCore.BuildableStep
