@@ -110,6 +110,15 @@ extension FileManager : MobileWorkflowCore.StreamProvider {
   @objc dynamic open func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc dynamic open func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
 }
+public struct PDFViewInput {
+  public let filePath: Swift.String
+  public let appId: Swift.String
+}
+public struct PDFViewerTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: MobileWorkflowCore.PDFViewInput
+  public typealias Input = MobileWorkflowCore.PDFViewInput
+}
 @available(*, deprecated, renamed: "StepServices")
 public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
 @_hasMissingDesignatedInitializers public class StepServices : MobileWorkflowCore.TaskExecutor {
@@ -2076,12 +2085,15 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
     get
   }
   open var pdfView: PDFKit.PDFView!
+  open var enforceOpenInApp: Swift.Bool {
+    get
+  }
   @objc override dynamic open func viewDidLoad()
   @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
   @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
   open func load()
-  open func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
-  open func documentPublisher(url: Foundation.URL) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
+  public func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
+  open func prepare(document: PDFKit.PDFDocument) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
   override public init(step: MobileWorkflowCore.Step)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
@@ -2187,6 +2199,20 @@ extension Decodable {
   public static func parse(data: Foundation.Data, decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> Self
   public static func decodeParse(decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.Parse<Self>
   public static func parsePublisher(_ parse: @escaping MobileWorkflowCore.Parse<Self> = Self.decodeParse()) -> MobileWorkflowCore.ParsePublisher<Self>
+}
+public enum PDFAppOption : Swift.Equatable {
+  case inApp
+  case externalApp(appId: Swift.String, appName: Swift.String)
+  public var title: Swift.String {
+    get
+  }
+  public static func == (a: MobileWorkflowCore.PDFAppOption, b: MobileWorkflowCore.PDFAppOption) -> Swift.Bool
+}
+public struct PDFListAppsTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = [MobileWorkflowCore.PDFAppOption]
+  public let input: Swift.Void
+  public init()
+  public typealias Input = Swift.Void
 }
 public struct ServiceConfiguration : Swift.Codable {
   public let type: Swift.String
