@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
@@ -549,6 +549,24 @@ extension ORKStepViewController : MobileWorkflowCore.StepViewController {
     get
   }
   @objc dynamic public func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+}
+public class DictionaryResult : MobileWorkflowCore.StepResult {
+  public var identifier: Swift.String
+  final public let elements: [Swift.String : Any]
+  public init(identifier: Swift.String, elements: [Swift.String : Any])
+  @objc deinit
+}
+extension DictionaryResult : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension DictionaryResult : MobileWorkflowCore.ValueProvider {
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
 public protocol StepResult : AnyObject, MobileWorkflowCore.SessionProvider {
   var identifier: Swift.String { get set }
@@ -1570,6 +1588,7 @@ extension Session : MobileWorkflowCore.ContentProvider {
   public func fetchValue(resource: Swift.String) -> Any?
   public func fetchFiles() -> [MobileWorkflowCore.FileInformation]
   public func fetchFiles(forResult identifier: Swift.String) -> [MobileWorkflowCore.FileInformation]
+  public func resolve<T>(value: Swift.String) -> T?
   @objc(resolveValue:) dynamic public func resolve(value: Swift.String) -> Swift.String
   @objc(resolveUrl:) dynamic public func resolve(url: Swift.String) -> Foundation.URL?
   public var jsonContent: Swift.String? {
@@ -1825,6 +1844,7 @@ public struct ValueFormatter {
   public init(regex: Swift.String = DefaultValueComposerRegex)
   public func parseIdentifier(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
+  public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
 }
 public protocol ReusableView : AnyObject {
   static var defaultReuseIdentifier: Swift.String { get }
@@ -2497,6 +2517,10 @@ extension SignatureResult {
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class StateView : UIKit.UIView {
   public struct ButtonConfig {
+    public let title: Swift.String
+    public let style: MobileWorkflowCore.ButtonStyle
+    public let action: () -> Swift.Void
+    public init(title: Swift.String, style: MobileWorkflowCore.ButtonStyle = .primary, action: @escaping () -> Swift.Void)
   }
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
