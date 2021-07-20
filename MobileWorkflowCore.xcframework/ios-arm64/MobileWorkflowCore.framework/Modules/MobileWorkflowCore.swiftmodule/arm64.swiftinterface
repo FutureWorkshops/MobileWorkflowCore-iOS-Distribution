@@ -1845,6 +1845,7 @@ public struct ValueFormatter {
   public func parseIdentifier(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
+  public func parseResponse<T>(resolvedValue: Any?, for key: Swift.String) -> T?
 }
 public protocol ReusableView : AnyObject {
   static var defaultReuseIdentifier: Swift.String { get }
