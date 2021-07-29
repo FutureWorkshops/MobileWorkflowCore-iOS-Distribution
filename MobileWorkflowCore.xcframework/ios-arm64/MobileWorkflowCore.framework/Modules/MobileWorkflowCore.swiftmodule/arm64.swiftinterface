@@ -513,6 +513,7 @@ public protocol WorkflowPresentationDelegator : AnyObject {
   var workflowPresentationDelegate: MobileWorkflowCore.WorkflowPresentationDelegate? { get set }
 }
 public protocol PresentedWorkflow : AnyObject {
+  var shouldDismiss: Swift.Bool { get }
   var onDismiss: MobileWorkflowCore.OnWorkflowDismiss? { get }
 }
 public protocol InstructionStep : MobileWorkflowCore.Step {
@@ -1616,7 +1617,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies)
+  convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies, urlSession: Foundation.URLSession = .shared)
   @objc deinit
 }
 public protocol CredentialStoreProtocol {
@@ -2280,7 +2281,11 @@ public protocol CustomisableErrorTypes {
   func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
   var responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type] { get }
 }
-public class NetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService, MobileWorkflowCore.CustomisableErrorTypes {
+public protocol NetworkService : MobileWorkflowCore.AsyncTaskService {
+  static var typeName: Swift.String { get }
+}
+public class NetworkAsyncTaskService : MobileWorkflowCore.NetworkService, MobileWorkflowCore.CustomisableErrorTypes {
+  public static let typeName: Swift.String
   public var responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type]
   public init(urlSession: Foundation.URLSession = .shared)
   public func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
@@ -2597,13 +2602,30 @@ extension UIColor {
 extension ORKImageCaptureStep : MobileWorkflowCore.BuildableStep {
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
+public protocol WorkflowInfoConvertible {
+  func convert() -> MobileWorkflowCore.WorkflowInfo?
+}
+public struct WorkflowInfo : MobileWorkflowCore.WorkflowInfoConvertible {
+  public let workflowId: Swift.String?
+  public let initialSessionValues: [Swift.String : Any]?
+  public init(workflowId: Swift.String? = nil, initialSessionValues: [Swift.String : Any]? = nil)
+  public func convert() -> MobileWorkflowCore.WorkflowInfo?
+}
 public enum AppConfigurationContext {
-  case remote(url: Swift.String, serverId: Swift.Int?)
-  case cached
-  case file(path: Swift.String, serverId: Swift.Int?, workflowId: Swift.String?, sessionValues: [Swift.String : Any]? = nil)
+  case remote(url: Swift.String, serverId: Swift.Int? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
+  case cached(modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
+  case file(path: Swift.String, serverId: Swift.Int? = nil, initialWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
+  public func updating(modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo?) -> MobileWorkflowCore.AppConfigurationContext
 }
 extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
+}
+public struct URLModalWorkflowInfoConverter : MobileWorkflowCore.WorkflowInfoConvertible {
+  public init(url: Foundation.URL)
+  public func convert() -> MobileWorkflowCore.WorkflowInfo?
+}
+extension AppConfigurationContext {
+  public func complementing(with modalWorkflowInfoConvertible: MobileWorkflowCore.WorkflowInfoConvertible) -> MobileWorkflowCore.AppConfigurationContext
 }
 public enum PopoverAnchor {
   case view(_: UIKit.UIView, rect: CoreGraphics.CGRect)
