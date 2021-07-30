@@ -1617,7 +1617,7 @@ public enum Currency : Swift.String {
   }
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
-  convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies, urlSession: Foundation.URLSession = .shared)
+  convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies, urlSession imageUrlSession: Foundation.URLSession = .shared, configUrlSession: Foundation.URLSession = URLSession(configuration: .default))
   @objc deinit
 }
 public protocol CredentialStoreProtocol {
