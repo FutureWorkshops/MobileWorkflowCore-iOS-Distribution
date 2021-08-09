@@ -1834,8 +1834,10 @@ final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol 
   final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
 }
-public struct NetworkDisplayStepItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
-  public typealias Response = [MobileWorkflowCore.DisplayStepItem]
+@available(*, deprecated, renamed: "NetworkStackStepItemTask")
+public typealias NetworkDisplayStepItemTask = MobileWorkflowCore.NetworkStackStepItemTask
+public struct NetworkStackStepItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
+  public typealias Response = [MobileWorkflowCore.StackStepItem]
   public let input: Foundation.URL
   public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
@@ -1920,7 +1922,9 @@ public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTa
   override public func configure()
   @objc deinit
 }
-public class DisplayStepItem : Swift.Codable {
+@available(*, deprecated, renamed: "StackStepItem")
+public typealias DisplayStepItem = MobileWorkflowCore.StackStepItem
+public class StackStepItem : Swift.Codable {
   public enum ItemType : Swift.String, Swift.Codable {
     case text
     case image
@@ -1932,7 +1936,7 @@ public class DisplayStepItem : Swift.Codable {
       get
     }
   }
-  final public let type: MobileWorkflowCore.DisplayStepItem.ItemType
+  final public let type: MobileWorkflowCore.StackStepItem.ItemType
   public var name: Swift.String?
   final public let label: Swift.String?
   final public let text: Swift.String?
@@ -1941,18 +1945,20 @@ public class DisplayStepItem : Swift.Codable {
   final public let method: Swift.String?
   final public let onSuccess: MobileWorkflowCore.SuccessAction?
   final public let modalWorkflow: Swift.String?
-  final public let buttonStyle: MobileWorkflowCore.DisplayStepItemButtonStyle?
+  final public let buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?
   final public let contentMode: MobileWorkflowCore.ContentMode?
   final public let systemURL: Swift.String?
   final public let confirmTitle: Swift.String?
   final public let confirmText: Swift.String?
   final public let sfSymbolName: Swift.String?
-  public init(type: MobileWorkflowCore.DisplayStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.DisplayStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil) throws
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
 }
-public typealias DisplayStepItemButtonStyle = MobileWorkflowCore.ButtonStyle
+@available(*, deprecated, renamed: "StackStepItemButtonStyle")
+public typealias DisplayStepItemButtonStyle = MobileWorkflowCore.StackStepItemButtonStyle
+public typealias StackStepItemButtonStyle = MobileWorkflowCore.ButtonStyle
 public enum ContentMode : Swift.String, Swift.Codable {
   case scaleAspectFit
   case scaleAspectFill
@@ -2887,9 +2893,9 @@ extension MobileWorkflowCore.Currency : Swift.RawRepresentable {}
 extension CoreLocation.CLLocation.CodingKeys : Swift.Equatable {}
 extension CoreLocation.CLLocation.CodingKeys : Swift.Hashable {}
 extension CoreLocation.CLLocation.CodingKeys : Swift.RawRepresentable {}
-extension MobileWorkflowCore.DisplayStepItem.ItemType : Swift.Equatable {}
-extension MobileWorkflowCore.DisplayStepItem.ItemType : Swift.Hashable {}
-extension MobileWorkflowCore.DisplayStepItem.ItemType : Swift.RawRepresentable {}
+extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Equatable {}
+extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Hashable {}
+extension MobileWorkflowCore.StackStepItem.ItemType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ContentMode : Swift.Equatable {}
 extension MobileWorkflowCore.ContentMode : Swift.Hashable {}
 extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}
