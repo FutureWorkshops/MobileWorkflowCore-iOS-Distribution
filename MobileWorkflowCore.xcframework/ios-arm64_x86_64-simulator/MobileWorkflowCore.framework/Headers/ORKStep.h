@@ -126,6 +126,11 @@ Unlike `identifier`, this UUID should be unique across tasks, to enable better a
 @property (nonatomic, copy, nullable) NSString *uuid;
 
 /**
+ A Boolean value indicatring whether the task should allow the user to 'go back' to this step.
+ */
+@property (nonatomic, assign) BOOL disableBackOnNextStep;
+
+/**
  A Boolean value indicating whether a task can be restored to the step
  during state restoration. (read-only)
  

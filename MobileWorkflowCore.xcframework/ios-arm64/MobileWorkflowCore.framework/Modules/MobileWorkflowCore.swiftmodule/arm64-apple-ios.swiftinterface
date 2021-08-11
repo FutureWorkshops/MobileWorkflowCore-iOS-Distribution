@@ -1507,6 +1507,7 @@ public protocol StepViewControllerDelegate : AnyObject {
   func mwStepViewControllerDidFail(_ stepViewController: MobileWorkflowCore.StepViewController, withError error: Swift.Error?)
   func mwStepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   func mwStepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  func mwStepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
 public enum StepViewControllerTitleMode {
   case largeTitle
@@ -2138,6 +2139,7 @@ public protocol Step {
   var text: Swift.String? { get set }
   var uuid: Swift.String? { get set }
   var isOptional: Swift.Bool { get }
+  var disableBackOnNextStep: Swift.Bool { get set }
   func instantiateViewController() -> MobileWorkflowCore.StepViewController
 }
 open class MWStep : MobileWorkflowCore.Step {
@@ -2146,6 +2148,7 @@ open class MWStep : MobileWorkflowCore.Step {
   public var text: Swift.String?
   public var uuid: Swift.String?
   public var isOptional: Swift.Bool
+  public var disableBackOnNextStep: Swift.Bool
   public init(identifier: Swift.String, title: Swift.String? = nil, text: Swift.String? = nil, uuid: Swift.String? = nil)
   open func instantiateViewController() -> MobileWorkflowCore.StepViewController
   @objc deinit
@@ -2502,6 +2505,7 @@ public struct StepData : Swift.Codable {
   public let image: UIKit.UIImage?
   public let imageURL: Swift.String?
   public let content: [Swift.String : Any]
+  public let disableBackOnNextStep: Swift.Bool
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -2552,8 +2556,10 @@ extension SignatureResult {
   public var currentStep: MobileWorkflowCore.StepViewController {
     get
   }
+  public func previousStep(before stepViewController: MobileWorkflowCore.StepViewController) -> MobileWorkflowCore.StepViewController?
   public func hasStepBefore(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   public func hasStepAfter(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  public func canGoBack(from stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   public func stepWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
   public func stepWillDisappear(_ stepViewController: MobileWorkflowCore.StepViewController)
   @available(iOS 5.0, *)
@@ -2568,6 +2574,7 @@ extension MWWorkflowViewController : MobileWorkflowCore.StepViewControllerDelega
   public func mwStepViewControllerDidFail(_ stepViewController: MobileWorkflowCore.StepViewController, withError error: Swift.Error?)
   public func mwStepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   public func mwStepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  public func mwStepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
 extension URLRequest {
   public func curlString() -> Swift.String
