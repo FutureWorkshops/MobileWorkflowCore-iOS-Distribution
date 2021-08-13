@@ -110,6 +110,9 @@ extension FileManager : MobileWorkflowCore.StreamProvider {
   @objc dynamic open func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc dynamic open func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
 }
+extension FileManager {
+  public func storeTemporaryImage(_ image: UIKit.UIImage) -> Foundation.URL
+}
 public struct PDFViewInput {
   public let filePath: Swift.String
   public let appId: Swift.String
@@ -2813,6 +2816,12 @@ public class PDFImageRenderer {
   public init()
   public func renderImages(_ images: [UIKit.UIImage], fileNamePrefix: Swift.String) throws -> Foundation.URL?
   @objc deinit
+}
+extension UIImage {
+  public func resized(to size: CoreGraphics.CGSize, preservingAspectRatio: Swift.Bool = false, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
+  public func resized(withRatio ratio: CoreGraphics.CGFloat, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
+  public func resized(toNumberOfBytes numberOfBytes: Swift.Int, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage?
+  public func scaledAndCroppedToSquare(ofLength length: CoreGraphics.CGFloat) -> UIKit.UIImage
 }
 extension WKWebView {
   @objc(mw_configureAppBoundDomains) dynamic public func configureAppBoundDomains()
