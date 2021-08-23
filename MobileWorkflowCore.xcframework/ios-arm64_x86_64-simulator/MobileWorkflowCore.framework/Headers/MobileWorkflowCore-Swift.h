@@ -317,6 +317,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
+@class UITraitCollection;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
+@interface CustomButton : UIButton
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+@property (nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+- (void)layoutSubviews;
+- (void)tintColorDidChange;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 @class NSInputStream;
@@ -399,6 +413,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -409,7 +424,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MWContentStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UITraitCollection;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @interface MWInstructionStepViewController : MWContentStepViewController
@@ -464,12 +478,14 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
 @class UISceneSession;
 @class UISceneConnectionOptions;
 @class UIOpenURLContext;
+@class NSUserActivity;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property (nonatomic, strong) UIWindow * _Nullable window;
 - (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
+- (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -493,6 +509,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
@@ -638,9 +655,53 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @end
 
 
+@class UIColor;
+
+SWIFT_CLASS_NAMED("Theme")
+@interface MWTheme : NSObject
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTitleColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarShadowColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull marginBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull imagePlaceholderBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull secondaryTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull warningTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonTextColor;
+@property (nonatomic, readonly) CGFloat buttonBorderWidth;
+@property (nonatomic, readonly) CGFloat buttonCornerRadius;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTitleColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarShadowColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedCellBackgroundColor;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface MWTheme (SWIFT_EXTENSION(MobileWorkflowCore))
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull current;)
++ (MWTheme * _Nonnull)current SWIFT_WARN_UNUSED_RESULT;
++ (void)setCurrent:(MWTheme * _Nonnull)value;
+@end
 
 
 
+
+
+
+@interface UIColor (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly) BOOL isDarkBackgroundForText;
+- (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
@@ -989,6 +1050,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
 - (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
 @end
 
+@class UITraitCollection;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
+@interface CustomButton : UIButton
+@property (nonatomic, getter=isHighlighted) BOOL highlighted;
+@property (nonatomic, getter=isSelected) BOOL selected;
+@property (nonatomic, getter=isEnabled) BOOL enabled;
+- (void)layoutSubviews;
+- (void)tintColorDidChange;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 
 @class NSInputStream;
@@ -1071,6 +1146,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -1081,7 +1157,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MWContentStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
-@class UITraitCollection;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @interface MWInstructionStepViewController : MWContentStepViewController
@@ -1136,12 +1211,14 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
 @class UISceneSession;
 @class UISceneConnectionOptions;
 @class UIOpenURLContext;
+@class NSUserActivity;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property (nonatomic, strong) UIWindow * _Nullable window;
 - (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
+- (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1165,6 +1242,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
@@ -1310,9 +1388,53 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @end
 
 
+@class UIColor;
+
+SWIFT_CLASS_NAMED("Theme")
+@interface MWTheme : NSObject
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTitleColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarShadowColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull marginBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull imagePlaceholderBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull secondaryTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull warningTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonTextColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonTextColor;
+@property (nonatomic, readonly) CGFloat buttonBorderWidth;
+@property (nonatomic, readonly) CGFloat buttonCornerRadius;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTintColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTitleColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarShadowColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedBackgroundColor;
+@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedCellBackgroundColor;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface MWTheme (SWIFT_EXTENSION(MobileWorkflowCore))
+SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull current;)
++ (MWTheme * _Nonnull)current SWIFT_WARN_UNUSED_RESULT;
++ (void)setCurrent:(MWTheme * _Nonnull)value;
+@end
 
 
 
+
+
+
+@interface UIColor (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly) BOOL isDarkBackgroundForText;
+- (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
+@end
 
 
 
