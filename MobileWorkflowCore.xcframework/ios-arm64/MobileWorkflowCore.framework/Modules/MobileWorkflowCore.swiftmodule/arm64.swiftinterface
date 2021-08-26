@@ -1941,6 +1941,16 @@ public class StackStepItem : Swift.Codable {
     case image
     case video
     case button
+    case dateTime
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
+  public enum DateType : Swift.String, Swift.Codable {
+    case date
+    case time
     public init?(rawValue: Swift.String)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -1962,10 +1972,12 @@ public class StackStepItem : Swift.Codable {
   final public let confirmTitle: Swift.String?
   final public let confirmText: Swift.String?
   final public let sfSymbolName: Swift.String?
-  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil) throws
+  final public let dateType: MobileWorkflowCore.StackStepItem.DateType?
+  final public let dateTime: Foundation.Date?
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil) throws
+  required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
-  required public init(from decoder: Swift.Decoder) throws
 }
 @available(*, deprecated, renamed: "StackStepItemButtonStyle")
 public typealias DisplayStepItemButtonStyle = MobileWorkflowCore.StackStepItemButtonStyle
@@ -2604,6 +2616,7 @@ extension SignatureResult {
   @objc override dynamic open var childForStatusBarStyle: UIKit.UIViewController? {
     @objc get
   }
+  @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   public var currentStep: MobileWorkflowCore.StepViewController {
     get
   }
@@ -2991,6 +3004,9 @@ extension CoreLocation.CLLocation.CodingKeys : Swift.RawRepresentable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Equatable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Hashable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.RawRepresentable {}
+extension MobileWorkflowCore.StackStepItem.DateType : Swift.Equatable {}
+extension MobileWorkflowCore.StackStepItem.DateType : Swift.Hashable {}
+extension MobileWorkflowCore.StackStepItem.DateType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ContentMode : Swift.Equatable {}
 extension MobileWorkflowCore.ContentMode : Swift.Hashable {}
 extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}

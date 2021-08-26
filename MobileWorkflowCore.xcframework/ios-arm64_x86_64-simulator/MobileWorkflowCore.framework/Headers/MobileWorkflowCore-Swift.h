@@ -510,6 +510,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
@@ -1243,6 +1244,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
