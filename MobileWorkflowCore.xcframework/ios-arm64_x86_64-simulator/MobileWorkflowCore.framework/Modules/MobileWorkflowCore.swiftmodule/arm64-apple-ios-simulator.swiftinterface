@@ -214,6 +214,9 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
+extension Error {
+  public func alertComponents() -> (title: Swift.String, message: Swift.String)
+}
 extension UIViewController {
   public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
   public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (Swift.Bool) -> Swift.Void)
@@ -271,7 +274,7 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
   @objc public var window: UIKit.UIWindow?
   public var urlSchemeManagers: [MobileWorkflowCore.URLSchemeManager]
   public var dependencies: MobileWorkflowCore.AppConfigurationDependencies
-  public var rootViewController: UIKit.UIViewController!
+  public var rootCoordinator: MobileWorkflowCore.RootCoordinator!
   public var bundleJSONPath: Swift.String?
   open var licensePath: Swift.String? {
     get
@@ -557,6 +560,21 @@ extension ORKStepViewController : MobileWorkflowCore.StepViewController {
   }
   @objc dynamic public func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
 }
+@objc @_inheritsConvenienceInitializers public class PanZoomImageScrollView : UIKit.UIScrollView {
+  public var image: UIKit.UIImage? {
+    get
+    set
+  }
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  convenience public init(image: UIKit.UIImage?)
+  public func configureForImageSize(_ imageSize: CoreGraphics.CGSize)
+  @objc deinit
+}
+extension PanZoomImageScrollView : UIKit.UIScrollViewDelegate {
+  @objc dynamic public func viewForZooming(in scrollView: UIKit.UIScrollView) -> UIKit.UIView?
+  @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+}
 public class DictionaryResult : MobileWorkflowCore.StepResult {
   public var identifier: Swift.String
   final public let elements: [Swift.String : Any]
@@ -706,6 +724,7 @@ open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewControlle
   public init(tableStep: T)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic open func viewDidLoad()
+  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
   @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
   @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
   @objc open func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
@@ -1968,13 +1987,15 @@ public class StackStepItem : Swift.Codable {
   final public let modalWorkflow: Swift.String?
   final public let buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?
   final public let contentMode: MobileWorkflowCore.ContentMode?
+  final public let fullScreenImageOnTap: Swift.Bool
+  final public let fullScreenImageURL: Swift.String?
   final public let systemURL: Swift.String?
   final public let confirmTitle: Swift.String?
   final public let confirmText: Swift.String?
   final public let sfSymbolName: Swift.String?
   final public let dateType: MobileWorkflowCore.StackStepItem.DateType?
   final public let dateTime: Foundation.Date?
-  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil) throws
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil) throws
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
@@ -1998,6 +2019,17 @@ extension UITextField {
   }
   public func setInitialSelectedTextRange()
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
+}
+@objc @_hasMissingDesignatedInitializers public class FullScreenImageViewController : UIKit.UINavigationController {
+  public init(imageUrl: Swift.String, session: MobileWorkflowCore.Session, imageLoadingService: MobileWorkflowCore.ImageLoadingService, theme: MobileWorkflowCore.Theme)
+  @objc override dynamic public var childForStatusBarStyle: UIKit.UIViewController? {
+    @objc get
+  }
+  @available(iOS 5.0, *)
+  @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
+  @objc override dynamic public init(rootViewController: UIKit.UIViewController)
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc deinit
 }
 public struct BinaryResource : Swift.Codable {
   public let identifier: Swift.String
@@ -2075,22 +2107,6 @@ extension EventServiceImplementation {
 extension EventServiceImplementation {
   public func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   public func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
-}
-extension UIViewController {
-  public func load(context: MobileWorkflowCore.AppConfigurationContext) -> Swift.Bool
-}
-@objc @_hasMissingDesignatedInitializers public class RootViewController : UIKit.UIViewController {
-  public static func build(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard) -> UIKit.UIViewController
-  @objc override dynamic public func viewDidLoad()
-  public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc deinit
-}
-extension RootViewController : MobileWorkflowCore.WorkflowViewControllerDelegate {
-  public func workflowViewControllerCanBeDismissed(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
-  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
-  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
-  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
 }
 public protocol TableStep : AnyObject, MobileWorkflowCore.Step {
   associatedtype Item
@@ -2601,6 +2617,7 @@ extension SignatureResult {
   @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil, theme: MobileWorkflowCore.Theme = .current)
+  public func configureForError(_ error: Swift.Error, theme: MobileWorkflowCore.Theme = .current, okAction: (() -> Swift.Void)?)
   @objc deinit
 }
 @objc open class MWWorkflowViewController : UIKit.UINavigationController, MobileWorkflowCore.WorkflowViewController {
@@ -2675,6 +2692,10 @@ public struct ButtonConfig {
   @objc deinit
 }
 extension UIColor {
+  convenience public init?(hex: Swift.String)
+  convenience public init(light: UIKit.UIColor, dark: UIKit.UIColor)
+}
+extension UIColor {
   @objc dynamic public var isDarkBackgroundForText: Swift.Bool {
     @objc get
   }
@@ -2705,7 +2726,7 @@ extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
 public struct URLModalWorkflowInfoConverter : MobileWorkflowCore.WorkflowInfoConvertible {
-  public init(url: Foundation.URL)
+  public init(url: Foundation.URL, useLegacyImplementation: Swift.Bool = false)
   public func convert() -> MobileWorkflowCore.WorkflowInfo?
 }
 extension AppConfigurationContext {
@@ -2738,6 +2759,17 @@ public enum CredentialError : Swift.Error {
   public var hashValue: Swift.Int {
     get
   }
+}
+@_hasMissingDesignatedInitializers public class RootCoordinator {
+  public func start(in window: UIKit.UIWindow)
+  public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext, animated: Swift.Bool)
+  @objc deinit
+}
+extension RootCoordinator : MobileWorkflowCore.WorkflowViewControllerDelegate {
+  public func workflowViewControllerCanBeDismissed(_ workflowViewController: MobileWorkflowCore.WorkflowViewController) -> Swift.Bool
+  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
+  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
+  public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
 }
 @available(*, deprecated, renamed: "MWSubtitleTableViewCell")
 public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubtitleTableViewCell
@@ -2977,6 +3009,13 @@ public class Reachability {
 }
 extension ReachabilityStatus {
   public init(reachabilityFlags flags: SystemConfiguration.SCNetworkReachabilityFlags)
+}
+@objc @_inheritsConvenienceInitializers public class StateViewController : UIKit.UIViewController {
+  public var stateView: MobileWorkflowCore.StateView
+  @objc override dynamic public func loadView()
+  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 extension MobileWorkflowCore.LocationServiceError : Swift.Equatable {}
 extension MobileWorkflowCore.LocationServiceError : Swift.Hashable {}

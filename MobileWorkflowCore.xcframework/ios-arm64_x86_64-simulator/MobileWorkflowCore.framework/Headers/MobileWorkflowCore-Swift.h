@@ -386,6 +386,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
+@interface FullScreenImageViewController : UINavigationController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -550,6 +560,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
+@interface PanZoomImageScrollView : UIScrollView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface PanZoomImageScrollView (SWIFT_EXTENSION(MobileWorkflowCore)) <UIScrollViewDelegate>
+- (UIView * _Nullable)viewForZoomingInScrollView:(UIScrollView * _Nonnull)scrollView SWIFT_WARN_UNUSED_RESULT;
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
 @interface QRScannerViewController : BarcodeScannerViewController
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -585,15 +608,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
 @end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore18RootViewController")
-@interface RootViewController : UIViewController
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
 
 
 SWIFT_CLASS_NAMED("Session")
@@ -639,6 +653,14 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore19StateViewController")
+@interface StateViewController : UIViewController
+- (void)loadView;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -703,7 +725,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 @property (nonatomic, readonly) BOOL isDarkBackgroundForText;
 - (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 
 
@@ -1120,6 +1141,16 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
+@interface FullScreenImageViewController : UINavigationController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @interface LocationService : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -1284,6 +1315,19 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
+@interface PanZoomImageScrollView : UIScrollView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface PanZoomImageScrollView (SWIFT_EXTENSION(MobileWorkflowCore)) <UIScrollViewDelegate>
+- (UIView * _Nullable)viewForZoomingInScrollView:(UIScrollView * _Nonnull)scrollView SWIFT_WARN_UNUSED_RESULT;
+- (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
 @interface QRScannerViewController : BarcodeScannerViewController
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
@@ -1319,15 +1363,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
 @end
-
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore18RootViewController")
-@interface RootViewController : UIViewController
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)viewDidLoad;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
 
 
 SWIFT_CLASS_NAMED("Session")
@@ -1373,6 +1408,14 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore19StateViewController")
+@interface StateViewController : UIViewController
+- (void)loadView;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 
@@ -1437,7 +1480,6 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 @property (nonatomic, readonly) BOOL isDarkBackgroundForText;
 - (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 
 
