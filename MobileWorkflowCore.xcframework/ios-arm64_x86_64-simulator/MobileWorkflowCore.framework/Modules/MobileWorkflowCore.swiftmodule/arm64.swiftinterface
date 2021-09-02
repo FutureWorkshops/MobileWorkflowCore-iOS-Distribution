@@ -2760,7 +2760,8 @@ public enum CredentialError : Swift.Error {
     get
   }
 }
-@_hasMissingDesignatedInitializers public class RootCoordinator {
+public class RootCoordinator {
+  public init(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard)
   public func start(in window: UIKit.UIWindow)
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext, animated: Swift.Bool)
   @objc deinit
