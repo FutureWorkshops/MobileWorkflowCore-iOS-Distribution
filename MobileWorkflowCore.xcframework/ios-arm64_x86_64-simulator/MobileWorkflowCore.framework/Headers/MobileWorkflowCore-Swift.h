@@ -748,6 +748,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 - (void)mw_configureAppBoundDomains;
 @end
 
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
+@interface WidthResizingView : UIView
+@property (nonatomic) CGRect frame;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
 #endif
@@ -1501,6 +1509,14 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 
 @interface WKWebView (SWIFT_EXTENSION(MobileWorkflowCore))
 - (void)mw_configureAppBoundDomains;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
+@interface WidthResizingView : UIView
+@property (nonatomic) CGRect frame;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
 #if __has_attribute(external_source_symbol)

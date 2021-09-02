@@ -3011,6 +3011,20 @@ public class Reachability {
 extension ReachabilityStatus {
   public init(reachabilityFlags flags: SystemConfiguration.SCNetworkReachabilityFlags)
 }
+@objc @_inheritsConvenienceInitializers public class WidthResizingView : UIKit.UIView {
+  public var shouldUpdateFrameWhenSettingWidth: Swift.Bool
+  @objc override dynamic public var frame: CoreGraphics.CGRect {
+    @objc get
+    @objc set
+  }
+  public var width: CoreGraphics.CGFloat {
+    get
+    set
+  }
+  @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers public class StateViewController : UIKit.UIViewController {
   public var stateView: MobileWorkflowCore.StateView
   @objc override dynamic public func loadView()
