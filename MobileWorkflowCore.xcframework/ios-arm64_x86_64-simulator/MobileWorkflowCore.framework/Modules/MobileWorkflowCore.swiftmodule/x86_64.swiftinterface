@@ -95,8 +95,19 @@ public struct AppConfigurationDependencies {
   public static func `default`(withAppId appId: Swift.String = Bundle.main.bundleIdentifier ?? "", plugins: [MobileWorkflowCore.Plugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?, queueControllerProvider: MobileWorkflowCore.QueueControllerProvider?) -> MobileWorkflowCore.AppConfigurationDependencies
 }
 public protocol AsyncTaskInterceptor {
-  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, completion: (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
+  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService, completion: @escaping (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
   func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
+  func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
+  func interceptErrorWithRetryTask<T>(task: MobileWorkflowCore.URLAsyncTask<T>, for error: Swift.Error, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>?
+}
+extension AsyncTaskInterceptor {
+  public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService, completion: (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
+  public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
+  public func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
+  public func interceptErrorWithRetryTask<T>(task: MobileWorkflowCore.URLAsyncTask<T>, for error: Swift.Error, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>?
+}
+public protocol InterceptorConfigurator {
+  func configureInterceptors(interceptors: [MobileWorkflowCore.AsyncTaskInterceptor])
 }
 @objc public protocol StreamProvider {
   @objc func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
@@ -230,7 +241,7 @@ extension UIViewController {
   public func presentActivitySheet(with activityItems: [Any], sourceRect: CoreGraphics.CGRect)
 }
 extension UIViewController {
-  public func showFilterSheet(options: [Swift.String], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
+  public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
 public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
   public var imageURL: Swift.String?
@@ -688,6 +699,9 @@ public protocol SecurityStoreProtocol {
   func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+}
+extension Error {
+  public func extractCode() -> Swift.Int?
 }
 public protocol ResponseError : Foundation.LocalizedError, Swift.Decodable {
   var errorCode: Swift.Int? { get }
@@ -1650,10 +1664,15 @@ public enum Currency : Swift.String {
   @objc deinit
 }
 public protocol CredentialStoreProtocol {
-  func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  func updateCredential(_ credential: MobileWorkflowCore.Credential) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func retrieveCredential(_ credentialType: MobileWorkflowCore.CredentialType, isRequired: Swift.Bool) -> Swift.Result<MobileWorkflowCore.Credential?, MobileWorkflowCore.CredentialError>
   func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  func updateCredentials(_ credentials: [MobileWorkflowCore.Credential]) -> Swift.Result<Swift.Void, Swift.Error>
+}
+extension CredentialStoreProtocol {
+  public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  public func updateCredentials(_ credentials: [MobileWorkflowCore.Credential], completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
 }
 extension NotificationCenter {
   public func buildKeyboardPublisher(heightMapping: @escaping (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat) -> Combine.AnyPublisher<CoreGraphics.CGFloat, Swift.Never>
@@ -1856,12 +1875,15 @@ extension CLLocation : Swift.Encodable {
 }
 final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol {
   public init(securityStore: MobileWorkflowCore.SecurityStoreProtocol = SecurityStore())
-  final public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
-  final public func saveCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
+  final public func updateCredential(_ credential: MobileWorkflowCore.Credential) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
+  final public func saveCredential(_ credential: MobileWorkflowCore.Credential) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   final public func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   final public func retrieveCredential(_ credentialType: MobileWorkflowCore.CredentialType, isRequired: Swift.Bool) -> Swift.Result<MobileWorkflowCore.Credential?, MobileWorkflowCore.CredentialError>
   final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
+}
+extension CredentialStore {
+  final public func updateCredentials(_ credentials: [MobileWorkflowCore.Credential]) -> Swift.Result<Swift.Void, Swift.Error>
 }
 @available(*, deprecated, renamed: "NetworkStackStepItemTask")
 public typealias NetworkDisplayStepItemTask = MobileWorkflowCore.NetworkStackStepItemTask
@@ -1874,6 +1896,7 @@ public struct NetworkStackStepItemTask : MobileWorkflowCore.CredentializedAsyncT
 public struct ValueFormatter {
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
+  public func valueConsistsOfSingleIdentifier(_ valueString: Swift.String) -> Swift.Bool
   public func parseIdentifier(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
@@ -2223,7 +2246,8 @@ public struct URLTaskInput {
   public let method: MobileWorkflowCore.HTTPMethod
   public let body: Foundation.Data?
   public let headers: [Swift.String : Swift.String]
-  public init(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, headers: [Swift.String : Swift.String] = [:])
+  public let shouldInterceptResponse: Swift.Bool
+  public init(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptResponse: Swift.Bool = false)
   public func setting(url: Foundation.URL) -> MobileWorkflowCore.URLTaskInput
   public func replacing(body: Foundation.Data?) -> MobileWorkflowCore.URLTaskInput
   public func adding(headers: [Swift.String : Swift.String]) -> MobileWorkflowCore.URLTaskInput
@@ -2258,10 +2282,10 @@ extension JSONDecoder {
 extension URLAsyncTask {
   public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = JSONEncoder(), decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension URLAsyncTask where T == Foundation.Data {
-  public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+  public static func build(urlString: Swift.String, requestPropertyIdentifiers: [Swift.String], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, shouldInterceptResponse: Swift.Bool, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public protocol NavigationTriggerResult {
   var navigationDestinationKey: Swift.String? { get }
@@ -2272,6 +2296,8 @@ extension Decodable {
   public static func parse(data: Foundation.Data, decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> Self
   public static func decodeParse(decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.Parse<Self>
   public static func parsePublisher(_ parse: @escaping MobileWorkflowCore.Parse<Self> = Self.decodeParse()) -> MobileWorkflowCore.ParsePublisher<Self>
+}
+public struct SortFieldItem {
 }
 public enum PDFAppOption : Swift.Equatable {
   case inApp
@@ -2969,11 +2995,11 @@ public struct AuthRedirectHandler {
   public init(_ handler: @escaping (MobileWorkflowCore.AuthFlowResumer) -> Swift.Void)
 }
 public protocol AuthProvider {
-  func authenticate(completion: @escaping (Swift.Result<MobileWorkflowCore.Credential, Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
+  func authenticate(completion: @escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
 }
 public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
-  public init(_ start: @escaping (@escaping (Swift.Result<MobileWorkflowCore.Credential, Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer)
-  public func authenticate(completion: @escaping (Swift.Result<MobileWorkflowCore.Credential, Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
+  public init(_ start: @escaping (@escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer)
+  public func authenticate(completion: @escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
   @objc deinit
 }
 public protocol AuthFlowResumer : AnyObject {
