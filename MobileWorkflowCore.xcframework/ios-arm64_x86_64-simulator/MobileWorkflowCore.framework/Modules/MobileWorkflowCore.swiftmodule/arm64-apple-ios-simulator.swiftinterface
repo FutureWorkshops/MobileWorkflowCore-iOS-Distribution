@@ -277,6 +277,7 @@ public protocol RemoteContentStep {
   func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
 extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
+  public func perform<T>(url: Swift.String, method: MobileWorkflowCore.HTTPMethod) -> Combine.AnyPublisher<T, Swift.Error> where T : Swift.Decodable
   public func perform<T>(url: Swift.String, method: MobileWorkflowCore.HTTPMethod, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
 }
 @available(*, deprecated, renamed: "MWSceneDelegate")
@@ -2334,10 +2335,22 @@ public protocol RemoteContentStepViewController : UIKit.UIViewController, Mobile
   func hideLoading()
   func update(content: Self.StepType.ResponseType)
 }
+public protocol LoadState : Swift.Equatable {
+  init()
+}
+public protocol HasLoadState : AnyObject {
+  associatedtype LoadStateType : MobileWorkflowCore.LoadState
+  var loadState: Self.LoadStateType? { get set }
+}
+extension UUID : MobileWorkflowCore.LoadState {
+}
 extension RemoteContentStepViewController {
   public var showBadURLError: Swift.Bool {
     get
   }
+}
+extension RemoteContentStepViewController where Self : MobileWorkflowCore.HasLoadState {
+  public func loadContent()
 }
 extension RemoteContentStepViewController {
   public func loadContent()
@@ -2410,12 +2423,19 @@ extension SelectionResult : MobileWorkflowCore.ValueProvider {
 }
 public protocol TaskExecutor {
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
+}
+extension TaskExecutor {
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
 }
 public protocol AsyncTaskService : MobileWorkflowCore.TaskExecutor {
   @discardableResult
   func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   func configure(stepServices: MobileWorkflowCore.StepServices?)
+}
+extension AsyncTaskService {
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
 }
 extension AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
