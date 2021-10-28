@@ -473,6 +473,9 @@ extension FileManager {
   open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
     get
   }
+  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
   public var outputDirectory: Foundation.URL?
   public var cancelButtonItem: UIKit.UIBarButtonItem? {
     get
@@ -655,6 +658,12 @@ public protocol AnalyticsEvent {
   var parameters: [Swift.String : Any]? { get }
 }
 public struct Analytics {
+}
+@available(*, deprecated, renamed: "MWVideoTableViewCell")
+public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTableViewCell
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWVideoTableViewCell : MobileWorkflowCore.MWImageTableViewCell {
+  override public func configure()
+  @objc deinit
 }
 @objc public class FileResult : MobileWorkflowCore.ORKResult {
   final public let fileInformation: MobileWorkflowCore.FileInformation
@@ -1970,15 +1979,12 @@ public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTa
     get
     set
   }
+  public var contentViewHeightConstraint: UIKit.NSLayoutConstraint?
+  @objc override dynamic public func prepareForReuse()
+  public func setHeightConstraint()
   public func configureTheme(_ theme: MobileWorkflowCore.Theme)
   public func configure()
   public func setContentMode(_ contentMode: UIKit.UIView.ContentMode)
-  @objc deinit
-}
-@available(*, deprecated, renamed: "MWVideoTableViewCell")
-public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTableViewCell
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWVideoTableViewCell : MobileWorkflowCore.MWImageTableViewCell {
-  override public func configure()
   @objc deinit
 }
 @available(*, deprecated, renamed: "StackStepItem")
@@ -1988,6 +1994,7 @@ public class StackStepItem : Swift.Codable {
     case text
     case image
     case video
+    case audio
     case button
     case dateTime
     public init?(rawValue: Swift.String)
@@ -2050,6 +2057,9 @@ extension UITextField {
   public func updateSelectedTextRange(lastOffsetFromEnd: Swift.Int)
 }
 @objc @_hasMissingDesignatedInitializers public class FullScreenImageViewController : UIKit.UINavigationController {
+  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
   public init(imageUrl: Swift.String, session: MobileWorkflowCore.Session, imageLoadingService: MobileWorkflowCore.ImageLoadingService, theme: MobileWorkflowCore.Theme)
   @objc override dynamic public var childForStatusBarStyle: UIKit.UIViewController? {
     @objc get
@@ -2677,6 +2687,12 @@ extension SignatureResult {
   public var isDiscardable: Swift.Bool
   public var outputDirectory: Foundation.URL?
   final public let analytics: MobileWorkflowCore.Analytics?
+  @objc override dynamic open var shouldAutorotate: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @objc get
+  }
   public init(workflow: MobileWorkflowCore.Workflow, theme: MobileWorkflowCore.Theme = .current, analytics: MobileWorkflowCore.Analytics? = nil)
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc override dynamic public func viewDidLoad()
@@ -2707,6 +2723,10 @@ extension MWWorkflowViewController : MobileWorkflowCore.StepViewControllerDelega
   public func mwStepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   public func mwStepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   public func mwStepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWAudioTableViewCell : MobileWorkflowCore.MWVideoTableViewCell {
+  override public func setHeightConstraint()
+  @objc deinit
 }
 extension URLRequest {
   public func curlString() -> Swift.String

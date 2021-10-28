@@ -386,6 +386,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureC
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
 @interface FullScreenImageViewController : UINavigationController
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)aDecoder SWIFT_UNAVAILABLE;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
@@ -409,6 +410,24 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15LocationService")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
+@interface MWImageTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)prepareForReuse;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWVideoTableViewCell")
+@interface MWVideoTableViewCell : MWImageTableViewCell
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore20MWAudioTableViewCell")
+@interface MWAudioTableViewCell : MWVideoTableViewCell
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore21MWButtonTableViewCell")
 @interface MWButtonTableViewCell : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
@@ -418,6 +437,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore21MWButtonTableViewCell")
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 @interface MWStepViewController : UIViewController
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
@@ -464,12 +484,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
-@interface MWImageTableViewCell : UITableViewCell
-- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-@end
-
 
 
 
@@ -507,13 +521,11 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore20MWVideoTableViewCell")
-@interface MWVideoTableViewCell : MWImageTableViewCell
-@end
-
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 @interface MWWorkflowViewController : UINavigationController
+@property (nonatomic, readonly) BOOL shouldAutorotate;
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
