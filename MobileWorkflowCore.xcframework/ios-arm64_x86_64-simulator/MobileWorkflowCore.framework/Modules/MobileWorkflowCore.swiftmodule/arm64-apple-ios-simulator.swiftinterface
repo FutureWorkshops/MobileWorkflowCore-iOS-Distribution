@@ -1732,6 +1732,9 @@ extension String {
   }
   public func fw_camelCaseToWords() -> Swift.String
 }
+extension String {
+  public func regexSanitized() -> Swift.String
+}
 public protocol CurrencyFormatting {
   var maxDigitsCount: Swift.Int { get }
   var decimalDigits: Swift.Int { get set }
