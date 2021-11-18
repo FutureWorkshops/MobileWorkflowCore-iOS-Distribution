@@ -489,6 +489,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
 
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore27MWLoadingStepViewController")
+@interface MWLoadingStepViewController : MWStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
 @interface MWPDFStepViewController : MWContentStepViewController
 - (void)viewDidLoad;
@@ -1262,6 +1269,13 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore25MWEmailStepViewController")
 
 
 
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore27MWLoadingStepViewController")
+@interface MWLoadingStepViewController : MWStepViewController
+- (void)viewDidLoad;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")

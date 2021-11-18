@@ -1692,6 +1692,12 @@ extension CredentialStoreProtocol {
 extension NotificationCenter {
   public func buildKeyboardPublisher(heightMapping: @escaping (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat) -> Combine.AnyPublisher<CoreGraphics.CGFloat, Swift.Never>
 }
+public class ProgressIndicator {
+  public init()
+  public func showActivityIndicatory(on view: UIKit.UIView)
+  public func hideActivityIndicator()
+  @objc deinit
+}
 public protocol NibLoadable : AnyObject {
   static var nibName: Swift.String { get }
   static var nib: UIKit.UINib { get }
@@ -1954,6 +1960,7 @@ extension UITableView {
 public protocol ImageLoadingService {
   func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
+  func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
 }
 extension ImageLoadingService {
   public func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
@@ -2034,7 +2041,9 @@ public class StackStepItem : Swift.Codable {
   final public let sfSymbolName: Swift.String?
   final public let dateType: MobileWorkflowCore.StackStepItem.DateType?
   final public let dateTime: Foundation.Date?
-  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil) throws
+  final public let playVideoPictureInPicture: Swift.Bool
+  final public let playAudioInBackground: Swift.Bool
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil, playVideoPictureInPicture: Swift.Bool = false, playAudioInBackground: Swift.Bool = false) throws
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
@@ -2384,6 +2393,22 @@ public class MWWorkflow : MobileWorkflowCore.Workflow {
 }
 extension UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
+}
+@objc @_inheritsConvenienceInitializers open class MWLoadingStepViewController : MobileWorkflowCore.MWStepViewController {
+  override open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    get
+  }
+  @objc override dynamic open func viewDidLoad()
+  public var loadingError: Swift.Error?
+  public var isLoading: Swift.Bool {
+    get
+    set
+  }
+  public func showLoading()
+  public func hideLoading()
+  override public init(step: MobileWorkflowCore.Step)
+  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @objc deinit
 }
 public protocol CustomisableErrorTypes {
   func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
