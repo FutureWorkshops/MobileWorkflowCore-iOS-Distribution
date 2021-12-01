@@ -552,6 +552,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 
 
 
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @interface NavigationFooterView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;

@@ -301,6 +301,11 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
 }
+extension Dictionary : MobileWorkflowCore.JSONRepresentable where Key == Swift.String {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
 extension Date : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
@@ -2939,6 +2944,15 @@ extension String : MobileWorkflowCore.ValueProvider {
 extension Dictionary : MobileWorkflowCore.SessionProvider {
 }
 extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.String {
+  public var content: [Swift.AnyHashable : Swift.Codable] {
+    get
+  }
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+}
+extension NSDictionary : MobileWorkflowCore.SessionProvider {
+}
+extension NSDictionary : MobileWorkflowCore.ValueProvider {
   public var content: [Swift.AnyHashable : Swift.Codable] {
     get
   }
