@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		rXhHwfAB9d+K9pkX4RIpVjnLUzo=
+		UXcTcB/x9RrmpyglWM6zuUGXvNk=
 		</data>
 		<key>Headers/MWFileStreamManager.h</key>
 		<data>
@@ -414,11 +414,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		M90jKeJFZrtRGV4IriThvt6SCZQ=
+		iTNLDlhKlae3f1FnHyH45bq8Jk4=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		ehAtiQTUotbGmTcM4KBT9XK/Hx8=
+		N2B/lqC3sJVelFDB188Lg4hJ/xc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -426,11 +426,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		M90jKeJFZrtRGV4IriThvt6SCZQ=
+		iTNLDlhKlae3f1FnHyH45bq8Jk4=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		ehAtiQTUotbGmTcM4KBT9XK/Hx8=
+		N2B/lqC3sJVelFDB188Lg4hJ/xc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -438,11 +438,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		RnOZM16uSVo+PxH3FNjuGe1aUtE=
+		bY6AwMfWtDZ4TafLO0BMOSs2Cck=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Gclcrp77AVK1DHzASfxaFNBVH44=
+		LY4CljHVqhrL65So6iDrvwdDfCY=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -450,11 +450,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		RnOZM16uSVo+PxH3FNjuGe1aUtE=
+		bY6AwMfWtDZ4TafLO0BMOSs2Cck=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		Gclcrp77AVK1DHzASfxaFNBVH44=
+		LY4CljHVqhrL65So6iDrvwdDfCY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -525,7 +525,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PLcEJu2VyfGNXcCAnOKcBiVGMtcR37uN5MOddbtfheY=
+			cFEv74G63UN1p07Tmn6721jSd3OzOVP5vhdQdRoTbdk=
 			</data>
 		</dict>
 		<key>Headers/MWFileStreamManager.h</key>
@@ -1232,14 +1232,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VEWdA0yfTx5b8fFFM1sETlLFAC27lk6EMhOTB/EqxGc=
+			l/6i116yTCsH2uphYNEGuFheJnXvqy6S6ir+H6dO60s=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			h8V1i7m1f2Q2mvPnQeP4rIg1zvjm196REUQUzhVZKdI=
+			a//Mw8RB+DKmNh89zLIwypOCd8uUNzt7R0rgEFokArk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -1253,14 +1253,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			VEWdA0yfTx5b8fFFM1sETlLFAC27lk6EMhOTB/EqxGc=
+			l/6i116yTCsH2uphYNEGuFheJnXvqy6S6ir+H6dO60s=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			h8V1i7m1f2Q2mvPnQeP4rIg1zvjm196REUQUzhVZKdI=
+			a//Mw8RB+DKmNh89zLIwypOCd8uUNzt7R0rgEFokArk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -1274,14 +1274,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PScbungGv0ae0lzYU40tmMqpecuEmd78niq74TrugwE=
+			sHeB1ZV/XgbsoW1xquYXFpLqHJkPiI1XbN0bzd+Jbsk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a3vff58zTDc/5XCeHUFCxl2ITYGtSyCffjA3SOGsHu4=
+			KxsR1JlCCiorZJVNT69fii4K+G0A1xUnaGpabXRYSjI=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -1295,14 +1295,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			PScbungGv0ae0lzYU40tmMqpecuEmd78niq74TrugwE=
+			sHeB1ZV/XgbsoW1xquYXFpLqHJkPiI1XbN0bzd+Jbsk=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			a3vff58zTDc/5XCeHUFCxl2ITYGtSyCffjA3SOGsHu4=
+			KxsR1JlCCiorZJVNT69fii4K+G0A1xUnaGpabXRYSjI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

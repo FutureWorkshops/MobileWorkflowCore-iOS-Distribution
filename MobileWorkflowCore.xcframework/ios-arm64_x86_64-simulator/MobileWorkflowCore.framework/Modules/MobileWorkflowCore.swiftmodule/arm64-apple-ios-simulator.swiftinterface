@@ -2382,6 +2382,9 @@ extension RemoteContentStepViewController where Self : MobileWorkflowCore.HasLoa
 extension RemoteContentStepViewController {
   public func loadContent()
 }
+extension RemoteContentStepViewController {
+  public func handleError(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
+}
 public class MWWorkflow : MobileWorkflowCore.Workflow {
   final public let identifier: Swift.String
   final public let mwSteps: [MobileWorkflowCore.Step]
