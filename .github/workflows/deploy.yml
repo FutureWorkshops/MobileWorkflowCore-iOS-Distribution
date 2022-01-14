@@ -15,11 +15,12 @@ jobs:
       - name: Extract Tag
         id: tag
         run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
-      - name: Get Podspec file
+      - name: Set Podspec file
         id: podspec
+        env:
+          PODSPEC_FILE: MobileWorkflowCore.podspec
+          PODSPEC_NAME: MobileWorkflow
         run: |
-          PODSPEC_FILE="$(ls main | grep ".*\.podspec")"
-          PODSPEC_NAME="$(echo "${PODSPEC_FILE}" | cut -f 1 -d '.')"
           echo ::set-output name=file::${PODSPEC_FILE}
           echo ::set-output name=name::${PODSPEC_NAME}
       - name: Checkout repo

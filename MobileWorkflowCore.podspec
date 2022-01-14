@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name                  = 'MobileWorkflow'
+    s.name                  = 'MobileWorkflowCore'
     s.version               = '1.0.27'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
