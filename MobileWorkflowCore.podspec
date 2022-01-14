@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-    s.name                  = 'MobileWorkflow'
+    s.name                  = 'MobileWorkflowCore'
     s.version               = '1.0.27'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
     s.swift_version         = '5'
     s.ios.deployment_target = '13.0'
     s.default_subspecs      = 'Core'
+    s.module_name           = 'MobileWorkflowCore'
 
     s.subspec 'Core' do |cs|
         cs.vendored_frameworks   = 'MobileWorkflowCore.xcframework'
