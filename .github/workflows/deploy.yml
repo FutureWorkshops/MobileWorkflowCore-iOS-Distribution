@@ -15,43 +15,43 @@ jobs:
       - name: Extract Tag
         id: tag
         run: echo ::set-output name=name::${GITHUB_REF#refs/*/}
-      - name: Set Podspec file
-        id: podspec
-        env:
-          PODSPEC_FILE: MobileWorkflowCore.podspec
-          PODSPEC_NAME: MobileWorkflow
-        run: |
-          echo ::set-output name=file::${PODSPEC_FILE}
-          echo ::set-output name=name::${PODSPEC_NAME}
       - name: Checkout repo
         uses: actions/checkout@v2
         with:
           token: ${{ secrets.FW_MWPODSPEC_DEPLOY_PAT }}
           repository: FutureWorkshops/MWPodspecs
           path: repo
-      - name: Create Plugin Folder
+      - name: Update MobileWorkflow Folder
         env:
-          PODSPEC: ${{ steps.podspec.outputs.file }}
-          PLUGIN: ${{ steps.podspec.outputs.name }}
           TAG_VERSION: ${{ steps.tag.outputs.name }}
         run: |
-          if [ ! -d "./repo/${PLUGIN}" ]; then
-            mkdir "./repo/${PLUGIN}"
+          if [ ! -d "./repo/MobileWorkflow" ]; then
+            mkdir "./repo/MobileWorkflow"
           fi
-          if [ ! -d "./repo/${PLUGIN}/${TAG_VERSION}" ]; then
-            mkdir "./repo/${PLUGIN}/${TAG_VERSION}"
-            cp "./main/${PODSPEC}" "./repo/${PLUGIN}/${TAG_VERSION}/${PODSPEC}"
+          if [ ! -d "./repo/MobileWorkflow/${TAG_VERSION}" ]; then
+            mkdir "./repo/MobileWorkflow/${TAG_VERSION}"
+            cp "./main/MobileWorkflow.podspec" "./repo/MobileWorkflow/${TAG_VERSION}/MobileWorkflow.podspec"
+          fi
+      - name: Update MobileWorkflowCore Folder
+        env:
+          TAG_VERSION: ${{ steps.tag.outputs.name }}
+        run: |
+          if [ ! -d "./repo/MobileWorkflowCore" ]; then
+            mkdir "./repo/MobileWorkflowCore"
+          fi
+          if [ ! -d "./repo/MobileWorkflowCore/${TAG_VERSION}" ]; then
+            mkdir "./repo/MobileWorkflowCore/${TAG_VERSION}"
+            cp "./main/MobileWorkflowCore.podspec" "./repo/MobileWorkflowCore/${TAG_VERSION}/MobileWorkflowCore.podspec"
           fi
       - name: Commit new version
         env:
-          PLUGIN: ${{ steps.podspec.outputs.name }}
           TAG_VERSION: ${{ steps.tag.outputs.name }}
         run: |
           cd repo
           git config --local user.email "c-i@futureworkshops.com"
           git config --local user.name "Continuous Integration"
           git add .
-          git commit -m "${PLUGIN} [${TAG_VERSION}]"
+          git commit -m "Core [${TAG_VERSION}]"
           cd ..
       - name: Push new version
         run: |
