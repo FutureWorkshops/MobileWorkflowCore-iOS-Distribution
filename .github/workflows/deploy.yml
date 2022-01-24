@@ -32,17 +32,6 @@ jobs:
             mkdir "./repo/MobileWorkflow/${TAG_VERSION}"
             cp "./main/MobileWorkflow.podspec" "./repo/MobileWorkflow/${TAG_VERSION}/MobileWorkflow.podspec"
           fi
-      - name: Update MobileWorkflowCore Folder
-        env:
-          TAG_VERSION: ${{ steps.tag.outputs.name }}
-        run: |
-          if [ ! -d "./repo/MobileWorkflowCore" ]; then
-            mkdir "./repo/MobileWorkflowCore"
-          fi
-          if [ ! -d "./repo/MobileWorkflowCore/${TAG_VERSION}" ]; then
-            mkdir "./repo/MobileWorkflowCore/${TAG_VERSION}"
-            cp "./main/MobileWorkflowCore.podspec" "./repo/MobileWorkflowCore/${TAG_VERSION}/MobileWorkflowCore.podspec"
-          fi
       - name: Commit new version
         env:
           TAG_VERSION: ${{ steps.tag.outputs.name }}
@@ -51,7 +40,7 @@ jobs:
           git config --local user.email "c-i@futureworkshops.com"
           git config --local user.name "Continuous Integration"
           git add .
-          git commit -m "Core [${TAG_VERSION}]"
+          git commit -m "MobileWorkflow [${TAG_VERSION}]"
           cd ..
       - name: Push new version
         run: |
