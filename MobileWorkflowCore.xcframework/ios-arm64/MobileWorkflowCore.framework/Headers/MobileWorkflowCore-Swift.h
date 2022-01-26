@@ -415,6 +415,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)prepareForReuse;
+- (void)layoutSubviews;
 @end
 
 
@@ -528,6 +529,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @end
 
 
+@class UIEvent;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 @interface MWWorkflowViewController : UINavigationController
@@ -538,6 +540,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
 - (void)viewWillAppear:(BOOL)animated;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@property (nonatomic, readonly) BOOL canBecomeFirstResponder;
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
 - (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;

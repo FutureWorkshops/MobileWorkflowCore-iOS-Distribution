@@ -244,11 +244,21 @@ extension UIViewController {
   public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
 public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
+  public enum IconType : Swift.String, Swift.RawRepresentable {
+    case success
+    case failure
+    public init?(rawValue: Swift.String)
+    public typealias RawValue = Swift.String
+    public var rawValue: Swift.String {
+      get
+    }
+  }
   public var imageURL: Swift.String?
   public var image: UIKit.UIImage?
+  public var iconType: MobileWorkflowCore.MWCompletionStep.IconType
   final public let session: MobileWorkflowCore.Session
   final public let services: MobileWorkflowCore.StepServices
-  public init(identifier: Swift.String, text: Swift.String?, image: UIKit.UIImage?, imageURL: Swift.String?, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
+  public init(identifier: Swift.String, text: Swift.String?, image: UIKit.UIImage?, imageURL: Swift.String?, iconType: MobileWorkflowCore.MWCompletionStep.IconType, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
   override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, uuid: Swift.String? = super, theme: MobileWorkflowCore.Theme = super)
   @objc deinit
@@ -291,6 +301,7 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
   open var licensePath: Swift.String? {
     get
   }
+  open var canShakeToClearApp: Swift.Bool
   @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
@@ -1996,10 +2007,11 @@ public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTa
   }
   public var contentViewHeightConstraint: UIKit.NSLayoutConstraint?
   @objc override dynamic public func prepareForReuse()
+  @objc override dynamic public func layoutSubviews()
   public func setHeightConstraint()
   public func configureTheme(_ theme: MobileWorkflowCore.Theme)
   public func configure()
-  public func setContentMode(_ contentMode: UIKit.UIView.ContentMode)
+  public func configure(title: Swift.String?, contentMode: UIKit.UIView.ContentMode?, imageStyle: MobileWorkflowCore.ImageStyle?)
   @objc deinit
 }
 @available(*, deprecated, renamed: "StackStepItem")
@@ -2048,7 +2060,8 @@ public class StackStepItem : Swift.Codable {
   final public let dateTime: Foundation.Date?
   final public let playVideoPictureInPicture: Swift.Bool
   final public let playAudioInBackground: Swift.Bool
-  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil, playVideoPictureInPicture: Swift.Bool = false, playAudioInBackground: Swift.Bool = false) throws
+  final public let imageStyle: MobileWorkflowCore.ImageStyle?
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, modalWorkflow: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil, playVideoPictureInPicture: Swift.Bool = false, playAudioInBackground: Swift.Bool = false, imageStyle: MobileWorkflowCore.ImageStyle? = nil) throws
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
@@ -2059,6 +2072,15 @@ public typealias StackStepItemButtonStyle = MobileWorkflowCore.ButtonStyle
 public enum ContentMode : Swift.String, Swift.Codable {
   case scaleAspectFit
   case scaleAspectFill
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum ImageStyle : Swift.String, Swift.Codable {
+  case fullWidth
+  case profile
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -2737,6 +2759,10 @@ extension SignatureResult {
     @objc get
   }
   @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @objc override dynamic open var canBecomeFirstResponder: Swift.Bool {
+    @objc get
+  }
+  @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
   public var currentStep: MobileWorkflowCore.StepViewController {
     get
   }
@@ -2868,7 +2894,7 @@ public enum CredentialError : Swift.Error {
   }
 }
 public class RootCoordinator {
-  public init(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], userDefaults: Foundation.UserDefaults = .standard)
+  public init(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], canShakeToClearApp: Swift.Bool, userDefaults: Foundation.UserDefaults = .standard)
   public func start(in window: UIKit.UIWindow)
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext, animated: Swift.Bool)
   @objc deinit
@@ -2878,6 +2904,7 @@ extension RootCoordinator : MobileWorkflowCore.WorkflowViewControllerDelegate {
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
   public func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
+  public func workflowViewControllerDidRegisterShakeGesture(_ workflowViewController: MobileWorkflowCore.WorkflowViewController)
 }
 @available(*, deprecated, renamed: "MWSubtitleTableViewCell")
 public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubtitleTableViewCell
@@ -3003,6 +3030,7 @@ public protocol WorkflowViewControllerDelegate : AnyObject {
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, didFinishWith reason: MobileWorkflowCore.WorkflowFinishReason)
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillAppear stepViewController: MobileWorkflowCore.StepViewController)
   func workflowViewController(_ workflowViewController: MobileWorkflowCore.WorkflowViewController, stepViewControllerWillDisappear stepViewController: MobileWorkflowCore.StepViewController)
+  func workflowViewControllerDidRegisterShakeGesture(_ workflowViewController: MobileWorkflowCore.WorkflowViewController)
 }
 public protocol WorkflowViewController : UIKit.UIViewController {
   var workflowDelegate: MobileWorkflowCore.WorkflowViewControllerDelegate? { get set }
@@ -3014,6 +3042,9 @@ public protocol WorkflowViewController : UIKit.UIViewController {
   func hasStepAfter(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   func stepWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
   func stepWillDisappear(_ stepViewController: MobileWorkflowCore.StepViewController)
+}
+extension WorkflowViewControllerDelegate {
+  public func workflowViewControllerDidRegisterShakeGesture(_ workflowViewController: MobileWorkflowCore.WorkflowViewController)
 }
 public enum PDFImageRenderError : Foundation.LocalizedError {
   case pathNotFound
@@ -3148,6 +3179,8 @@ extension ReachabilityStatus {
   @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
+extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
 extension MobileWorkflowCore.LocationServiceError : Swift.Equatable {}
 extension MobileWorkflowCore.LocationServiceError : Swift.Hashable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Equatable {}
@@ -3180,6 +3213,9 @@ extension MobileWorkflowCore.StackStepItem.DateType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ContentMode : Swift.Equatable {}
 extension MobileWorkflowCore.ContentMode : Swift.Hashable {}
 extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}
+extension MobileWorkflowCore.ImageStyle : Swift.Equatable {}
+extension MobileWorkflowCore.ImageStyle : Swift.Hashable {}
+extension MobileWorkflowCore.ImageStyle : Swift.RawRepresentable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Equatable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
