@@ -6,7 +6,7 @@
 	<dict>
 		<key>Assets.car</key>
 		<data>
-		5tmVjTcTE04F7BMwPvJR3lfGDwY=
+		HmFfCPZxlBwFWgdsS3FCpackgEY=
 		</data>
 		<key>Headers/MWFileStreamManager.h</key>
 		<data>
@@ -418,7 +418,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		z7GVvKZulvDs29zMQvuq+MT56jQ=
+		QmzaY6sQoAl1z6pwhbAOqWenzP0=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
@@ -430,7 +430,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		z7GVvKZulvDs29zMQvuq+MT56jQ=
+		QmzaY6sQoAl1z6pwhbAOqWenzP0=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -442,7 +442,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		8g5jA1H0zj+TKbsv5q8DLIXRlFg=
+		V6BSEw03nHtuzlJkXmH1Z1a/hto=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -454,7 +454,7 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		8g5jA1H0zj+TKbsv5q8DLIXRlFg=
+		V6BSEw03nHtuzlJkXmH1Z1a/hto=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -525,7 +525,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4MlOJLa2QaYaWuJs4fYjprdrAal9Dl/WFIWLvjP/8lM=
+			GbvC4lPlIMfi89GQ30BPSKbrExeq1icyp0RB4L9m3lc=
 			</data>
 		</dict>
 		<key>Headers/MWFileStreamManager.h</key>
@@ -1239,7 +1239,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Mu6gzkinGXspsxdT9FLftu16SjXbAPuG1blmtAJnArY=
+			AhCjbWU1wpSiUYpmyCyWptatWabbHObs6Qzz4gQ3E4c=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
@@ -1260,7 +1260,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Mu6gzkinGXspsxdT9FLftu16SjXbAPuG1blmtAJnArY=
+			AhCjbWU1wpSiUYpmyCyWptatWabbHObs6Qzz4gQ3E4c=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -1281,7 +1281,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cK4QpqR9Ertze5M13QFF8/5FOPbqK4XoNbbtaT84bL4=
+			fmn0/5ZdjzR8fcSPsun8+IR1ai2pjj0Wvxbp8edmMO0=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
@@ -1302,7 +1302,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			cK4QpqR9Ertze5M13QFF8/5FOPbqK4XoNbbtaT84bL4=
+			fmn0/5ZdjzR8fcSPsun8+IR1ai2pjj0Wvxbp8edmMO0=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
