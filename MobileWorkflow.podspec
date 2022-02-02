@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = 'chore/update-welba-recorder'
+    s.version               = '1.0.29'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.homepage              = 'https://www.mobileworkflow.io'
     s.license               = { :type => 'Copyright', :file => 'LICENSE' }
     s.author                = { 'Future Workshops' => 'info@futureworkshops.com' }
-    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/chore/update-welba-recorder/MobileWorkflowCore.zip' }
+    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/1.0.29/MobileWorkflowCore.zip' }
     s.platform              = :ios
     s.swift_version         = '5'
     s.ios.deployment_target = '13.0'
