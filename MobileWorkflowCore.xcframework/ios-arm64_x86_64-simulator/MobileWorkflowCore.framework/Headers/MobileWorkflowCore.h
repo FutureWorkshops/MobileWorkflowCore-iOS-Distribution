@@ -15,6 +15,4 @@ FOUNDATION_EXPORT const unsigned char MobileWorkflowCoreVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <MobileWorkflowCore/PublicHeader.h>
 
-#import <MobileWorkflowCore/ResearchKit.h>
-#import <MobileWorkflowCore/ResearchKit_Private.h>
-#import <MobileWorkflowCore/ORKESerialization.h>
+#import <MobileWorkflowCore/MWFileStreamManager.h>

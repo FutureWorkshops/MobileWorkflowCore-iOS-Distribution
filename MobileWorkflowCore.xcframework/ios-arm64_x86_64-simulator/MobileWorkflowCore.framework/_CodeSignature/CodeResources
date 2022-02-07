@@ -4,489 +4,79 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Assets.car</key>
-		<data>
-		rXhHwfAB9d+K9pkX4RIpVjnLUzo=
-		</data>
 		<key>Headers/MWFileStreamManager.h</key>
 		<data>
 		9fYdp923+C30Ys4AI13CIiN6DrI=
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		+T9WXOX22v9P23sZqJ8U6C6NhC0=
+		hE0e7UC8A1jYi+e3LJnzTGJNpkM=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
-		366ZC0CAPcY3o7TNVn49ah78aVE=
-		</data>
-		<key>Headers/ORKAnswerFormat.h</key>
-		<data>
-		4oo6ugoy7ulKRhTQUApvHKiaDIQ=
-		</data>
-		<key>Headers/ORKAnswerFormat_Private.h</key>
-		<data>
-		ydz+U1qEdYLBQy+H1PMC63aB8E4=
-		</data>
-		<key>Headers/ORKBodyContainerView.h</key>
-		<data>
-		H6hr+M6QHOw+y5iuvLqCQEqDM8o=
-		</data>
-		<key>Headers/ORKBodyItem.h</key>
-		<data>
-		bRfIkzyq4X2u4YD7Vs1azrJ6AF8=
-		</data>
-		<key>Headers/ORKBodyLabel.h</key>
-		<data>
-		lEIuWQyz0tmv44UUunBP2B1TDGY=
-		</data>
-		<key>Headers/ORKBorderedButton.h</key>
-		<data>
-		8+9bIAdwdFgbk+6ysqLE4Px2Qcw=
-		</data>
-		<key>Headers/ORKCheckmarkView.h</key>
-		<data>
-		viV36WGTGZ99N8Pn3icNtEFi5Ao=
-		</data>
-		<key>Headers/ORKChoiceViewCell.h</key>
-		<data>
-		linSfVwKKfdzNuGNyPEOwd6hKJI=
-		</data>
-		<key>Headers/ORKChoiceViewCell_Internal.h</key>
-		<data>
-		p24pVdw+eNhREIJS1DyIcjPfy14=
-		</data>
-		<key>Headers/ORKCollectionResult.h</key>
-		<data>
-		0ifVOTB6utoCJkvWhAWzxB0RqjQ=
-		</data>
-		<key>Headers/ORKCollectionResult_Private.h</key>
-		<data>
-		ei6F49QjY0iXGpUWy4bnNF+NJDc=
-		</data>
-		<key>Headers/ORKCompletionStep.h</key>
-		<data>
-		PFLJgJOi1Xjh7JWrDNbZeOOTKEE=
-		</data>
-		<key>Headers/ORKCompletionStepViewController.h</key>
-		<data>
-		40e8FnC8rAi/nNQ9Xi1acUlJPuc=
-		</data>
-		<key>Headers/ORKContinueButton.h</key>
-		<data>
-		g2raUShlDgbU7/Dgkt+J5JCEKyk=
-		</data>
-		<key>Headers/ORKCustomStep.h</key>
-		<data>
-		f4jeS3y5Rt98lfxMRqfyIkHIEmM=
-		</data>
-		<key>Headers/ORKCustomStepView.h</key>
-		<data>
-		TEggGWvqi+hieqUEoW2lqgSHna8=
-		</data>
-		<key>Headers/ORKCustomStepView_Internal.h</key>
-		<data>
-		KMfXqNgf3NRqlijDRye6U/iMHJ8=
-		</data>
-		<key>Headers/ORKDefaultFont.h</key>
-		<data>
-		9533ZwwIPLrW1h0qap2+HEkqMJw=
-		</data>
-		<key>Headers/ORKDefines.h</key>
-		<data>
-		9tdlNLBZs7LK7hbuC8TxngOFZ18=
-		</data>
-		<key>Headers/ORKDirectionView.h</key>
-		<data>
-		NflM6ky9QY0VINFilkPYyXTPnk0=
-		</data>
-		<key>Headers/ORKESerialization.h</key>
-		<data>
-		VqM0CoPTPNWe26pWSmrjoV/iOZY=
-		</data>
-		<key>Headers/ORKErrors.h</key>
-		<data>
-		TRHslLw8/vkEneNTUKLoatDmBFA=
-		</data>
-		<key>Headers/ORKFootnoteLabel.h</key>
-		<data>
-		D9FjABr6tk9trl2M9KD+HRZQcXM=
-		</data>
-		<key>Headers/ORKFormStep.h</key>
-		<data>
-		RO6y58qps9ZqOaSZ+TBKp/iqVLI=
-		</data>
-		<key>Headers/ORKFormStepViewController.h</key>
-		<data>
-		Yn8m44nCjJ3qn+GLWUSdYZD3HQ8=
-		</data>
-		<key>Headers/ORKFormStepViewController_Private.h</key>
-		<data>
-		dzh8UgxQNBG1D0lRylEh2vuTWQQ=
-		</data>
-		<key>Headers/ORKFreehandDrawingView.h</key>
-		<data>
-		whJac/+JzT5TTdnj8E6JtOhbmrs=
-		</data>
-		<key>Headers/ORKHTMLPDFPageRenderer.h</key>
-		<data>
-		zvux87JRe3hSqZgXrw7GP44YRe8=
-		</data>
-		<key>Headers/ORKHeadlineLabel.h</key>
-		<data>
-		8WSkHR2KzTbigJX1dYLGDuQWnMw=
-		</data>
-		<key>Headers/ORKHelpers_Internal.h</key>
-		<data>
-		2k/al6R72UzwJf2j+T44PXHzDQ4=
-		</data>
-		<key>Headers/ORKHelpers_Private.h</key>
-		<data>
-		JmYtG/4w/E9PlaVTXVC7NK933i0=
-		</data>
-		<key>Headers/ORKImageCaptureStep.h</key>
-		<data>
-		T7mP3QWVTSEw/iGA/tfL4OdkzbI=
-		</data>
-		<key>Headers/ORKImageCaptureStepViewController.h</key>
-		<data>
-		U/Ty/D4XWlwXUU1xwaOvXol9QgY=
-		</data>
-		<key>Headers/ORKInstructionStep.h</key>
-		<data>
-		xzQK3ApdHJsQz6TDp31WM1gFJ5g=
-		</data>
-		<key>Headers/ORKInstructionStepContainerView.h</key>
-		<data>
-		XeieZBjkiC8oj40yAF61NzI5fuA=
-		</data>
-		<key>Headers/ORKInstructionStepViewController.h</key>
-		<data>
-		j9Th/fWDp6m2F7UVC/woGnClROs=
-		</data>
-		<key>Headers/ORKInstructionStepViewController_Internal.h</key>
-		<data>
-		G0575fg5YvMWG/Hu/tO11pRcUh4=
-		</data>
-		<key>Headers/ORKLabel.h</key>
-		<data>
-		t8tK4ps+vGdU2vOmApNf9lKsKII=
-		</data>
-		<key>Headers/ORKLearnMoreInstructionStep.h</key>
-		<data>
-		YYS1hTdnLj+Il+XzhomY7m1ynoU=
-		</data>
-		<key>Headers/ORKLearnMoreItem.h</key>
-		<data>
-		vLjTt+ffsq6RnxdgTcdu4nYx+J0=
-		</data>
-		<key>Headers/ORKLearnMoreStepViewController.h</key>
-		<data>
-		rtv29adRmbny5LZVH6/li2d7xgY=
-		</data>
-		<key>Headers/ORKLearnMoreView.h</key>
-		<data>
-		3cwE9WhblLacMS6gtg/VZZRp+88=
-		</data>
-		<key>Headers/ORKNavigationContainerView.h</key>
-		<data>
-		ZyaumudJYMjBtkON3l0mni5YMJM=
-		</data>
-		<key>Headers/ORKNavigationContainerView_Internal.h</key>
-		<data>
-		9nsZg/X2jhnXkN7XRbE0svzJ8mg=
-		</data>
-		<key>Headers/ORKPDFViewerStep.h</key>
-		<data>
-		wWSO1lw9Xkrfspnw6Z7emCD20o4=
-		</data>
-		<key>Headers/ORKPDFViewerStepViewController.h</key>
-		<data>
-		lJ3l9J65/RaCLKHiqVwbPlGQbdE=
-		</data>
-		<key>Headers/ORKPermissionType.h</key>
-		<data>
-		20gdCGktm3xka4KqytT/fh8BuU4=
-		</data>
-		<key>Headers/ORKPlaybackButton.h</key>
-		<data>
-		RqHK0W6fJwTuvRxLcoB5+zNsLoA=
-		</data>
-		<key>Headers/ORKProgressView.h</key>
-		<data>
-		Y2gfbfrAhdZ+X5XqyhLNNVhKANI=
-		</data>
-		<key>Headers/ORKQuestionResult.h</key>
-		<data>
-		1MTXDNA/tBw3IFJBmcMYbM7rAJg=
-		</data>
-		<key>Headers/ORKQuestionResult_Private.h</key>
-		<data>
-		xZZP1bK8zibB1hp1DNNP07gx/pI=
-		</data>
-		<key>Headers/ORKQuestionStep.h</key>
-		<data>
-		V+aMytcX2qvINqsXZiDs2VnJ0Kw=
-		</data>
-		<key>Headers/ORKQuestionStepViewController.h</key>
-		<data>
-		plQlbUQx5ey5rARa9FOe+/HWg68=
-		</data>
-		<key>Headers/ORKQuestionStepViewController_Private.h</key>
-		<data>
-		ztgFKw3sswUuPsZXVrDTHfhs4Pk=
-		</data>
-		<key>Headers/ORKRequestPermissionsStep.h</key>
-		<data>
-		06axQ9GQGsLRDju8apGTq77wf5A=
-		</data>
-		<key>Headers/ORKResult.h</key>
-		<data>
-		JCJDCve074EeQMJ6GzjW1LrV300=
-		</data>
-		<key>Headers/ORKResultPredicate.h</key>
-		<data>
-		vwDDEgx6V9laKXzdDijkqVE4ARQ=
-		</data>
-		<key>Headers/ORKResult_Private.h</key>
-		<data>
-		oBswfCjE9V8QdMEaj7dtAV5jf4s=
-		</data>
-		<key>Headers/ORKRingView.h</key>
-		<data>
-		nJ7x2eONIkOiJM3tmztn37P98ZM=
-		</data>
-		<key>Headers/ORKRoundTappingButton.h</key>
-		<data>
-		Ipc3sKuO2KNpaGbgtDZoNOdgs4c=
-		</data>
-		<key>Headers/ORKSeparatorView.h</key>
-		<data>
-		0uUSJKldZDuVqBf8E5L5q+pnDP4=
-		</data>
-		<key>Headers/ORKSignatureStep.h</key>
-		<data>
-		SbZa1ejN19twACHqgZmWxItdPsE=
-		</data>
-		<key>Headers/ORKSignatureStepViewController.h</key>
-		<data>
-		WSbkTBYmXjTlIcMRuFUxE8JNdR8=
-		</data>
-		<key>Headers/ORKSignatureView.h</key>
-		<data>
-		dUbhVJcSONBCVX+60+0VbNYTaUw=
-		</data>
-		<key>Headers/ORKSkin.h</key>
-		<data>
-		ZAS39rEocVMDz7ERW0UOprMIvu8=
-		</data>
-		<key>Headers/ORKStep.h</key>
-		<data>
-		jNl9aTmtt984CkJ85g+Q3hslQwM=
-		</data>
-		<key>Headers/ORKStepContainerView.h</key>
-		<data>
-		NzarscOHRyplKc7zQ82dZ/i8pq8=
-		</data>
-		<key>Headers/ORKStepContainerView_Private.h</key>
-		<data>
-		KBGUPsA2UIt/9+QXP2Uzsi+6yEE=
-		</data>
-		<key>Headers/ORKStepHeaderView.h</key>
-		<data>
-		7lVqA7yHh7yEkQdEKXZd+dYoUtQ=
-		</data>
-		<key>Headers/ORKStepHeaderView_Internal.h</key>
-		<data>
-		qPkxMYngyTMDaBWaINtU5+5wcso=
-		</data>
-		<key>Headers/ORKStepView.h</key>
-		<data>
-		7xpsLxlnIDQlDekf7jGb+Hm0Ht0=
-		</data>
-		<key>Headers/ORKStepViewController.h</key>
-		<data>
-		3XGYpIs9kRXw8jmyesLOcpEYE9E=
-		</data>
-		<key>Headers/ORKStepViewController_Internal.h</key>
-		<data>
-		S/wE/O/p1sO9iE0NzGlvcaRgwiA=
-		</data>
-		<key>Headers/ORKStepView_Private.h</key>
-		<data>
-		SYEBbSCH/4fklND8JnzQ9xZn0zI=
-		</data>
-		<key>Headers/ORKStep_Private.h</key>
-		<data>
-		Q7UTdbFmQx+1qNrUL6YBBTeUVME=
-		</data>
-		<key>Headers/ORKSubheadlineLabel.h</key>
-		<data>
-		kR1wvDO7mKayKrhFQ50ZZUrflvY=
-		</data>
-		<key>Headers/ORKTableStep.h</key>
-		<data>
-		DomJcIllIsNyHV9zAiBGWrKYMKM=
-		</data>
-		<key>Headers/ORKTableStepViewController.h</key>
-		<data>
-		ddWajfff/+jW8Xm5ZsoI1Groqho=
-		</data>
-		<key>Headers/ORKTextButton.h</key>
-		<data>
-		CxGV6ySFxvGnsJow/fB2UDvDONs=
-		</data>
-		<key>Headers/ORKTintedImageView.h</key>
-		<data>
-		x8CnvRBVpLLqvohSpjeiZWiL7Wk=
-		</data>
-		<key>Headers/ORKTitleLabel.h</key>
-		<data>
-		U016zbX+qHMue4ZPE2MwkZZnPvU=
-		</data>
-		<key>Headers/ORKTypes.h</key>
-		<data>
-		MUKcQFuQVd3MW5scLSVgOu9rlyw=
-		</data>
-		<key>Headers/ORKUnitLabel.h</key>
-		<data>
-		p99TqMsyzFgPWW0PhEwNFOXDbtI=
-		</data>
-		<key>Headers/ORKVerticalContainerView.h</key>
-		<data>
-		mjtE/htrjnQQ2wpWCfTD3fS84yA=
-		</data>
-		<key>Headers/ORKVerticalContainerView_Internal.h</key>
-		<data>
-		BhtqNhxqFnYXH9BF+iqDGehkhOw=
-		</data>
-		<key>Headers/ORKVideoCaptureStep.h</key>
-		<data>
-		9coKtxDnynr/UtsZx3My/8Y0mRA=
-		</data>
-		<key>Headers/ORKVideoInstructionStep.h</key>
-		<data>
-		sqyekoVm3Bm5BX6QDpcc4bB3z8k=
-		</data>
-		<key>Headers/ORKVideoInstructionStepResult.h</key>
-		<data>
-		8FJk/j/eMLQpSDoOo95f1uZbZKc=
-		</data>
-		<key>Headers/ORKVideoInstructionStepViewController.h</key>
-		<data>
-		slRI9Pk8hmgSUAVGZzrQCfSWyq4=
-		</data>
-		<key>Headers/ORKWaitStep.h</key>
-		<data>
-		117ztALS+/rtkoubif9J/CAHQrQ=
-		</data>
-		<key>Headers/ORKWaitStepViewController.h</key>
-		<data>
-		eOz8CuID4tCbjAUdbA672LSJ2eI=
-		</data>
-		<key>Headers/ORKWebViewStep.h</key>
-		<data>
-		Ysm0VYYgAQob59k0+2PGKjjZ1w8=
-		</data>
-		<key>Headers/ORKWebViewStepResult.h</key>
-		<data>
-		sQ1cTd4T0PKDxDbWow6UP7bMEGg=
-		</data>
-		<key>Headers/ORKWebViewStepViewController.h</key>
-		<data>
-		WXaJN+/NQCmyjBaxkno1cPBYzxY=
-		</data>
-		<key>Headers/ResearchKit.h</key>
-		<data>
-		2gcfgiyytTPuP/Zm3P3LFaayXx8=
-		</data>
-		<key>Headers/ResearchKit_Private.h</key>
-		<data>
-		urgZqMyX5FjhZ96nySoGcyUsXz8=
+		JNP+QG7YRVBesicKndtDD+Xzyew=
 		</data>
 		<key>Info.plist</key>
 		<data>
-		Sr4kQAxUerayvFmzLhqR3sITCcU=
+		aoCfdl6gFBKgU9bejRgi16hVyhs=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		OcjHvMXV0bEENFPKbZFejM921b8=
+		1wjgJmIbMAOBYldl+25aP4NDJi0=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		CSen5o36OQ1wcifComXLRmwfGgw=
+		zx/mp88NHErydCZUorg6D+rh7nA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		RohIuWAI89vYcuzv7hVUKP3zpoI=
+		w2xsVITLQyXGWUIFiKhPRVh5b1c=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<data>
-		OcjHvMXV0bEENFPKbZFejM921b8=
+		1wjgJmIbMAOBYldl+25aP4NDJi0=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftinterface</key>
 		<data>
-		CSen5o36OQ1wcifComXLRmwfGgw=
+		zx/mp88NHErydCZUorg6D+rh7nA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<data>
-		RohIuWAI89vYcuzv7hVUKP3zpoI=
+		w2xsVITLQyXGWUIFiKhPRVh5b1c=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		LzYeg7A0fNpFZc3pPax3QpRuOR4=
+		SqatbzxKcMBZ0RUgPJvg/0iyGVk=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		NiOFJrwdUzgdQdxbptdYKjvnADw=
+		vUSIfkimuEf+w5I9StKnNn3G83Y=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		xmigDU1TOQ47aS2NeBzgCsxC6Ws=
+		YHNgULLKm4Yjac897njpKWS6zdE=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<data>
-		LzYeg7A0fNpFZc3pPax3QpRuOR4=
+		SqatbzxKcMBZ0RUgPJvg/0iyGVk=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftinterface</key>
 		<data>
-		NiOFJrwdUzgdQdxbptdYKjvnADw=
+		vUSIfkimuEf+w5I9StKnNn3G83Y=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<data>
-		xmigDU1TOQ47aS2NeBzgCsxC6Ws=
+		YHNgULLKm4Yjac897njpKWS6zdE=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		K008JzQaB5BrtBDViQscJ9HuaMw=
 		</data>
-		<key>ResearchKit.stringsdict</key>
-		<data>
-		dPW3KWrkI4n4CQRxYLFfiV4o7gg=
-		</data>
 		<key>ar.lproj/Localizations.strings</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			eVHAsClN2p1/hPYM04XwZKkkTK8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ar.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			4vw61ohWlAMmUSZSQGZ++wYbJD8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ar.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			ccyXmiuqD886kFn+Tooi//dBRkQ=
+			qOQrd5yjWyVvPQnHmB5O52M5B1U=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -495,25 +85,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			gd4Fy3uLh4Zj8zwWFZwzBZoVv/M=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			vM2LffsJlS4GCj+whpc0X0ObRUM=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			dPW3KWrkI4n4CQRxYLFfiV4o7gg=
+			7zFI7t62vN+/VtMqymuP/SUuPv8=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -521,13 +93,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Assets.car</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			PLcEJu2VyfGNXcCAnOKcBiVGMtcR37uN5MOddbtfheY=
-			</data>
-		</dict>
 		<key>Headers/MWFileStreamManager.h</key>
 		<dict>
 			<key>hash2</key>
@@ -539,770 +104,98 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			XytyPasuVHhfCboeiAonhvVc5w5m6PeFfwKaOK6wD94=
+			1YPdhimT1yNr+3ChY6Hnp/YMQ8N0h490ZlbvU1op46M=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			5Xa19X9PTgIqWslSkJH7PJd8nXQ4fU7iXje3Q0AH1D4=
-			</data>
-		</dict>
-		<key>Headers/ORKAnswerFormat.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			KwFNZaQri1a6n6O/4voFQ+RaqAFL4YfK7MjER7e/Wbc=
-			</data>
-		</dict>
-		<key>Headers/ORKAnswerFormat_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bEn/dz/vQL0uN8EqgnGYqMbhtLG+6pMcyWRSM3Y4jN4=
-			</data>
-		</dict>
-		<key>Headers/ORKBodyContainerView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			p3xbzJTKwJlkA3GXRejbYtbK0NUamR1QwQvXg4MiFaU=
-			</data>
-		</dict>
-		<key>Headers/ORKBodyItem.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DVPnhS6G8w7zsxYqbKF0kGhof121+RM4S0JZ5VXGBog=
-			</data>
-		</dict>
-		<key>Headers/ORKBodyLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DdyOVQfuMbrfOlCF7X0i7pc/X96s8B85BNy6Sb3S6bc=
-			</data>
-		</dict>
-		<key>Headers/ORKBorderedButton.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			BnBH1HUG2F8DLeTJosyTOXb1XEPLLpgg3aZA1Bojnco=
-			</data>
-		</dict>
-		<key>Headers/ORKCheckmarkView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bVSWyq15HEGxUx9yq9zw59E5tI/P7HD2WnzjI8thaYg=
-			</data>
-		</dict>
-		<key>Headers/ORKChoiceViewCell.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			d2XZXeF4ZNj+odCgclvp+tiX/kph+G1Jh70YaPcmg28=
-			</data>
-		</dict>
-		<key>Headers/ORKChoiceViewCell_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			p6FhBC8a07rVeehb6lUe4zXmdyMV0boQoDRb78s4QoY=
-			</data>
-		</dict>
-		<key>Headers/ORKCollectionResult.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			X2TJTbbiE/ROb75JWSC6f8z8teOp2RWthe/expMvOvY=
-			</data>
-		</dict>
-		<key>Headers/ORKCollectionResult_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			E1JzvxzQG6olKYoJvThKiPU89J4twUWQWQC/qsMPFYg=
-			</data>
-		</dict>
-		<key>Headers/ORKCompletionStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			9fhdDgIkknWJ7Go/h3w4aD8zABgnIotidAtXfaf/RCc=
-			</data>
-		</dict>
-		<key>Headers/ORKCompletionStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			MutZhdVAPRhvruvAiR8Suvb3ZHVgtTtQGoFIlcIPggg=
-			</data>
-		</dict>
-		<key>Headers/ORKContinueButton.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cZWdR7f+GheJouj4lJeWivUoWC6K0X5WRCsecRSboY4=
-			</data>
-		</dict>
-		<key>Headers/ORKCustomStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			rW8yAVs5LOtDfgrfOhOxQW+ZBTaq+g7K+B7Q1TG9x7M=
-			</data>
-		</dict>
-		<key>Headers/ORKCustomStepView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			y9/2RlCJR37ItS6LhKs1So4BuxD4cel0F81ZaTcdYMM=
-			</data>
-		</dict>
-		<key>Headers/ORKCustomStepView_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Hs4RmEsrKbONAo0H861nSoSdeGBeSroNAKnBv6p1Kw8=
-			</data>
-		</dict>
-		<key>Headers/ORKDefaultFont.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			DgOo6hCD2BV0G/MCfYCMymT3bC5X6c4Rl0jzRdebGT8=
-			</data>
-		</dict>
-		<key>Headers/ORKDefines.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			NNVTTrywkFK8EMZAhCmsRg6S3VLACdba79s2LisMxSY=
-			</data>
-		</dict>
-		<key>Headers/ORKDirectionView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ckXle5MJOP2jSE/jWdtyYSkCYl5qD6TU+ojcgPSTu64=
-			</data>
-		</dict>
-		<key>Headers/ORKESerialization.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			d+6Pt5K8m5R0mpPzYjRRXwnoqs4OOzb+dHKsNFQEsM0=
-			</data>
-		</dict>
-		<key>Headers/ORKErrors.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			TyLNLHyfBsa253W9FjdnJJ1w6ESUQbow9RoAaPoDJ7Q=
-			</data>
-		</dict>
-		<key>Headers/ORKFootnoteLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			IafmkCn/g+iGwubskIBNRJlNGeTbzkn2NnDO0SKsT/0=
-			</data>
-		</dict>
-		<key>Headers/ORKFormStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			sXSE8uNEIKdL1stYQoZomI2f24XDXscaUE/Z7XRbBHQ=
-			</data>
-		</dict>
-		<key>Headers/ORKFormStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			F1xtOtghWCeMFyW9cNV6qNEESgIbquFO/bs/LAWNlBQ=
-			</data>
-		</dict>
-		<key>Headers/ORKFormStepViewController_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			oFAaCQQzUMLCaRuLNnjFZhv8QQx5ovCY0xhtAtBSE/E=
-			</data>
-		</dict>
-		<key>Headers/ORKFreehandDrawingView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			VRjqH8oo4xeub+6SDuuDOqM1+uOCm7+XEpy+4m/5mEM=
-			</data>
-		</dict>
-		<key>Headers/ORKHTMLPDFPageRenderer.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			tI3euSWU6BGY+0lUJeoD1m1z2xGVSfemQwZB44Qsngo=
-			</data>
-		</dict>
-		<key>Headers/ORKHeadlineLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			m9SzhP/pHIBytTb0IS+xmIDebqWgeeJ9FQilZZ5YQkk=
-			</data>
-		</dict>
-		<key>Headers/ORKHelpers_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			X6pXsHIuTs35HT+2OVZ8K2ghcsucoTfh53qTewha1xw=
-			</data>
-		</dict>
-		<key>Headers/ORKHelpers_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			SaWUJ+6I4tN01auvSBYi13qJlBHVlVU8sb2o2LDcmp8=
-			</data>
-		</dict>
-		<key>Headers/ORKImageCaptureStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			TTUyyIh3FLr+anGOQXh9O/pDONZn7+5lfJJjuxd3/NA=
-			</data>
-		</dict>
-		<key>Headers/ORKImageCaptureStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			gTBX61aKYLi59tIsFPjoAcBC774WHcOIvvx6YksWBq8=
-			</data>
-		</dict>
-		<key>Headers/ORKInstructionStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8qdY4OSLXNQMO2jGNFnBNpbMZWDg3Zf9JOlIarnOh2I=
-			</data>
-		</dict>
-		<key>Headers/ORKInstructionStepContainerView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			zPUG78ibKsU5Z8g3ggg0x7o+GOxub8sG3LtVUnzusW4=
-			</data>
-		</dict>
-		<key>Headers/ORKInstructionStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			vKDOk0MECBKSzDUGLeLf7UtGUbKPrVoIsDeypCzqb4M=
-			</data>
-		</dict>
-		<key>Headers/ORKInstructionStepViewController_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			C89bYAqaD6hovKYUy9SCfJWJV7XDBtOLNusyttb8ipU=
-			</data>
-		</dict>
-		<key>Headers/ORKLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8GuUZ+Y6003xbMPJbj42BeRwdppyLtwAKAmNG+AWTOE=
-			</data>
-		</dict>
-		<key>Headers/ORKLearnMoreInstructionStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			6gctIuGBy+dG1aGwqbNxAEFr52eMg7cW/F8Gk0qGTik=
-			</data>
-		</dict>
-		<key>Headers/ORKLearnMoreItem.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4iPak7GQsZ2B0G/6pdBacjmKKrJZsemVoXGlk2P7GSk=
-			</data>
-		</dict>
-		<key>Headers/ORKLearnMoreStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			T67x8jyHrsFdYqZdF7al08MdowgMGkFt/SVlMf3xqHw=
-			</data>
-		</dict>
-		<key>Headers/ORKLearnMoreView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Kt+GddWuzKrTitf4rl3O9uf83sQ0xMvn14iSPVVWlRk=
-			</data>
-		</dict>
-		<key>Headers/ORKNavigationContainerView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			uHIhdUSU1M0TuGe5mwNCGb1ERJiBluRC8QZKbgy5Wzk=
-			</data>
-		</dict>
-		<key>Headers/ORKNavigationContainerView_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			cvGCyC39ailIjZz4GEmBw50R5JZDuMqeN7FEn7WGSv0=
-			</data>
-		</dict>
-		<key>Headers/ORKPDFViewerStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			lR9gGqQh+tKPR3UFyAHYRw9GRrKGSWB52TV3LF2k/qg=
-			</data>
-		</dict>
-		<key>Headers/ORKPDFViewerStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			tcSbM2qofXDn0FIM/Do6ShxdRl3H/bPjcJcIBjcvmuA=
-			</data>
-		</dict>
-		<key>Headers/ORKPermissionType.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			WUn9OPp0Cy2n1+gCFWbGl+gygKVTghX/VxmEzSv8LdM=
-			</data>
-		</dict>
-		<key>Headers/ORKPlaybackButton.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			f0+t1PaGzdqkbNt7ocU3TzAhhORKKkWJXXHhIYNqT24=
-			</data>
-		</dict>
-		<key>Headers/ORKProgressView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			UZIaKHfTquM6ScRwBohGquqVMaBwTZO5FXlqNV2Xzwk=
-			</data>
-		</dict>
-		<key>Headers/ORKQuestionResult.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Can5Wl6jzXAXyxOTswrxyq8HJYZXEVxO10TvyU0/1To=
-			</data>
-		</dict>
-		<key>Headers/ORKQuestionResult_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			obUShP7w7zRMYtJnlbs5Bvta1v83Qad/zS7wmCcWaW4=
-			</data>
-		</dict>
-		<key>Headers/ORKQuestionStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			USuE0vAXWKTBdj+RWYy1Ezj6PBr+7qyTm/GXtol/TAU=
-			</data>
-		</dict>
-		<key>Headers/ORKQuestionStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			7AvDLL0eBJkYui9tsbm1ZfmC7K9WWsxRSw6t8PtcD7g=
-			</data>
-		</dict>
-		<key>Headers/ORKQuestionStepViewController_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			xju9QV+PIzh1pDSFtlpMf5T6sDkpumIKMvvcM9ZOw2w=
-			</data>
-		</dict>
-		<key>Headers/ORKRequestPermissionsStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Vgse4W+0rtx8wPVtv1BGaUzUtqJRph0SuYwN+HxYHms=
-			</data>
-		</dict>
-		<key>Headers/ORKResult.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			dthOLvM34k5JmmtIghLiSvrs1Df8FremxNfgfSjudQI=
-			</data>
-		</dict>
-		<key>Headers/ORKResultPredicate.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			9I08Gbaq0qyJEi838BADe9yAmtzvepL1yo9BKfOLeHo=
-			</data>
-		</dict>
-		<key>Headers/ORKResult_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			5thA+VFjKs6QDr8RieB6K8FPJGX3Q1QqpL411O2iSJo=
-			</data>
-		</dict>
-		<key>Headers/ORKRingView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			wXSU59g2tSAZnt1zPAapClSJXN3o02jheeG9UsiX3TQ=
-			</data>
-		</dict>
-		<key>Headers/ORKRoundTappingButton.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			YQoaMa2lZps6ySnvVOUn6awbBmCGqTowO2fYe6geL0I=
-			</data>
-		</dict>
-		<key>Headers/ORKSeparatorView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			sJcGjGBJRV8lDGwylblQhLuRTTbLdcHD6L7zPUd4ifo=
-			</data>
-		</dict>
-		<key>Headers/ORKSignatureStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			aYKER870T/Qf0XpDVsqLDYWqPyuIm6kfd6NVFY76w1s=
-			</data>
-		</dict>
-		<key>Headers/ORKSignatureStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Uk9srLMYQ78CUjjWIUyOUgPw9oe0T8bpCHVx/CjLaaw=
-			</data>
-		</dict>
-		<key>Headers/ORKSignatureView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			4Vu0k5hmarseQj3FAOs1UsbnrnZLVwCuo/BrzZlmN7o=
-			</data>
-		</dict>
-		<key>Headers/ORKSkin.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			3KAHiLZR7l76ypA+zphpgHVtnCB77VwBvdo/hof09qA=
-			</data>
-		</dict>
-		<key>Headers/ORKStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			nIcMvz2dG2n0FJLxtmEefOwI03/egqF8gBiVX8ROyIk=
-			</data>
-		</dict>
-		<key>Headers/ORKStepContainerView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			u+RCMokCZ7H1+CWjDF6gICQlly5+LaPCuuPhG8d7CMs=
-			</data>
-		</dict>
-		<key>Headers/ORKStepContainerView_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			GP/wrMkCF0Rh3s5S6Q15srvgZGg/THQQbnSoiO5xnEg=
-			</data>
-		</dict>
-		<key>Headers/ORKStepHeaderView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			VsorAlbS2BDLZjTOOjca54wIpbqu41OCIdlAYk+BLfU=
-			</data>
-		</dict>
-		<key>Headers/ORKStepHeaderView_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			8Y5n52pB0cBwjj/lTMsJQKY+pzEW7XF+dWScoJYXg3I=
-			</data>
-		</dict>
-		<key>Headers/ORKStepView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ew/k/51Xmk8Fn9aQ+rcmu4+vhn2ObqWoBHwOFcgDzcM=
-			</data>
-		</dict>
-		<key>Headers/ORKStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			bvdqOX5t100ZmOgzgJIF2Iwn9WJat/iNeeE6QNFWDaI=
-			</data>
-		</dict>
-		<key>Headers/ORKStepViewController_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			OSLdbR6CmG6EARs7xkiuiFfh5Hg+QcH7acYefjmb7vg=
-			</data>
-		</dict>
-		<key>Headers/ORKStepView_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/0KQR15S3zKhdZPc7GPAmFeqy/SZOt8dPhkCH2YlG8c=
-			</data>
-		</dict>
-		<key>Headers/ORKStep_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			sTwc44YVBrTg09gISgY1kDh6PP3j/H5Rx2UH0scfljA=
-			</data>
-		</dict>
-		<key>Headers/ORKSubheadlineLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			jF+Xp4FDzUmoTuJEbmcufLdpF2drW4NJePp55ZlxK/I=
-			</data>
-		</dict>
-		<key>Headers/ORKTableStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			qxh4FsBMUGa3PYnlopw4NfMwtrUV3i+LMXMhMHFXG74=
-			</data>
-		</dict>
-		<key>Headers/ORKTableStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			/1+Tg3ouD54nhL/+em+URzZ5eRVKmZRVAY9FPnRzaTU=
-			</data>
-		</dict>
-		<key>Headers/ORKTextButton.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			3t8M/Mxhez67PPo5fg9m3uBDEaD3WvMj3eGcDV1UYFQ=
-			</data>
-		</dict>
-		<key>Headers/ORKTintedImageView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			056J34LCtAskUEgDO7wTi1PFDhvhEguTRT3ApKhWjOs=
-			</data>
-		</dict>
-		<key>Headers/ORKTitleLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			NpLiWbqLfBONkm69TLfmpsZ2HmjOyVID3pzKxqPmM8I=
-			</data>
-		</dict>
-		<key>Headers/ORKTypes.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			hQNPxudl9TZEq71v5QJfzoQTXNfVNK+pXBgu2UG03rs=
-			</data>
-		</dict>
-		<key>Headers/ORKUnitLabel.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			vuwSrdRmziUy/0aU2J8Nlmsp6/p0O/NAuL3pf8KqgeY=
-			</data>
-		</dict>
-		<key>Headers/ORKVerticalContainerView.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			NgZHC94IWcgmRIBc5FbwoBVCiSmQ7x5n6Yeqk8t8zNw=
-			</data>
-		</dict>
-		<key>Headers/ORKVerticalContainerView_Internal.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			Jy5qFaUu/yDbfFux6cMubUnBfEijbCEQDSH/5PDgnX4=
-			</data>
-		</dict>
-		<key>Headers/ORKVideoCaptureStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			aiQhD47hm+53pR7Xx5D3fOTt9s1xqN7QlDckfv2hIJk=
-			</data>
-		</dict>
-		<key>Headers/ORKVideoInstructionStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ox8VySq3F4Xfc4A3KHoUPYKntf6UeCVSmnVxWDCpIbU=
-			</data>
-		</dict>
-		<key>Headers/ORKVideoInstructionStepResult.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			K7yMDIL+2jRYkRkzjm+OqvXI31zUQTuuqsxzFHIXt/g=
-			</data>
-		</dict>
-		<key>Headers/ORKVideoInstructionStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			UvaInStzALW8E4rAxw1GvHkM0ZztYr/84R3W/hyNpzU=
-			</data>
-		</dict>
-		<key>Headers/ORKWaitStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			uV4K/gI2rDEweES52xChBazUSDnhEtxZdCdaN3KoCOk=
-			</data>
-		</dict>
-		<key>Headers/ORKWaitStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			ld7i8scocWyaKzi5QToPAMldQ4B2Y6ie9iGTvjy2gck=
-			</data>
-		</dict>
-		<key>Headers/ORKWebViewStep.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			EVymnT4oOoKwciUQOxcf/2c33jnAQxArko2kAgzFfXA=
-			</data>
-		</dict>
-		<key>Headers/ORKWebViewStepResult.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			C95C8hd5jjgDcYsWQEGKdcm+5345KHuuWgD4sI2/cKE=
-			</data>
-		</dict>
-		<key>Headers/ORKWebViewStepViewController.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			PmBIbC/4CQYAbdJViXD1M74ztrIKcMQiKN+qcow7ofs=
-			</data>
-		</dict>
-		<key>Headers/ResearchKit.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			5C4y+pQIYAd2jCjDFx9xnO3x7Vfdm5Hfw43d7iI/JVE=
-			</data>
-		</dict>
-		<key>Headers/ResearchKit_Private.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			7iNH9Ry9PTTrjDXcNNrtxDmcGb59lVJnw5xp4vPOQdo=
+			x2DArAxrU58uk3e1G1z32iLbM6UoCtwzYsRTqVgebbc=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H4hsyoYQB7fyCVNknD66+8Bg3tyeAthOSwS/RpKlzwY=
+			Sa5I72BtktPHGs/sITSpxChIHdcn/PBtdjfu9WwULYw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RKJ/p+D8GcvfsDxLTTZb2AKAxaKkhM+kZ3KT2W6oGyI=
+			bXVjHRQtSxtOPeq5ohGN/CMY/XmutQkTavmwQ0P8l2Y=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			e3v64zMzqT5AGDflVIUMUDc9xMqSGfkwoMUPDHguua0=
+			XBgjrU1iRX4U4wV9OLZKKSDjk1N0HJzXeV4hTNbkYPo=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			H4hsyoYQB7fyCVNknD66+8Bg3tyeAthOSwS/RpKlzwY=
+			Sa5I72BtktPHGs/sITSpxChIHdcn/PBtdjfu9WwULYw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			RKJ/p+D8GcvfsDxLTTZb2AKAxaKkhM+kZ3KT2W6oGyI=
+			bXVjHRQtSxtOPeq5ohGN/CMY/XmutQkTavmwQ0P8l2Y=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			e3v64zMzqT5AGDflVIUMUDc9xMqSGfkwoMUPDHguua0=
+			XBgjrU1iRX4U4wV9OLZKKSDjk1N0HJzXeV4hTNbkYPo=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pIRElDPPfwvfs/Uxe8POV3hnVvEaD7iVyEemDVLC/0w=
+			Gq1XwlzoqvyMUwFLb9NzYgYI4pfYuKA8VthRrxxPi1c=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1YGW1ZXwJOFfEWSZGOvHm+J0O0x5nZIe+1Po83DW7T8=
+			mXwitvPNMeITZHwA7xLVyAwLm2LoEBC+SSSUEj9kh10=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4nYUoAH/oA2T4267dtLFN4Cu4vEvpwsgCuXoMSvKM9w=
+			xXwosKmS42KUF8IYGkZ3bYomL0rEi8N8GyO45pFL2Y8=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			pIRElDPPfwvfs/Uxe8POV3hnVvEaD7iVyEemDVLC/0w=
+			Gq1XwlzoqvyMUwFLb9NzYgYI4pfYuKA8VthRrxxPi1c=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			1YGW1ZXwJOFfEWSZGOvHm+J0O0x5nZIe+1Po83DW7T8=
+			mXwitvPNMeITZHwA7xLVyAwLm2LoEBC+SSSUEj9kh10=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			4nYUoAH/oA2T4267dtLFN4Cu4vEvpwsgCuXoMSvKM9w=
+			xXwosKmS42KUF8IYGkZ3bYomL0rEi8N8GyO45pFL2Y8=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -1312,36 +205,11 @@
 			vMsAnUNjgav39Q+DJcgyJ3CekEEDI+hvA/v2prD74vM=
 			</data>
 		</dict>
-		<key>ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
-			</data>
-		</dict>
 		<key>ar.lproj/Localizations.strings</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			N3nbjjZAbcQ9jWPIJvKB1wDmFCY0ogJfkzAnDSo9Q+g=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ar.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			y0h8jBy7jWuNmzwf0XyM8DtOO1JW6qSClBp7MXiStEA=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>ar.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			V6IpnWbv0TjRGvE3Kq3/IHAXbYdGBf+XDwZs0/aBsWU=
+			RH7hx12NwVEOtPFgLzrEJg39VE+5+sffnbFx9dovccA=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -1350,25 +218,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Hxd2azALAKpqe3PDMUReZuubWmZFaxCDXLMEjYMZLV4=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en.lproj/ResearchKit.strings</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			tk2JXPpbeAddPvZUzr+FmtBYRSjyJUCGorPZs+ySmxs=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-		<key>en.lproj/ResearchKit.stringsdict</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			HgI4Z+dJriY/HxMFb++CswI+QhYu876F44CxGLj0xpc=
+			wYqtYRxD88vgv8wIZ8JZ2G7mUj5oNDCC+PxFMiUL4B8=
 			</data>
 			<key>optional</key>
 			<true/>
