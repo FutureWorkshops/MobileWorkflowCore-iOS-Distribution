@@ -197,10 +197,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import MessageUI;
 @import ObjectiveC;
 @import UIKit;
-@import WebKit;
 #endif
-
-#import <MobileWorkflowCore/MobileWorkflowCore.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -246,77 +243,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
 
 
 
-@class NSLocale;
-@class NSNumberFormatter;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore17CurrencyFormatter")
-@interface CurrencyFormatter : NSObject
-@property (nonatomic, strong) NSLocale * _Nonnull nsLocale;
-/// Can be used to set a custom currency code string
-@property (nonatomic, copy) NSString * _Nonnull currencyCode;
-/// Encapsulated Number formatter
-@property (nonatomic, readonly, strong) NSNumberFormatter * _Nonnull numberFormatter;
-/// Initialize a new currency formatter with optional configuration handler callback.
-/// \param handler configuration handler callback.
-///
-- (nonnull instancetype)init:(void (^ _Nullable)(CurrencyFormatter * _Nonnull))handler OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface CurrencyFormatter (SWIFT_EXTENSION(MobileWorkflowCore))
-/// Returns a currency string from a given double value.
-/// \param doubleValue the monetary amount.
-///
-///
-/// returns:
-/// formatted currency string.
-- (NSString * _Nullable)stringFrom:(double)doubleValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns a double (as NSNumber) from a string that represents a numerical value.
-/// \param string string that describes the numerical value.
-///
-///
-/// returns:
-/// the value as a Double.
-- (NSNumber * _Nullable)doubleAsNSNumberFrom:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
-/// Receives a currency formatted string and returns its
-/// numerical/unformatted representation.
-/// \param string currency formatted string
-///
-///
-/// returns:
-/// numerical representation
-- (NSString * _Nullable)unformattedWithString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@protocol UITextFieldDelegate;
-
-/// Custom text field delegate, that formats user inputs based on a given currency formatter.
-SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
-@interface CurrencyUITextFieldDelegate : NSObject
-/// A delegate object to receive and potentially handle <code>UITextFieldDelegate events</code> that are sent to <code>CurrencyUITextFieldDelegate</code>.
-/// Note: Make sure the implementation of this object does not wrongly interfere with currency formatting.
-/// By returning <code>false</code> on<code>textField(textField:shouldChangeCharactersIn:replacementString:)</code> no currency formatting is done.
-@property (nonatomic, strong) id <UITextFieldDelegate> _Nullable passthroughDelegate;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithFormatter:(CurrencyFormatter * _Nonnull)formatter OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@class UITextField;
-
-@interface CurrencyUITextFieldDelegate (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextFieldDelegate>
-- (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldEndEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldClear:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
-- (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
-@end
-
 @class UITraitCollection;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
@@ -346,42 +272,6 @@ SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
-+ (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
-+ (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _Nonnull mw_streamProvider;)
-+ (id <StreamProvider> _Nonnull)mw_streamProvider SWIFT_WARN_UNUSED_RESULT;
-+ (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
-@end
-
-@class NSURL;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore10FileResult")
-@interface FileResult : ORKResult
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
-+ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
-/// This convenience method will attempt to use the file extension (based on contentType) as file identifier. If failed, it will return nil
-/// \param identifier The identifier for the result
-///
-/// \param fileURL URL of the file in the device file system. This URL should be accessible through the FileManager.shared
-///
-/// \param contentType Content-Type of the file
-///
-- (nullable instancetype)initWithIdentifier:(NSString * _Nonnull)identifier fileURL:(NSURL * _Nonnull)fileURL contentType:(NSString * _Nonnull)contentType;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly) NSUInteger hash;
-- (NSURL * _Nonnull)getFileURL SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -531,25 +421,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @end
 
 
-@class UIEvent;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
-@interface MWWorkflowViewController : UINavigationController
-@property (nonatomic, readonly) BOOL shouldAutorotate;
-@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-@property (nonatomic, readonly) BOOL canBecomeFirstResponder;
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
-- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
-
 
 
 
@@ -567,22 +438,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
-
-
-
-
-
-
-
-
-
-
-
-@class UINavigationBar;
-
-@interface ORKStepViewController (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)configureNavigationBar:(UINavigationBar * _Nonnull)navigationBar;
-@end
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
@@ -635,44 +490,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 @end
 
 
-SWIFT_CLASS_NAMED("Session")
-@interface MWSession : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-@interface MWSession (SWIFT_EXTENSION(MobileWorkflowCore))
-- (NSString * _Nonnull)resolveValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
-- (NSURL * _Nullable)resolveUrl:(NSString * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class UIBezierPath;
-@class UIImage;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore15SignatureResult")
-@interface SignatureResult : ORKResult
-@property (nonatomic, readonly, copy) NSArray<UIBezierPath *> * _Nonnull signaturePath;
-@property (nonatomic, readonly, copy) NSURL * _Nonnull fileURL;
-- (nullable instancetype)initWithSignatureImage:(UIImage * _Nonnull)signatureImage signaturePath:(NSArray * _Nonnull)signaturePath fileManager:(NSFileManager * _Nonnull)fileManager OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-@interface SignatureResult (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-@property (nonatomic, readonly) NSUInteger hash;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 @interface StateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -695,6 +512,26 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIEvent;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore28StepNavigationViewController")
+@interface StepNavigationViewController : UINavigationController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@property (nonatomic, readonly) BOOL shouldAutorotate;
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
+@property (nonatomic, readonly) BOOL canBecomeFirstResponder;
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
+- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @interface StepTitleLabel : UILabel
@@ -703,53 +540,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @end
 
 
-@class UIColor;
-
-SWIFT_CLASS_NAMED("Theme")
-@interface MWTheme : NSObject
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTitleColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarShadowColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull marginBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull imagePlaceholderBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull secondaryTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull warningTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonTextColor;
-@property (nonatomic, readonly) CGFloat buttonBorderWidth;
-@property (nonatomic, readonly) CGFloat buttonCornerRadius;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTitleColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarShadowColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedCellBackgroundColor;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface MWTheme (SWIFT_EXTENSION(MobileWorkflowCore))
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull current;)
-+ (MWTheme * _Nonnull)current SWIFT_WARN_UNUSED_RESULT;
-+ (void)setCurrent:(MWTheme * _Nonnull)value;
-@end
-
-
-
-
-
-
-@interface UIColor (SWIFT_EXTENSION(MobileWorkflowCore))
-@property (nonatomic, readonly) BOOL isDarkBackgroundForText;
-- (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
-@end
 
 
 
@@ -769,9 +559,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 
 
 
-@interface WKWebView (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)mw_configureAppBoundDomains;
-@end
+
+
+
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
@@ -985,10 +775,7 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 @import MessageUI;
 @import ObjectiveC;
 @import UIKit;
-@import WebKit;
 #endif
-
-#import <MobileWorkflowCore/MobileWorkflowCore.h>
 
 #pragma clang diagnostic ignored "-Wproperty-attribute-mismatch"
 #pragma clang diagnostic ignored "-Wduplicate-method-arg"
@@ -1034,77 +821,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
 
 
 
-@class NSLocale;
-@class NSNumberFormatter;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore17CurrencyFormatter")
-@interface CurrencyFormatter : NSObject
-@property (nonatomic, strong) NSLocale * _Nonnull nsLocale;
-/// Can be used to set a custom currency code string
-@property (nonatomic, copy) NSString * _Nonnull currencyCode;
-/// Encapsulated Number formatter
-@property (nonatomic, readonly, strong) NSNumberFormatter * _Nonnull numberFormatter;
-/// Initialize a new currency formatter with optional configuration handler callback.
-/// \param handler configuration handler callback.
-///
-- (nonnull instancetype)init:(void (^ _Nullable)(CurrencyFormatter * _Nonnull))handler OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface CurrencyFormatter (SWIFT_EXTENSION(MobileWorkflowCore))
-/// Returns a currency string from a given double value.
-/// \param doubleValue the monetary amount.
-///
-///
-/// returns:
-/// formatted currency string.
-- (NSString * _Nullable)stringFrom:(double)doubleValue SWIFT_WARN_UNUSED_RESULT;
-/// Returns a double (as NSNumber) from a string that represents a numerical value.
-/// \param string string that describes the numerical value.
-///
-///
-/// returns:
-/// the value as a Double.
-- (NSNumber * _Nullable)doubleAsNSNumberFrom:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
-/// Receives a currency formatted string and returns its
-/// numerical/unformatted representation.
-/// \param string currency formatted string
-///
-///
-/// returns:
-/// numerical representation
-- (NSString * _Nullable)unformattedWithString:(NSString * _Nonnull)string SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@protocol UITextFieldDelegate;
-
-/// Custom text field delegate, that formats user inputs based on a given currency formatter.
-SWIFT_CLASS("_TtC18MobileWorkflowCore27CurrencyUITextFieldDelegate")
-@interface CurrencyUITextFieldDelegate : NSObject
-/// A delegate object to receive and potentially handle <code>UITextFieldDelegate events</code> that are sent to <code>CurrencyUITextFieldDelegate</code>.
-/// Note: Make sure the implementation of this object does not wrongly interfere with currency formatting.
-/// By returning <code>false</code> on<code>textField(textField:shouldChangeCharactersIn:replacementString:)</code> no currency formatting is done.
-@property (nonatomic, strong) id <UITextFieldDelegate> _Nullable passthroughDelegate;
-- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithFormatter:(CurrencyFormatter * _Nonnull)formatter OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@class UITextField;
-
-@interface CurrencyUITextFieldDelegate (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextFieldDelegate>
-- (BOOL)textFieldShouldBeginEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidBeginEditing:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldEndEditing:(UITextField * _Nonnull)textField;
-- (void)textFieldDidEndEditing:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldClear:(UITextField * _Nonnull)textField;
-- (BOOL)textFieldShouldReturn:(UITextField * _Nonnull)textField;
-- (BOOL)textField:(UITextField * _Nonnull)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString * _Nonnull)string;
-@end
-
 @class UITraitCollection;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
@@ -1134,42 +850,6 @@ SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore))
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) NSFileManager * _Nonnull mw_sharedManager;)
-+ (NSFileManager * _Nonnull)mw_sharedManager SWIFT_WARN_UNUSED_RESULT;
-+ (void)setMw_sharedManager:(NSFileManager * _Nonnull)value;
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) id <StreamProvider> _Nonnull mw_streamProvider;)
-+ (id <StreamProvider> _Nonnull)mw_streamProvider SWIFT_WARN_UNUSED_RESULT;
-+ (void)setMw_streamProvider:(id <StreamProvider> _Nonnull)value;
-@end
-
-@class NSURL;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore10FileResult")
-@interface FileResult : ORKResult
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL supportsSecureCoding;)
-+ (BOOL)supportsSecureCoding SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly, getter=isSaveable) BOOL saveable;
-/// This convenience method will attempt to use the file extension (based on contentType) as file identifier. If failed, it will return nil
-/// \param identifier The identifier for the result
-///
-/// \param fileURL URL of the file in the device file system. This URL should be accessible through the FileManager.shared
-///
-/// \param contentType Content-Type of the file
-///
-- (nullable instancetype)initWithIdentifier:(NSString * _Nonnull)identifier fileURL:(NSURL * _Nonnull)fileURL contentType:(NSString * _Nonnull)contentType;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-@property (nonatomic, readonly) NSUInteger hash;
-- (NSURL * _Nonnull)getFileURL SWIFT_WARN_UNUSED_RESULT;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -1319,25 +999,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @end
 
 
-@class UIEvent;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore24MWWorkflowViewController")
-@interface MWWorkflowViewController : UINavigationController
-@property (nonatomic, readonly) BOOL shouldAutorotate;
-@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-@property (nonatomic, readonly) BOOL canBecomeFirstResponder;
-- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
-- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
-@end
-
-
 
 
 
@@ -1355,22 +1016,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
-
-
-
-
-
-
-
-
-
-
-
-@class UINavigationBar;
-
-@interface ORKStepViewController (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)configureNavigationBar:(UINavigationBar * _Nonnull)navigationBar;
-@end
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
@@ -1423,44 +1068,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 @end
 
 
-SWIFT_CLASS_NAMED("Session")
-@interface MWSession : NSObject
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-
-@interface MWSession (SWIFT_EXTENSION(MobileWorkflowCore))
-- (NSString * _Nonnull)resolveValue:(NSString * _Nonnull)value SWIFT_WARN_UNUSED_RESULT;
-- (NSURL * _Nullable)resolveUrl:(NSString * _Nonnull)url SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class UIBezierPath;
-@class UIImage;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore15SignatureResult")
-@interface SignatureResult : ORKResult
-@property (nonatomic, readonly, copy) NSArray<UIBezierPath *> * _Nonnull signaturePath;
-@property (nonatomic, readonly, copy) NSURL * _Nonnull fileURL;
-- (nullable instancetype)initWithSignatureImage:(UIImage * _Nonnull)signatureImage signaturePath:(NSArray * _Nonnull)signaturePath fileManager:(NSFileManager * _Nonnull)fileManager OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-- (nonnull instancetype)initWithIdentifier:(NSString * _Nonnull)identifier SWIFT_UNAVAILABLE;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-
-@interface SignatureResult (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)encodeWithCoder:(NSCoder * _Nonnull)coder;
-@property (nonatomic, readonly) NSUInteger hash;
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-- (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
 SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 @interface StateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
@@ -1483,6 +1090,26 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore13StepBodyLabel")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class UIEvent;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore28StepNavigationViewController")
+@interface StepNavigationViewController : UINavigationController
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+@property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+@property (nonatomic, readonly) BOOL shouldAutorotate;
+@property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
+@property (nonatomic, readonly) BOOL canBecomeFirstResponder;
+- (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
+- (nonnull instancetype)initWithNavigationBarClass:(Class _Nullable)navigationBarClass toolbarClass:(Class _Nullable)toolbarClass SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithRootViewController:(UIViewController * _Nonnull)rootViewController SWIFT_UNAVAILABLE;
+- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
+@end
+
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @interface StepTitleLabel : UILabel
@@ -1491,53 +1118,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 @end
 
 
-@class UIColor;
-
-SWIFT_CLASS_NAMED("Theme")
-@interface MWTheme : NSObject
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarTitleColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryNavBarShadowColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull marginBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull imagePlaceholderBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull secondaryTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull warningTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull primaryButtonTextColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull destructiveButtonTextColor;
-@property (nonatomic, readonly) CGFloat buttonBorderWidth;
-@property (nonatomic, readonly) CGFloat buttonCornerRadius;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTintColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarTitleColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedNavBarShadowColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedBackgroundColor;
-@property (nonatomic, readonly, strong) UIColor * _Nonnull groupedCellBackgroundColor;
-- (nonnull instancetype)init SWIFT_UNAVAILABLE;
-+ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
-@end
-
-
-@interface MWTheme (SWIFT_EXTENSION(MobileWorkflowCore))
-SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull current;)
-+ (MWTheme * _Nonnull)current SWIFT_WARN_UNUSED_RESULT;
-+ (void)setCurrent:(MWTheme * _Nonnull)value;
-@end
-
-
-
-
-
-
-@interface UIColor (SWIFT_EXTENSION(MobileWorkflowCore))
-@property (nonatomic, readonly) BOOL isDarkBackgroundForText;
-- (UIStatusBarStyle)statusBarStyleForBestContrast SWIFT_WARN_UNUSED_RESULT;
-@end
 
 
 
@@ -1557,9 +1137,9 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, strong) MWTheme * _Nonnull cur
 
 
 
-@interface WKWebView (SWIFT_EXTENSION(MobileWorkflowCore))
-- (void)mw_configureAppBoundDomains;
-@end
+
+
+
 
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
