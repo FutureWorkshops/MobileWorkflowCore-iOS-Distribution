@@ -248,6 +248,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 @property (nonatomic, getter=isHighlighted) BOOL highlighted;
 @property (nonatomic, getter=isSelected) BOOL selected;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+@property (nonatomic, readonly) CGSize intrinsicContentSize;
 - (void)layoutSubviews;
 - (void)tintColorDidChange;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;

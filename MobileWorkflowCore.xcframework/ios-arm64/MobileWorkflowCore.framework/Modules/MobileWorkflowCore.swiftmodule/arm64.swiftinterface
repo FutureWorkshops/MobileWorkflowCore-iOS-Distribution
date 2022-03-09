@@ -56,7 +56,8 @@ public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
   public let fileURL: Foundation.URL
   public let contentType: Swift.String
   public let identifier: Swift.String
-  public init(fileURL: Foundation.URL, contentType: Swift.String, identifier: Swift.String)
+  public let key: Swift.String?
+  public init(fileURL: Foundation.URL, contentType: Swift.String, identifier: Swift.String, key: Swift.String? = nil)
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: MobileWorkflowCore.FileInformation, b: MobileWorkflowCore.FileInformation) -> Swift.Bool
   public func encode(to encoder: Swift.Encoder) throws
@@ -804,6 +805,9 @@ public struct StepData : Swift.Codable {
   public let navigationItems: [MobileWorkflowCore.LinkNavigationItem]
   public let content: [Swift.String : Any]
   public let disableBackOnNextStep: Swift.Bool
+  public var title: Swift.String {
+    get
+  }
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1342,17 +1346,19 @@ public protocol URLAsyncTaskConvertible {
 extension URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
   public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
 }
+public typealias UploadResponse = (statusCode: Swift.Int, data: Foundation.Data?)
 public struct ResultsUploadTask : Swift.Codable, MobileWorkflowCore.QueueableTask, MobileWorkflowCore.CredentializedAsyncTask {
   public var type: Swift.String {
     get
   }
-  public typealias Response = Foundation.Data
+  public typealias Response = MobileWorkflowCore.UploadResponse
   public typealias UrlString = Swift.String
   public typealias Input = MobileWorkflowCore.ResultsUploadTask.UrlString
   public let input: MobileWorkflowCore.ResultsUploadTask.UrlString
   public let uploadProperties: [MobileWorkflowCore.UploadProperty]
   public let credential: MobileWorkflowCore.Credential?
   public let queueNetworkUploads: Swift.Bool
+  public let method: MobileWorkflowCore.HTTPMethod
   public func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
   public static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> MobileWorkflowCore.ResultsUploadTask
   public func encode(to encoder: Swift.Encoder) throws
@@ -1547,8 +1553,9 @@ public struct URLTaskInput {
 public struct URLAsyncTask<T> : MobileWorkflowCore.AsyncTask {
   public typealias Response = T
   public typealias URLTaskParser = (Foundation.Data) throws -> T
+  public typealias URLTaskParserWithStatusCode = (Swift.Int, Foundation.Data) throws -> T
   public let input: MobileWorkflowCore.URLTaskInput
-  public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParser
+  public let parser: MobileWorkflowCore.URLAsyncTask<T>.URLTaskParserWithStatusCode
   public func setting(url: Foundation.URL) -> MobileWorkflowCore.URLAsyncTask<T>
   public func replacing(body: Foundation.Data?) -> MobileWorkflowCore.URLAsyncTask<T>
   public func adding(headers: [Swift.String : Swift.String]) -> MobileWorkflowCore.URLAsyncTask<T>
@@ -1575,9 +1582,10 @@ extension URLAsyncTask {
   public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = JSONEncoder(), decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Swift.Int, Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
-extension URLAsyncTask where T == Foundation.Data {
-  public static func build(urlString: Swift.String, uploadProperties: [MobileWorkflowCore.UploadProperty], session: MobileWorkflowCore.ContentProvider, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, shouldInterceptResponse: Swift.Bool, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
+extension URLAsyncTask where T == MobileWorkflowCore.UploadResponse {
+  public static func build(urlString: Swift.String, uploadProperties: [MobileWorkflowCore.UploadProperty], session: MobileWorkflowCore.ContentProvider, method: MobileWorkflowCore.HTTPMethod, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, shouldInterceptResponse: Swift.Bool, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public typealias Parse<T> = (Foundation.Data) throws -> T
 public typealias ParsePublisher<T> = (Combine.AnyPublisher<Foundation.Data, Swift.Error>) -> Combine.AnyPublisher<T, Swift.Error>
@@ -1727,7 +1735,7 @@ extension AsyncTaskService {
 extension AsyncTaskService {
   public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
 }
-public enum HTTPMethod : Swift.String {
+public enum HTTPMethod : Swift.String, Swift.Codable {
   case GET
   case HEAD
   case POST
@@ -2152,6 +2160,9 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
   @objc override dynamic public var isEnabled: Swift.Bool {
     @objc get
     @objc set
+  }
+  @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
+    @objc get
   }
   convenience public init(style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
   @objc override dynamic public func layoutSubviews()
