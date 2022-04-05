@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
 // swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
 import AuthenticationServices
+import BackgroundTasks
 import SystemConfiguration.CaptiveNetwork
 import Combine
 import CoreLocation
@@ -13,7 +14,6 @@ import MediaPlayer
 import MessageUI
 @_exported import MobileWorkflowCore
 import PDFKit
-import RealityKit
 import Security
 import Swift
 import SwiftUI
@@ -21,8 +21,9 @@ import SystemConfiguration
 import UIKit
 import VisionKit
 import WebKit
+import _Concurrency
 public typealias EmailProperty = MobileWorkflowCore.UploadProperty
-extension Collection where Self.Element == Swift.Dictionary<Swift.String, Any> {
+extension Swift.Collection where Self.Element == Swift.Dictionary<Swift.String, Any> {
   public func asEmailProperties() throws -> [MobileWorkflowCore.EmailProperty]
 }
 public protocol EmailStep : MobileWorkflowCore.InstructionStep {
@@ -46,10 +47,9 @@ public protocol EmailStep : MobileWorkflowCore.InstructionStep {
   final public let services: MobileWorkflowCore.StepServices
   public init(identifier: Swift.String, body: Swift.String?, subject: Swift.String, sendTo: Swift.String?, emailProperties: [MobileWorkflowCore.EmailProperty], session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
-  override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, theme: MobileWorkflowCore.Theme = super, links: [MobileWorkflowCore.StepLink] = super, navigationItems: [MobileWorkflowCore.StepNavigationItem] = super)
   @objc deinit
 }
-extension MWEmailStep : MobileWorkflowCore.BuildableStep {
+extension MobileWorkflowCore.MWEmailStep : MobileWorkflowCore.BuildableStep {
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
@@ -65,9 +65,6 @@ public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
     get
   }
   public init(from decoder: Swift.Decoder) throws
-}
-extension RootCoordinator : MobileWorkflowCore.StepNavigationViewControllerDelegate {
-  public func stepNavigationViewControllerDidRegisterShakeGesture(_ stepNavigationViewController: MobileWorkflowCore.StepNavigationViewController)
 }
 public enum ParseError : Foundation.LocalizedError, Swift.CustomStringConvertible {
   case invalidStepData(cause: Swift.String)
@@ -104,7 +101,7 @@ public protocol AsyncTaskInterceptor {
   func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
   func interceptErrorWithRetryTask<T>(task: MobileWorkflowCore.URLAsyncTask<T>, for error: Swift.Error, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>?
 }
-extension AsyncTaskInterceptor {
+extension MobileWorkflowCore.AsyncTaskInterceptor {
   public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService, completion: (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
   public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
   public func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
@@ -117,15 +114,15 @@ public protocol InterceptorConfigurator {
   @objc func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
 }
-extension FileManager {
+extension Foundation.FileManager {
   public static var shared: Foundation.FileManager
   public static var streamProvider: MobileWorkflowCore.StreamProvider
 }
-extension FileManager : MobileWorkflowCore.StreamProvider {
+extension Foundation.FileManager : MobileWorkflowCore.StreamProvider {
   @objc dynamic open func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc dynamic open func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
 }
-extension FileManager {
+extension Foundation.FileManager {
   public func storeTemporaryImage(_ image: UIKit.UIImage) -> Foundation.URL
 }
 public struct PDFViewInput {
@@ -150,69 +147,69 @@ public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
 }
-extension String : MobileWorkflowCore.StringConvertableValue {
+extension Swift.String : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension NSString : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.NSString : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Date : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.Date : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension NSDate : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.NSDate : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Bool : MobileWorkflowCore.StringConvertableValue {
+extension Swift.Bool : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension NSNumber : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.NSNumber : MobileWorkflowCore.StringConvertableValue {
 }
-extension CLLocation : MobileWorkflowCore.StringConvertableValue {
+extension CoreLocation.CLLocation : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension CLLocationCoordinate2D : MobileWorkflowCore.StringConvertableValue {
+extension CoreLocation.CLLocationCoordinate2D : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Int : MobileWorkflowCore.StringConvertableValue {
+extension Swift.Int : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Float : MobileWorkflowCore.StringConvertableValue {
+extension Swift.Float : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Double : MobileWorkflowCore.StringConvertableValue {
+extension Swift.Double : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension Array : MobileWorkflowCore.StringConvertableValue where Element == MobileWorkflowCore.StringConvertableValue {
+extension Swift.Array : MobileWorkflowCore.StringConvertableValue where Element == MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension NSArray : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.NSArray : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
 }
-extension NSDateComponents : MobileWorkflowCore.StringConvertableValue {
+extension Foundation.NSDateComponents : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
     get
   }
@@ -224,23 +221,23 @@ public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager 
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
 }
-extension Error {
+extension Swift.Error {
   public func alertComponents() -> (title: Swift.String, message: Swift.String)
 }
-extension UIViewController {
-  public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
-  public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (Swift.Bool) -> Swift.Void)
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor(unsafe) public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (_ didConfirm: Swift.Bool) -> Swift.Void)
 }
-extension UIViewController {
-  public func addCovering(childViewController: UIKit.UIViewController, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
-  public func removeCovering(childViewController: UIKit.UIViewController)
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func addCovering(childViewController: UIKit.UIViewController, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
+  @_Concurrency.MainActor(unsafe) public func removeCovering(childViewController: UIKit.UIViewController)
 }
-extension UIViewController {
-  public func performSystemAction(_ systemAction: MobileWorkflowCore.SystemAction) throws
-  public func presentActivitySheet(with activityItems: [Any], sourceRect: CoreGraphics.CGRect)
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func performSystemAction(_ systemAction: MobileWorkflowCore.SystemAction) throws
+  @_Concurrency.MainActor(unsafe) public func presentActivitySheet(with activityItems: [Any], sourceRect: CoreGraphics.CGRect)
 }
-extension UIViewController {
-  public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
 public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
   public enum IconType : Swift.String, Swift.RawRepresentable {
@@ -259,10 +256,9 @@ public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.In
   final public let services: MobileWorkflowCore.StepServices
   public init(identifier: Swift.String, text: Swift.String?, image: UIKit.UIImage?, imageURL: Swift.String?, iconType: MobileWorkflowCore.MWCompletionStep.IconType, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
-  override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, theme: MobileWorkflowCore.Theme = super, links: [MobileWorkflowCore.StepLink] = super, navigationItems: [MobileWorkflowCore.StepNavigationItem] = super)
   @objc deinit
 }
-extension MWCompletionStep : MobileWorkflowCore.BuildableStep {
+extension MobileWorkflowCore.MWCompletionStep : MobileWorkflowCore.BuildableStep {
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 public enum BinaryContentType {
@@ -286,140 +282,144 @@ public protocol RemoteContentStep {
   var contentURL: Swift.String? { get }
   func loadContent(completion: @escaping (Swift.Result<Self.ResponseType, Swift.Error>) -> Swift.Void)
 }
-extension RemoteContentStep where Self.ResponseType : Swift.Decodable {
+extension MobileWorkflowCore.RemoteContentStep where Self.ResponseType : Swift.Decodable {
   public func perform<T>(url: Swift.String, method: MobileWorkflowCore.HTTPMethod) -> Combine.AnyPublisher<T, Swift.Error> where T : Swift.Decodable
   public func perform<T>(url: Swift.String, method: MobileWorkflowCore.HTTPMethod, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void) where T : Swift.Decodable
 }
 @available(*, deprecated, renamed: "MWSceneDelegate")
 public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegate
-@objc @_inheritsConvenienceInitializers open class MWSceneDelegate : UIKit.UIResponder, UIKit.UIWindowSceneDelegate {
-  @objc public var window: UIKit.UIWindow?
-  public var urlSchemeManagers: [MobileWorkflowCore.URLSchemeManager]
-  public var dependencies: MobileWorkflowCore.AppConfigurationDependencies
-  public var rootCoordinator: MobileWorkflowCore.RootCoordinator!
-  public var bundleJSONPath: Swift.String?
-  open var licensePath: Swift.String? {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWSceneDelegate : UIKit.UIResponder, UIKit.UIWindowSceneDelegate {
+  @_Concurrency.MainActor(unsafe) @objc public var window: UIKit.UIWindow?
+  @_Concurrency.MainActor(unsafe) public var urlSchemeManagers: [MobileWorkflowCore.URLSchemeManager]
+  @_Concurrency.MainActor(unsafe) public var dependencies: MobileWorkflowCore.AppConfigurationDependencies
+  @_Concurrency.MainActor(unsafe) public var rootCoordinator: MobileWorkflowCore.RootCoordinator!
+  @_Concurrency.MainActor(unsafe) public var bundleJSONPath: Swift.String?
+  @_Concurrency.MainActor(unsafe) open var licensePath: Swift.String? {
     get
   }
-  open var canShakeToClearApp: Swift.Bool
-  @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
-  @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
-  open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
-  @objc open func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
+  @_Concurrency.MainActor(unsafe) open var canShakeToClearApp: Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
+  @_Concurrency.MainActor(unsafe) @objc public func sceneDidEnterBackground(_ scene: UIKit.UIScene)
+  @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+  @_Concurrency.MainActor(unsafe) open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
+  @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
   @objc override dynamic public init()
   @objc deinit
 }
 public protocol JSONRepresentable {
   var jsonContent: Swift.String? { get }
 }
-extension Dictionary : MobileWorkflowCore.JSONRepresentable where Key == Swift.String {
+extension MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension Date : MobileWorkflowCore.JSONRepresentable {
+extension Swift.Dictionary : MobileWorkflowCore.JSONRepresentable where Key == Swift.String {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension NSDate : MobileWorkflowCore.JSONRepresentable {
+extension Foundation.Date : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension CLLocation : MobileWorkflowCore.JSONRepresentable {
+extension Foundation.NSDate : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension CLLocationCoordinate2D : MobileWorkflowCore.JSONRepresentable {
+extension CoreLocation.CLLocation : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
+}
+extension CoreLocation.CLLocationCoordinate2D : MobileWorkflowCore.JSONRepresentable {
+  public var jsonContent: Swift.String? {
+    get
+  }
+}
+extension Swift.String : MobileWorkflowCore.JSONRepresentable {
+}
+extension Foundation.NSString : MobileWorkflowCore.JSONRepresentable {
+}
+extension Swift.Bool : MobileWorkflowCore.JSONRepresentable {
+}
+extension ObjectiveC.ObjCBool : MobileWorkflowCore.JSONRepresentable {
+}
+extension Swift.Int : MobileWorkflowCore.JSONRepresentable {
+}
+extension Swift.Double : MobileWorkflowCore.JSONRepresentable {
+}
+extension Swift.Float : MobileWorkflowCore.JSONRepresentable {
+}
+extension Foundation.NSNumber : MobileWorkflowCore.JSONRepresentable {
 }
 public protocol BuildableStep : MobileWorkflowCore.Step {
   static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
+  static var mandatoryCodingPaths: [Swift.CodingKey] { get }
+}
+extension MobileWorkflowCore.BuildableStep {
+  public static var mandatoryCodingPaths: [Swift.CodingKey] {
+    get
+  }
 }
 @available(*, deprecated, renamed: "QRScannerViewController")
 public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRScannerViewController
-@objc @_inheritsConvenienceInitializers open class QRScannerViewController : MobileWorkflowCore.BarcodeScannerViewController {
-  override open var instructionsText: Swift.String {
-    get
-    set
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class QRScannerViewController : MobileWorkflowCore.BarcodeScannerViewController {
+  @_Concurrency.MainActor(unsafe) override open var instructionsText: Swift.String {
+    @_Concurrency.MainActor(unsafe) get
+    @_Concurrency.MainActor(unsafe) set
   }
-  override open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
-    get
-    set
+  @_Concurrency.MainActor(unsafe) override open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
+    @_Concurrency.MainActor(unsafe) get
+    @_Concurrency.MainActor(unsafe) set
   }
-  override open func found(code: Swift.String)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) override open func found(code: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 @available(*, deprecated, renamed: "MWInstructionStepViewController")
 public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstructionStepViewController
-@objc @_inheritsConvenienceInitializers open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
-  override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWInstructionStepViewController : MobileWorkflowCore.MWContentStepViewController {
+  @_Concurrency.MainActor(unsafe) override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    @_Concurrency.MainActor(unsafe) get
+  }
+  @_Concurrency.MainActor(unsafe) public var contentStackView: UIKit.UIStackView! {
     get
   }
-  public var contentStackView: UIKit.UIStackView! {
+  @_Concurrency.MainActor(unsafe) public var imageView: UIKit.UIImageView! {
     get
   }
-  public var imageView: UIKit.UIImageView! {
+  @_Concurrency.MainActor(unsafe) public var titleLabel: MobileWorkflowCore.StepTitleLabel! {
     get
   }
-  public var titleLabel: MobileWorkflowCore.StepTitleLabel! {
+  @_Concurrency.MainActor(unsafe) public var bodyLabel: MobileWorkflowCore.StepBodyLabel! {
     get
   }
-  public var bodyLabel: MobileWorkflowCore.StepBodyLabel! {
+  @_Concurrency.MainActor(unsafe) public var loadingView: MobileWorkflowCore.StateView! {
     get
   }
-  public var loadingView: MobileWorkflowCore.StateView! {
-    get
-  }
-  public init(instructionStep: MobileWorkflowCore.InstructionStep)
+  @_Concurrency.MainActor(unsafe) public init(instructionStep: MobileWorkflowCore.InstructionStep)
   @available(*, unavailable, message: "init(instructionStep:) must be used instead")
-  override public init(step: MobileWorkflowCore.Step)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic open func viewDidLoad()
-  public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
-  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  public func showLoading()
-  public func hideLoading()
+  @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor(unsafe) public func showLoading()
+  @_Concurrency.MainActor(unsafe) public func hideLoading()
   @objc deinit
 }
-extension MWInstructionStepViewController {
-  public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
-  public func configureWithTitle(_ title: Swift.String, body: Swift.String, primaryConfig: MobileWorkflowCore.ButtonConfig, secondaryConfig: MobileWorkflowCore.ButtonConfig?, hasBlurredBackground: Swift.Bool = false)
+extension MobileWorkflowCore.MWInstructionStepViewController {
+  @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
+  @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, primaryConfig: MobileWorkflowCore.ButtonConfig, secondaryConfig: MobileWorkflowCore.ButtonConfig?, hasBlurredBackground: Swift.Bool = false)
 }
 public enum FileUploadUpdate {
   case failed(error: Swift.Error)
   case uploaded(identifier: Swift.String)
   case completed
-}
-public enum LocationServiceError : Foundation.LocalizedError {
-  case significantLocationChangeMonitoringUnavailable
-  public var errorDescription: Swift.String? {
-    get
-  }
-  public var localizedDescription: Swift.String {
-    get
-  }
-  public static func == (a: MobileWorkflowCore.LocationServiceError, b: MobileWorkflowCore.LocationServiceError) -> Swift.Bool
-  public func hash(into hasher: inout Swift.Hasher)
-  public var hashValue: Swift.Int {
-    get
-  }
-}
-@objc public class LocationService : ObjectiveC.NSObject {
-  public init(userDefaults: Foundation.UserDefaults = .standard)
-  public func significantLocationChangesPublisher() -> Combine.AnyPublisher<[CoreLocation.CLLocation], Swift.Error>
-  @objc override dynamic public init()
-  @objc deinit
-}
-extension LocationService : CoreLocation.CLLocationManagerDelegate {
-  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didUpdateLocations locations: [CoreLocation.CLLocation])
-  @objc dynamic public func locationManager(_ manager: CoreLocation.CLLocationManager, didFailWithError error: Swift.Error)
 }
 @objc @_inheritsConvenienceInitializers public class QueueControllerNetworkAsyncTaskService : ObjectiveC.NSObject {
   public static let kQueuedSessionIdentifier: Swift.String
@@ -440,9 +440,17 @@ extension LocationService : CoreLocation.CLLocationManagerDelegate {
   public func updateCredentialStore(credentialStore: MobileWorkflowCore.CredentialStoreProtocol)
   @objc deinit
 }
-extension QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
+extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+}
+extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
+  public struct RegisterQueueableTaskTypeTask : MobileWorkflowCore.AsyncTask {
+    public typealias Response = Swift.Bool
+    public typealias Input = MobileWorkflowCore.QueueableTask.Type
+    public let input: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.RegisterQueueableTaskTypeTask.Input
+    public init(input: MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.RegisterQueueableTaskTypeTask.Input)
+  }
 }
 public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
   public init(credentialStore: MobileWorkflowCore.CredentialStoreProtocol, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
@@ -450,78 +458,70 @@ public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   @objc deinit
 }
-public struct LocationUploadServiceConfiguration : Swift.Codable {
-  public let id: Swift.String
-  public let url: Swift.String
-  public let method: Swift.String
-  public init(from decoder: Swift.Decoder) throws
-  public init(id: Swift.String, properties: [Swift.String : Any]) throws
-  public func encode(to encoder: Swift.Encoder) throws
-}
-@objc @_inheritsConvenienceInitializers open class MWContentStepViewController : MobileWorkflowCore.MWStepViewController {
-  open var contentView: UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWContentStepViewController : MobileWorkflowCore.MWStepViewController {
+  @_Concurrency.MainActor(unsafe) open var contentView: UIKit.UIView {
     get
     set
   }
-  @objc override dynamic open func viewDidLoad()
-  override public init(step: MobileWorkflowCore.Step)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public protocol BinaryProvider : MobileWorkflowCore.SessionProvider {
   var identifier: Swift.String { get }
   var files: [MobileWorkflowCore.FileInformation] { get }
 }
-extension FileManager {
+extension Foundation.FileManager {
   public func load(file: MobileWorkflowCore.FileInformation) -> Foundation.Data?
 }
-@objc open class MWStepViewController : UIKit.UIViewController, MobileWorkflowCore.StepViewController {
-  weak public var delegate: MobileWorkflowCore.StepViewControllerDelegate?
-  final public let step: MobileWorkflowCore.Step
-  public var result: MobileWorkflowCore.StepResult? {
+@objc @_Concurrency.MainActor(unsafe) open class MWStepViewController : UIKit.UIViewController, MobileWorkflowCore.StepViewController {
+  @_Concurrency.MainActor(unsafe) weak public var delegate: MobileWorkflowCore.StepViewControllerDelegate?
+  @_Concurrency.MainActor(unsafe) final public let step: MobileWorkflowCore.Step
+  @_Concurrency.MainActor(unsafe) public var result: MobileWorkflowCore.StepResult? {
     get
   }
-  open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+  @_Concurrency.MainActor(unsafe) open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
     get
   }
-  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
-    @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  public var outputDirectory: Foundation.URL?
-  public var cancelButtonItem: UIKit.UIBarButtonItem? {
-    get
-    set
-  }
-  public var utilityButtonItem: UIKit.UIBarButtonItem? {
+  @_Concurrency.MainActor(unsafe) public var outputDirectory: Foundation.URL?
+  @_Concurrency.MainActor(unsafe) public var cancelButtonItem: UIKit.UIBarButtonItem? {
     get
     set
   }
-  public var navigationFooterView: MobileWorkflowCore.NavigationFooterView {
+  @_Concurrency.MainActor(unsafe) public var utilityButtonItem: UIKit.UIBarButtonItem? {
     get
     set
   }
-  public var navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config? {
+  @_Concurrency.MainActor(unsafe) public var navigationFooterView: MobileWorkflowCore.NavigationFooterView {
     get
     set
   }
-  public init(step: MobileWorkflowCore.Step)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic open func viewDidLoad()
-  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
-  @objc override dynamic open var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
-    @objc get
+  @_Concurrency.MainActor(unsafe) public var navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config? {
+    get
+    set
   }
-  open func updateBarButtonItems()
-  public func defaultNavigationFooterConfig() -> MobileWorkflowCore.NavigationFooterView.Config
-  public func updateNavigationFooterView()
-  public func addStepResult(_ result: MobileWorkflowCore.StepResult)
-  public func disableCancel()
-  public func hideNavigationFooterView()
-  open func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
-  open func goForward()
-  public func goBackward()
-  public func hasNextStep() -> Swift.Bool
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
+    @_Concurrency.MainActor(unsafe) @objc get
+  }
+  @_Concurrency.MainActor(unsafe) open func updateBarButtonItems()
+  @_Concurrency.MainActor(unsafe) public func defaultNavigationFooterConfig() -> MobileWorkflowCore.NavigationFooterView.Config
+  @_Concurrency.MainActor(unsafe) public func updateNavigationFooterView()
+  @_Concurrency.MainActor(unsafe) public func addStepResult(_ result: MobileWorkflowCore.StepResult)
+  @_Concurrency.MainActor(unsafe) public func disableCancel()
+  @_Concurrency.MainActor(unsafe) public func hideNavigationFooterView()
+  @_Concurrency.MainActor(unsafe) open func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  @_Concurrency.MainActor(unsafe) open func goForward()
+  @_Concurrency.MainActor(unsafe) public func goBackward()
+  @_Concurrency.MainActor(unsafe) public func hasNextStep() -> Swift.Bool
   @objc deinit
 }
 public enum StepLinkType {
@@ -534,7 +534,7 @@ public enum StepLinkType {
     get
   }
 }
-extension LinkData {
+extension MobileWorkflowCore.LinkData {
   public var linkType: MobileWorkflowCore.StepLinkType {
     get
   }
@@ -562,65 +562,58 @@ public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
   public init(input: MobileWorkflowCore.AuthProvider)
   public typealias Input = MobileWorkflowCore.AuthProvider
 }
-public protocol StepNavigationViewControllerDelegate : AnyObject {
-  func stepNavigationViewControllerDidRegisterShakeGesture(_ stepNavigationViewController: MobileWorkflowCore.StepNavigationViewController)
-}
-@objc open class StepNavigationViewController : UIKit.UINavigationController {
-  final public let stepBuilders: [MobileWorkflowCore.StepBuilder]
-  final public let initialStep: MobileWorkflowCore.Step
-  final public let session: MobileWorkflowCore.Session
-  public var outputDirectory: Foundation.URL?
-  final public let analytics: MobileWorkflowCore.Analytics?
-  final public let presentation: MobileWorkflowCore.Presentation?
-  public var isDiscardable: Swift.Bool {
+@objc @_Concurrency.MainActor(unsafe) open class StepNavigationViewController : UIKit.UINavigationController {
+  @_Concurrency.MainActor(unsafe) final public let stepBuilders: [MobileWorkflowCore.StepBuilder]
+  @_Concurrency.MainActor(unsafe) final public let initialStep: MobileWorkflowCore.Step
+  @_Concurrency.MainActor(unsafe) final public let session: MobileWorkflowCore.Session
+  @_Concurrency.MainActor(unsafe) public var outputDirectory: Foundation.URL?
+  @_Concurrency.MainActor(unsafe) final public let analytics: MobileWorkflowCore.Analytics?
+  @_Concurrency.MainActor(unsafe) final public let presentation: MobileWorkflowCore.Presentation?
+  @_Concurrency.MainActor(unsafe) public var isDiscardable: Swift.Bool {
     get
   }
-  final public let theme: MobileWorkflowCore.Theme
-  public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, analytics: MobileWorkflowCore.Analytics? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic public func viewDidLoad()
-  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @objc override dynamic open var childForStatusBarStyle: UIKit.UIViewController? {
-    @objc get
+  @_Concurrency.MainActor(unsafe) final public let theme: MobileWorkflowCore.Theme
+  @_Concurrency.MainActor(unsafe) public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, analytics: MobileWorkflowCore.Analytics? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var childForStatusBarStyle: UIKit.UIViewController? {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  @objc override dynamic open var shouldAutorotate: Swift.Bool {
-    @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var shouldAutorotate: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
-    @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  @objc override dynamic open var canBecomeFirstResponder: Swift.Bool {
-    @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var canBecomeFirstResponder: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
-  public func stepAfterStep(_ step: MobileWorkflowCore.Step) -> MobileWorkflowCore.Step?
-  public var currentStepViewController: MobileWorkflowCore.StepViewController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
+  @_Concurrency.MainActor(unsafe) public func stepAfterStep(_ step: MobileWorkflowCore.Step) -> MobileWorkflowCore.Step?
+  @_Concurrency.MainActor(unsafe) public var currentStepViewController: MobileWorkflowCore.StepViewController {
     get
   }
-  public func previousStepViewController(before stepViewController: MobileWorkflowCore.StepViewController) -> MobileWorkflowCore.StepViewController?
-  public func hasStepBefore(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
-  public func hasStepAfter(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
-  public func canGoBack(from stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
-  open func stepWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
-  open func stepWillDisappear(_ stepViewController: MobileWorkflowCore.StepViewController)
-  @available(iOS 5.0, *)
-  @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
-  @objc override dynamic public init(rootViewController: UIKit.UIViewController)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) public func previousStepViewController(before stepViewController: MobileWorkflowCore.StepViewController) -> MobileWorkflowCore.StepViewController?
+  @_Concurrency.MainActor(unsafe) public func hasStepBefore(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func hasStepAfter(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func canGoBack(from stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) open func stepWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
+  @_Concurrency.MainActor(unsafe) open func stepWillDisappear(_ stepViewController: MobileWorkflowCore.StepViewController)
   @objc deinit
 }
-extension StepNavigationViewController : MobileWorkflowCore.StepViewControllerDelegate {
-  public func stepViewControllerWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
-  public func stepViewController(_ stepViewController: MobileWorkflowCore.StepViewController, didFinishWith direction: MobileWorkflowCore.NavigationDirection)
-  public func stepViewControllerDidFail(_ stepViewController: MobileWorkflowCore.StepViewController, withError error: Swift.Error?)
-  public func stepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
-  public func stepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
-  public func stepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+extension MobileWorkflowCore.StepNavigationViewController : MobileWorkflowCore.StepViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerWillAppear(_ stepViewController: MobileWorkflowCore.StepViewController)
+  @_Concurrency.MainActor(unsafe) public func stepViewController(_ stepViewController: MobileWorkflowCore.StepViewController, didFinishWith direction: MobileWorkflowCore.NavigationDirection)
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerDidFail(_ stepViewController: MobileWorkflowCore.StepViewController, withError error: Swift.Error?)
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
-extension StepNavigationViewController : MobileWorkflowCore.PresentationDelegate {
-  public func presentStepWithId(_ stepId: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, willDismiss: MobileWorkflowCore.OnDismiss?, didDismiss: MobileWorkflowCore.OnDismiss?)
-  public func presentStepForLinkId(_ linkId: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, willDismiss: MobileWorkflowCore.OnDismiss?, didDismiss: MobileWorkflowCore.OnDismiss?)
+extension MobileWorkflowCore.StepNavigationViewController : MobileWorkflowCore.PresentationDelegate {
+  @_Concurrency.MainActor(unsafe) public func presentStepWithId(_ stepId: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, willDismiss: MobileWorkflowCore.OnDismiss?, didDismiss: MobileWorkflowCore.OnDismiss?)
+  @_Concurrency.MainActor(unsafe) public func presentStepForLinkId(_ linkId: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, willDismiss: MobileWorkflowCore.OnDismiss?, didDismiss: MobileWorkflowCore.OnDismiss?)
 }
 public protocol InstructionStep : MobileWorkflowCore.Step {
   var imageURL: Swift.String? { get }
@@ -635,26 +628,25 @@ public class MWInstructionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.I
   final public let services: MobileWorkflowCore.StepServices
   public init(identifier: Swift.String, text: Swift.String?, imageURL: Swift.String?, image: UIKit.UIImage?, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
-  override public init(identifier: Swift.String, title: Swift.String? = super, text: Swift.String? = super, theme: MobileWorkflowCore.Theme = super, links: [MobileWorkflowCore.StepLink] = super, navigationItems: [MobileWorkflowCore.StepNavigationItem] = super)
   @objc deinit
 }
-extension MWInstructionStep : MobileWorkflowCore.BuildableStep {
+extension MobileWorkflowCore.MWInstructionStep : MobileWorkflowCore.BuildableStep {
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
-@objc @_inheritsConvenienceInitializers public class PanZoomImageScrollView : UIKit.UIScrollView {
-  public var image: UIKit.UIImage? {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class PanZoomImageScrollView : UIKit.UIScrollView {
+  @_Concurrency.MainActor(unsafe) public var image: UIKit.UIImage? {
     get
     set
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  convenience public init(image: UIKit.UIImage?)
-  public func configureForImageSize(_ imageSize: CoreGraphics.CGSize)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage?)
+  @_Concurrency.MainActor(unsafe) public func configureForImageSize(_ imageSize: CoreGraphics.CGSize)
   @objc deinit
 }
-extension PanZoomImageScrollView : UIKit.UIScrollViewDelegate {
-  @objc dynamic public func viewForZooming(in scrollView: UIKit.UIScrollView) -> UIKit.UIView?
-  @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
+extension MobileWorkflowCore.PanZoomImageScrollView : UIKit.UIScrollViewDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func viewForZooming(in scrollView: UIKit.UIScrollView) -> UIKit.UIView?
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
 }
 public class DictionaryResult : MobileWorkflowCore.StepResult {
   public var identifier: Swift.String
@@ -662,12 +654,12 @@ public class DictionaryResult : MobileWorkflowCore.StepResult {
   public init(identifier: Swift.String, elements: [Swift.String : Any])
   @objc deinit
 }
-extension DictionaryResult : MobileWorkflowCore.JSONRepresentable {
+extension MobileWorkflowCore.DictionaryResult : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension DictionaryResult : MobileWorkflowCore.ValueProvider {
+extension MobileWorkflowCore.DictionaryResult : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
@@ -698,9 +690,9 @@ public protocol MWButtonTableViewCellDelegate : AnyObject {
 }
 @available(*, deprecated, renamed: "MWButtonTableViewCell")
 public typealias MobileWorkflowButtonTableViewCell = MobileWorkflowCore.MWButtonTableViewCell
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWButtonTableViewCell : UIKit.UITableViewCell {
-  public var delegate: MobileWorkflowCore.MWButtonTableViewCellDelegate?
-  public func configureButton(label: Swift.String?, style: MobileWorkflowCore.ButtonStyle, image: UIKit.UIImage? = nil, theme: MobileWorkflowCore.Theme = .current)
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWButtonTableViewCell : UIKit.UITableViewCell {
+  @_Concurrency.MainActor(unsafe) public var delegate: MobileWorkflowCore.MWButtonTableViewCellDelegate?
+  @_Concurrency.MainActor(unsafe) public func configureButton(label: Swift.String?, style: MobileWorkflowCore.ButtonStyle, image: UIKit.UIImage? = nil, theme: MobileWorkflowCore.Theme = .current)
   @objc deinit
 }
 public struct URLFormatter {
@@ -719,8 +711,8 @@ public struct Analytics {
 }
 @available(*, deprecated, renamed: "MWVideoTableViewCell")
 public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTableViewCell
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWVideoTableViewCell : MobileWorkflowCore.MWImageTableViewCell {
-  override public func configure()
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWVideoTableViewCell : MobileWorkflowCore.MWImageTableViewCell {
+  @_Concurrency.MainActor(unsafe) override public func configure()
   @objc deinit
 }
 open class FileResult : MobileWorkflowCore.StepResult {
@@ -731,7 +723,7 @@ open class FileResult : MobileWorkflowCore.StepResult {
   public init(identifier: Swift.String, fileInformation: MobileWorkflowCore.FileInformation)
   @objc deinit
 }
-extension FileResult : MobileWorkflowCore.BinaryProvider {
+extension MobileWorkflowCore.FileResult : MobileWorkflowCore.BinaryProvider {
   public var files: [MobileWorkflowCore.FileInformation] {
     get
   }
@@ -748,10 +740,25 @@ public struct Credential : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-public protocol QueueableTask {
+public protocol QueueableTask : Swift.Decodable, Swift.Encodable {
   var type: Swift.String { get }
+  var canBeQueued: Swift.Bool { get }
   func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
   static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> Self
+  func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
+}
+extension MobileWorkflowCore.QueueableTask {
+  public var type: Swift.String {
+    get
+  }
+  public var canBeQueued: Swift.Bool {
+    get
+  }
+  public func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
+  public static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> Self
+}
+extension MobileWorkflowCore.QueueableTask where Self : MobileWorkflowCore.AsyncTask {
+  public func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
 }
 public protocol SecurityStoreProtocol {
   func storePassword(key: Swift.String, value: Foundation.Data) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
@@ -772,20 +779,20 @@ public struct UploadProperty : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension Collection where Self.Element == Swift.Dictionary<Swift.String, Any> {
+extension Swift.Collection where Self.Element == Swift.Dictionary<Swift.String, Any> {
   public func asUploadProperties() throws -> [MobileWorkflowCore.UploadProperty]
 }
-extension Dictionary where Key == Swift.String, Value == Any {
+extension Swift.Dictionary where Key == Swift.String, Value == Any {
   public func asUploadProperty() throws -> MobileWorkflowCore.UploadProperty
 }
-extension Error {
+extension Swift.Error {
   public func extractCode() -> Swift.Int?
 }
 public protocol ResponseError : Foundation.LocalizedError, Swift.Decodable {
   var errorCode: Swift.Int? { get }
   static func build(errorCode: Swift.Int, data: Foundation.Data) throws -> Foundation.LocalizedError
 }
-extension ResponseError {
+extension MobileWorkflowCore.ResponseError {
   public static func build(errorCode: Swift.Int, data: Foundation.Data) throws -> Foundation.LocalizedError
 }
 public struct SimpleResponseError : MobileWorkflowCore.ResponseError {
@@ -862,26 +869,25 @@ public protocol Credentialized {
 }
 public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.Credentialized {
 }
-open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewController, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate where T : MobileWorkflowCore.TableStep {
-  final public let tableView: UIKit.UITableView
-  public var tableStep: T {
+@_Concurrency.MainActor(unsafe) open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewController, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate where T : MobileWorkflowCore.TableStep {
+  @_Concurrency.MainActor(unsafe) final public let tableView: UIKit.UITableView
+  @_Concurrency.MainActor(unsafe) public var tableStep: T {
     get
   }
-  public init(tableStep: T)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic open func viewDidLoad()
-  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
-  @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
-  @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
-  @objc open func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
-  @objc open func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
-  @objc open func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
-  @objc open func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
-  @objc open func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
-  @objc open func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreGraphics.CGFloat
-  @objc open func tableView(_ tableView: UIKit.UITableView, viewForFooterInSection section: Swift.Int) -> UIKit.UIView?
-  @objc open func tableView(_ tableView: UIKit.UITableView, heightForFooterInSection section: Swift.Int) -> CoreGraphics.CGFloat
-  override public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) public init(tableStep: T)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, didSelectRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, willDisplay cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, didEndDisplaying cell: UIKit.UITableViewCell, forRowAt indexPath: Foundation.IndexPath)
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, viewForHeaderInSection section: Swift.Int) -> UIKit.UIView?
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, heightForHeaderInSection section: Swift.Int) -> CoreGraphics.CGFloat
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, viewForFooterInSection section: Swift.Int) -> UIKit.UIView?
+  @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, heightForFooterInSection section: Swift.Int) -> CoreGraphics.CGFloat
   @objc deinit
 }
 final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
@@ -953,7 +959,7 @@ public protocol StepViewController : UIKit.UIViewController {
   func goBackward()
   func hasNextStep() -> Swift.Bool
 }
-extension StepViewController {
+extension MobileWorkflowCore.StepViewController {
   public var mwDelegate: MobileWorkflowCore.StepViewControllerDelegate? {
     get
     set
@@ -970,7 +976,7 @@ public protocol SessionProvider {
 public protocol FileKeyResolver {
   var valueFormatter: MobileWorkflowCore.ValueFormatter { get }
 }
-extension FileKeyResolver where Self : MobileWorkflowCore.ContentProvider {
+extension MobileWorkflowCore.FileKeyResolver where Self : MobileWorkflowCore.ContentProvider {
   public func fetchFiles(withKey identifier: Swift.String) -> MobileWorkflowCore.FileInformation?
   public func resolve(value: Swift.String) -> Swift.String
 }
@@ -1010,9 +1016,9 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
   public func checkAndConvertBinaries(completion: @escaping ((Swift.Error?) -> Swift.Void))
   @objc deinit
 }
-extension Session : MobileWorkflowCore.FileKeyResolver {
+extension MobileWorkflowCore.Session : MobileWorkflowCore.FileKeyResolver {
 }
-extension Session : MobileWorkflowCore.ContentProvider {
+extension MobileWorkflowCore.Session : MobileWorkflowCore.ContentProvider {
   public func fetchValue(resource: Swift.String) -> Any?
   public func fetchFiles() -> [MobileWorkflowCore.FileInformation]
   public func fetchFiles(forResult identifier: Swift.String) -> [MobileWorkflowCore.FileInformation]
@@ -1024,7 +1030,7 @@ extension Session : MobileWorkflowCore.ContentProvider {
   }
   public func jsonContent(filteredBy properties: [MobileWorkflowCore.UploadProperty]) -> Swift.String?
 }
-extension Session {
+extension MobileWorkflowCore.Session {
   public func copyForChild() -> MobileWorkflowCore.Session
 }
 public struct QueueControllerConfiguration : Swift.Codable {
@@ -1035,9 +1041,9 @@ public struct QueueControllerConfiguration : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension UIViewController {
-  public func configureNavBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
-  public func configureNavBarAsDefaultGrouped(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
+extension UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultGrouped(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
   convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies, urlSession imageUrlSession: Foundation.URLSession = .shared, configUrlSession: Foundation.URLSession = URLSession(configuration: .default))
@@ -1050,11 +1056,11 @@ public protocol CredentialStoreProtocol {
   func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func updateCredentials(_ credentials: [MobileWorkflowCore.Credential]) -> Swift.Result<Swift.Void, Swift.Error>
 }
-extension CredentialStoreProtocol {
+extension MobileWorkflowCore.CredentialStoreProtocol {
   public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
   public func updateCredentials(_ credentials: [MobileWorkflowCore.Credential], completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
 }
-extension NotificationCenter {
+extension Foundation.NotificationCenter {
   public func buildKeyboardPublisher(heightMapping: @escaping (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat) -> Combine.AnyPublisher<CoreGraphics.CGFloat, Swift.Never>
 }
 public class ProgressIndicator {
@@ -1070,7 +1076,7 @@ public protocol NibLoadable : AnyObject {
   static func loadFromNib() -> Self
   static func loadFromNib(bundle: Foundation.Bundle?) -> Self
 }
-extension NibLoadable {
+extension MobileWorkflowCore.NibLoadable {
   public static var nibName: Swift.String {
     get
   }
@@ -1079,68 +1085,42 @@ extension NibLoadable {
   }
   public static func nib(bundle: Foundation.Bundle?) -> UIKit.UINib
 }
-extension NibLoadable where Self : UIKit.UIView {
+extension MobileWorkflowCore.NibLoadable where Self : UIKit.UIView {
   public static func loadFromNib() -> Self
   public static func loadFromNib(bundle: Foundation.Bundle?) -> Self
 }
-extension NibLoadable where Self : UIKit.UIViewController {
+extension MobileWorkflowCore.NibLoadable where Self : UIKit.UIViewController {
   public static func loadFromNib() -> Self
   public static func loadFromNib(bundle: Foundation.Bundle?) -> Self
 }
-extension Dictionary where Key == Swift.String {
+extension Swift.Dictionary where Key == Swift.String {
   public func getString(key: Swift.String) -> Swift.String?
 }
-extension NSCoder {
+extension Foundation.NSCoder {
   public func decodeAsString(key: Swift.String) -> Swift.String?
 }
-extension KeyedDecodingContainer {
+extension Swift.KeyedDecodingContainer {
   public func decodeAsString(key: Swift.KeyedDecodingContainer<K>.Key) throws -> Swift.String
 }
-extension String {
+extension Swift.String {
   public func fw_attributedString(baseAttributes: [Foundation.NSAttributedString.Key : Any], substringsAttributes: [(substrings: [Swift.String], attributes: [Foundation.NSAttributedString.Key : Any])] = []) -> Foundation.NSAttributedString
   public var fw_firstCapitalized: Swift.String {
     get
   }
   public func fw_camelCaseToWords() -> Swift.String
 }
-extension String {
+extension Swift.String {
   public func regexSanitized() -> Swift.String
 }
-public class LocationUploadService {
-  public init?(config: MobileWorkflowCore.LocationUploadServiceConfiguration, session: MobileWorkflowCore.Session, networkService: MobileWorkflowCore.AsyncTaskService, credentialStore: MobileWorkflowCore.CredentialStoreProtocol, eventService: MobileWorkflowCore.EventService)
-  @objc deinit
-}
-extension CLLocation : Swift.Encodable {
-  public enum CodingKeys : Swift.String, Swift.CodingKey {
-    case latitude
-    case longitude
-    case timestamp
-    public init?(rawValue: Swift.String)
-    public init?(stringValue: Swift.String)
-    public init?(intValue: Swift.Int)
-    public typealias RawValue = Swift.String
-    public var intValue: Swift.Int? {
-      get
-    }
-    public var rawValue: Swift.String {
-      get
-    }
-    public var stringValue: Swift.String {
-      get
-    }
-  }
-  public func encode(to encoder: Swift.Encoder) throws
-}
-@objc public class MWCompletionStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
-  public var completionStep: MobileWorkflowCore.MWCompletionStep {
+@objc @_Concurrency.MainActor(unsafe) public class MWCompletionStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
+  @_Concurrency.MainActor(unsafe) public var completionStep: MobileWorkflowCore.MWCompletionStep {
     get
   }
-  public init(completionStep: MobileWorkflowCore.MWCompletionStep)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic public func viewDidLoad()
-  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
-  override public init(instructionStep: MobileWorkflowCore.InstructionStep)
+  @_Concurrency.MainActor(unsafe) public init(completionStep: MobileWorkflowCore.MWCompletionStep)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc deinit
 }
 final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol {
@@ -1152,7 +1132,7 @@ final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol 
   final public func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
 }
-extension CredentialStore {
+extension MobileWorkflowCore.CredentialStore {
   final public func updateCredentials(_ credentials: [MobileWorkflowCore.Credential]) -> Swift.Result<Swift.Void, Swift.Error>
 }
 @available(*, deprecated, renamed: "NetworkStackStepItemTask")
@@ -1172,7 +1152,7 @@ public struct ValueFormatter {
   public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
   public func parseResponse<T>(resolvedValue: Any?, for key: Swift.String) -> T?
 }
-extension Dictionary where Key == Swift.String {
+extension Swift.Dictionary where Key == Swift.String {
   public subscript(first keys: [Swift.String]) -> Any? {
     get
   }
@@ -1180,51 +1160,51 @@ extension Dictionary where Key == Swift.String {
 public protocol ReusableView : AnyObject {
   static var defaultReuseIdentifier: Swift.String { get }
 }
-extension ReusableView where Self : UIKit.UIView {
+extension MobileWorkflowCore.ReusableView where Self : UIKit.UIView {
   public static var defaultReuseIdentifier: Swift.String {
     get
   }
 }
-extension UICollectionViewCell : MobileWorkflowCore.ReusableView {
+extension UIKit.UICollectionViewCell : MobileWorkflowCore.ReusableView {
 }
-extension UICollectionView {
-  public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell
-  public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell, T : MobileWorkflowCore.NibLoadable
-  public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionViewCell
-  public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
-  public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.NibLoadable, T : MobileWorkflowCore.ReusableView
-  public func dequeueReusableSupplementaryViewOfKind<T>(_ elementKind: Swift.String, forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
+extension UIKit.UICollectionView {
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UICollectionViewCell, T : MobileWorkflowCore.NibLoadable
+  @_Concurrency.MainActor(unsafe) public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionViewCell
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type, forSupplementaryViewOfKind elementKind: Swift.String) where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.NibLoadable, T : MobileWorkflowCore.ReusableView
+  @_Concurrency.MainActor(unsafe) public func dequeueReusableSupplementaryViewOfKind<T>(_ elementKind: Swift.String, forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UICollectionReusableView, T : MobileWorkflowCore.ReusableView
 }
-extension UITableViewCell : MobileWorkflowCore.ReusableView {
+extension UIKit.UITableViewCell : MobileWorkflowCore.ReusableView {
 }
-extension UITableView {
-  public func register<T>(_: T.Type) where T : UIKit.UITableViewCell
-  public func register<T>(_: T.Type) where T : UIKit.UITableViewCell, T : MobileWorkflowCore.NibLoadable
-  public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UITableViewCell
+extension UIKit.UITableView {
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewCell
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewCell, T : MobileWorkflowCore.NibLoadable
+  @_Concurrency.MainActor(unsafe) public func dequeueReusableCell<T>(forIndexPath indexPath: Foundation.IndexPath) -> T where T : UIKit.UITableViewCell
 }
-extension UITableViewHeaderFooterView : MobileWorkflowCore.ReusableView {
+extension UIKit.UITableViewHeaderFooterView : MobileWorkflowCore.ReusableView {
 }
-extension UITableView {
-  public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView, T : MobileWorkflowCore.NibLoadable
-  public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
+extension UIKit.UITableView {
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView, T : MobileWorkflowCore.NibLoadable
+  @_Concurrency.MainActor(unsafe) public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
 public protocol ImageLoadingService {
   func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
   func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
 }
-extension ImageLoadingService {
+extension MobileWorkflowCore.ImageLoadingService {
   public func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
   public func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
-@objc @_inheritsConvenienceInitializers public class StepTitleLabel : UIKit.UILabel {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepTitleLabel : UIKit.UILabel {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class StepBodyLabel : UIKit.UILabel {
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepBodyLabel : UIKit.UILabel {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 @available(*, deprecated, renamed: "MWImageTableViewCellDelegate")
@@ -1234,19 +1214,19 @@ public protocol MWImageTableViewCellDelegate : AnyObject {
 }
 @available(*, deprecated, renamed: "MWImageTableViewCell")
 public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTableViewCell
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWImageTableViewCell : UIKit.UITableViewCell {
-  public var delegate: MobileWorkflowCore.MWImageTableViewCellDelegate?
-  public var backgroundImage: UIKit.UIImage? {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWImageTableViewCell : UIKit.UITableViewCell {
+  @_Concurrency.MainActor(unsafe) public var delegate: MobileWorkflowCore.MWImageTableViewCellDelegate?
+  @_Concurrency.MainActor(unsafe) public var backgroundImage: UIKit.UIImage? {
     get
     set
   }
-  public var contentViewHeightConstraint: UIKit.NSLayoutConstraint?
-  @objc override dynamic public func prepareForReuse()
-  @objc override dynamic public func layoutSubviews()
-  public func setHeightConstraint()
-  public func configureTheme(_ theme: MobileWorkflowCore.Theme)
-  public func configure()
-  public func configure(title: Swift.String?, contentMode: UIKit.UIView.ContentMode?, imageStyle: MobileWorkflowCore.ImageStyle?)
+  @_Concurrency.MainActor(unsafe) public var contentViewHeightConstraint: UIKit.NSLayoutConstraint?
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func prepareForReuse()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func setHeightConstraint()
+  @_Concurrency.MainActor(unsafe) public func configureTheme(_ theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) public func configure()
+  @_Concurrency.MainActor(unsafe) public func configure(title: Swift.String?, contentMode: UIKit.UIView.ContentMode?, imageStyle: MobileWorkflowCore.ImageStyle?)
   @objc deinit
 }
 public class StackStepItem : Swift.Codable {
@@ -1294,7 +1274,8 @@ public class StackStepItem : Swift.Codable {
   final public let playVideoPictureInPicture: Swift.Bool
   final public let playAudioInBackground: Swift.Bool
   final public let imageStyle: MobileWorkflowCore.ImageStyle?
-  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, linkId: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil, playVideoPictureInPicture: Swift.Bool = false, playAudioInBackground: Swift.Bool = false, imageStyle: MobileWorkflowCore.ImageStyle? = nil) throws
+  final public let textStyle: MobileWorkflowCore.TextStyle?
+  public init(type: MobileWorkflowCore.StackStepItem.ItemType, name: Swift.String?, label: Swift.String?, text: Swift.String?, previewURL: Swift.String?, url: Swift.String?, method: Swift.String?, onSuccess: MobileWorkflowCore.SuccessAction?, linkId: Swift.String?, buttonStyle: MobileWorkflowCore.StackStepItemButtonStyle?, contentMode: MobileWorkflowCore.ContentMode?, fullScreenImageOnTap: Swift.Bool = false, fullScreenImageURL: Swift.String? = nil, systemURL: Swift.String? = nil, confirmTitle: Swift.String? = nil, confirmText: Swift.String? = nil, sfSymbolName: Swift.String? = nil, dateType: MobileWorkflowCore.StackStepItem.DateType? = nil, dateTime: Foundation.Date? = nil, playVideoPictureInPicture: Swift.Bool = false, playAudioInBackground: Swift.Bool = false, imageStyle: MobileWorkflowCore.ImageStyle? = nil, textStyle: MobileWorkflowCore.TextStyle? = nil) throws
   required public init(from decoder: Swift.Decoder) throws
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
@@ -1318,19 +1299,24 @@ public enum ImageStyle : Swift.String, Swift.Codable {
     get
   }
 }
+public enum TextStyle : Swift.String, Swift.Codable {
+  case left
+  case largeCenter
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
 public typealias SystemAction = Swift.String
-@objc @_hasMissingDesignatedInitializers public class FullScreenImageViewController : UIKit.UINavigationController {
-  @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
-    @objc get
+@objc @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class FullScreenImageViewController : UIKit.UINavigationController {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  public init(imageUrl: Swift.String, session: MobileWorkflowCore.Session, imageLoadingService: MobileWorkflowCore.ImageLoadingService, theme: MobileWorkflowCore.Theme)
-  @objc override dynamic public var childForStatusBarStyle: UIKit.UIViewController? {
-    @objc get
+  @_Concurrency.MainActor(unsafe) public init(imageUrl: Swift.String, session: MobileWorkflowCore.Session, imageLoadingService: MobileWorkflowCore.ImageLoadingService, theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var childForStatusBarStyle: UIKit.UIViewController? {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  @available(iOS 5.0, *)
-  @objc override dynamic public init(navigationBarClass: Swift.AnyClass?, toolbarClass: Swift.AnyClass?)
-  @objc override dynamic public init(rootViewController: UIKit.UIViewController)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @objc deinit
 }
 public struct BinaryResource : Swift.Codable {
@@ -1343,31 +1329,25 @@ public struct BinaryResource : Swift.Codable {
 public protocol URLAsyncTaskConvertible {
   func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
 }
-extension URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
+extension MobileWorkflowCore.URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
   public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
 }
 public typealias UploadResponse = (statusCode: Swift.Int, data: Foundation.Data?)
 public struct ResultsUploadTask : Swift.Codable, MobileWorkflowCore.QueueableTask, MobileWorkflowCore.CredentializedAsyncTask {
-  public var type: Swift.String {
-    get
-  }
   public typealias Response = MobileWorkflowCore.UploadResponse
   public typealias UrlString = Swift.String
   public typealias Input = MobileWorkflowCore.ResultsUploadTask.UrlString
   public let input: MobileWorkflowCore.ResultsUploadTask.UrlString
   public let uploadProperties: [MobileWorkflowCore.UploadProperty]
   public let credential: MobileWorkflowCore.Credential?
-  public let queueNetworkUploads: Swift.Bool
+  public let canBeQueued: Swift.Bool
   public let method: MobileWorkflowCore.HTTPMethod
-  public func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
-  public static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> MobileWorkflowCore.ResultsUploadTask
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
 public enum Event {
   case notification(name: Foundation.NSNotification.Name)
   case apnsTokenRegistered
-  case significantLocationChanges
   case applicationOpensURL
 }
 public protocol EventService : MobileWorkflowCore.AppEventDelegate, MobileWorkflowCore.AuthRedirector, MobileWorkflowCore.SceneEventDelegate {
@@ -1382,7 +1362,7 @@ public class EventServiceImplementation : MobileWorkflowCore.EventService {
 public protocol APNSRegister {
   func registerForRemoteNotifications()
 }
-extension UIApplication : MobileWorkflowCore.APNSRegister {
+extension UIKit.UIApplication : MobileWorkflowCore.APNSRegister {
 }
 public protocol AppEventDelegator : AnyObject {
   var eventDelegate: MobileWorkflowCore.AppEventDelegate? { get set }
@@ -1399,12 +1379,12 @@ public protocol SceneEventDelegate : AnyObject {
   func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
 }
-extension EventServiceImplementation {
+extension MobileWorkflowCore.EventServiceImplementation {
   public func application(_ app: UIKit.UIApplication, open url: Foundation.URL, options: [UIKit.UIApplication.OpenURLOptionsKey : Any]) -> Swift.Bool
   public func application(_ application: UIKit.UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Foundation.Data)
   public func application(_ application: UIKit.UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Swift.Error)
 }
-extension EventServiceImplementation {
+extension MobileWorkflowCore.EventServiceImplementation {
   public func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   public func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
 }
@@ -1430,7 +1410,7 @@ public class ListStepItem : Swift.Codable {
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
-extension ListStepItem : MobileWorkflowCore.ValueProvider {
+extension MobileWorkflowCore.ListStepItem : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
@@ -1446,22 +1426,22 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers open class MWPDFStepViewController : MobileWorkflowCore.MWContentStepViewController {
-  override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWPDFStepViewController : MobileWorkflowCore.MWContentStepViewController {
+  @_Concurrency.MainActor(unsafe) override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    @_Concurrency.MainActor(unsafe) get
+  }
+  @_Concurrency.MainActor(unsafe) open var pdfView: PDFKit.PDFView!
+  @_Concurrency.MainActor(unsafe) open var enforceOpenInApp: Swift.Bool {
     get
   }
-  open var pdfView: PDFKit.PDFView!
-  open var enforceOpenInApp: Swift.Bool {
-    get
-  }
-  @objc override dynamic open func viewDidLoad()
-  @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
-  @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
-  open func load()
-  public func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
-  open func prepare(document: PDFKit.PDFDocument) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
-  override public init(step: MobileWorkflowCore.Step)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) open func load()
+  @_Concurrency.MainActor(unsafe) public func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
+  @_Concurrency.MainActor(unsafe) open func prepare(document: PDFKit.PDFDocument) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
+  @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
@@ -1503,8 +1483,8 @@ public enum PresentationFinishReason : Swift.Equatable {
 public typealias OnDismiss = (MobileWorkflowCore.PresentationFinishReason) -> Swift.Void
 public struct Presentation {
   public let context: MobileWorkflowCore.PresentationContext
-  public let dismiss: ((MobileWorkflowCore.PresentationFinishReason, MobileWorkflowCore.PresentationContext) -> Swift.Void)?
-  public init(context: MobileWorkflowCore.PresentationContext, dismiss: ((MobileWorkflowCore.PresentationFinishReason, MobileWorkflowCore.PresentationContext) -> Swift.Void)?)
+  public let dismiss: ((_ reason: MobileWorkflowCore.PresentationFinishReason, _ context: MobileWorkflowCore.PresentationContext) -> Swift.Void)?
+  public init(context: MobileWorkflowCore.PresentationContext, dismiss: ((_ reason: MobileWorkflowCore.PresentationFinishReason, _ context: MobileWorkflowCore.PresentationContext) -> Swift.Void)?)
 }
 public struct PresentationContext {
   public enum DismissRule {
@@ -1572,24 +1552,24 @@ public enum JSONParsingError : Foundation.LocalizedError {
     get
   }
 }
-extension JSONEncoder {
+extension Foundation.JSONEncoder {
   public func encodeParsingException<T>(_ value: T) throws -> Foundation.Data where T : Swift.Encodable
 }
-extension JSONDecoder {
+extension Foundation.JSONDecoder {
   public func decodeParsingException<T>(data: Foundation.Data) throws -> T where T : Swift.Decodable
 }
-extension URLAsyncTask {
+extension MobileWorkflowCore.URLAsyncTask {
   public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = JSONEncoder(), decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Swift.Int, Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
-extension URLAsyncTask where T == MobileWorkflowCore.UploadResponse {
+extension MobileWorkflowCore.URLAsyncTask where T == MobileWorkflowCore.UploadResponse {
   public static func build(urlString: Swift.String, uploadProperties: [MobileWorkflowCore.UploadProperty], session: MobileWorkflowCore.ContentProvider, method: MobileWorkflowCore.HTTPMethod, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, shouldInterceptResponse: Swift.Bool, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> Swift.Error?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
 }
 public typealias Parse<T> = (Foundation.Data) throws -> T
 public typealias ParsePublisher<T> = (Combine.AnyPublisher<Foundation.Data, Swift.Error>) -> Combine.AnyPublisher<T, Swift.Error>
-extension Decodable {
+extension Swift.Decodable {
   public static func parse(data: Foundation.Data, decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> Self
   public static func decodeParse(decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.Parse<Self>
   public static func parsePublisher(_ parse: @escaping MobileWorkflowCore.Parse<Self> = Self.decodeParse()) -> MobileWorkflowCore.ParsePublisher<Self>
@@ -1633,42 +1613,42 @@ public protocol HasLoadState : AnyObject {
   associatedtype LoadStateType : MobileWorkflowCore.LoadState
   var loadState: Self.LoadStateType? { get set }
 }
-extension UUID : MobileWorkflowCore.LoadState {
+extension Foundation.UUID : MobileWorkflowCore.LoadState {
 }
-extension RemoteContentStepViewController {
+extension MobileWorkflowCore.RemoteContentStepViewController {
   public var showBadURLError: Swift.Bool {
     get
   }
 }
-extension RemoteContentStepViewController where Self : MobileWorkflowCore.HasLoadState {
+extension MobileWorkflowCore.RemoteContentStepViewController where Self : MobileWorkflowCore.HasLoadState {
   public func loadContent()
 }
-extension RemoteContentStepViewController {
+extension MobileWorkflowCore.RemoteContentStepViewController {
   public func loadContent()
 }
-extension RemoteContentStepViewController {
+extension MobileWorkflowCore.RemoteContentStepViewController {
   public func handleError(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
 }
 @_hasMissingDesignatedInitializers public class StepBuilder {
   @objc deinit
 }
-extension UIFont {
+extension UIKit.UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
-@objc @_inheritsConvenienceInitializers open class MWLoadingStepViewController : MobileWorkflowCore.MWStepViewController {
-  override open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
-    get
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWLoadingStepViewController : MobileWorkflowCore.MWStepViewController {
+  @_Concurrency.MainActor(unsafe) override open var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
+    @_Concurrency.MainActor(unsafe) get
   }
-  @objc override dynamic open func viewDidLoad()
-  public var loadingError: Swift.Error?
-  public var isLoading: Swift.Bool {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) public var loadingError: Swift.Error?
+  @_Concurrency.MainActor(unsafe) public var isLoading: Swift.Bool {
     get
     set
   }
-  public func showLoading()
-  public func hideLoading()
-  override public init(step: MobileWorkflowCore.Step)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) public func showLoading()
+  @_Concurrency.MainActor(unsafe) public func hideLoading()
+  @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public protocol CustomisableErrorTypes {
@@ -1703,12 +1683,12 @@ open class SelectionResult<Item> : MobileWorkflowCore.StepResult, MobileWorkflow
   open func encode(to encoder: Swift.Encoder) throws
   required public init(from decoder: Swift.Decoder) throws
 }
-extension SelectionResult : MobileWorkflowCore.JSONRepresentable {
+extension MobileWorkflowCore.SelectionResult : MobileWorkflowCore.JSONRepresentable {
   public var jsonContent: Swift.String? {
     get
   }
 }
-extension SelectionResult : MobileWorkflowCore.ValueProvider {
+extension MobileWorkflowCore.SelectionResult : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
@@ -1716,7 +1696,7 @@ public protocol TaskExecutor {
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
 }
-extension TaskExecutor {
+extension MobileWorkflowCore.TaskExecutor {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
 }
 public protocol AsyncTaskService : MobileWorkflowCore.TaskExecutor {
@@ -1725,14 +1705,14 @@ public protocol AsyncTaskService : MobileWorkflowCore.TaskExecutor {
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   func configure(stepServices: MobileWorkflowCore.StepServices?)
 }
-extension AsyncTaskService {
+extension MobileWorkflowCore.AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
 }
-extension AsyncTaskService {
+extension MobileWorkflowCore.AsyncTaskService {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   public func configure(stepServices: MobileWorkflowCore.StepServices?)
 }
-extension AsyncTaskService {
+extension MobileWorkflowCore.AsyncTaskService {
   public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
 }
 public enum HTTPMethod : Swift.String, Swift.Codable {
@@ -1751,7 +1731,7 @@ public enum HTTPMethod : Swift.String, Swift.Codable {
     get
   }
 }
-extension QueueControllerNetworkAsyncTaskService : Foundation.URLSessionTaskDelegate {
+extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : Foundation.URLSessionTaskDelegate {
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, didBecomeInvalidWithError error: Swift.Error?)
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, didReceive challenge: Foundation.URLAuthenticationChallenge, completionHandler: @escaping (Foundation.URLSession.AuthChallengeDisposition, Foundation.URLCredential?) -> Swift.Void)
   @objc dynamic public func urlSessionDidFinishEvents(forBackgroundURLSession session: Foundation.URLSession)
@@ -1766,27 +1746,27 @@ extension QueueControllerNetworkAsyncTaskService : Foundation.URLSessionTaskDele
 }
 @available(*, deprecated, renamed: "BarcodeScannerViewController")
 public typealias MobileWorkflowBarcodeScannerViewController = MobileWorkflowCore.BarcodeScannerViewController
-@objc @_inheritsConvenienceInitializers open class BarcodeScannerViewController : UIKit.UIViewController {
-  open var instructionsText: Swift.String {
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class BarcodeScannerViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) open var instructionsText: Swift.String {
     get
     set
   }
-  open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
+  @_Concurrency.MainActor(unsafe) open var supportedBarcodes: [AVFoundation.AVMetadataObject.ObjectType] {
     get
     set
   }
-  @objc override dynamic public func viewDidLoad()
-  @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
-  @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
-  @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
-  @objc override dynamic open func viewWillLayoutSubviews()
-  open func found(code: Swift.String)
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillDisappear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) open func found(code: Swift.String)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-extension BarcodeScannerViewController : AVFoundation.AVCaptureMetadataOutputObjectsDelegate {
-  @objc dynamic public func metadataOutput(_ output: AVFoundation.AVCaptureMetadataOutput, didOutput metadataObjects: [AVFoundation.AVMetadataObject], from connection: AVFoundation.AVCaptureConnection)
+extension MobileWorkflowCore.BarcodeScannerViewController : AVFoundation.AVCaptureMetadataOutputObjectsDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func metadataOutput(_ output: AVFoundation.AVCaptureMetadataOutput, didOutput metadataObjects: [AVFoundation.AVMetadataObject], from connection: AVFoundation.AVCaptureConnection)
 }
 public struct Theme {
   public let primaryTintColor: UIKit.UIColor
@@ -1813,7 +1793,7 @@ public struct Theme {
   public let groupedBackgroundColor: UIKit.UIColor
   public let groupedCellBackgroundColor: UIKit.UIColor
 }
-extension Theme {
+extension MobileWorkflowCore.Theme {
   public static var current: MobileWorkflowCore.Theme
 }
 public protocol NamedType {
@@ -1830,7 +1810,9 @@ public protocol ServiceType : MobileWorkflowCore.NamedType {
   func buildService(with config: MobileWorkflowCore.ServiceConfiguration) throws -> MobileWorkflowCore.AsyncTaskService?
 }
 public protocol BackgroundService : MobileWorkflowCore.NamedType {
-  func provide(services: MobileWorkflowCore.StepServices)
+  var id: Swift.String { get }
+  func provide(services: MobileWorkflowCore.StepServices, session: MobileWorkflowCore.Session)
+  func loadConfiguration(configuration: [Swift.String : Any])
   func restore(configuration: Any)
   func saveConfiguration() -> Any
 }
@@ -1843,7 +1825,7 @@ public protocol Plugin {
   static var backgroundServices: [MobileWorkflowCore.BackgroundService] { get }
   static func buildInterceptors(credentialStore: MobileWorkflowCore.CredentialStoreProtocol) -> [MobileWorkflowCore.AsyncTaskInterceptor]
 }
-extension Plugin {
+extension MobileWorkflowCore.Plugin {
   public static var allStepsTypes: [MobileWorkflowCore.StepType] {
     get
   }
@@ -1860,8 +1842,13 @@ extension Plugin {
 }
 @available(*, deprecated, renamed: "BuildableStep")
 public typealias MobileWorkflowStep = MobileWorkflowCore.BuildableStep
-extension ServiceType {
+extension MobileWorkflowCore.ServiceType {
   public func buildDecodableService<T>(type: T.Type, with config: MobileWorkflowCore.ServiceConfiguration) throws -> T where T : MobileWorkflowCore.AsyncTaskService, T : Swift.Decodable
+}
+extension MobileWorkflowCore.BackgroundService {
+  public var id: Swift.String {
+    get
+  }
 }
 public enum L10n {
   public enum Alert {
@@ -1893,24 +1880,24 @@ public struct StepInfo {
   public let context: MobileWorkflowCore.StepContext
   public let session: MobileWorkflowCore.Session
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class StateView : UIKit.UIView {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class StateView : UIKit.UIView {
   public struct ButtonConfig {
     public let title: Swift.String
     public let style: MobileWorkflowCore.ButtonStyle
     public let action: () -> Swift.Void
     public init(title: Swift.String, style: MobileWorkflowCore.ButtonStyle = .primary, action: @escaping () -> Swift.Void)
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil, theme: MobileWorkflowCore.Theme = .current)
-  public func configureForError(_ error: Swift.Error, theme: MobileWorkflowCore.Theme = .current, okAction: (() -> Swift.Void)?)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor(unsafe) public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil, theme: MobileWorkflowCore.Theme = .current)
+  @_Concurrency.MainActor(unsafe) public func configureForError(_ error: Swift.Error, theme: MobileWorkflowCore.Theme = .current, okAction: (() -> Swift.Void)?)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWAudioTableViewCell : MobileWorkflowCore.MWVideoTableViewCell {
-  override public func setHeightConstraint()
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWAudioTableViewCell : MobileWorkflowCore.MWVideoTableViewCell {
+  @_Concurrency.MainActor(unsafe) override public func setHeightConstraint()
   @objc deinit
 }
-extension URLRequest {
+extension Foundation.URLRequest {
   public func curlString() -> Swift.String
 }
 public struct ButtonConfig {
@@ -1920,7 +1907,7 @@ public struct ButtonConfig {
   public var action: () -> Swift.Void
   public init(isEnabled: Swift.Bool, style: MobileWorkflowCore.ButtonStyle, title: Swift.String, action: @escaping () -> Swift.Void)
 }
-@objc public class NavigationFooterView : UIKit.UIView {
+@objc @_Concurrency.MainActor(unsafe) public class NavigationFooterView : UIKit.UIView {
   public struct Config {
     public var primaryButton: MobileWorkflowCore.ButtonConfig
     public var secondaryButton: MobileWorkflowCore.ButtonConfig?
@@ -1930,31 +1917,70 @@ public struct ButtonConfig {
     }
     public init(primaryButton: MobileWorkflowCore.ButtonConfig, secondaryButton: MobileWorkflowCore.ButtonConfig?, hasBlurredBackground: Swift.Bool)
   }
-  public var config: MobileWorkflowCore.NavigationFooterView.Config {
+  @_Concurrency.MainActor(unsafe) public var config: MobileWorkflowCore.NavigationFooterView.Config {
     get
     set
   }
-  public var theme: MobileWorkflowCore.Theme
-  public init(config: MobileWorkflowCore.NavigationFooterView.Config = .default, theme: MobileWorkflowCore.Theme)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic public var isHidden: Swift.Bool {
-    @objc get
-    @objc set
+  @_Concurrency.MainActor(unsafe) public var theme: MobileWorkflowCore.Theme
+  @_Concurrency.MainActor(unsafe) public init(config: MobileWorkflowCore.NavigationFooterView.Config = .default, theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHidden: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @objc deinit
 }
-extension UIColor {
+extension Swift.String : Swift.CodingKey {
+  public var intValue: Swift.Int? {
+    get
+  }
+  public init?(stringValue: Swift.String)
+  public init?(intValue: Swift.Int)
+}
+public protocol KeyInformation {
+  var path: [Swift.CodingKey] { get }
+}
+extension Swift.Array : MobileWorkflowCore.KeyInformation where Element == Swift.CodingKey {
+  public var path: [Swift.CodingKey] {
+    get
+  }
+}
+extension Swift.Array : Swift.CodingKey where Element == Swift.CodingKey {
+  public var intValue: Swift.Int? {
+    get
+  }
+  public var stringValue: Swift.String {
+    get
+  }
+  public init?(intValue: Swift.Int)
+  public init?(stringValue: Swift.String)
+}
+extension Swift.Dictionary : MobileWorkflowCore.KeyInformation where Key == Swift.String, Value == [Swift.CodingKey] {
+  public var path: [Swift.CodingKey] {
+    get
+  }
+}
+extension Swift.Dictionary : Swift.CodingKey where Key == Swift.String, Value == [Swift.CodingKey] {
+  public var intValue: Swift.Int? {
+    get
+  }
+  public var stringValue: Swift.String {
+    get
+  }
+  public init?(intValue: Swift.Int)
+  public init?(stringValue: Swift.String)
+}
+extension UIKit.UIColor {
   convenience public init?(hex: Swift.String)
   convenience public init(light: UIKit.UIColor, dark: UIKit.UIColor)
 }
-extension UIColor {
+extension UIKit.UIColor {
   public var isDarkBackgroundForText: Swift.Bool {
     get
   }
   public func statusBarStyleForBestContrast() -> UIKit.UIStatusBarStyle
 }
-extension UIColor {
+extension UIKit.UIColor {
   public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
 }
 public protocol WorkflowInfoConvertible {
@@ -1972,14 +1998,14 @@ public enum AppConfigurationContext {
   case file(path: Swift.String, serverId: Swift.Int? = nil, initialWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
   public func updating(modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo?) -> MobileWorkflowCore.AppConfigurationContext
 }
-extension Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
+extension Swift.Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
   public func firstValidConfiguration(from urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> MobileWorkflowCore.AppConfigurationContext?
 }
 public struct URLModalWorkflowInfoConverter : MobileWorkflowCore.WorkflowInfoConvertible {
   public init(url: Foundation.URL, useLegacyImplementation: Swift.Bool = false)
   public func convert() -> MobileWorkflowCore.WorkflowInfo?
 }
-extension AppConfigurationContext {
+extension MobileWorkflowCore.AppConfigurationContext {
   public func complementing(with modalWorkflowInfoConvertible: MobileWorkflowCore.WorkflowInfoConvertible) -> MobileWorkflowCore.AppConfigurationContext
 }
 public struct LocalizationService {
@@ -2011,18 +2037,18 @@ public class RootCoordinator {
 }
 @available(*, deprecated, renamed: "MWSubtitleTableViewCell")
 public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubtitleTableViewCell
-@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class MWSubtitleTableViewCell : UIKit.UITableViewCell {
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWSubtitleTableViewCell : UIKit.UITableViewCell {
   public struct ViewData {
     public init(title: Swift.String?, subtitle: Swift.String?, image: UIKit.UIImage?, willLoadImage: Swift.Bool, isDisclosureIndictorHidden: Swift.Bool)
   }
-  public var viewData: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData? {
+  @_Concurrency.MainActor(unsafe) public var viewData: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData? {
     get
     set
   }
-  @objc override dynamic public func layoutSubviews()
-  public func updateImage(_ image: UIKit.UIImage?)
-  public func updatePlaceholderImage(theme: MobileWorkflowCore.Theme)
-  public func configureStyle(backgroundColor: UIKit.UIColor = Theme.current.primaryBackgroundColor, titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = Theme.current.primaryTextColor, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = Theme.current.secondaryTextColor)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) public func updateImage(_ image: UIKit.UIImage?)
+  @_Concurrency.MainActor(unsafe) public func updatePlaceholderImage(theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) public func configureStyle(backgroundColor: UIKit.UIColor = Theme.current.primaryBackgroundColor, titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = Theme.current.primaryTextColor, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = Theme.current.secondaryTextColor)
   @objc deinit
 }
 public struct Server : Swift.Codable {
@@ -2032,7 +2058,7 @@ public struct Server : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
   public init(from decoder: Swift.Decoder) throws
 }
-extension Collection {
+extension Swift.Collection {
   public subscript(safe index: Self.Index) -> Self.Iterator.Element? {
     get
   }
@@ -2041,40 +2067,39 @@ public enum Attachment {
   case filePath(_: Swift.String)
   case data(_: Foundation.Data, mimeType: Swift.String, fileName: Swift.String)
 }
-@objc open class MWEmailStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
-  public var emailStep: MobileWorkflowCore.EmailStep {
+@objc @_Concurrency.MainActor(unsafe) open class MWEmailStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
+  @_Concurrency.MainActor(unsafe) public var emailStep: MobileWorkflowCore.EmailStep {
     get
   }
-  public init(emailStep: MobileWorkflowCore.EmailStep)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @objc override dynamic public func viewDidLoad()
-  override public func hideNavigationFooterView()
-  open func extractAttachements(completion: @escaping (Swift.Result<[MobileWorkflowCore.Attachment], Swift.Error>) -> Swift.Void)
-  public func extractAnswerContent() -> Swift.String?
-  open func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
-  override public init(instructionStep: MobileWorkflowCore.InstructionStep)
+  @_Concurrency.MainActor(unsafe) public init(emailStep: MobileWorkflowCore.EmailStep)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) override public func hideNavigationFooterView()
+  @_Concurrency.MainActor(unsafe) open func extractAttachements(completion: @escaping (Swift.Result<[MobileWorkflowCore.Attachment], Swift.Error>) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) public func extractAnswerContent() -> Swift.String?
+  @_Concurrency.MainActor(unsafe) open func openEmailComposer(sendTo: Swift.String, subject: Swift.String, body: Swift.String?, attachments: [MobileWorkflowCore.Attachment])
   @objc deinit
 }
-extension MWEmailStepViewController : MessageUI.MFMailComposeViewControllerDelegate {
-  @objc dynamic public func mailComposeController(_ controller: MessageUI.MFMailComposeViewController, didFinishWith result: MessageUI.MFMailComposeResult, error: Swift.Error?)
+extension MobileWorkflowCore.MWEmailStepViewController : MessageUI.MFMailComposeViewControllerDelegate {
+  @_Concurrency.MainActor(unsafe) @objc dynamic public func mailComposeController(_ controller: MessageUI.MFMailComposeViewController, didFinishWith result: MessageUI.MFMailComposeResult, error: Swift.Error?)
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   func fetchValue(for path: Swift.String) -> Any?
   func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
-extension String : MobileWorkflowCore.ValueProvider {
+extension Swift.String : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
-extension Dictionary : MobileWorkflowCore.SessionProvider {
+extension Swift.Dictionary : MobileWorkflowCore.SessionProvider {
 }
-extension Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.String {
+extension Swift.Dictionary : MobileWorkflowCore.ValueProvider where Key == Swift.String {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
-extension NSDictionary : MobileWorkflowCore.SessionProvider {
+extension Foundation.NSDictionary : MobileWorkflowCore.SessionProvider {
 }
-extension NSDictionary : MobileWorkflowCore.ValueProvider {
+extension Foundation.NSDictionary : MobileWorkflowCore.ValueProvider {
   public func fetchValue(for path: Swift.String) -> Any?
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
@@ -2091,13 +2116,13 @@ public protocol SyncableContentSource : AnyObject {
   var resolvedURL: Foundation.URL? { get set }
   func syncContentSource() -> MobileWorkflowCore.SyncResult
 }
-extension SyncableContentSource where Self : MobileWorkflowCore.RemoteContentStep {
+extension MobileWorkflowCore.SyncableContentSource where Self : MobileWorkflowCore.RemoteContentStep {
   public func syncContentSource() -> MobileWorkflowCore.SyncResult
 }
 public protocol ContentClearable {
   func clearContent()
 }
-extension RemoteContentStepViewController where Self : MobileWorkflowCore.ContentClearable, Self.StepType : MobileWorkflowCore.SyncableContentSource {
+extension MobileWorkflowCore.RemoteContentStepViewController where Self : MobileWorkflowCore.ContentClearable, Self.StepType : MobileWorkflowCore.SyncableContentSource {
   public func resyncContent()
 }
 public enum ViewOrder {
@@ -2105,8 +2130,8 @@ public enum ViewOrder {
   case above(view: UIKit.UIView)
   case below(view: UIKit.UIView)
 }
-extension UIView {
-  public func addPinnedSubview(_ view: UIKit.UIView, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
+extension UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public func addPinnedSubview(_ view: UIKit.UIView, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
 }
 public enum PDFImageRenderError : Foundation.LocalizedError {
   case pathNotFound
@@ -2127,15 +2152,15 @@ public class PDFImageRenderer {
   public func renderImages(_ images: [UIKit.UIImage], fileNamePrefix: Swift.String) throws -> Foundation.URL?
   @objc deinit
 }
-extension UIImage {
+extension UIKit.UIImage {
   public func resized(to size: CoreGraphics.CGSize, preservingAspectRatio: Swift.Bool = false, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
   public func resized(withRatio ratio: CoreGraphics.CGFloat, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
   public func resized(toNumberOfBytes numberOfBytes: Swift.Int, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage?
   public func scaledAndCroppedToSquare(ofLength length: CoreGraphics.CGFloat) -> UIKit.UIImage
   public static func coloredImage(size: CoreGraphics.CGSize, color: UIKit.UIColor) -> UIKit.UIImage
 }
-extension WKWebView {
-  public func configureAppBoundDomains()
+extension WebKit.WKWebView {
+  @_Concurrency.MainActor(unsafe) public func configureAppBoundDomains()
 }
 public enum ButtonStyle : Swift.String, Swift.Codable {
   case primary
@@ -2148,30 +2173,30 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
     get
   }
 }
-@objc @_inheritsConvenienceInitializers public class CustomButton : UIKit.UIButton {
-  @objc override dynamic public var isHighlighted: Swift.Bool {
-    @objc get
-    @objc set
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class CustomButton : UIKit.UIButton {
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHighlighted: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
   }
-  @objc override dynamic public var isSelected: Swift.Bool {
-    @objc get
-    @objc set
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isSelected: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
   }
-  @objc override dynamic public var isEnabled: Swift.Bool {
-    @objc get
-    @objc set
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isEnabled: Swift.Bool {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
   }
-  @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
-    @objc get
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var intrinsicContentSize: CoreGraphics.CGSize {
+    @_Concurrency.MainActor(unsafe) @objc get
   }
-  convenience public init(style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
-  @objc override dynamic public func layoutSubviews()
-  @objc override dynamic public func tintColorDidChange()
-  @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
-  public func configureWithStyle(_ style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
-  public func configureWithImage(_ image: UIKit.UIImage)
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) convenience public init(style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func tintColorDidChange()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @_Concurrency.MainActor(unsafe) public func configureWithStyle(_ style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) public func configureWithImage(_ image: UIKit.UIImage)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public struct AuthRedirectHandler {
@@ -2181,7 +2206,7 @@ public protocol AuthProvider {
   func authenticate(completion: @escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
 }
 public class AuthProviderImplementation : MobileWorkflowCore.AuthProvider {
-  public init(_ start: @escaping (@escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer)
+  public init(_ start: @escaping (_ completion: @escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer)
   public func authenticate(completion: @escaping (Swift.Result<[MobileWorkflowCore.Credential], Swift.Error>) -> Swift.Void) -> MobileWorkflowCore.AuthFlowResumer
   @objc deinit
 }
@@ -2191,11 +2216,11 @@ public protocol AuthFlowResumer : AnyObject {
 public protocol AuthRedirector : AnyObject {
   var authFlowResumer: MobileWorkflowCore.AuthFlowResumer? { get set }
 }
-extension AuthRedirector {
+extension MobileWorkflowCore.AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
-extension ListStepItem : MobileWorkflowCore.SelectionItem {
+extension MobileWorkflowCore.ListStepItem : MobileWorkflowCore.SelectionItem {
   public var resultKey: Swift.String? {
     get
   }
@@ -2217,28 +2242,28 @@ public class Reachability {
   public init(host: Swift.String = "google.com")
   @objc deinit
 }
-extension ReachabilityStatus {
+extension MobileWorkflowCore.ReachabilityStatus {
   public init(reachabilityFlags flags: SystemConfiguration.SCNetworkReachabilityFlags)
 }
-@objc @_inheritsConvenienceInitializers public class WidthResizingView : UIKit.UIView {
-  public var shouldUpdateFrameWhenSettingWidth: Swift.Bool
-  @objc override dynamic public var frame: CoreGraphics.CGRect {
-    @objc get
-    @objc set
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class WidthResizingView : UIKit.UIView {
+  @_Concurrency.MainActor(unsafe) public var shouldUpdateFrameWhenSettingWidth: Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public var frame: CoreGraphics.CGRect {
+    @_Concurrency.MainActor(unsafe) @objc get
+    @_Concurrency.MainActor(unsafe) @objc set
   }
-  public var width: CoreGraphics.CGFloat {
+  @_Concurrency.MainActor(unsafe) public var width: CoreGraphics.CGFloat {
     get
     set
   }
-  @objc override dynamic public init(frame: CoreGraphics.CGRect)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
-@objc @_inheritsConvenienceInitializers public class StateViewController : UIKit.UIViewController {
-  public var stateView: MobileWorkflowCore.StateView
-  @objc override dynamic public func loadView()
-  @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
-  @objc required dynamic public init?(coder: Foundation.NSCoder)
+@objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StateViewController : UIKit.UIViewController {
+  @_Concurrency.MainActor(unsafe) public var stateView: MobileWorkflowCore.StateView
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func loadView()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public init(nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
+  @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
 public protocol PDFStep {
@@ -2248,8 +2273,6 @@ public protocol PDFStep {
 }
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
-extension MobileWorkflowCore.LocationServiceError : Swift.Equatable {}
-extension MobileWorkflowCore.LocationServiceError : Swift.Hashable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Equatable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Hashable {}
 extension MobileWorkflowCore.StepLinkType : Swift.Equatable {}
@@ -2270,9 +2293,6 @@ extension MobileWorkflowCore.NavigationDirection : Swift.Equatable {}
 extension MobileWorkflowCore.NavigationDirection : Swift.Hashable {}
 extension MobileWorkflowCore.StepViewControllerTitleMode : Swift.Equatable {}
 extension MobileWorkflowCore.StepViewControllerTitleMode : Swift.Hashable {}
-extension CoreLocation.CLLocation.CodingKeys : Swift.Equatable {}
-extension CoreLocation.CLLocation.CodingKeys : Swift.Hashable {}
-extension CoreLocation.CLLocation.CodingKeys : Swift.RawRepresentable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Equatable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.Hashable {}
 extension MobileWorkflowCore.StackStepItem.ItemType : Swift.RawRepresentable {}
@@ -2285,6 +2305,9 @@ extension MobileWorkflowCore.ContentMode : Swift.RawRepresentable {}
 extension MobileWorkflowCore.ImageStyle : Swift.Equatable {}
 extension MobileWorkflowCore.ImageStyle : Swift.Hashable {}
 extension MobileWorkflowCore.ImageStyle : Swift.RawRepresentable {}
+extension MobileWorkflowCore.TextStyle : Swift.Equatable {}
+extension MobileWorkflowCore.TextStyle : Swift.Hashable {}
+extension MobileWorkflowCore.TextStyle : Swift.RawRepresentable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Equatable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Hashable {}
 extension MobileWorkflowCore.PresentationContext.DismissRule : Swift.Equatable {}
