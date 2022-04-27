@@ -50,6 +50,9 @@ public protocol EmailStep : MobileWorkflowCore.InstructionStep {
   @objc deinit
 }
 extension MobileWorkflowCore.MWEmailStep : MobileWorkflowCore.BuildableStep {
+  public static var mandatoryCodingPaths: [Swift.CodingKey] {
+    get
+  }
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
@@ -259,6 +262,9 @@ public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.In
   @objc deinit
 }
 extension MobileWorkflowCore.MWCompletionStep : MobileWorkflowCore.BuildableStep {
+  public static var mandatoryCodingPaths: [Swift.CodingKey] {
+    get
+  }
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 public enum BinaryContentType {
@@ -631,6 +637,9 @@ public class MWInstructionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.I
   @objc deinit
 }
 extension MobileWorkflowCore.MWInstructionStep : MobileWorkflowCore.BuildableStep {
+  public static var mandatoryCodingPaths: [Swift.CodingKey] {
+    get
+  }
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class PanZoomImageScrollView : UIKit.UIScrollView {
@@ -638,6 +647,7 @@ extension MobileWorkflowCore.MWInstructionStep : MobileWorkflowCore.BuildableSte
     get
     set
   }
+  @_Concurrency.MainActor(unsafe) public func setImage(_ image: UIKit.UIImage?, animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) convenience public init(image: UIKit.UIImage?)
@@ -712,7 +722,7 @@ public struct Analytics {
 @available(*, deprecated, renamed: "MWVideoTableViewCell")
 public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTableViewCell
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWVideoTableViewCell : MobileWorkflowCore.MWImageTableViewCell {
-  @_Concurrency.MainActor(unsafe) override public func configure()
+  @_Concurrency.MainActor(unsafe) override public func configure(backgroundImage: UIKit.UIImage? = nil, animated: Swift.Bool = false)
   @objc deinit
 }
 open class FileResult : MobileWorkflowCore.StepResult {
@@ -1185,17 +1195,28 @@ extension UIKit.UITableView {
 extension UIKit.UITableViewHeaderFooterView : MobileWorkflowCore.ReusableView {
 }
 extension UIKit.UITableView {
+  @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView
   @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView, T : MobileWorkflowCore.NibLoadable
   @_Concurrency.MainActor(unsafe) public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
+public enum ImageLoadingResult {
+  case bundle(_: UIKit.UIImage)
+  case session(_: UIKit.UIImage)
+  case cache(_: UIKit.UIImage)
+  case remote(_: UIKit.UIImage)
+  case notFound
+  public var image: UIKit.UIImage? {
+    get
+  }
+  public var wasLoadedRemotely: Swift.Bool {
+    get
+  }
+}
 public protocol ImageLoadingService {
+  func load(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((MobileWorkflowCore.ImageLoadingResult) -> Swift.Void)?) -> Combine.AnyCancellable?
   func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
   func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
   func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
-}
-extension MobileWorkflowCore.ImageLoadingService {
-  public func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
-  public func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepTitleLabel : UIKit.UILabel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -1216,6 +1237,7 @@ public protocol MWImageTableViewCellDelegate : AnyObject {
 public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTableViewCell
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWImageTableViewCell : UIKit.UITableViewCell {
   @_Concurrency.MainActor(unsafe) public var delegate: MobileWorkflowCore.MWImageTableViewCellDelegate?
+  @available(*, deprecated, message: "Use `self.configure(backgroundImage:animated:)` instead.")
   @_Concurrency.MainActor(unsafe) public var backgroundImage: UIKit.UIImage? {
     get
     set
@@ -1225,7 +1247,7 @@ public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTa
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func setHeightConstraint()
   @_Concurrency.MainActor(unsafe) public func configureTheme(_ theme: MobileWorkflowCore.Theme)
-  @_Concurrency.MainActor(unsafe) public func configure()
+  @_Concurrency.MainActor(unsafe) public func configure(backgroundImage: UIKit.UIImage? = nil, animated: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configure(title: Swift.String?, contentMode: UIKit.UIView.ContentMode?, imageStyle: MobileWorkflowCore.ImageStyle?)
   @objc deinit
 }
@@ -1405,8 +1427,9 @@ public class ListStepItem : Swift.Codable {
   final public let detailText: Swift.String?
   final public let sfSymbolName: Swift.String?
   final public let imageURL: Swift.String?
+  final public let sectionName: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
-  public init(id: Swift.String, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?)
+  public init(id: Swift.String, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1775,6 +1798,7 @@ public struct Theme {
   public let primaryNavBarTitleColor: UIKit.UIColor
   public let primaryNavBarShadowColor: UIKit.UIColor
   public let primaryBackgroundColor: UIKit.UIColor
+  public let primarySectionBackgroundColor: UIKit.UIColor
   public let marginBackgroundColor: UIKit.UIColor
   public let imagePlaceholderBackgroundColor: UIKit.UIColor
   public let primaryTextColor: UIKit.UIColor
@@ -2046,8 +2070,8 @@ public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubt
     set
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
-  @_Concurrency.MainActor(unsafe) public func updateImage(_ image: UIKit.UIImage?)
-  @_Concurrency.MainActor(unsafe) public func updatePlaceholderImage(theme: MobileWorkflowCore.Theme)
+  @_Concurrency.MainActor(unsafe) public func updateImage(_ image: UIKit.UIImage?, animated: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func updatePlaceholderImage(theme: MobileWorkflowCore.Theme, animated: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configureStyle(backgroundColor: UIKit.UIColor = Theme.current.primaryBackgroundColor, titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = Theme.current.primaryTextColor, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = Theme.current.secondaryTextColor)
   @objc deinit
 }
@@ -2158,6 +2182,9 @@ extension UIKit.UIImage {
   public func resized(toNumberOfBytes numberOfBytes: Swift.Int, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage?
   public func scaledAndCroppedToSquare(ofLength length: CoreGraphics.CGFloat) -> UIKit.UIImage
   public static func coloredImage(size: CoreGraphics.CGSize, color: UIKit.UIColor) -> UIKit.UIImage
+}
+extension UIKit.UIImageView {
+  @_Concurrency.MainActor(unsafe) public func transition(to image: UIKit.UIImage?, animated: Swift.Bool, completion: ((Swift.Bool) -> Swift.Void)? = nil)
 }
 extension WebKit.WKWebView {
   @_Concurrency.MainActor(unsafe) public func configureAppBoundDomains()
