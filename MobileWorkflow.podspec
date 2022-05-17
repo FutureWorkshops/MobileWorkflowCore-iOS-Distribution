@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = '2.0.4'
+    s.version               = '2.0.8'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
     s.homepage              = 'https://www.mobileworkflow.io'
     s.license               = { :type => 'Copyright', :file => 'LICENSE' }
     s.author                = { 'Future Workshops' => 'info@futureworkshops.com' }
-    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/2.0.4/MobileWorkflowCore.zip' }
+    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/2.0.8/MobileWorkflowCore.zip' }
     s.platform              = :ios
     s.swift_version         = '5'
     s.ios.deployment_target = '13.0'
@@ -16,7 +16,8 @@ Pod::Spec.new do |s|
     s.module_name           = 'MobileWorkflowCore'
 
     s.subspec 'Core' do |cs|
-        cs.source_files          = 'MobileWorkflowCore/**/*.{swift,h,m}'
+        cs.vendored_frameworks   = 'MobileWorkflowCore.xcframework'
+        cs.preserve_paths        = ['MobileWorkflowCore.xcframework']
         cs.resources             = ['MobileWorkflowCore/**/*.{xib,xcassets,strings,stringsdict,m4v,fsh,vsh}']
     end
 end
