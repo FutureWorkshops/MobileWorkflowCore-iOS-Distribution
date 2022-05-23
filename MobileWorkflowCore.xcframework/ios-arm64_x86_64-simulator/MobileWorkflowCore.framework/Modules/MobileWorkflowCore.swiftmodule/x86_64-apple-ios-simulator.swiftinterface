@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
 // swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
@@ -229,6 +229,9 @@ public protocol URLSchemeManager {
 public struct MobileWorkflowSchemeManager : MobileWorkflowCore.URLSchemeManager {
   public init(version: Swift.String = "v1", debugHost: Swift.String = "localhost", defaultPort: Swift.Int = 5000)
   public func parse(url: Foundation.URL) -> MobileWorkflowCore.AppConfigurationContext?
+}
+public protocol TitledError : Swift.Error {
+  var title: Swift.String? { get }
 }
 extension Swift.Error {
   public func alertComponents() -> (title: Swift.String, message: Swift.String)
@@ -510,6 +513,7 @@ extension Foundation.FileManager {
     get
     set
   }
+  @_Concurrency.MainActor(unsafe) public var shouldAnimatedPop: Swift.Bool
   @_Concurrency.MainActor(unsafe) public var navigationFooterView: MobileWorkflowCore.NavigationFooterView {
     get
     set
@@ -562,6 +566,7 @@ public struct StepLink {
   public let type: MobileWorkflowCore.StepLinkType
   public let target: Swift.String
   public let rule: MobileWorkflowCore.StepLink.Rule?
+  public let animated: Swift.Bool
 }
 public struct StepNavigationItem {
   public let linkId: Swift.String
@@ -582,13 +587,13 @@ public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
   @_Concurrency.MainActor(unsafe) final public let initialStep: MobileWorkflowCore.Step
   @_Concurrency.MainActor(unsafe) final public let session: MobileWorkflowCore.Session
   @_Concurrency.MainActor(unsafe) public var outputDirectory: Foundation.URL?
-  @_Concurrency.MainActor(unsafe) final public let analytics: MobileWorkflowCore.Analytics?
+  @_Concurrency.MainActor(unsafe) final public let services: MobileWorkflowCore.StepServices?
   @_Concurrency.MainActor(unsafe) final public let presentation: MobileWorkflowCore.Presentation?
   @_Concurrency.MainActor(unsafe) public var isDiscardable: Swift.Bool {
     get
   }
   @_Concurrency.MainActor(unsafe) final public let theme: MobileWorkflowCore.Theme
-  @_Concurrency.MainActor(unsafe) public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, analytics: MobileWorkflowCore.Analytics? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?)
+  @_Concurrency.MainActor(unsafe) public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, services: MobileWorkflowCore.StepServices? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -719,14 +724,43 @@ public struct URLFormatter {
   public init(regex: Swift.String = DefaultURLComposerRegex)
   public func parse(baseURL: Foundation.URL, complement: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
 }
-public protocol AnalyticsWorker {
-  func logEvent(_ name: Swift.String, parameters: [Swift.String : Any]?)
-}
 public protocol AnalyticsEvent {
   var name: Swift.String { get }
   var parameters: [Swift.String : Any]? { get }
 }
-public struct Analytics {
+public struct ARAnalyticsEventTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: MobileWorkflowCore.AnalyticsEvent
+  public init(input: MobileWorkflowCore.AnalyticsEvent)
+  public typealias Input = MobileWorkflowCore.AnalyticsEvent
+}
+public protocol AnalyticsScreenView {
+  var name: Swift.String { get }
+  var title: Swift.String { get }
+}
+public struct ARAnalyticsScreenViewTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: MobileWorkflowCore.AnalyticsScreenView
+  public init(input: MobileWorkflowCore.AnalyticsScreenView)
+  public typealias Input = MobileWorkflowCore.AnalyticsScreenView
+}
+public struct ARAnalyticsResetUserSessionTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: Swift.Void?
+  public init(input: Swift.Void?)
+  public typealias Input = Swift.Void?
+}
+public protocol Analytics {
+  func logEvent(_ event: MobileWorkflowCore.AnalyticsEvent, using session: MobileWorkflowCore.ContentProvider)
+  func logScreenView(_ screenView: MobileWorkflowCore.AnalyticsScreenView, using session: MobileWorkflowCore.ContentProvider)
+  func resetUserSession(using session: MobileWorkflowCore.ContentProvider)
+}
+extension MobileWorkflowCore.StepServices : MobileWorkflowCore.Analytics {
+}
+extension MobileWorkflowCore.Analytics where Self : MobileWorkflowCore.TaskExecutor {
+  public func logEvent(_ event: MobileWorkflowCore.AnalyticsEvent, using session: MobileWorkflowCore.ContentProvider)
+  public func logScreenView(_ screenView: MobileWorkflowCore.AnalyticsScreenView, using session: MobileWorkflowCore.ContentProvider)
+  public func resetUserSession(using session: MobileWorkflowCore.ContentProvider)
 }
 @available(*, deprecated, renamed: "MWVideoTableViewCell")
 public typealias MobileWorkflowVideoTableViewCell = MobileWorkflowCore.MWVideoTableViewCell
@@ -851,47 +885,6 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
-public enum LinkType : Swift.String, Swift.Codable {
-  case push
-  case modal
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-public enum LinkModalType : Swift.String, Swift.Codable {
-  case navigation
-  case content
-  public init?(rawValue: Swift.String)
-  public typealias RawValue = Swift.String
-  public var rawValue: Swift.String {
-    get
-  }
-}
-public struct LinkData : Swift.Codable {
-  public let id: Swift.String
-  public let type: MobileWorkflowCore.LinkType
-  public let modalType: MobileWorkflowCore.LinkModalType?
-  public let target: Swift.String
-  public let conditional: MobileWorkflowCore.ConditionalLinkData?
-  public init(data: [Swift.String : Any]) throws
-  public init(from decoder: Swift.Decoder) throws
-  public func encode(to encoder: Swift.Encoder) throws
-}
-public struct ConditionalLinkData : Swift.Codable {
-  public var resultKeyPath: Swift.String {
-    get
-  }
-  public init?(data: [Swift.String : Any]) throws
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
-}
-public struct LinkNavigationItem : Swift.Codable {
-  public init(data: [Swift.String : Any]) throws
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
-}
 public protocol AsyncTask {
   associatedtype Response
   associatedtype Input
@@ -986,6 +979,7 @@ public protocol StepViewController : UIKit.UIViewController {
   var outputDirectory: Foundation.URL? { get set }
   var cancelButtonItem: UIKit.UIBarButtonItem? { get set }
   var utilityButtonItem: UIKit.UIBarButtonItem? { get set }
+  var shouldAnimatedPop: Swift.Bool { get set }
   func disableCancel()
   func hideNavigationFooterView()
   func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
@@ -1498,6 +1492,48 @@ public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, 
   public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
 }
+public enum LinkType : Swift.String, Swift.Codable {
+  case push
+  case modal
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum LinkModalType : Swift.String, Swift.Codable {
+  case navigation
+  case content
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public struct LinkData : Swift.Codable {
+  public let id: Swift.String
+  public let type: MobileWorkflowCore.LinkType
+  public let modalType: MobileWorkflowCore.LinkModalType?
+  public let target: Swift.String
+  public let conditional: MobileWorkflowCore.ConditionalLinkData?
+  public let animated: Swift.Bool
+  public init(data: [Swift.String : Any]) throws
+  public init(from decoder: Swift.Decoder) throws
+  public func encode(to encoder: Swift.Encoder) throws
+}
+public struct ConditionalLinkData : Swift.Codable {
+  public var resultKeyPath: Swift.String {
+    get
+  }
+  public init?(data: [Swift.String : Any]) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct LinkNavigationItem : Swift.Codable {
+  public init(data: [Swift.String : Any]) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
 public protocol Step {
   var identifier: Swift.String { get }
   var title: Swift.String? { get set }
@@ -1898,8 +1934,6 @@ public enum L10n {
     public static let confirmTitle: Swift.String
     public static let retryTitle: Swift.String
     public static let genericItemName: Swift.String
-    public static func deleteConfirmationTitle(itemName: Swift.String? = nil) -> Swift.String
-    public static func deleteConfirmationMessage(itemName: Swift.String? = nil) -> Swift.String
     public static let yesTitle: Swift.String
     public static let noTitle: Swift.String
     public static let unauthorizedTitle: Swift.String
@@ -2005,12 +2039,12 @@ extension Swift.Array : Swift.CodingKey where Element == Swift.CodingKey {
   public init?(intValue: Swift.Int)
   public init?(stringValue: Swift.String)
 }
-extension Swift.Dictionary : MobileWorkflowCore.KeyInformation where Key == Swift.String, Value == [Swift.CodingKey] {
+extension Swift.Dictionary : MobileWorkflowCore.KeyInformation where Key == Swift.String, Value == Swift.Array<Swift.CodingKey> {
   public var path: [Swift.CodingKey] {
     get
   }
 }
-extension Swift.Dictionary : Swift.CodingKey where Key == Swift.String, Value == [Swift.CodingKey] {
+extension Swift.Dictionary : Swift.CodingKey where Key == Swift.String, Value == Swift.Array<Swift.CodingKey> {
   public var intValue: Swift.Int? {
     get
   }
@@ -2345,12 +2379,6 @@ extension MobileWorkflowCore.CredentialType : Swift.Hashable {}
 extension MobileWorkflowCore.CredentialType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.SecurityStoreAccessible : Swift.Equatable {}
 extension MobileWorkflowCore.SecurityStoreAccessible : Swift.Hashable {}
-extension MobileWorkflowCore.LinkType : Swift.Equatable {}
-extension MobileWorkflowCore.LinkType : Swift.Hashable {}
-extension MobileWorkflowCore.LinkType : Swift.RawRepresentable {}
-extension MobileWorkflowCore.LinkModalType : Swift.Equatable {}
-extension MobileWorkflowCore.LinkModalType : Swift.Hashable {}
-extension MobileWorkflowCore.LinkModalType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.SuccessAction : Swift.Equatable {}
 extension MobileWorkflowCore.SuccessAction : Swift.Hashable {}
 extension MobileWorkflowCore.SuccessAction : Swift.RawRepresentable {}
@@ -2375,6 +2403,12 @@ extension MobileWorkflowCore.TextStyle : Swift.Hashable {}
 extension MobileWorkflowCore.TextStyle : Swift.RawRepresentable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Equatable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Hashable {}
+extension MobileWorkflowCore.LinkType : Swift.Equatable {}
+extension MobileWorkflowCore.LinkType : Swift.Hashable {}
+extension MobileWorkflowCore.LinkType : Swift.RawRepresentable {}
+extension MobileWorkflowCore.LinkModalType : Swift.Equatable {}
+extension MobileWorkflowCore.LinkModalType : Swift.Hashable {}
+extension MobileWorkflowCore.LinkModalType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.PresentationContext.DismissRule : Swift.Equatable {}
 extension MobileWorkflowCore.PresentationContext.DismissRule : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
