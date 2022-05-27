@@ -538,6 +538,7 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) public func disableCancel()
   @_Concurrency.MainActor(unsafe) public func hideNavigationFooterView()
   @_Concurrency.MainActor(unsafe) open func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  @_Concurrency.MainActor(unsafe) open func configureTabBar()
   @_Concurrency.MainActor(unsafe) open func goForward()
   @_Concurrency.MainActor(unsafe) public func goBackward()
   @_Concurrency.MainActor(unsafe) public func hasNextStep() -> Swift.Bool
@@ -878,6 +879,7 @@ public struct StepData : Swift.Codable {
   public let links: [MobileWorkflowCore.LinkData]
   public let navigationItems: [MobileWorkflowCore.LinkNavigationItem]
   public let content: [Swift.String : Any]
+  @available(*, deprecated, message: "No longer mapped or referenced - should be provided in step 'properties' instead.")
   public let disableBackOnNextStep: Swift.Bool
   public var title: Swift.String {
     get
@@ -895,7 +897,7 @@ public protocol Credentialized {
 }
 public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.Credentialized {
 }
-@_Concurrency.MainActor(unsafe) open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewController, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate where T : MobileWorkflowCore.TableStep {
+@_Concurrency.MainActor(unsafe) open class MWTableStepViewController<T> : MobileWorkflowCore.MWStepViewController, UIKit.UITableViewDataSource, UIKit.UITableViewDelegate, MobileWorkflowCore.CanEmbedTitleAsTableHeaderView where T : MobileWorkflowCore.TableStep {
   @_Concurrency.MainActor(unsafe) final public let tableView: UIKit.UITableView
   @_Concurrency.MainActor(unsafe) public var tableStep: T {
     get
@@ -904,6 +906,9 @@ public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWo
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLayoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillTransition(to size: CoreGraphics.CGSize, with coordinator: UIKit.UIViewControllerTransitionCoordinator)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
   @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, cellForRowAt indexPath: Foundation.IndexPath) -> UIKit.UITableViewCell
@@ -983,6 +988,7 @@ public protocol StepViewController : UIKit.UIViewController {
   func disableCancel()
   func hideNavigationFooterView()
   func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
+  func configureTabBar()
   func goForward()
   func goBackward()
   func hasNextStep() -> Swift.Bool
@@ -998,6 +1004,9 @@ extension MobileWorkflowCore.StepViewController {
   public var mwResult: MobileWorkflowCore.StepResult? {
     get
   }
+}
+public protocol HasDynamicTitleMode : MobileWorkflowCore.StepViewController {
+  func titleModeForTitle(_ title: Swift.String?) -> MobileWorkflowCore.StepViewControllerTitleMode
 }
 public protocol SessionProvider {
 }
@@ -1072,6 +1081,8 @@ public struct QueueControllerConfiguration : Swift.Codable {
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultGrouped(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func configureTabBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, tabBarShadowHidden: Swift.Bool = false)
+  @_Concurrency.MainActor(unsafe) public func configureTabBarAsDefaultGrouped(withTheme theme: MobileWorkflowCore.Theme, tabBarShadowHidden: Swift.Bool = false)
 }
 @_hasMissingDesignatedInitializers public class AppConfigurationManager {
   convenience public init(dependencies: MobileWorkflowCore.AppConfigurationDependencies, urlSession imageUrlSession: Foundation.URLSession = .shared, configUrlSession: Foundation.URLSession = URLSession(configuration: .default))
@@ -1184,6 +1195,17 @@ extension Swift.Dictionary where Key == Swift.String {
   public subscript(first keys: [Swift.String]) -> Any? {
     get
   }
+}
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class LargeTitleView : MobileWorkflowCore.WidthResizingView {
+  @_Concurrency.MainActor(unsafe) public var titleLabel: MobileWorkflowCore.StepTitleLabel!
+  @objc deinit
+}
+public protocol CanEmbedTitleAsTableHeaderView {
+  var tableView: UIKit.UITableView { get }
+}
+extension MobileWorkflowCore.CanEmbedTitleAsTableHeaderView {
+  public func embedTitleAsTableHeaderView(_ title: Swift.String)
+  public func layoutTitleAsTableHeaderView()
 }
 public protocol ReusableView : AnyObject {
   static var defaultReuseIdentifier: Swift.String { get }

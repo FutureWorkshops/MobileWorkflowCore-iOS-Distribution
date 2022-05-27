@@ -292,6 +292,21 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
+@interface WidthResizingView : UIView
+@property (nonatomic) CGRect frame;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore14LargeTitleView")
+@interface LargeTitleView : WidthResizingView
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
 @interface MWImageTableViewCell : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
@@ -560,13 +575,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 
 
 
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
-@interface WidthResizingView : UIView
-@property (nonatomic) CGRect frame;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
@@ -867,6 +875,21 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
+@interface WidthResizingView : UIView
+@property (nonatomic) CGRect frame;
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore14LargeTitleView")
+@interface LargeTitleView : WidthResizingView
+- (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+@end
+
+
 SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
 @interface MWImageTableViewCell : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
@@ -1135,13 +1158,6 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 
 
 
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore17WidthResizingView")
-@interface WidthResizingView : UIView
-@property (nonatomic) CGRect frame;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
 
 #if __has_attribute(external_source_symbol)
 # pragma clang attribute pop
