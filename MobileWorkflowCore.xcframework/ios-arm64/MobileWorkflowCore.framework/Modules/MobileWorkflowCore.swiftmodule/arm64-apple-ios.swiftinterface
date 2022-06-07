@@ -2314,6 +2314,7 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func configureWithStyle(_ style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
   @_Concurrency.MainActor(unsafe) public func configureWithImage(_ image: UIKit.UIImage)
+  @_Concurrency.MainActor(unsafe) public func clearImage()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
