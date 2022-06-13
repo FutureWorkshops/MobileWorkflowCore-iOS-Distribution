@@ -266,17 +266,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 
 @class NSInputStream;
 @class NSOutputStream;
+@class NSData;
 
 SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @protocol StreamProvider
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)appendWithData:(NSData * _Nonnull)data into:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)appendWithData:(NSData * _Nonnull)data into:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -413,6 +416,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property (nonatomic, strong) UIWindow * _Nullable window;
 - (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
+- (void)sceneDidBecomeActive:(UIScene * _Nonnull)scene;
 - (void)sceneDidEnterBackground:(UIScene * _Nonnull)scene;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
 - (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
@@ -549,6 +553,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -849,17 +854,20 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 
 @class NSInputStream;
 @class NSOutputStream;
+@class NSData;
 
 SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @protocol StreamProvider
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)appendWithData:(NSData * _Nonnull)data into:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
 @interface NSFileManager (SWIFT_EXTENSION(MobileWorkflowCore)) <StreamProvider>
 - (NSInputStream * _Nullable)inputStreamForFileAtPath:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 - (NSOutputStream * _Nullable)outputStreamForFileAtPath:(NSString * _Nonnull)path append:(BOOL)append SWIFT_WARN_UNUSED_RESULT;
+- (BOOL)appendWithData:(NSData * _Nonnull)data into:(NSString * _Nonnull)path SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -996,6 +1004,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
 @property (nonatomic, strong) UIWindow * _Nullable window;
 - (void)scene:(UIScene * _Nonnull)scene willConnectToSession:(UISceneSession * _Nonnull)session options:(UISceneConnectionOptions * _Nonnull)connectionOptions;
+- (void)sceneDidBecomeActive:(UIScene * _Nonnull)scene;
 - (void)sceneDidEnterBackground:(UIScene * _Nonnull)scene;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
 - (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
@@ -1132,6 +1141,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

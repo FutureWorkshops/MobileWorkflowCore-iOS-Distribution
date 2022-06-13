@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		5wnlcs5YdN26qSrHbOXXGmq3lUs=
+		zC+jVqaOHNZkApUagRu65e8DeWE=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
@@ -22,27 +22,27 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		cI/YVh7usokTz3nsr2ErwhsQKWY=
+		J5uEsxIq4iZd39sP6Lbis0onwhI=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		M7gs8FCagu5fFPS3avXVvU1cuGk=
+		qofYZIlwBITWn3vZAuhH7gs7xKc=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		5CQqwhOZtD8iqKsaAww4FAFlTcs=
+		FKpXaM3ZNLklx/uX5CEGdmL2IMU=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
-		DgmBNjF6kh+vuEs4W9cyONocBJ4=
+		JDs88zXG/flJJ26VFSmwMCPzKwY=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		iveAZ6WcrxWtGvCZCTjEGzlgRcQ=
+		Gl8FWF0Uw0rv0q7zPFGmGfiavDY=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		/aMpZXrvjBdcN50o8a8WAICYGtA=
+		T7VitbZ7A8DO0xPSf6nXcHDwISM=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -80,7 +80,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			XpFwhTNt128qIFuvy1cgXDH9UXCtazwVYzsQStYtRRk=
+			mo0XY86Q5jWSYMW/JCjAvcsvM4zWSZbwW0p1TAqJ/uk=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
@@ -94,42 +94,42 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			GeMYhwYAQ2fuZlEcuZpRM3oqs4hRIaKsn5ZGZROZFk8=
+			csHBvBjfXRuyHiedAOPdyXeWd8/tenoz51BM03Qc1C8=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			D7YvoEoL0o6jh9aJWvhlsSQ+szjAS057lvps9VRRd7k=
+			fVe3DX9NrtRauNrKRG9nWFENKJY1re4D2ml0RClP0Mc=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bU58s9jY8ohQmi9HCdi2BCjr3PqwwNTqdXndnSXfo+E=
+			KKcdsbHm7X3V+kLYyrELV89ozXByGuSpCZGvTVlBW2k=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			YNhlJyimXX6hLJRZBXe0uiwBLpdKlj9s2HbQOibxnZQ=
+			G68Xoj353QItu8XAYPIyu0Wc9sZFcWmkLVoGfVhU5Wc=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			97D8aeH6QHAWPVw/Vz9d8j8DWxgQaHxJqQ7RibbJXVk=
+			nFE2lIprgraHciBWW7dg5JtTCq2ZPFM7R4N8x80E4x8=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EJyGyIto6af/X/07vM9aeonMSBEQqD/jYNpNaDacxzU=
+			6svY7tDaJpobYObTzFxdOgkI4iyvkiH/skcQrL5/LNw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>

@@ -119,9 +119,16 @@ extension MobileWorkflowCore.AsyncTaskInterceptor {
 public protocol InterceptorConfigurator {
   func configureInterceptors(interceptors: [MobileWorkflowCore.AsyncTaskInterceptor])
 }
+public struct CleanARLoggerTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: ()
+  public init()
+  public typealias Input = Swift.Void
+}
 @objc public protocol StreamProvider {
   @objc func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
+  @objc func append(data: Foundation.Data, into path: Swift.String) -> Swift.Bool
 }
 extension Foundation.FileManager {
   public static var shared: Foundation.FileManager
@@ -130,9 +137,15 @@ extension Foundation.FileManager {
 extension Foundation.FileManager : MobileWorkflowCore.StreamProvider {
   @objc dynamic open func inputStreamFor(fileAtPath path: Swift.String) -> Foundation.InputStream?
   @objc dynamic open func outputStreamFor(fileAtPath path: Swift.String, append: Swift.Bool) -> Foundation.OutputStream?
+  @objc dynamic open func append(data: Foundation.Data, into path: Swift.String) -> Swift.Bool
 }
 extension Foundation.FileManager {
   public func storeTemporaryImage(_ image: UIKit.UIImage) -> Foundation.URL
+}
+public struct BootARLoggerTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  weak public var input: UIKit.UIViewController?
+  public typealias Input = UIKit.UIViewController?
 }
 public struct PDFViewInput {
   public let filePath: Swift.String
@@ -151,6 +164,11 @@ public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
   final public let localizationService: MobileWorkflowCore.LocalizationService
   final public let eventService: MobileWorkflowCore.EventService
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
   @objc deinit
 }
 public protocol StringConvertableValue {
@@ -239,7 +257,25 @@ extension Swift.Error {
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
   @_Concurrency.MainActor(unsafe) public func showAlert(error: Swift.Error, cancelTitle: Swift.String? = nil, actionTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (_ didSelectAction: Swift.Bool) -> Swift.Void)
+  @_Concurrency.MainActor(unsafe) public func showMessageAlert(title: Swift.String? = nil, message: Swift.String, confirmTitle: Swift.String? = nil, dismissAction: (() -> Swift.Void)? = nil)
   @_Concurrency.MainActor(unsafe) public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (_ didConfirm: Swift.Bool) -> Swift.Void)
+}
+extension UIKit.UIViewController {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor public func showAlert(error: Swift.Error, cancelTitle: Swift.String? = nil, actionTitle: Swift.String? = nil, isDestructive: Swift.Bool = false) async -> Swift.Bool
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor public func show(_ error: Swift.Error) async
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor public func showMessageAlert(title: Swift.String? = nil, message: Swift.String, confirmTitle: Swift.String? = nil) async
+  #endif
+
 }
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func addCovering(childViewController: UIKit.UIViewController, order: MobileWorkflowCore.ViewOrder = .top, horizontalLayoutGuide: UIKit.UILayoutGuide? = nil, verticalLayoutGuide: UIKit.UILayoutGuide? = nil, insets: UIKit.NSDirectionalEdgeInsets = .zero)
@@ -251,6 +287,14 @@ extension UIKit.UIViewController {
 }
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
+}
+public struct ARLoggerTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public let input: MobileWorkflowCore.ARLoggerEvent
+  public let level: MobileWorkflowCore.ARLogLevel
+  public init(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public init(_ input: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information)
+  public typealias Input = MobileWorkflowCore.ARLoggerEvent
 }
 public class MWCompletionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
   public enum IconType : Swift.String, Swift.RawRepresentable {
@@ -315,6 +359,7 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
   }
   @_Concurrency.MainActor(unsafe) open var canShakeToClearApp: Swift.Bool
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
+  @_Concurrency.MainActor(unsafe) @objc public func sceneDidBecomeActive(_ scene: UIKit.UIScene)
   @_Concurrency.MainActor(unsafe) @objc public func sceneDidEnterBackground(_ scene: UIKit.UIScene)
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   @_Concurrency.MainActor(unsafe) open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
@@ -377,6 +422,17 @@ public protocol BuildableStep : MobileWorkflowCore.Step {
 }
 extension MobileWorkflowCore.BuildableStep {
   public static var mandatoryCodingPaths: [Swift.CodingKey] {
+    get
+  }
+}
+public enum ARLoggerError : Swift.Error {
+  case logNotAvailable
+  case unableToOpenLogFile
+  case unableToPerformTask
+  case logFileDoesNotExists
+  public static func == (a: MobileWorkflowCore.ARLoggerError, b: MobileWorkflowCore.ARLoggerError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
     get
   }
 }
@@ -455,6 +511,10 @@ public enum FileUploadUpdate {
   public func updateShadowNetworkService(shadowNetworkService: MobileWorkflowCore.AsyncTaskService)
   public func updateCredentialStore(credentialStore: MobileWorkflowCore.CredentialStoreProtocol)
   @objc deinit
+}
+extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
+  public func registerBackgroundTask()
+  public func listenToBackgroundTasks()
 }
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
@@ -673,6 +733,12 @@ extension MobileWorkflowCore.PanZoomImageScrollView : UIKit.UIScrollViewDelegate
   @_Concurrency.MainActor(unsafe) @objc dynamic public func viewForZooming(in scrollView: UIKit.UIScrollView) -> UIKit.UIView?
   @_Concurrency.MainActor(unsafe) @objc dynamic public func scrollViewDidScroll(_ scrollView: UIKit.UIScrollView)
 }
+public struct ExportLogFileTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Foundation.URL
+  weak public var input: UIKit.UIViewController?
+  public init(input: UIKit.UIViewController? = nil)
+  public typealias Input = UIKit.UIViewController?
+}
 public class DictionaryResult : MobileWorkflowCore.StepResult {
   public var identifier: Swift.String
   final public let elements: [Swift.String : Any]
@@ -728,6 +794,7 @@ public struct URLFormatter {
 public protocol AnalyticsEvent {
   var name: Swift.String { get }
   var parameters: [Swift.String : Any]? { get }
+  var message: Swift.String { get }
 }
 public struct ARAnalyticsEventTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Swift.Void
@@ -738,6 +805,7 @@ public struct ARAnalyticsEventTask : MobileWorkflowCore.AsyncTask {
 public protocol AnalyticsScreenView {
   var name: Swift.String { get }
   var title: Swift.String { get }
+  var message: Swift.String { get }
 }
 public struct ARAnalyticsScreenViewTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Swift.Void
@@ -1162,6 +1230,13 @@ extension Swift.String {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
   @objc deinit
 }
+public struct URLRequestLogEvent : MobileWorkflowCore.ARLoggerEvent {
+  public let function: Swift.String
+  public let file: Swift.String
+  public let line: Swift.Int
+  public init(urlRequest: Foundation.URLRequest, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
+}
 final public class CredentialStore : MobileWorkflowCore.CredentialStoreProtocol {
   public init(securityStore: MobileWorkflowCore.SecurityStoreProtocol = SecurityStore())
   final public func updateCredential(_ credential: MobileWorkflowCore.Credential) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
@@ -1206,6 +1281,9 @@ public protocol CanEmbedTitleAsTableHeaderView {
 extension MobileWorkflowCore.CanEmbedTitleAsTableHeaderView {
   public func embedTitleAsTableHeaderView(_ title: Swift.String)
   public func layoutTitleAsTableHeaderView()
+}
+public protocol LoggableItem {
+  func fetchLogEvent() -> MobileWorkflowCore.ARLoggerEvent
 }
 public protocol ReusableView : AnyObject {
   static var defaultReuseIdentifier: Swift.String { get }
@@ -1258,6 +1336,8 @@ public protocol ImageLoadingService {
   func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
   func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
 }
+public func debugPrint(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n")
+public func print(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n")
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepTitleLabel : UIKit.UILabel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -1508,11 +1588,52 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+public enum ARLogLevel : Swift.Int, Swift.Comparable {
+  public static func < (lhs: MobileWorkflowCore.ARLogLevel, rhs: MobileWorkflowCore.ARLogLevel) -> Swift.Bool
+  public static func == (lhs: MobileWorkflowCore.ARLogLevel, rhs: MobileWorkflowCore.ARLogLevel) -> Swift.Bool
+  case error
+  case information
+  case debug
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public protocol ARLoggerEvent {
+  var function: Swift.String { get }
+  var file: Swift.String { get }
+  var line: Swift.Int { get }
+  func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
+}
+public struct ARLogMessageEvent : MobileWorkflowCore.ARLoggerEvent {
+  public let message: Swift.String
+  public let function: Swift.String
+  public let file: Swift.String
+  public let line: Swift.Int
+  public init(_ message: Swift.String, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
+}
 public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
   public typealias Response = [MobileWorkflowCore.ListStepItem]
   public let input: Foundation.URL
   public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
+}
+public struct ARLoggerConfiguration {
+  public var enableLogs: Swift.Bool {
+    get
+    set
+  }
+  public var exportLogs: Swift.Bool {
+    get
+    set
+  }
+  public var deleteLogs: Swift.Bool {
+    get
+    set
+  }
+  public init(userDefaults: Foundation.UserDefaults = UserDefaults.standard)
 }
 public enum LinkType : Swift.String, Swift.Codable {
   case push
@@ -1738,6 +1859,11 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
 @_hasMissingDesignatedInitializers public class StepBuilder {
   @objc deinit
 }
+public struct ARLogger {
+  public static func log(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public static func boot(caller: UIKit.UIViewController?, session: MobileWorkflowCore.ContentProvider? = nil)
+  public static func log(_ event: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil)
+}
 extension UIKit.UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
 }
@@ -1850,6 +1976,11 @@ extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : Foundation
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didSendBodyData bytesSent: Swift.Int64, totalBytesSent: Swift.Int64, totalBytesExpectedToSend: Swift.Int64)
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didFinishCollecting metrics: Foundation.URLSessionTaskMetrics)
   @objc dynamic public func urlSession(_ session: Foundation.URLSession, task: Foundation.URLSessionTask, didCompleteWithError error: Swift.Error?)
+}
+public struct EnableLogTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Bool
+  public let input: Swift.Bool
+  public typealias Input = Swift.Bool
 }
 @available(*, deprecated, renamed: "BarcodeScannerViewController")
 public typealias MobileWorkflowBarcodeScannerViewController = MobileWorkflowCore.BarcodeScannerViewController
@@ -1975,6 +2106,12 @@ public struct StepInfo {
   public let data: MobileWorkflowCore.StepData
   public let context: MobileWorkflowCore.StepContext
   public let session: MobileWorkflowCore.Session
+}
+public struct DeleteLogsTask : MobileWorkflowCore.AsyncTask {
+  public typealias Response = Swift.Void
+  public var input: Swift.Void
+  public init()
+  public typealias Input = Swift.Void
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class StateView : UIKit.UIView {
   public struct ButtonConfig {
@@ -2386,6 +2523,14 @@ extension MobileWorkflowCore.ReachabilityStatus {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
 }
+public struct URLResponseLogEvent : MobileWorkflowCore.ARLoggerEvent {
+  public let function: Swift.String
+  public let file: Swift.String
+  public let line: Swift.Int
+  public let urlResponse: Foundation.URLResponse
+  public init(urlResponse: Foundation.URLResponse, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
+}
 public protocol PDFStep {
   var pdfURL: Swift.String? { get }
   var session: MobileWorkflowCore.Session { get }
@@ -2393,6 +2538,8 @@ public protocol PDFStep {
 }
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
+extension MobileWorkflowCore.ARLoggerError : Swift.Equatable {}
+extension MobileWorkflowCore.ARLoggerError : Swift.Hashable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Equatable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Hashable {}
 extension MobileWorkflowCore.StepLinkType : Swift.Equatable {}
@@ -2426,6 +2573,8 @@ extension MobileWorkflowCore.TextStyle : Swift.Hashable {}
 extension MobileWorkflowCore.TextStyle : Swift.RawRepresentable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Equatable {}
 extension MobileWorkflowCore.MWPDFStepViewControllerError : Swift.Hashable {}
+extension MobileWorkflowCore.ARLogLevel : Swift.Hashable {}
+extension MobileWorkflowCore.ARLogLevel : Swift.RawRepresentable {}
 extension MobileWorkflowCore.LinkType : Swift.Equatable {}
 extension MobileWorkflowCore.LinkType : Swift.Hashable {}
 extension MobileWorkflowCore.LinkType : Swift.RawRepresentable {}
