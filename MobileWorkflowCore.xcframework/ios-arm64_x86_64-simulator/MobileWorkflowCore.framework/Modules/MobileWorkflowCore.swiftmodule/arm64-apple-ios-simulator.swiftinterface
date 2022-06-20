@@ -255,15 +255,20 @@ extension Swift.Error {
   public func alertComponents() -> (title: Swift.String, message: Swift.String)
 }
 extension UIKit.UIViewController {
+  @available(*, deprecated, message: "Use '.show(_:) async' instead.")
   @_Concurrency.MainActor(unsafe) public func show(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
+  @available(*, deprecated, message: "Use '.show(_:cancelAction:confirmAction:) async' instead.")
   @_Concurrency.MainActor(unsafe) public func showAlert(error: Swift.Error, cancelTitle: Swift.String? = nil, actionTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (_ didSelectAction: Swift.Bool) -> Swift.Void)
+  @available(*, deprecated, message: "Use '.showAlert(title:message:actions:) async' instead.")
   @_Concurrency.MainActor(unsafe) public func showMessageAlert(title: Swift.String? = nil, message: Swift.String, confirmTitle: Swift.String? = nil, dismissAction: (() -> Swift.Void)? = nil)
+  @available(*, deprecated, message: "Use '.showAlert(title:message:actions:) async' instead.")
   @_Concurrency.MainActor(unsafe) public func showConfirmationAlert(title: Swift.String, message: Swift.String?, cancelTitle: Swift.String? = nil, confirmTitle: Swift.String? = nil, isDestructive: Swift.Bool = false, actionHandler: @escaping (_ didConfirm: Swift.Bool) -> Swift.Void)
 }
 extension UIKit.UIViewController {
+  public typealias AlertAction = (title: Swift.String?, style: UIKit.UIAlertAction.Style)
   
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func showAlert(error: Swift.Error, cancelTitle: Swift.String? = nil, actionTitle: Swift.String? = nil, isDestructive: Swift.Bool = false) async -> Swift.Bool
+  @_Concurrency.MainActor public func showAlert(title: Swift.String? = nil, message: Swift.String? = nil, actions: [UIKit.UIViewController.AlertAction] = [(title: L10n.Alert.okTitle, style: .default)]) async -> Swift.Int
   #endif
 
   
@@ -273,7 +278,7 @@ extension UIKit.UIViewController {
 
   
   #if compiler(>=5.3) && $AsyncAwait
-  @_Concurrency.MainActor public func showMessageAlert(title: Swift.String? = nil, message: Swift.String, confirmTitle: Swift.String? = nil) async
+  @_Concurrency.MainActor public func show(_ error: Swift.Error, cancelAction: UIKit.UIViewController.AlertAction = (title: L10n.Alert.cancelTitle, style: .cancel), confirmAction: UIKit.UIViewController.AlertAction = (title: L10n.Alert.confirmTitle, style: .default)) async -> Swift.Bool
   #endif
 
 }
@@ -430,6 +435,7 @@ public enum ARLoggerError : Swift.Error {
   case unableToOpenLogFile
   case unableToPerformTask
   case logFileDoesNotExists
+  case unableToCleanLogs
   public static func == (a: MobileWorkflowCore.ARLoggerError, b: MobileWorkflowCore.ARLoggerError) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -738,6 +744,11 @@ public struct ExportLogFileTask : MobileWorkflowCore.AsyncTask {
   weak public var input: UIKit.UIViewController?
   public init(input: UIKit.UIViewController? = nil)
   public typealias Input = UIKit.UIViewController?
+}
+extension MobileWorkflowCore.ExportLogFileTask {
+  public var sourceScreen: UIKit.UIViewController? {
+    get
+  }
 }
 public class DictionaryResult : MobileWorkflowCore.StepResult {
   public var identifier: Swift.String
@@ -1336,8 +1347,6 @@ public protocol ImageLoadingService {
   func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
   func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
 }
-public func debugPrint(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n")
-public func print(_ items: Any..., separator: Swift.String = " ", terminator: Swift.String = "\n")
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepTitleLabel : UIKit.UILabel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -1619,21 +1628,6 @@ public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, 
   public let input: Foundation.URL
   public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
-}
-public struct ARLoggerConfiguration {
-  public var enableLogs: Swift.Bool {
-    get
-    set
-  }
-  public var exportLogs: Swift.Bool {
-    get
-    set
-  }
-  public var deleteLogs: Swift.Bool {
-    get
-    set
-  }
-  public init(userDefaults: Foundation.UserDefaults = UserDefaults.standard)
 }
 public enum LinkType : Swift.String, Swift.Codable {
   case push
