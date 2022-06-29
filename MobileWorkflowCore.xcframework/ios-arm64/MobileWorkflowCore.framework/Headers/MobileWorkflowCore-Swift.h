@@ -314,6 +314,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWImageTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)prepareForReuse;
 - (void)layoutSubviews;
+- (void)layoutMarginsDidChange;
 @end
 
 
@@ -341,6 +342,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+- (void)viewLayoutMarginsDidChange;
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
 @property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
@@ -358,6 +360,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 @interface MWInstructionStepViewController : MWContentStepViewController
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
+- (void)viewLayoutMarginsDidChange;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @end
 
@@ -368,6 +371,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore30MWCompletionStepViewController")
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
 - (void)viewDidAppear:(BOOL)animated;
+- (void)viewLayoutMarginsDidChange;
 @end
 
 
@@ -447,6 +451,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @interface NavigationFooterView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @property (nonatomic, getter=isHidden) BOOL hidden;
+- (void)layoutMarginsDidChange;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end
 
@@ -532,6 +537,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore28StepNavigationViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
+- (void)viewLayoutMarginsDidChange;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
 - (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
 @property (nonatomic, readonly) BOOL shouldAutorotate;
@@ -551,6 +557,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

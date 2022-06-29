@@ -144,8 +144,8 @@ extension Foundation.FileManager {
 }
 public struct BootARLoggerTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Swift.Void
-  weak public var input: UIKit.UIViewController?
-  public typealias Input = UIKit.UIViewController?
+  public let input: ()
+  public typealias Input = Swift.Void
 }
 public struct PDFViewInput {
   public let filePath: Swift.String
@@ -464,6 +464,9 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
   @_Concurrency.MainActor(unsafe) override public var titleMode: MobileWorkflowCore.StepViewControllerTitleMode {
     @_Concurrency.MainActor(unsafe) get
   }
+  @_Concurrency.MainActor(unsafe) public var labelsStackView: UIKit.UIStackView! {
+    get
+  }
   @_Concurrency.MainActor(unsafe) public var contentStackView: UIKit.UIStackView! {
     get
   }
@@ -484,6 +487,7 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
   @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewLayoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func showLoading()
@@ -593,6 +597,7 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewLayoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
     @_Concurrency.MainActor(unsafe) @objc get
@@ -664,6 +669,7 @@ public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewLayoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var childForStatusBarStyle: UIKit.UIViewController? {
     @_Concurrency.MainActor(unsafe) @objc get
   }
@@ -741,9 +747,9 @@ extension MobileWorkflowCore.PanZoomImageScrollView : UIKit.UIScrollViewDelegate
 }
 public struct ExportLogFileTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Foundation.URL
-  weak public var input: UIKit.UIViewController?
-  public init(input: UIKit.UIViewController? = nil)
-  public typealias Input = UIKit.UIViewController?
+  public var input: Swift.Void
+  public init()
+  public typealias Input = Swift.Void
 }
 extension MobileWorkflowCore.ExportLogFileTask {
   public var sourceScreen: UIKit.UIViewController? {
@@ -1239,6 +1245,7 @@ extension Swift.String {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidAppear(_ animated: Swift.Bool)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewLayoutMarginsDidChange()
   @objc deinit
 }
 public struct URLRequestLogEvent : MobileWorkflowCore.ARLoggerEvent {
@@ -1374,6 +1381,7 @@ public typealias MobileWorkflowImageTableViewCell = MobileWorkflowCore.MWImageTa
   @_Concurrency.MainActor(unsafe) public var contentViewHeightConstraint: UIKit.NSLayoutConstraint?
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func prepareForReuse()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) public func setHeightConstraint()
   @_Concurrency.MainActor(unsafe) public func configureTheme(_ theme: MobileWorkflowCore.Theme)
   @_Concurrency.MainActor(unsafe) public func configure(backgroundImage: UIKit.UIImage? = nil, animated: Swift.Bool = false)
@@ -1855,7 +1863,7 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
 }
 public struct ARLogger {
   public static func log(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
-  public static func boot(caller: UIKit.UIViewController?, session: MobileWorkflowCore.ContentProvider? = nil)
+  public static func boot(session: MobileWorkflowCore.ContentProvider? = nil)
   public static func log(_ event: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil)
 }
 extension UIKit.UIFont {
@@ -2165,6 +2173,7 @@ public struct ButtonConfig {
     @_Concurrency.MainActor(unsafe) @objc get
     @_Concurrency.MainActor(unsafe) @objc set
   }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutMarginsDidChange()
   @objc deinit
 }
 extension Swift.String : Swift.CodingKey {
