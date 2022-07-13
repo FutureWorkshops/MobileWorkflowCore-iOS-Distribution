@@ -486,6 +486,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 
 
 
+
 @class NSURLSession;
 @class NSURLAuthenticationChallenge;
 @class NSURLCredential;
@@ -557,6 +558,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

@@ -268,6 +268,7 @@ extension UIKit.UIViewController {
   public typealias AlertAction = (title: Swift.String?, style: UIKit.UIAlertAction.Style)
   
   #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
   @_Concurrency.MainActor public func showAlert(title: Swift.String? = nil, message: Swift.String? = nil, actions: [UIKit.UIViewController.AlertAction] = [(title: L10n.Alert.okTitle, style: .default)]) async -> Swift.Int
   #endif
 
@@ -513,13 +514,16 @@ public enum FileUploadUpdate {
       get
     }
   }
+  public var queueSize: Swift.Int {
+    get
+  }
   @objc convenience override dynamic public init()
-  required public init(sessionIdentifier: Swift.String = QueueControllerNetworkAsyncTaskService.kQueuedSessionIdentifier, configuration: MobileWorkflowCore.QueueControllerConfiguration = .disabled, credentialStore: MobileWorkflowCore.CredentialStore = CredentialStore(), shadowNetworkService: MobileWorkflowCore.AsyncTaskService? = nil, reachability: MobileWorkflowCore.Reachability = Reachability())
+  required public init(credentialStore: MobileWorkflowCore.CredentialStore = CredentialStore(), shadowNetworkService: MobileWorkflowCore.AsyncTaskService? = nil, reachability: MobileWorkflowCore.Reachability = Reachability())
   @discardableResult
   public func handleEvents(sessionIdentifier: Swift.String, completion: @escaping () -> Swift.Void) -> Swift.Bool
-  public func loadConfiguration(configuration: MobileWorkflowCore.ServiceConfiguration)
   public func updateShadowNetworkService(shadowNetworkService: MobileWorkflowCore.AsyncTaskService)
   public func updateCredentialStore(credentialStore: MobileWorkflowCore.CredentialStoreProtocol)
+  public func clear() throws
   @objc deinit
 }
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
@@ -529,6 +533,11 @@ extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
 }
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
   public struct RegisterQueueableTaskTypeTask : MobileWorkflowCore.AsyncTask {
@@ -885,7 +894,12 @@ public protocol QueueableTask : Swift.Decodable, Swift.Encodable {
   var canBeQueued: Swift.Bool { get }
   func encode(encoder: Foundation.JSONEncoder) throws -> Foundation.Data
   static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> Self
-  func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider) async throws -> Any
+  #endif
+
 }
 extension MobileWorkflowCore.QueueableTask {
   public var type: Swift.String {
@@ -898,7 +912,12 @@ extension MobileWorkflowCore.QueueableTask {
   public static func decode(decoder: Foundation.JSONDecoder, data: Foundation.Data) throws -> Self
 }
 extension MobileWorkflowCore.QueueableTask where Self : MobileWorkflowCore.AsyncTask {
-  public func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<Any, Swift.Error>) -> Swift.Void)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @discardableResult
+  public func perform(on service: MobileWorkflowCore.AsyncTaskService, session: MobileWorkflowCore.ContentProvider) async throws -> Any
+  #endif
+
 }
 public enum SecurityStoreAccessible {
   case whenPasscodeSetThisDeviceOnly
@@ -1135,7 +1154,13 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
   public func clear()
   public func loadBinary(valueString: Swift.String) -> MobileWorkflowCore.BinaryResource?
   public func loadBinaries() -> [MobileWorkflowCore.BinaryResource]
+  @available(*, deprecated, renamed: "checkAndConvertBinaries()")
   public func checkAndConvertBinaries(completion: @escaping ((Swift.Error?) -> Swift.Void))
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func checkAndConvertBinaries() async throws
+  #endif
+
   @objc deinit
 }
 extension MobileWorkflowCore.Session : MobileWorkflowCore.FileKeyResolver {
@@ -1154,14 +1179,6 @@ extension MobileWorkflowCore.Session : MobileWorkflowCore.ContentProvider {
 }
 extension MobileWorkflowCore.Session {
   public func copyForChild() -> MobileWorkflowCore.Session
-}
-public struct QueueControllerConfiguration : Swift.Codable {
-  public let showQueueOnBadge: Swift.Bool
-  public static var disabled: MobileWorkflowCore.QueueControllerConfiguration {
-    get
-  }
-  public func encode(to encoder: Swift.Encoder) throws
-  public init(from decoder: Swift.Decoder) throws
 }
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
@@ -1833,7 +1850,7 @@ public protocol RemoteContentStepViewController : UIKit.UIViewController, Mobile
   func loadContent()
   func showLoading()
   func hideLoading()
-  func update(content: Self.StepType.ResponseType)
+  @_Concurrency.MainActor func update(content: Self.StepType.ResponseType)
 }
 public protocol LoadState : Swift.Equatable {
   init()
@@ -1856,7 +1873,7 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
   public func loadContent()
 }
 extension MobileWorkflowCore.RemoteContentStepViewController {
-  public func handleError(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
+  @_Concurrency.MainActor public func handleError(_ error: Swift.Error, actionHandler: (() -> Swift.Void)? = nil)
 }
 @_hasMissingDesignatedInitializers public class StepBuilder {
   @objc deinit
@@ -1865,6 +1882,7 @@ public struct ARLogger {
   public static func log(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
   public static func boot(session: MobileWorkflowCore.ContentProvider? = nil)
   public static func log(_ event: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil)
+  public static func update(level: MobileWorkflowCore.ARLogLevel)
 }
 extension UIKit.UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
@@ -1875,7 +1893,7 @@ extension UIKit.UIFont {
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
   @_Concurrency.MainActor(unsafe) public var loadingError: Swift.Error?
-  @_Concurrency.MainActor(unsafe) public var isLoading: Swift.Bool {
+  @_Concurrency.MainActor public var isLoading: Swift.Bool {
     get
     set
   }
@@ -1900,6 +1918,11 @@ public class NetworkAsyncTaskService : MobileWorkflowCore.NetworkService, Mobile
   public func add(responseErrorsTypes: [MobileWorkflowCore.ResponseError.Type])
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
   @objc deinit
 }
 public protocol Selection {
@@ -1930,9 +1953,21 @@ extension MobileWorkflowCore.SelectionResult : MobileWorkflowCore.ValueProvider 
 public protocol TaskExecutor {
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
 }
 extension MobileWorkflowCore.TaskExecutor {
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
+}
+extension MobileWorkflowCore.TaskExecutor {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
 }
 public protocol AsyncTaskService : MobileWorkflowCore.Reinitializable, MobileWorkflowCore.TaskExecutor {
   @discardableResult
@@ -2530,8 +2565,7 @@ public struct URLResponseLogEvent : MobileWorkflowCore.ARLoggerEvent {
   public let function: Swift.String
   public let file: Swift.String
   public let line: Swift.Int
-  public let urlResponse: Foundation.URLResponse
-  public init(urlResponse: Foundation.URLResponse, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public init(urlResponse: Foundation.URLResponse, data: Foundation.Data? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
   public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
 }
 public protocol PDFStep {
