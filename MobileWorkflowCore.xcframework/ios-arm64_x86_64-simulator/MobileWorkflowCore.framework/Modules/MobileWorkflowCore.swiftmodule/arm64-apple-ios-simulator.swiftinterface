@@ -1594,6 +1594,7 @@ extension MobileWorkflowCore.ListStepItem : MobileWorkflowCore.ValueProvider {
 public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
   case invalidURL
   case unableToLoad
+  case unableToShare
   public var errorDescription: Swift.String? {
     get
   }
@@ -1677,11 +1678,15 @@ public struct LinkData : Swift.Codable {
   public let type: MobileWorkflowCore.LinkType
   public let modalType: MobileWorkflowCore.LinkModalType?
   public let target: Swift.String
-  public let conditional: MobileWorkflowCore.ConditionalLinkData?
-  public let animated: Swift.Bool
+  public let properties: MobileWorkflowCore.LinkPropertiesData?
   public init(data: [Swift.String : Any]) throws
-  public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct LinkPropertiesData : Swift.Codable {
+  public init(data: [Swift.String : Any]) throws
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct ConditionalLinkData : Swift.Codable {
   public var resultKeyPath: Swift.String {
@@ -2570,6 +2575,7 @@ public struct URLResponseLogEvent : MobileWorkflowCore.ARLoggerEvent {
 }
 public protocol PDFStep {
   var pdfURL: Swift.String? { get }
+  var sharingEnabled: Swift.Bool { get }
   var session: MobileWorkflowCore.Session { get }
   var services: MobileWorkflowCore.StepServices { get }
 }

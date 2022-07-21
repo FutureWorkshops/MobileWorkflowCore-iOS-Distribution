@@ -26,11 +26,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		bufz7abkzT9mnIaQPB1i3l3aKwU=
+		Bg8sHoblU2BsfBliEqonxAFSBeA=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		RynyeYYcGK2fKWzGSV+xvl0pvk0=
+		EiQjWxXuQVN/5ykiVuTdlA4ZPpo=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -38,11 +38,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		MSEMTdLg7Ezl++lLtQGOckghrgI=
+		xB09QnlZaxrYHs6yeEBCLWz6JfQ=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		Sso8FYO2XtO+PbI34YGPf6H2ypU=
+		bd3iBm096L62gt8nPGd99fBHyMQ=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -52,7 +52,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			cwnQS0mwUNpY8COMJAQswr2G3qg=
+			jX3Sr+5rfJsTaYKegtud4U/WlEo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -61,7 +61,7 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			KJO1/Ffc4aqQRlgnndfya2fKJkE=
+			ArD151+DRXYVYyFofziPoaXqqPo=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -101,14 +101,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			9x/AHqsFarkyMFPnuuNYH15aEB9V6xl/RklIH0py6MI=
+			hYytGE9F1bqDE6ygTGMBYUYsrJSCO/8w2KK4brO0mXU=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			NBhVvm8ySIFfayO5UTjxcv1lvrj+AW8YAvpAE2fqYt4=
+			41XOanOZlhcqlEvl/a6yWUwwxti1E+C3ieCu+2z1k2M=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -122,14 +122,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			Jei9AqlnxUSFGs8BWwHv4s8Wz7cZLsGqpj861hcUlLQ=
+			w3YBmBuY+kzBQFe+WUZ5pIWrUIYS5fHpABbf+OyE5AM=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			eDh9ndfjByTGbjSivbq3VepcmtofDKzKh+Db1NyxEOE=
+			ffteHTEdq2VMmEW+5TvuhnU+5HfBLe5qSmEw2ZSKpAg=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -143,7 +143,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			6Ds0lF445SN+4Fg0sVHcksAXfJngVJymbbw58gy2Wb8=
+			7OlgSi8xipv5YcYy3eHAM3CzPipTruogTdR0Izqnwz0=
 			</data>
 			<key>optional</key>
 			<true/>
@@ -152,7 +152,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			v7LfC7DA61jd03fSI3hYlFYV3O9LWLXv+q23kHIYgpE=
+			QFh+W29UWGVSxiUY9/xj6bhobshEqExW9HGfyHpCWx4=
 			</data>
 			<key>optional</key>
 			<true/>
