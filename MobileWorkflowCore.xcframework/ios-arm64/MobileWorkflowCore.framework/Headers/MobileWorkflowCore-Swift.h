@@ -450,7 +450,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 SWIFT_CLASS("_TtC18MobileWorkflowCore20NavigationFooterView")
 @interface NavigationFooterView : UIView
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@property (nonatomic, getter=isHidden) BOOL hidden;
+- (CGSize)sizeThatFits:(CGSize)size SWIFT_WARN_UNUSED_RESULT;
 - (void)layoutMarginsDidChange;
 - (nonnull instancetype)initWithFrame:(CGRect)frame SWIFT_UNAVAILABLE;
 @end

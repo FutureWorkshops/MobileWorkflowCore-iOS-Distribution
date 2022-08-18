@@ -364,10 +364,14 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
     get
   }
   @_Concurrency.MainActor(unsafe) open var canShakeToClearApp: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var hasCachedConfiguration: Swift.Bool {
+    get
+  }
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
   @_Concurrency.MainActor(unsafe) @objc public func sceneDidBecomeActive(_ scene: UIKit.UIScene)
   @_Concurrency.MainActor(unsafe) @objc public func sceneDidEnterBackground(_ scene: UIKit.UIScene)
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
+  @_Concurrency.MainActor(unsafe) public func load(configuration: Foundation.Data, serverId: Swift.Int?, cacheConfiguration: Swift.Bool) throws
   @_Concurrency.MainActor(unsafe) open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
   @objc override dynamic public init()
@@ -1616,8 +1620,25 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidDisappear(_ animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) open func load()
-  @_Concurrency.MainActor(unsafe) public func load(pdfURL: Swift.String?, completion: ((Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)?)
+  @available(*, deprecated, renamed: "load(pdfURL:)")
+  @_Concurrency.MainActor(unsafe) public func load(pdfURL: Swift.String?, completion: @escaping (Swift.Result<PDFKit.PDFDocument, Swift.Error>) -> Swift.Void)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor(unsafe) public func load(pdfURL: Swift.String?) async
+  #endif
+
+  @available(*, deprecated, renamed: "prepareDocument(data:)")
   @_Concurrency.MainActor(unsafe) open func prepare(document: PDFKit.PDFDocument) -> Combine.AnyPublisher<PDFKit.PDFDocument, Swift.Error>
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor(unsafe) open func prepareDocument(data: Foundation.Data) async throws -> PDFKit.PDFDocument
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  @_Concurrency.MainActor public func handle(error: Swift.Error) async
+  #endif
+
   @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step, nibName nibNameOrNil: Swift.String?, bundle nibBundleOrNil: Foundation.Bundle?)
   @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
@@ -2209,10 +2230,7 @@ public struct ButtonConfig {
   @_Concurrency.MainActor(unsafe) public var theme: MobileWorkflowCore.Theme
   @_Concurrency.MainActor(unsafe) public init(config: MobileWorkflowCore.NavigationFooterView.Config = .default, theme: MobileWorkflowCore.Theme)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public var isHidden: Swift.Bool {
-    @_Concurrency.MainActor(unsafe) @objc get
-    @_Concurrency.MainActor(unsafe) @objc set
-  }
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func sizeThatFits(_ size: CoreGraphics.CGSize) -> CoreGraphics.CGSize
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutMarginsDidChange()
   @objc deinit
 }
@@ -2354,6 +2372,21 @@ public enum Attachment {
   case data(_: Foundation.Data, mimeType: Swift.String, fileName: Swift.String)
 }
 @objc @_Concurrency.MainActor(unsafe) open class MWEmailStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
+  @_Concurrency.MainActor(unsafe) public var body: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var stepTitle: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var buttonTitle: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var sendTo: Swift.String {
+    get
+  }
+  @_Concurrency.MainActor(unsafe) public var subject: Swift.String {
+    get
+  }
   @_Concurrency.MainActor(unsafe) public var emailStep: MobileWorkflowCore.EmailStep {
     get
   }
@@ -2578,6 +2611,12 @@ public protocol PDFStep {
   var sharingEnabled: Swift.Bool { get }
   var session: MobileWorkflowCore.Session { get }
   var services: MobileWorkflowCore.StepServices { get }
+  var saveOnDevice: Swift.Bool { get }
+}
+extension MobileWorkflowCore.PDFStep {
+  public var saveOnDevice: Swift.Bool {
+    get
+  }
 }
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
