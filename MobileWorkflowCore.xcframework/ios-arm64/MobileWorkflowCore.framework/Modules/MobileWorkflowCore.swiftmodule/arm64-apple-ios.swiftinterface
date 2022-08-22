@@ -674,11 +674,12 @@ public struct AuthenticationTask : MobileWorkflowCore.AsyncTask {
   @_Concurrency.MainActor(unsafe) public var outputDirectory: Foundation.URL?
   @_Concurrency.MainActor(unsafe) final public let services: MobileWorkflowCore.StepServices?
   @_Concurrency.MainActor(unsafe) final public let presentation: MobileWorkflowCore.Presentation?
+  @_Concurrency.MainActor(unsafe) final public let isModal: Swift.Bool
   @_Concurrency.MainActor(unsafe) public var isDiscardable: Swift.Bool {
     get
   }
   @_Concurrency.MainActor(unsafe) final public let theme: MobileWorkflowCore.Theme
-  @_Concurrency.MainActor(unsafe) public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, services: MobileWorkflowCore.StepServices? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?)
+  @_Concurrency.MainActor(unsafe) public init(stepBuilders: [MobileWorkflowCore.StepBuilder], initialStep: MobileWorkflowCore.Step, session: MobileWorkflowCore.Session, theme: MobileWorkflowCore.Theme = .current, services: MobileWorkflowCore.StepServices? = nil, outputDirectory: Foundation.URL?, presentation: MobileWorkflowCore.Presentation?, isModal: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewWillAppear(_ animated: Swift.Bool)
@@ -1581,13 +1582,14 @@ public protocol TableStep : AnyObject, MobileWorkflowCore.Step {
 }
 public class ListStepItem : Swift.Codable {
   final public let id: Swift.String
+  final public let type: Swift.String?
   final public let text: Swift.String
   final public let detailText: Swift.String?
   final public let sfSymbolName: Swift.String?
   final public let imageURL: Swift.String?
   final public let sectionName: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
-  public init(id: Swift.String, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
+  public init(id: Swift.String, type: Swift.String? = nil, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
