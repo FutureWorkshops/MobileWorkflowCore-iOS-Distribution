@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name                  = 'MobileWorkflow'
-    s.version               = '2.0.20'
+    s.version               = '2.0.21'
     s.summary               = 'Core functionality for MobileWorkflow on iOS.'
     s.description           = <<-DESC
     Core functionality for MobileWorkflow on iOS, including ResearchKit derived steps and addtional custom steps.
@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
     s.homepage              = 'https://www.mobileworkflow.io'
     s.license               = { :type => 'Copyright', :file => 'LICENSE' }
     s.author                = { 'Future Workshops' => 'info@futureworkshops.com' }
-    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/2.0.20/MobileWorkflowCore.zip' }
+    s.source                = { :http => 'https://raw.github.com/FutureWorkshops/MobileWorkflowCore-iOS-Distribution/2.0.21/MobileWorkflowCore.zip' }
     s.platform              = :ios
     s.swift_version         = '5'
-    s.ios.deployment_target = '13.0'
+    s.ios.deployment_target = '15.0'
     s.default_subspecs      = 'Core'
     s.module_name           = 'MobileWorkflowCore'
 

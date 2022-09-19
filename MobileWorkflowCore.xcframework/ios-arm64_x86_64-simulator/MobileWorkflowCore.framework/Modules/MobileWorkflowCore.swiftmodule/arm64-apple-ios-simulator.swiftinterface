@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.6.1 (swiftlang-5.6.0.323.66 clang-1316.0.20.12)
-// swift-module-flags: -target arm64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
+// swift-module-flags: -target arm64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 import AVFoundation
 import AVKit
 import AuthenticationServices
@@ -105,13 +105,21 @@ public struct AppConfigurationDependencies {
   public static func `default`(withAppId appId: Swift.String = Bundle.main.bundleIdentifier ?? "", plugins: [MobileWorkflowCore.Plugin.Type], eventDelegator: MobileWorkflowCore.AppEventDelegator?, queueControllerProvider: MobileWorkflowCore.QueueControllerProvider?) -> MobileWorkflowCore.AppConfigurationDependencies
 }
 public protocol AsyncTaskInterceptor {
-  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService, completion: @escaping (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService) async -> MobileWorkflowCore.URLAsyncTask<T>
+  #endif
+
   func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
   func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
   func interceptErrorWithRetryTask<T>(task: MobileWorkflowCore.URLAsyncTask<T>, for error: Swift.Error, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>?
 }
 extension MobileWorkflowCore.AsyncTaskInterceptor {
-  public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService, completion: (MobileWorkflowCore.URLAsyncTask<T>) -> Swift.Void)
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider, networkService: MobileWorkflowCore.AsyncTaskService) async -> MobileWorkflowCore.URLAsyncTask<T>
+  #endif
+
   public func intercept<T>(task: MobileWorkflowCore.URLAsyncTask<T>, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>
   public func interceptResponse<T>(_ response: T, session: MobileWorkflowCore.ContentProvider) -> T
   public func interceptErrorWithRetryTask<T>(task: MobileWorkflowCore.URLAsyncTask<T>, for error: Swift.Error, session: MobileWorkflowCore.ContentProvider) -> MobileWorkflowCore.URLAsyncTask<T>?
@@ -163,13 +171,15 @@ public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
   final public let imageLoadingService: MobileWorkflowCore.ImageLoadingService
   final public let localizationService: MobileWorkflowCore.LocalizationService
   final public let eventService: MobileWorkflowCore.EventService
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   
   #if compiler(>=5.3) && $AsyncAwait
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
   #endif
 
   @objc deinit
+}
+extension MobileWorkflowCore.StepServices {
+  public static func buildEmptyServices() -> MobileWorkflowCore.StepServices
 }
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
@@ -508,6 +518,18 @@ public enum FileUploadUpdate {
   case uploaded(identifier: Swift.String)
   case completed
 }
+public class Navigator {
+  public var hasNextStep: Swift.Bool {
+    get
+  }
+  public init(controller: MobileWorkflowCore.MWStepViewController? = nil)
+  @_Concurrency.MainActor public func goBack()
+  @_Concurrency.MainActor public func `continue`<T>(selecting result: T?) where T : Swift.Encodable
+  @_Concurrency.MainActor public func `continue`<T>(encoding result: T?) where T : Swift.Encodable
+  @_Concurrency.MainActor public func `continue`(storing: Any?)
+  @_Concurrency.MainActor public func `continue`(result: MobileWorkflowCore.StepResult? = nil)
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers public class QueueControllerNetworkAsyncTaskService : ObjectiveC.NSObject {
   public static let kQueuedSessionIdentifier: Swift.String
   public enum Exceptions : Swift.Error {
@@ -536,7 +558,6 @@ extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
 }
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService : MobileWorkflowCore.AsyncTaskService {
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   
   #if compiler(>=5.3) && $AsyncAwait
   public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
@@ -554,7 +575,11 @@ extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService {
 public class AuthenticationService : MobileWorkflowCore.AsyncTaskService {
   public init(credentialStore: MobileWorkflowCore.CredentialStoreProtocol, authRedirectHandler: MobileWorkflowCore.AuthRedirectHandler?)
   public func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
+  #endif
+
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class MWContentStepViewController : MobileWorkflowCore.MWStepViewController {
@@ -610,6 +635,7 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
+  @objc deinit
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewLayoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func motionEnded(_ motion: UIKit.UIEvent.EventSubtype, with event: UIKit.UIEvent?)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var preferredStatusBarStyle: UIKit.UIStatusBarStyle {
@@ -626,7 +652,6 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) open func goForward()
   @_Concurrency.MainActor(unsafe) public func goBackward()
   @_Concurrency.MainActor(unsafe) public func hasNextStep() -> Swift.Bool
-  @objc deinit
 }
 public enum StepLinkType {
   case push
@@ -817,6 +842,22 @@ public typealias MobileWorkflowButtonTableViewCell = MobileWorkflowCore.MWButton
   @_Concurrency.MainActor(unsafe) public func configureButton(label: Swift.String?, style: MobileWorkflowCore.ButtonStyle, image: UIKit.UIImage? = nil, theme: MobileWorkflowCore.Theme = .current)
   @objc deinit
 }
+public class CodableResult : MobileWorkflowCore.StepResult, MobileWorkflowCore.ValueProvider {
+  public var identifier: Swift.String
+  final public let content: Foundation.Data?
+  public init<T>(identifier: Swift.String, result: T) where T : Swift.Encodable
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+  @objc deinit
+}
+public class CodableSelectionResult : MobileWorkflowCore.StepResult, MobileWorkflowCore.ValueProvider {
+  public var identifier: Swift.String
+  final public let result: MobileWorkflowCore.CodableResult
+  public init<T>(identifier: Swift.String, result: T) where T : Swift.Encodable
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+  @objc deinit
+}
 public struct URLFormatter {
   public static let DefaultURLComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultURLComposerRegex)
@@ -996,6 +1037,14 @@ public struct StepData : Swift.Codable {
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
 }
+public class AnyResult : MobileWorkflowCore.StepResult, MobileWorkflowCore.ValueProvider {
+  public var identifier: Swift.String
+  final public let result: Any
+  public init(identifier: Swift.String, result: Any)
+  public func fetchValue(for path: Swift.String) -> Any?
+  public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
+  @objc deinit
+}
 public protocol AsyncTask {
   associatedtype Response
   associatedtype Input
@@ -1168,6 +1217,9 @@ public protocol ContentProvider : MobileWorkflowCore.JSONRepresentable {
 
   @objc deinit
 }
+extension MobileWorkflowCore.Session {
+  public static func buildEmptySession() -> MobileWorkflowCore.Session
+}
 extension MobileWorkflowCore.Session : MobileWorkflowCore.FileKeyResolver {
 }
 extension MobileWorkflowCore.Session : MobileWorkflowCore.ContentProvider {
@@ -1185,6 +1237,59 @@ extension MobileWorkflowCore.Session : MobileWorkflowCore.ContentProvider {
 extension MobileWorkflowCore.Session {
   public func copyForChild() -> MobileWorkflowCore.Session
 }
+public struct ARButton : SwiftUI.View {
+  @SwiftUI.Binding @_projectedValueProperty($title) public var title: Swift.String {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $title: SwiftUI.Binding<Swift.String> {
+    get
+  }
+  @SwiftUI.Binding @_projectedValueProperty($style) public var style: MobileWorkflowCore.ButtonStyle {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $style: SwiftUI.Binding<MobileWorkflowCore.ButtonStyle> {
+    get
+  }
+  @SwiftUI.Binding @_projectedValueProperty($theme) public var theme: MobileWorkflowCore.Theme {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $theme: SwiftUI.Binding<MobileWorkflowCore.Theme> {
+    get
+  }
+  @SwiftUI.Binding @_projectedValueProperty($enabled) public var enabled: Swift.Bool {
+    get
+    nonmutating set
+    nonmutating _modify
+  }
+  public var $enabled: SwiftUI.Binding<Swift.Bool> {
+    get
+  }
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public init(title: Swift.String = L10n.Step.nextButtonTitle, style: MobileWorkflowCore.ButtonStyle = .primary, theme: MobileWorkflowCore.Theme = .current, enabled: Swift.Bool = true, action: @escaping @Sendable () async -> Swift.Void = {})
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public init(title: Swift.String = L10n.Step.nextButtonTitle, style: SwiftUI.Binding<MobileWorkflowCore.ButtonStyle> = .constant(.primary), theme: SwiftUI.Binding<MobileWorkflowCore.Theme> = .constant(.current), enabled: SwiftUI.Binding<Swift.Bool>, action: @escaping @Sendable () async -> Swift.Void = {})
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public init(title: SwiftUI.Binding<Swift.String> = .constant(L10n.Step.nextButtonTitle), style: SwiftUI.Binding<MobileWorkflowCore.ButtonStyle> = .constant(.primary), theme: SwiftUI.Binding<MobileWorkflowCore.Theme> = .constant(.current), enabled: SwiftUI.Binding<Swift.Bool> = .constant(true), action: @escaping @Sendable () async -> Swift.Void = {})
+  #endif
+
+  @_Concurrency.MainActor(unsafe) public var body: some SwiftUI.View {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s18MobileWorkflowCore8ARButtonV4bodyQrvp", 0) __
+}
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultPrimary(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configureNavBarAsDefaultGrouped(withTheme theme: MobileWorkflowCore.Theme, navBarShadowHidden: Swift.Bool = false)
@@ -1201,10 +1306,6 @@ public protocol CredentialStoreProtocol {
   func removeCredential(_ credentialType: MobileWorkflowCore.CredentialType) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func wipeCredentials() -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   func updateCredentials(_ credentials: [MobileWorkflowCore.Credential]) -> Swift.Result<Swift.Void, Swift.Error>
-}
-extension MobileWorkflowCore.CredentialStoreProtocol {
-  public func updateCredential(_ credential: MobileWorkflowCore.Credential, completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
-  public func updateCredentials(_ credentials: [MobileWorkflowCore.Credential], completion: @escaping (Swift.Result<Swift.Void, Swift.Error>) -> Swift.Void)
 }
 extension Foundation.NotificationCenter {
   public func buildKeyboardPublisher(heightMapping: @escaping (CoreGraphics.CGFloat) -> CoreGraphics.CGFloat) -> Combine.AnyPublisher<CoreGraphics.CGFloat, Swift.Never>
@@ -1297,6 +1398,70 @@ public struct NetworkStackStepItemTask : MobileWorkflowCore.CredentializedAsyncT
   public let credential: MobileWorkflowCore.Credential?
   public typealias Input = Foundation.URL
 }
+public protocol StepViewModel : MobileWorkflowCore.Step {
+  var session: MobileWorkflowCore.Session { get }
+  var services: MobileWorkflowCore.StepServices { get }
+}
+extension MobileWorkflowCore.StepViewModel {
+  public func resolve(optional string: Swift.String?) -> Swift.String?
+  public func resolve(_ string: Swift.String) -> Swift.String
+  public func getResult<T>(for property: Swift.String) -> T?
+}
+extension MobileWorkflowCore.StepViewModel {
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func fetch(image: Swift.String) async -> MobileWorkflowCore.ImageLoadingResult
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func load(image: Swift.String) async -> UIKit.UIImage?
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func load(image: Swift.String, placeholder: UIKit.UIImage) async -> UIKit.UIImage
+  #endif
+
+}
+extension MobileWorkflowCore.StepViewModel {
+  public func build(url: Swift.String) -> Foundation.URL?
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func get<T>(path: Swift.String, headers: [Swift.String : Swift.String] = [:]) async throws -> T where T : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func put<T, U>(path: Swift.String, body: T, headers: [Swift.String : Swift.String] = [:]) async throws -> U? where T : Swift.Encodable, U : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func patch<T, U>(path: Swift.String, body: T, headers: [Swift.String : Swift.String] = [:]) async throws -> U? where T : Swift.Encodable, U : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func post<T, U>(path: Swift.String, body: T, headers: [Swift.String : Swift.String] = [:]) async throws -> U? where T : Swift.Encodable, U : Swift.Decodable
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  public func delete<T, U>(path: Swift.String, body: T?, headers: [Swift.String : Swift.String] = [:]) async throws -> U? where T : Swift.Encodable, U : Swift.Decodable
+  #endif
+
+}
+open class ObservableStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.StepViewModel, Foundation.ObservableObject {
+  public var session: MobileWorkflowCore.Session
+  public var services: MobileWorkflowCore.StepServices
+  public var navigator: MobileWorkflowCore.Navigator {
+    get
+  }
+  public init(identifier: Swift.String, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices)
+  public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+  @objc deinit
+}
 public struct ValueFormatter {
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
@@ -1357,6 +1522,15 @@ extension UIKit.UITableView {
   @_Concurrency.MainActor(unsafe) public func register<T>(_: T.Type) where T : UIKit.UITableViewHeaderFooterView, T : MobileWorkflowCore.NibLoadable
   @_Concurrency.MainActor(unsafe) public func dequeueHeaderFooterView<T>() -> T where T : UIKit.UITableViewHeaderFooterView
 }
+public struct ImageLoadingOptions : Swift.OptionSet {
+  public let rawValue: Swift.Int
+  public init(rawValue: Swift.Int)
+  public static let none: MobileWorkflowCore.ImageLoadingOptions
+  public static let localOnly: MobileWorkflowCore.ImageLoadingOptions
+  public typealias ArrayLiteralElement = MobileWorkflowCore.ImageLoadingOptions
+  public typealias Element = MobileWorkflowCore.ImageLoadingOptions
+  public typealias RawValue = Swift.Int
+}
 public enum ImageLoadingResult {
   case bundle(_: UIKit.UIImage)
   case session(_: UIKit.UIImage)
@@ -1371,10 +1545,21 @@ public enum ImageLoadingResult {
   }
 }
 public protocol ImageLoadingService {
-  func load(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((MobileWorkflowCore.ImageLoadingResult) -> Swift.Void)?) -> Combine.AnyCancellable?
-  func syncLoad(image: Swift.String, session: MobileWorkflowCore.Session) -> UIKit.UIImage?
-  func asyncLoad(image: Swift.String, session: MobileWorkflowCore.Session, completion: ((UIKit.UIImage?) -> Swift.Void)?) -> Combine.AnyCancellable?
-  func loadPublisher(image: Swift.String, session: MobileWorkflowCore.Session) -> Combine.AnyPublisher<UIKit.UIImage, Swift.Error>
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  func getImage(_ image: Swift.String, session: MobileWorkflowCore.Session) async -> UIKit.UIImage?
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  func load(image: Swift.String, session: MobileWorkflowCore.Session) async -> MobileWorkflowCore.ImageLoadingResult
+  #endif
+
+  
+  #if compiler(>=5.3) && $AsyncAwait
+  func load(image: Swift.String, session: MobileWorkflowCore.Session, options: MobileWorkflowCore.ImageLoadingOptions) async -> MobileWorkflowCore.ImageLoadingResult
+  #endif
+
 }
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) public class StepTitleLabel : UIKit.UILabel {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreGraphics.CGRect)
@@ -1979,8 +2164,8 @@ extension MobileWorkflowCore.SelectionResult : MobileWorkflowCore.ValueProvider 
   public func fetchProvider(for path: Swift.String) -> MobileWorkflowCore.ValueProvider?
 }
 public protocol TaskExecutor {
+  @available(*, deprecated, renamed: "perform(task:session:)")
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
-  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
   
   #if compiler(>=5.3) && $AsyncAwait
   func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
@@ -1988,30 +2173,24 @@ public protocol TaskExecutor {
 
 }
 extension MobileWorkflowCore.TaskExecutor {
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
+  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
 }
-extension MobileWorkflowCore.TaskExecutor {
-  
-  #if compiler(>=5.3) && $AsyncAwait
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) async throws -> T.Response where T : MobileWorkflowCore.AsyncTask
-  #endif
-
+public enum AsyncTaskServiceError : Swift.Error {
+  case unableToPerformTask
+  case invalidResponse
+  public static func == (a: MobileWorkflowCore.AsyncTaskServiceError, b: MobileWorkflowCore.AsyncTaskServiceError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 public protocol AsyncTaskService : MobileWorkflowCore.Reinitializable, MobileWorkflowCore.TaskExecutor {
   @discardableResult
   func canPerform<T>(task: T) -> Swift.Bool where T : MobileWorkflowCore.AsyncTask
-  func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, respondOn: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   func configure(stepServices: MobileWorkflowCore.StepServices?)
 }
 extension MobileWorkflowCore.AsyncTaskService {
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider) -> Combine.AnyPublisher<T.Response, Swift.Error> where T : MobileWorkflowCore.AsyncTask
-}
-extension MobileWorkflowCore.AsyncTaskService {
-  public func perform<T>(task: T, session: MobileWorkflowCore.ContentProvider, completion: @escaping (Swift.Result<T.Response, Swift.Error>) -> Swift.Void) where T : MobileWorkflowCore.AsyncTask
   public func configure(stepServices: MobileWorkflowCore.StepServices?)
-}
-extension MobileWorkflowCore.AsyncTaskService {
-  public func notify<T>(result: Swift.Result<T, Swift.Error>, on: Dispatch.DispatchQueue, completion: @escaping (Swift.Result<T, Swift.Error>) -> Swift.Void)
 }
 public enum HTTPMethod : Swift.String, Swift.Codable {
   case GET
@@ -2156,6 +2335,14 @@ public enum L10n {
     public static let noTitle: Swift.String
     public static let unauthorizedTitle: Swift.String
     public static func unauthorizedMessage(error: Swift.String? = nil) -> Swift.String
+  }
+  public enum Step {
+    public static let generalError: Swift.String
+    public static let verifyStepConfiguration: Swift.String
+    public static func unsupportedStep(type: Swift.String) -> Swift.String
+    public static let nextButtonTitle: Swift.String
+    public static let skipButtonTitle: Swift.String
+    public static let doneButtonTitle: Swift.String
   }
   #warning("Tempoary inclusion until image capture step is removed from the core")
 }
@@ -2667,6 +2854,8 @@ extension MobileWorkflowCore.LinkModalType : Swift.Hashable {}
 extension MobileWorkflowCore.LinkModalType : Swift.RawRepresentable {}
 extension MobileWorkflowCore.PresentationContext.DismissRule : Swift.Equatable {}
 extension MobileWorkflowCore.PresentationContext.DismissRule : Swift.Hashable {}
+extension MobileWorkflowCore.AsyncTaskServiceError : Swift.Equatable {}
+extension MobileWorkflowCore.AsyncTaskServiceError : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Equatable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
