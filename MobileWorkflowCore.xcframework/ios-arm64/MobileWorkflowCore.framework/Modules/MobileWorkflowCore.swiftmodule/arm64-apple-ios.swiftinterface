@@ -1647,6 +1647,9 @@ public struct BinaryResource : Swift.Codable {
 public protocol URLAsyncTaskConvertible {
   func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
 }
+extension MobileWorkflowCore.URLAsyncTaskConvertible where Self : MobileWorkflowCore.AsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
+  public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
+}
 extension MobileWorkflowCore.URLAsyncTaskConvertible where Self : MobileWorkflowCore.CredentializedAsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable {
   public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
 }
@@ -1803,10 +1806,15 @@ public struct ARLogMessageEvent : MobileWorkflowCore.ARLoggerEvent {
   public init(_ message: Swift.String, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
   public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
 }
-public struct NetworkListItemTask : MobileWorkflowCore.CredentializedAsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
-  public typealias Response = [MobileWorkflowCore.ListStepItem]
+public enum ResultOrMessage<T> where T : Swift.Decodable {
+  case result(_: T)
+  case message(_: Swift.String)
+}
+public struct NetworkListItemTask : MobileWorkflowCore.AsyncTask, MobileWorkflowCore.URLAsyncTaskConvertible {
+  public typealias Result = [MobileWorkflowCore.ListStepItem]
+  public typealias Response = MobileWorkflowCore.ResultOrMessage<MobileWorkflowCore.NetworkListItemTask.Result>
   public let input: Foundation.URL
-  public let credential: MobileWorkflowCore.Credential?
+  public func convertToURLAsyncTask<T>(using session: MobileWorkflowCore.ContentProvider) -> T? where T : MobileWorkflowCore.AsyncTask
   public typealias Input = Foundation.URL
 }
 public enum LinkType : Swift.String, Swift.Codable {

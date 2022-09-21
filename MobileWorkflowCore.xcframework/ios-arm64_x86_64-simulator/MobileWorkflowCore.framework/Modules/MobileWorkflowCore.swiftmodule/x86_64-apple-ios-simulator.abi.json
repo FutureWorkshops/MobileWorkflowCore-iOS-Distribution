@@ -41578,6 +41578,43 @@
               }
             ],
             "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore23URLAsyncTaskConvertiblePA2A05AsyncE0Rz10Foundation3URLV5InputAaDPRtzSe8ResponseAIRpzrlE09convertTodE05usingqd__SgAA15ContentProvider_p_tAaDRd__lF",
+            "mangledName": "$s18MobileWorkflowCore23URLAsyncTaskConvertiblePA2A05AsyncE0Rz10Foundation3URLV5InputAaDPRtzSe8ResponseAIRpzrlE09convertTodE05usingqd__SgAA15ContentProvider_p_tAaDRd__lF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0, τ_1_0 where τ_0_0 : MobileWorkflowCore.AsyncTask, τ_0_0 : MobileWorkflowCore.URLAsyncTaskConvertible, τ_1_0 : MobileWorkflowCore.AsyncTask, τ_0_0.Input == Foundation.URL, τ_0_0.Response : Swift.Decodable>",
+            "sugared_genericSig": "<Self, T where Self : MobileWorkflowCore.AsyncTask, Self : MobileWorkflowCore.URLAsyncTaskConvertible, T : MobileWorkflowCore.AsyncTask, Self.Input == Foundation.URL, Self.Response : Swift.Decodable>",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "convertToURLAsyncTask",
+            "printedName": "convertToURLAsyncTask(using:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "τ_1_0?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_1_0"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
+              }
+            ],
+            "declKind": "Func",
             "usr": "s:18MobileWorkflowCore23URLAsyncTaskConvertiblePA2A019CredentializedAsyncE0Rz10Foundation3URLV5InputAA0hE0PRtzSe8ResponseAJRpzrlE09convertTodE05usingqd__SgAA15ContentProvider_p_tAaIRd__lF",
             "mangledName": "$s18MobileWorkflowCore23URLAsyncTaskConvertiblePA2A019CredentializedAsyncE0Rz10Foundation3URLV5InputAA0hE0PRtzSe8ResponseAJRpzrlE09convertTodE05usingqd__SgAA15ContentProvider_p_tAaIRd__lF",
             "moduleName": "MobileWorkflowCore",
@@ -46234,6 +46271,149 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "ResultOrMessage",
+        "printedName": "ResultOrMessage",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "result",
+            "printedName": "result",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "GenericFunction",
+                "printedName": "<τ_0_0 where τ_0_0 : Swift.Decodable> (MobileWorkflowCore.ResultOrMessage<τ_0_0>.Type) -> (τ_0_0) -> MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(τ_0_0) -> MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ResultOrMessage",
+                        "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "GenericTypeParam",
+                            "printedName": "τ_0_0"
+                          }
+                        ],
+                        "usr": "s:18MobileWorkflowCore15ResultOrMessageO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "GenericTypeParam",
+                        "printedName": "τ_0_0"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ResultOrMessage",
+                        "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "GenericTypeParam",
+                            "printedName": "τ_0_0"
+                          }
+                        ],
+                        "usr": "s:18MobileWorkflowCore15ResultOrMessageO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18MobileWorkflowCore15ResultOrMessageO6resultyACyxGxcAEmSeRzlF",
+            "mangledName": "$s18MobileWorkflowCore15ResultOrMessageO6resultyACyxGxcAEmSeRzlF",
+            "moduleName": "MobileWorkflowCore"
+          },
+          {
+            "kind": "Var",
+            "name": "message",
+            "printedName": "message",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "GenericFunction",
+                "printedName": "<τ_0_0 where τ_0_0 : Swift.Decodable> (MobileWorkflowCore.ResultOrMessage<τ_0_0>.Type) -> (Swift.String) -> MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.String) -> MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ResultOrMessage",
+                        "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "GenericTypeParam",
+                            "printedName": "τ_0_0"
+                          }
+                        ],
+                        "usr": "s:18MobileWorkflowCore15ResultOrMessageO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ResultOrMessage",
+                        "printedName": "MobileWorkflowCore.ResultOrMessage<τ_0_0>",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "GenericTypeParam",
+                            "printedName": "τ_0_0"
+                          }
+                        ],
+                        "usr": "s:18MobileWorkflowCore15ResultOrMessageO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18MobileWorkflowCore15ResultOrMessageO7messageyACyxGSScAEmSeRzlF",
+            "mangledName": "$s18MobileWorkflowCore15ResultOrMessageO7messageyACyxGSScAEmSeRzlF",
+            "moduleName": "MobileWorkflowCore"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:18MobileWorkflowCore15ResultOrMessageO",
+        "mangledName": "$s18MobileWorkflowCore15ResultOrMessageO",
+        "moduleName": "MobileWorkflowCore",
+        "genericSig": "<τ_0_0 where τ_0_0 : Swift.Decodable>",
+        "sugared_genericSig": "<T where T : Swift.Decodable>",
+        "declAttributes": [
+          "AccessControl"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "NetworkListItemTask",
         "printedName": "NetworkListItemTask",
         "children": [
@@ -46282,64 +46462,40 @@
             ]
           },
           {
-            "kind": "Var",
-            "name": "credential",
-            "printedName": "credential",
+            "kind": "Function",
+            "name": "convertToURLAsyncTask",
+            "printedName": "convertToURLAsyncTask(using:)",
             "children": [
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
-                "printedName": "MobileWorkflowCore.Credential?",
+                "printedName": "τ_0_0?",
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Credential",
-                    "printedName": "MobileWorkflowCore.Credential",
-                    "usr": "s:18MobileWorkflowCore10CredentialV"
+                    "name": "GenericTypeParam",
+                    "printedName": "τ_0_0"
                   }
                 ],
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
               }
             ],
-            "declKind": "Var",
-            "usr": "s:18MobileWorkflowCore19NetworkListItemTaskV10credentialAA10CredentialVSgvp",
-            "mangledName": "$s18MobileWorkflowCore19NetworkListItemTaskV10credentialAA10CredentialVSgvp",
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore19NetworkListItemTaskV017convertToURLAsyncG05usingxSgAA15ContentProvider_p_tAA05AsyncG0RzlF",
+            "mangledName": "$s18MobileWorkflowCore19NetworkListItemTaskV017convertToURLAsyncG05usingxSgAA15ContentProvider_p_tAA05AsyncG0RzlF",
             "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.AsyncTask>",
+            "sugared_genericSig": "<T where T : MobileWorkflowCore.AsyncTask>",
             "declAttributes": [
-              "HasStorage",
               "AccessControl"
             ],
-            "isLet": true,
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Optional",
-                    "printedName": "MobileWorkflowCore.Credential?",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "Credential",
-                        "printedName": "MobileWorkflowCore.Credential",
-                        "usr": "s:18MobileWorkflowCore10CredentialV"
-                      }
-                    ],
-                    "usr": "s:Sq"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore19NetworkListItemTaskV10credentialAA10CredentialVSgvg",
-                "mangledName": "$s18MobileWorkflowCore19NetworkListItemTaskV10credentialAA10CredentialVSgvg",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "accessorKind": "get"
-              }
-            ]
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Struct",
@@ -46352,20 +46508,6 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "CredentializedAsyncTask",
-            "printedName": "CredentializedAsyncTask",
-            "usr": "s:18MobileWorkflowCore23CredentializedAsyncTaskP",
-            "mangledName": "$s18MobileWorkflowCore23CredentializedAsyncTaskP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "URLAsyncTaskConvertible",
-            "printedName": "URLAsyncTaskConvertible",
-            "usr": "s:18MobileWorkflowCore23URLAsyncTaskConvertibleP",
-            "mangledName": "$s18MobileWorkflowCore23URLAsyncTaskConvertibleP"
-          },
-          {
-            "kind": "Conformance",
             "name": "AsyncTask",
             "printedName": "AsyncTask",
             "children": [
@@ -46376,17 +46518,25 @@
                 "children": [
                   {
                     "kind": "TypeNominal",
-                    "name": "Array",
-                    "printedName": "[MobileWorkflowCore.ListStepItem]",
+                    "name": "ResultOrMessage",
+                    "printedName": "MobileWorkflowCore.ResultOrMessage<[MobileWorkflowCore.ListStepItem]>",
                     "children": [
                       {
                         "kind": "TypeNominal",
-                        "name": "ListStepItem",
-                        "printedName": "MobileWorkflowCore.ListStepItem",
-                        "usr": "s:18MobileWorkflowCore12ListStepItemC"
+                        "name": "Array",
+                        "printedName": "[MobileWorkflowCore.ListStepItem]",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ListStepItem",
+                            "printedName": "MobileWorkflowCore.ListStepItem",
+                            "usr": "s:18MobileWorkflowCore12ListStepItemC"
+                          }
+                        ],
+                        "usr": "s:Sa"
                       }
                     ],
-                    "usr": "s:Sa"
+                    "usr": "s:18MobileWorkflowCore15ResultOrMessageO"
                   }
                 ]
               },
@@ -46409,10 +46559,10 @@
           },
           {
             "kind": "Conformance",
-            "name": "Credentialized",
-            "printedName": "Credentialized",
-            "usr": "s:18MobileWorkflowCore14CredentializedP",
-            "mangledName": "$s18MobileWorkflowCore14CredentializedP"
+            "name": "URLAsyncTaskConvertible",
+            "printedName": "URLAsyncTaskConvertible",
+            "usr": "s:18MobileWorkflowCore23URLAsyncTaskConvertibleP",
+            "mangledName": "$s18MobileWorkflowCore23URLAsyncTaskConvertibleP"
           }
         ]
       },
