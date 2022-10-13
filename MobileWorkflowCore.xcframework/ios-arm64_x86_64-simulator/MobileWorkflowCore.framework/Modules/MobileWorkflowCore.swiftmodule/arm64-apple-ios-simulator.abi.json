@@ -845,7 +845,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(identifier:title:text:theme:links:navigationItems:)",
+            "printedName": "init(identifier:title:text:isOptional:disableBackOnNextStep:theme:links:navigationItems:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -891,6 +891,20 @@
               },
               {
                 "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
                 "name": "Theme",
                 "printedName": "MobileWorkflowCore.Theme",
                 "hasDefaultArg": true,
@@ -928,8 +942,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore11MWEmailStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
-            "mangledName": "$s18MobileWorkflowCore11MWEmailStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "usr": "s:18MobileWorkflowCore11MWEmailStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "mangledName": "$s18MobileWorkflowCore11MWEmailStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
             "moduleName": "MobileWorkflowCore",
             "overriding": true,
             "implicit": true,
@@ -6026,7 +6040,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(identifier:title:text:theme:links:navigationItems:)",
+            "printedName": "init(identifier:title:text:isOptional:disableBackOnNextStep:theme:links:navigationItems:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -6072,6 +6086,20 @@
               },
               {
                 "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
                 "name": "Theme",
                 "printedName": "MobileWorkflowCore.Theme",
                 "hasDefaultArg": true,
@@ -6109,8 +6137,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore16MWCompletionStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
-            "mangledName": "$s18MobileWorkflowCore16MWCompletionStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "usr": "s:18MobileWorkflowCore16MWCompletionStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "mangledName": "$s18MobileWorkflowCore16MWCompletionStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
             "moduleName": "MobileWorkflowCore",
             "overriding": true,
             "implicit": true,
@@ -17854,7 +17882,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(identifier:title:text:theme:links:navigationItems:)",
+            "printedName": "init(identifier:title:text:isOptional:disableBackOnNextStep:theme:links:navigationItems:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -17900,6 +17928,20 @@
               },
               {
                 "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
                 "name": "Theme",
                 "printedName": "MobileWorkflowCore.Theme",
                 "hasDefaultArg": true,
@@ -17937,8 +17979,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore17MWInstructionStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
-            "mangledName": "$s18MobileWorkflowCore17MWInstructionStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "usr": "s:18MobileWorkflowCore17MWInstructionStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "mangledName": "$s18MobileWorkflowCore17MWInstructionStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
             "moduleName": "MobileWorkflowCore",
             "overriding": true,
             "implicit": true,
@@ -34906,7 +34948,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(identifier:title:text:theme:links:navigationItems:)",
+            "printedName": "init(identifier:title:text:isOptional:disableBackOnNextStep:theme:links:navigationItems:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -34952,6 +34994,20 @@
               },
               {
                 "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
                 "name": "Theme",
                 "printedName": "MobileWorkflowCore.Theme",
                 "hasDefaultArg": true,
@@ -34989,8 +35045,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore14ObservableStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
-            "mangledName": "$s18MobileWorkflowCore14ObservableStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "usr": "s:18MobileWorkflowCore14ObservableStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
+            "mangledName": "$s18MobileWorkflowCore14ObservableStepC10identifier5title4text10isOptional017disableBackOnNextE05theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0E4LinkVGSayAA0E14NavigationItemVGtcfc",
             "moduleName": "MobileWorkflowCore",
             "overriding": true,
             "implicit": true,
@@ -49330,7 +49386,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(identifier:title:text:theme:links:navigationItems:)",
+            "printedName": "init(identifier:title:text:isOptional:disableBackOnNextStep:theme:links:navigationItems:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -49376,6 +49432,20 @@
               },
               {
                 "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
                 "name": "Theme",
                 "printedName": "MobileWorkflowCore.Theme",
                 "hasDefaultArg": true,
@@ -49413,8 +49483,8 @@
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore6MWStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA8StepLinkVGSayAA0M14NavigationItemVGtcfc",
-            "mangledName": "$s18MobileWorkflowCore6MWStepC10identifier5title4text5theme5links15navigationItemsACSS_SSSgAjA5ThemeVSayAA8StepLinkVGSayAA0M14NavigationItemVGtcfc",
+            "usr": "s:18MobileWorkflowCore6MWStepC10identifier5title4text10isOptional21disableBackOnNextStep5theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0N4LinkVGSayAA0N14NavigationItemVGtcfc",
+            "mangledName": "$s18MobileWorkflowCore6MWStepC10identifier5title4text10isOptional21disableBackOnNextStep5theme5links15navigationItemsACSS_SSSgALS2bAA5ThemeVSayAA0N4LinkVGSayAA0N14NavigationItemVGtcfc",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
@@ -84501,15 +84571,29 @@
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/Step.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1153,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/Step.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1198,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/Step.swift",
       "kind": "Array",
-      "offset": 1240,
+      "offset": 1319,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/Step.swift",
       "kind": "Array",
-      "offset": 1292,
+      "offset": 1371,
       "length": 2,
       "value": "[]"
     },
