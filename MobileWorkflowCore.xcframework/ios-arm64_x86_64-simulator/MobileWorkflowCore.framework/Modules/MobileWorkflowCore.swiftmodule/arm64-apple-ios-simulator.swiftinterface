@@ -1883,7 +1883,8 @@ open class MWStep : MobileWorkflowCore.Step {
   public var theme: MobileWorkflowCore.Theme
   public var links: [MobileWorkflowCore.StepLink]
   public var navigationItems: [MobileWorkflowCore.StepNavigationItem]
-  public init(identifier: Swift.String, title: Swift.String? = nil, text: Swift.String? = nil, isOptional: Swift.Bool = false, disableBackOnNextStep: Swift.Bool = false, theme: MobileWorkflowCore.Theme = .current, links: [MobileWorkflowCore.StepLink] = [], navigationItems: [MobileWorkflowCore.StepNavigationItem] = [])
+  public init(identifier: Swift.String, title: Swift.String? = nil, text: Swift.String? = nil, theme: MobileWorkflowCore.Theme = .current, links: [MobileWorkflowCore.StepLink] = [], navigationItems: [MobileWorkflowCore.StepNavigationItem] = [])
+  public init(identifier: Swift.String, isOptional: Swift.Bool, theme: MobileWorkflowCore.Theme)
   open func instantiateViewController() -> MobileWorkflowCore.StepViewController
   @objc deinit
 }
