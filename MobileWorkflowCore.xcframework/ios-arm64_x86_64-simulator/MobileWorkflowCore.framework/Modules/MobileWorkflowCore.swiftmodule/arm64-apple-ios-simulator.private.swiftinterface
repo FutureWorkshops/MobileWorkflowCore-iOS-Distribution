@@ -294,6 +294,9 @@ extension UIKit.UIViewController {
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
+extension Swift.String {
+  public func parseDateString(asTime: Swift.Bool, timeZone: Foundation.TimeZone = TimeZone.autoupdatingCurrent) -> Foundation.Date?
+}
 public struct ARLoggerTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Swift.Void
   public let input: MobileWorkflowCore.ARLoggerEvent
@@ -631,6 +634,7 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) public func defaultNavigationFooterConfig() -> MobileWorkflowCore.NavigationFooterView.Config
   @_Concurrency.MainActor(unsafe) public func updateNavigationFooterView()
   @_Concurrency.MainActor(unsafe) public func addStepResult(_ result: MobileWorkflowCore.StepResult)
+  @_Concurrency.MainActor(unsafe) public func resetResult()
   @_Concurrency.MainActor(unsafe) public func disableCancel()
   @_Concurrency.MainActor(unsafe) public func hideNavigationFooterView()
   @_Concurrency.MainActor(unsafe) open func configureNavigationBar(_ navigationBar: UIKit.UINavigationBar)
@@ -848,6 +852,7 @@ public struct URLFormatter {
   public static let DefaultURLComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultURLComposerRegex)
   public func parse(baseURL: Foundation.URL, complement: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
+  public func parse(_ content: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
 }
 public protocol AnalyticsEvent {
   var name: Swift.String { get }
@@ -986,6 +991,9 @@ extension Swift.Dictionary where Key == Swift.String, Value == Any {
   public func asUploadProperty() throws -> MobileWorkflowCore.UploadProperty
 }
 extension Swift.Error {
+  public var isAuthenticationError: Swift.Bool {
+    get
+  }
   public func extractCode() -> Swift.Int?
 }
 public protocol ResponseError : Foundation.LocalizedError, Swift.Decodable {
@@ -2047,10 +2055,15 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
   @objc deinit
 }
 public struct ARLogger {
+  public static var sharedInstance: MobileWorkflowCore.ARLogger {
+    get
+  }
   public static func log(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
   public static func boot(session: MobileWorkflowCore.ContentProvider? = nil)
   public static func log(_ event: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil)
   public static func update(level: MobileWorkflowCore.ARLogLevel)
+  public func log(_ message: Swift.String, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
+  public func log(_ event: MobileWorkflowCore.ARLoggerEvent, level: MobileWorkflowCore.ARLogLevel = .information, session: MobileWorkflowCore.ContentProvider? = nil)
 }
 extension UIKit.UIFont {
   public static func preferredFont(forTextStyle style: UIKit.UIFont.TextStyle, weight: UIKit.UIFont.Weight) -> UIKit.UIFont
@@ -2327,6 +2340,7 @@ public struct DeleteLogsTask : MobileWorkflowCore.AsyncTask {
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil, theme: MobileWorkflowCore.Theme = .current)
   @_Concurrency.MainActor(unsafe) public func configureForError(_ error: Swift.Error, theme: MobileWorkflowCore.Theme = .current, okAction: (() -> Swift.Void)?)
+  @_Concurrency.MainActor(unsafe) public func configureForError(_ error: Swift.Error, actionTitle: Swift.String, theme: MobileWorkflowCore.Theme, translation: (Swift.String) -> Swift.String, okAction: (() -> Swift.Void)?)
   @objc deinit
 }
 public protocol EmbedsStateViewInTableView {

@@ -5097,6 +5097,16 @@
         ]
       },
       {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "ARLoggerTask",
         "printedName": "ARLoggerTask",
@@ -14139,7 +14149,30 @@
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "Custom",
-              "AccessControl"
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "resetResult",
+            "printedName": "resetResult()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore20MWStepViewControllerC11resetResultyyF",
+            "mangledName": "$s18MobileWorkflowCore20MWStepViewControllerC11resetResultyyF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "RawDocComment"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -20915,6 +20948,55 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore12URLFormatterV5parse7baseURL10complement5using10Foundation0G0VSgAJ_SSAA15ContentProvider_pSgtF",
             "mangledName": "$s18MobileWorkflowCore12URLFormatterV5parse7baseURL10complement5using10Foundation0G0VSgAJ_SSAA15ContentProvider_pSgtF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "parse",
+            "printedName": "parse(_:using:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.URL?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "URL",
+                    "printedName": "Foundation.URL",
+                    "usr": "s:10Foundation3URLV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.ContentProvider?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ContentProvider",
+                    "printedName": "MobileWorkflowCore.ContentProvider",
+                    "usr": "s:18MobileWorkflowCore15ContentProviderP"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore12URLFormatterV5parse_5using10Foundation3URLVSgSS_AA15ContentProvider_pSgtF",
+            "mangledName": "$s18MobileWorkflowCore12URLFormatterV5parse_5using10Foundation3URLVSgSS_AA15ContentProvider_pSgtF",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
@@ -54444,6 +54526,16 @@
       },
       {
         "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "UIKit",
         "printedName": "UIKit",
         "declKind": "Import",
@@ -54454,6 +54546,53 @@
         "name": "ARLogger",
         "printedName": "ARLogger",
         "children": [
+          {
+            "kind": "Var",
+            "name": "sharedInstance",
+            "printedName": "sharedInstance",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ARLogger",
+                "printedName": "MobileWorkflowCore.ARLogger",
+                "usr": "s:18MobileWorkflowCore8ARLoggerV"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore8ARLoggerV14sharedInstanceACvpZ",
+            "mangledName": "$s18MobileWorkflowCore8ARLoggerV14sharedInstanceACvpZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl",
+              "SetterAccess"
+            ],
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ARLogger",
+                    "printedName": "MobileWorkflowCore.ARLogger",
+                    "usr": "s:18MobileWorkflowCore8ARLoggerV"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore8ARLoggerV14sharedInstanceACvgZ",
+                "mangledName": "$s18MobileWorkflowCore8ARLoggerV14sharedInstanceACvgZ",
+                "moduleName": "MobileWorkflowCore",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
           {
             "kind": "Function",
             "name": "log",
@@ -54632,6 +54771,124 @@
             "mangledName": "$s18MobileWorkflowCore8ARLoggerV6update5levelyAA10ARLogLevelO_tFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "log",
+            "printedName": "log(_:level:session:file:line:function:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ARLogLevel",
+                "printedName": "MobileWorkflowCore.ARLogLevel",
+                "hasDefaultArg": true,
+                "usr": "s:18MobileWorkflowCore10ARLogLevelO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.ContentProvider?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ContentProvider",
+                    "printedName": "MobileWorkflowCore.ContentProvider",
+                    "usr": "s:18MobileWorkflowCore15ContentProviderP"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "hasDefaultArg": true,
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "hasDefaultArg": true,
+                "usr": "s:Si"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "hasDefaultArg": true,
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore8ARLoggerV3log_5level7session4file4line8functionySS_AA10ARLogLevelOAA15ContentProvider_pSgSSSiSStF",
+            "mangledName": "$s18MobileWorkflowCore8ARLoggerV3log_5level7session4file4line8functionySS_AA10ARLogLevelOAA15ContentProvider_pSgSSSiSStF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "log",
+            "printedName": "log(_:level:session:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ARLoggerEvent",
+                "printedName": "MobileWorkflowCore.ARLoggerEvent",
+                "usr": "s:18MobileWorkflowCore13ARLoggerEventP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ARLogLevel",
+                "printedName": "MobileWorkflowCore.ARLogLevel",
+                "hasDefaultArg": true,
+                "usr": "s:18MobileWorkflowCore10ARLogLevelO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.ContentProvider?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ContentProvider",
+                    "printedName": "MobileWorkflowCore.ContentProvider",
+                    "usr": "s:18MobileWorkflowCore15ContentProviderP"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore8ARLoggerV3log_5level7sessionyAA0D5Event_p_AA10ARLogLevelOAA15ContentProvider_pSgtF",
+            "mangledName": "$s18MobileWorkflowCore8ARLoggerV3log_5level7sessionyAA0D5Event_p_AA10ARLogLevelOAA15ContentProvider_pSgtF",
+            "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
             ],
@@ -62152,6 +62409,92 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore9StateViewC17configureForError_5theme8okActionys0H0_p_AA5ThemeVyycSgtF",
             "mangledName": "$s18MobileWorkflowCore9StateViewC17configureForError_5theme8okActionys0H0_p_AA5ThemeVyycSgtF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "Custom",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "configureForError",
+            "printedName": "configureForError(_:actionTitle:theme:translation:okAction:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Error",
+                "printedName": "Swift.Error",
+                "usr": "s:s5ErrorP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Theme",
+                "printedName": "MobileWorkflowCore.Theme",
+                "usr": "s:18MobileWorkflowCore5ThemeV"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.String) -> Swift.String",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "typeAttributes": [
+                  "noescape"
+                ]
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "(() -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "() -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore9StateViewC17configureForError_11actionTitle5theme11translation8okActionys0H0_p_SSAA5ThemeVS2SXEyycSgtF",
+            "mangledName": "$s18MobileWorkflowCore9StateViewC17configureForError_11actionTitle5theme11translation8okActionys0H0_p_SSAA5ThemeVS2SXEyycSgtF",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "Custom",
@@ -72404,6 +72747,49 @@
           },
           {
             "kind": "Function",
+            "name": "parseDateString",
+            "printedName": "parseDateString(asTime:timeZone:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Date?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Date",
+                    "printedName": "Foundation.Date",
+                    "usr": "s:10Foundation4DateV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "TimeZone",
+                "printedName": "Foundation.TimeZone",
+                "hasDefaultArg": true,
+                "usr": "s:10Foundation8TimeZoneV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:SS18MobileWorkflowCoreE15parseDateString6asTime8timeZone10Foundation0E0VSgSb_AE0hJ0VtF",
+            "mangledName": "$sSS18MobileWorkflowCoreE15parseDateString6asTime8timeZone10Foundation0E0VSgSb_AE0hJ0VtF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "fw_attributedString",
             "printedName": "fw_attributedString(baseAttributes:substringsAttributes:)",
             "children": [
@@ -77656,6 +78042,47 @@
             "sugared_genericSig": "<Self where Self : Swift.Error>",
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Var",
+            "name": "isAuthenticationError",
+            "printedName": "isAuthenticationError",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:s5ErrorP18MobileWorkflowCoreE016isAuthenticationA0Sbvp",
+            "mangledName": "$ss5ErrorP18MobileWorkflowCoreE016isAuthenticationA0Sbvp",
+            "moduleName": "MobileWorkflowCore",
+            "isFromExtension": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:s5ErrorP18MobileWorkflowCoreE016isAuthenticationA0Sbvg",
+                "mangledName": "$ss5ErrorP18MobileWorkflowCoreE016isAuthenticationA0Sbvg",
+                "moduleName": "MobileWorkflowCore",
+                "genericSig": "<τ_0_0 where τ_0_0 : Swift.Error>",
+                "sugared_genericSig": "<Self where Self : Swift.Error>",
+                "isFromExtension": true,
+                "accessorKind": "get"
+              }
+            ]
           },
           {
             "kind": "Function",
@@ -83313,8 +83740,8 @@
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Network\/URLFormatter.swift",
       "kind": "StringLiteral",
       "offset": 253,
-      "length": 55,
-      "value": "\"\\{([a-zA-Z0-9_]{1,}[\\.]{1}){1,}([a-zA-Z0-9_]{1,})\\}\""
+      "length": 59,
+      "value": "\"\\{([a-zA-Z0-9_\\-]{1,}[\\.]{1}){1,}([a-zA-Z0-9_\\-]{1,})\\}\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Image Capture Step (Temp Copy)\/MWCoreImageCaptureStep.swift",
@@ -84579,7 +85006,7 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Stack Step\/MWNetworkStackStep.swift",
       "kind": "StringLiteral",
-      "offset": 192,
+      "offset": 468,
       "length": 18,
       "value": "\"MobileWorkflowCore.MWNetworkStackStep\""
     },
@@ -84894,7 +85321,7 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Log\/ARLogger.swift",
       "kind": "Array",
-      "offset": 279,
+      "offset": 291,
       "length": 2,
       "value": "[]"
     },
@@ -85146,392 +85573,399 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4114,
+      "offset": 4098,
+      "length": 22,
+      "value": "\"stackStep.invalidURL\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
+      "kind": "StringLiteral",
+      "offset": 4196,
       "length": 38,
       "value": "\"stackStep.urlActionsUnsupportedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4221,
+      "offset": 4303,
       "length": 31,
       "value": "\"stackStep.noButtonActionError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4324,
+      "offset": 4406,
       "length": 34,
       "value": "\"stackStep.nullStackStepItemError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4433,
+      "offset": 4515,
       "length": 37,
       "value": "\"stackStep.stackStepItemTypeNotFound\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4763,
+      "offset": 4845,
       "length": 31,
       "value": "\"binaryConversion.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4864,
+      "offset": 4946,
       "length": 39,
       "value": "\"binaryConversion.invalidFileTypeError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 4976,
+      "offset": 5058,
       "length": 42,
       "value": "\"binaryConversion.fileURLNotProvidedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5095,
+      "offset": 5177,
       "length": 46,
       "value": "\"binaryConversion.unableToRemovePreviousError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5219,
+      "offset": 5301,
       "length": 47,
       "value": "\"binaryConversion.unableToReplaceOriginalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5371,
+      "offset": 5453,
       "length": 35,
       "value": "\"workflowPresentation.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5684,
+      "offset": 5766,
       "length": 29,
       "value": "\"pdfImageRender.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5805,
+      "offset": 5887,
       "length": 22,
       "value": "\"pdfStep.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5892,
+      "offset": 5974,
       "length": 25,
       "value": "\"pdfStep.invalidUrlError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 5985,
+      "offset": 6067,
       "length": 28,
       "value": "\"pdfStep.unableToShareError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6072,
+      "offset": 6154,
       "length": 19,
       "value": "\"pdfStep.inAppName\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6153,
+      "offset": 6235,
       "length": 23,
       "value": "\"pdfStep.openPDF.title\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6240,
+      "offset": 6322,
       "length": 25,
       "value": "\"pdfStep.openPDF.message\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6326,
+      "offset": 6408,
       "length": 21,
       "value": "\"pdfStep.reopenTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6411,
+      "offset": 6493,
       "length": 24,
       "value": "\"pdfStep.reopenSubtitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6497,
+      "offset": 6579,
       "length": 22,
       "value": "\"pdfStep.reopenButton\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6623,
+      "offset": 6705,
       "length": 34,
       "value": "\"pdfOverlayStep.unableToSaveError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6729,
+      "offset": 6811,
       "length": 39,
       "value": "\"pdfOverlayStep.pageForOverlayNotFound\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6838,
+      "offset": 6920,
       "length": 37,
       "value": "\"pdfOverlayStep.unableToAddSignature\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 6965,
+      "offset": 7047,
       "length": 20,
       "value": "\"email.instructions\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7046,
+      "offset": 7128,
       "length": 19,
       "value": "\"email.buttonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7133,
+      "offset": 7215,
       "length": 26,
       "value": "\"email.notConfiguredError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7231,
+      "offset": 7313,
       "length": 30,
       "value": "\"email.invalidAttachmentError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7354,
+      "offset": 7436,
       "length": 23,
       "value": "\"services.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7455,
+      "offset": 7537,
       "length": 39,
       "value": "\"services.noServiceCanPerformTaskError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7594,
+      "offset": 7676,
       "length": 30,
       "value": "\"locationService.generalError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7725,
+      "offset": 7807,
       "length": 69,
       "value": "\"locationService.significantLocationChangeMonitoringUnavailableError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7892,
+      "offset": 7974,
       "length": 28,
       "value": "\"unsupportedStep.errorTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 7980,
+      "offset": 8062,
       "length": 28,
       "value": "\"unsupportedStep.detailText\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8077,
+      "offset": 8159,
       "length": 37,
       "value": "\"unsupportedStep.continueButtonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8581,
+      "offset": 8663,
       "length": 27,
       "value": "\"networkStep.enqueuedTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8673,
+      "offset": 8755,
       "length": 29,
       "value": "\"networkStep.enqueuedMessage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8794,
+      "offset": 8876,
       "length": 22,
       "value": "\"invalidLicense.title\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8873,
+      "offset": 8955,
       "length": 24,
       "value": "\"invalidLicense.message\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8998,
+      "offset": 9080,
       "length": 31,
       "value": "\"workflow.confirmCancelMessage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9146,
+      "offset": 9228,
       "length": 47,
       "value": "\"barcodeScanner.videoRecordingUnsupportedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9275,
+      "offset": 9357,
       "length": 49,
       "value": "\"barcodeScanner.requiredBarcodesUnsupportedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9401,
+      "offset": 9483,
       "length": 44,
       "value": "\"barcodeScanner.cameraPermissionDeniedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9538,
+      "offset": 9620,
       "length": 24,
       "value": "\"qrScanner.instructions\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9666,
+      "offset": 9748,
       "length": 34,
       "value": "\"completion.checkboxAccessibility\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10312,
+      "offset": 10394,
       "length": 31,
       "value": "\"imageCaptureStep.captureImage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10407,
+      "offset": 10489,
       "length": 33,
       "value": "\"imageCaptureStep.recaptureImage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10505,
+      "offset": 10587,
       "length": 34,
       "value": "\"imageCaptureStep.nextButtonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10604,
+      "offset": 10686,
       "length": 34,
       "value": "\"imageCaptureStep.skipButtonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10705,
+      "offset": 10787,
       "length": 36,
       "value": "\"imageCaptureStep.cameraUnavailable\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10816,
+      "offset": 10898,
       "length": 44,
       "value": "\"imageCaptureStep.captureErrorNoPermissions\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10936,
+      "offset": 11018,
       "length": 45,
       "value": "\"imageCaptureStep.captureErrorCameraNotFound\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11060,
+      "offset": 11142,
       "length": 48,
       "value": "\"imageCaptureStep.captureErrorNoOutputDirectory\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11185,
+      "offset": 11267,
       "length": 46,
       "value": "\"imageCaptureStep.captureErrorCannotWriteFile\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11305,
+      "offset": 11387,
       "length": 43,
       "value": "\"imageCaptureStep.photoLibraryNotAvailable\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11447,
+      "offset": 11529,
       "length": 29,
       "value": "\"stepBuilder.parseErrorTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11543,
+      "offset": 11625,
       "length": 31,
       "value": "\"stepBuilder.parseErrorMessage\""
     },
@@ -85779,13 +86213,6 @@
       "offset": 1340,
       "length": 25,
       "value": "\"MobileWorkflowCore.MWEmailStepViewController\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Stack Step\/StackStep.swift",
-      "kind": "StringLiteral",
-      "offset": 203,
-      "length": 9,
-      "value": "\"MobileWorkflowCore.StackStep\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Stack Step\/StackStep.swift",
