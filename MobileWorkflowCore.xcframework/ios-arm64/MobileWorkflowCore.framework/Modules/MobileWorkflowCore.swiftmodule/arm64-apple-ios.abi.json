@@ -10563,6 +10563,150 @@
           },
           {
             "kind": "Function",
+            "name": "present",
+            "printedName": "present(link:discardable:willDismiss:didDismiss:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.PresentationFinishReason) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PresentationFinishReason",
+                    "printedName": "MobileWorkflowCore.PresentationFinishReason",
+                    "usr": "s:18MobileWorkflowCore24PresentationFinishReasonO"
+                  }
+                ],
+                "hasDefaultArg": true
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.PresentationFinishReason) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PresentationFinishReason",
+                    "printedName": "MobileWorkflowCore.PresentationFinishReason",
+                    "usr": "s:18MobileWorkflowCore24PresentationFinishReasonO"
+                  }
+                ],
+                "hasDefaultArg": true
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore9NavigatorC7present4link11discardable11willDismiss03didI0ySS_SbyAA24PresentationFinishReasonOcyAJctF",
+            "mangledName": "$s18MobileWorkflowCore9NavigatorC7present4link11discardable11willDismiss03didI0ySS_SbyAA24PresentationFinishReasonOcyAJctF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl",
+              "Custom"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "present",
+            "printedName": "present(step:discardable:willDismiss:didDismiss:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.PresentationFinishReason) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PresentationFinishReason",
+                    "printedName": "MobileWorkflowCore.PresentationFinishReason",
+                    "usr": "s:18MobileWorkflowCore24PresentationFinishReasonO"
+                  }
+                ],
+                "hasDefaultArg": true
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.PresentationFinishReason) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PresentationFinishReason",
+                    "printedName": "MobileWorkflowCore.PresentationFinishReason",
+                    "usr": "s:18MobileWorkflowCore24PresentationFinishReasonO"
+                  }
+                ],
+                "hasDefaultArg": true
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore9NavigatorC7present4step11discardable11willDismiss03didI0ySS_SbyAA24PresentationFinishReasonOcyAJctF",
+            "mangledName": "$s18MobileWorkflowCore9NavigatorC7present4step11discardable11willDismiss03didI0ySS_SbyAA24PresentationFinishReasonOcyAJctF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl",
+              "Custom"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "continue",
             "printedName": "continue(encoding:)",
             "children": [
@@ -15038,6 +15182,30 @@
         "moduleName": "MobileWorkflowCore",
         "declAttributes": [
           "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Identifiable",
+            "printedName": "Identifiable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ID",
+                "printedName": "ID",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:s12IdentifiableP",
+            "mangledName": "$ss12IdentifiableP"
+          }
         ]
       },
       {
@@ -83595,6 +83763,20 @@
       "offset": 10777,
       "length": 5,
       "value": "false"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Bridges\/Navigator.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2054,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Bridges\/Navigator.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2841,
+      "length": 4,
+      "value": "true"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Services\/QueueController\/QueueControllerNetworkAsyncTaskService.swift",

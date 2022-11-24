@@ -518,6 +518,8 @@ public class Navigator {
   public init(controller: MobileWorkflowCore.MWStepViewController? = nil)
   @_Concurrency.MainActor public func goBack()
   @_Concurrency.MainActor public func `continue`<T>(selecting result: T?) where T : Swift.Encodable
+  @_Concurrency.MainActor public func present(link: Swift.String, discardable: Swift.Bool = true, willDismiss: @escaping MobileWorkflowCore.OnDismiss = { _ in }, didDismiss: @escaping MobileWorkflowCore.OnDismiss = { _ in })
+  @_Concurrency.MainActor public func present(step: Swift.String, discardable: Swift.Bool = true, willDismiss: @escaping MobileWorkflowCore.OnDismiss = { _ in }, didDismiss: @escaping MobileWorkflowCore.OnDismiss = { _ in })
   @_Concurrency.MainActor public func `continue`<T>(encoding result: T?) where T : Swift.Encodable
   @_Concurrency.MainActor public func `continue`(storing: Any?)
   @_Concurrency.MainActor public func `continue`(result: MobileWorkflowCore.StepResult? = nil)
@@ -658,7 +660,7 @@ extension MobileWorkflowCore.LinkData {
     get
   }
 }
-public struct StepLink {
+public struct StepLink : Swift.Identifiable {
   public enum Rule {
     case propertyMatch(keyPath: Swift.String, value: Swift.String)
   }
@@ -667,6 +669,7 @@ public struct StepLink {
   public let target: Swift.String
   public let rule: MobileWorkflowCore.StepLink.Rule?
   public let animated: Swift.Bool
+  public typealias ID = Swift.String
 }
 public struct StepNavigationItem {
   public let linkId: Swift.String
