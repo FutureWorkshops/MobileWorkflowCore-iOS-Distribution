@@ -10444,8 +10444,10 @@
             "usr": "s:18MobileWorkflowCore9NavigatorC11hasNextStepSbvp",
             "mangledName": "$s18MobileWorkflowCore9NavigatorC11hasNextStepSbvp",
             "moduleName": "MobileWorkflowCore",
+            "deprecated": true,
             "declAttributes": [
-              "AccessControl"
+              "AccessControl",
+              "Available"
             ],
             "accessors": [
               {
@@ -10463,6 +10465,86 @@
                 "declKind": "Accessor",
                 "usr": "s:18MobileWorkflowCore9NavigatorC11hasNextStepSbvg",
                 "mangledName": "$s18MobileWorkflowCore9NavigatorC11hasNextStepSbvg",
+                "moduleName": "MobileWorkflowCore",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "canGoToNextStep",
+            "printedName": "canGoToNextStep",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore9NavigatorC15canGoToNextStepSbvp",
+            "mangledName": "$s18MobileWorkflowCore9NavigatorC15canGoToNextStepSbvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore9NavigatorC15canGoToNextStepSbvg",
+                "mangledName": "$s18MobileWorkflowCore9NavigatorC15canGoToNextStepSbvg",
+                "moduleName": "MobileWorkflowCore",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
+            "name": "isLastStepOnFlow",
+            "printedName": "isLastStepOnFlow",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore9NavigatorC16isLastStepOnFlowSbvp",
+            "mangledName": "$s18MobileWorkflowCore9NavigatorC16isLastStepOnFlowSbvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore9NavigatorC16isLastStepOnFlowSbvg",
+                "mangledName": "$s18MobileWorkflowCore9NavigatorC16isLastStepOnFlowSbvg",
                 "moduleName": "MobileWorkflowCore",
                 "accessorKind": "get"
               }
@@ -13696,6 +13778,47 @@
           },
           {
             "kind": "Var",
+            "name": "isLastStepOnFlow",
+            "printedName": "isLastStepOnFlow",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore20MWStepViewControllerC16isLastStepOnFlowSbvp",
+            "mangledName": "$s18MobileWorkflowCore20MWStepViewControllerC16isLastStepOnFlowSbvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "Custom",
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore20MWStepViewControllerC16isLastStepOnFlowSbvg",
+                "mangledName": "$s18MobileWorkflowCore20MWStepViewControllerC16isLastStepOnFlowSbvg",
+                "moduleName": "MobileWorkflowCore",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "navigationFooterView",
             "printedName": "navigationFooterView",
             "children": [
@@ -14472,6 +14595,30 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore20MWStepViewControllerC11hasNextStepSbyF",
             "mangledName": "$s18MobileWorkflowCore20MWStepViewControllerC11hasNextStepSbyF",
+            "moduleName": "MobileWorkflowCore",
+            "deprecated": true,
+            "declAttributes": [
+              "Custom",
+              "AccessControl",
+              "Available"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "canGoToNextStep",
+            "printedName": "canGoToNextStep()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore20MWStepViewControllerC15canGoToNextStepSbyF",
+            "mangledName": "$s18MobileWorkflowCore20MWStepViewControllerC15canGoToNextStepSbyF",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "Custom",
@@ -17277,6 +17424,35 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore28StepNavigationViewControllerC04stepfG20ShouldHideBackButtonySbAA0dfG0_pF",
             "mangledName": "$s18MobileWorkflowCore28StepNavigationViewControllerC04stepfG20ShouldHideBackButtonySbAA0dfG0_pF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stepViewControllerIsTheLastOnTheFlow",
+            "printedName": "stepViewControllerIsTheLastOnTheFlow(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "StepViewController",
+                "printedName": "MobileWorkflowCore.StepViewController",
+                "usr": "s:18MobileWorkflowCore18StepViewControllerP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore28StepNavigationViewControllerC04stepfg11IsTheLastOnJ4FlowySbAA0dfG0_pF",
+            "mangledName": "$s18MobileWorkflowCore28StepNavigationViewControllerC04stepfg11IsTheLastOnJ4FlowySbAA0dfG0_pF",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "Custom",
@@ -27999,6 +28175,34 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore26StepViewControllerDelegateP04stepeF20ShouldHideBackButtonySbAA0deF0_pF",
             "mangledName": "$s18MobileWorkflowCore26StepViewControllerDelegateP04stepeF20ShouldHideBackButtonySbAA0deF0_pF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.StepViewControllerDelegate>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.StepViewControllerDelegate>",
+            "protocolReq": true,
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "stepViewControllerIsTheLastOnTheFlow",
+            "printedName": "stepViewControllerIsTheLastOnTheFlow(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "StepViewController",
+                "printedName": "MobileWorkflowCore.StepViewController",
+                "usr": "s:18MobileWorkflowCore18StepViewControllerP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore26StepViewControllerDelegateP04stepef11IsTheLastOnJ4FlowySbAA0deF0_pF",
+            "mangledName": "$s18MobileWorkflowCore26StepViewControllerDelegateP04stepef11IsTheLastOnJ4FlowySbAA0deF0_pF",
             "moduleName": "MobileWorkflowCore",
             "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.StepViewControllerDelegate>",
             "sugared_genericSig": "<Self where Self : MobileWorkflowCore.StepViewControllerDelegate>",
@@ -83767,14 +83971,14 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Bridges\/Navigator.swift",
       "kind": "BooleanLiteral",
-      "offset": 2054,
+      "offset": 2267,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Bridges\/Navigator.swift",
       "kind": "BooleanLiteral",
-      "offset": 2841,
+      "offset": 3054,
       "length": 4,
       "value": "true"
     },
@@ -83823,7 +84027,7 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Base Step\/MWStepViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 1375,
+      "offset": 1500,
       "length": 5,
       "value": "false"
     },

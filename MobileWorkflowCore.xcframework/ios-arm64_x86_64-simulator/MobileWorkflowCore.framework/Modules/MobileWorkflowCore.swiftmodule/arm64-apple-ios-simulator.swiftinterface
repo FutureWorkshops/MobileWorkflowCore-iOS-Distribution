@@ -512,7 +512,14 @@ public enum FileUploadUpdate {
   case completed
 }
 public class Navigator {
+  @available(*, deprecated, renamed: "canGoToNextStep")
   public var hasNextStep: Swift.Bool {
+    get
+  }
+  public var canGoToNextStep: Swift.Bool {
+    get
+  }
+  public var isLastStepOnFlow: Swift.Bool {
     get
   }
   public init(controller: MobileWorkflowCore.MWStepViewController? = nil)
@@ -613,6 +620,9 @@ extension Foundation.FileManager {
     set
   }
   @_Concurrency.MainActor(unsafe) public var shouldAnimatedPop: Swift.Bool
+  @_Concurrency.MainActor(unsafe) public var isLastStepOnFlow: Swift.Bool {
+    get
+  }
   @_Concurrency.MainActor(unsafe) public var navigationFooterView: MobileWorkflowCore.NavigationFooterView {
     get
     set
@@ -643,7 +653,9 @@ extension Foundation.FileManager {
   @_Concurrency.MainActor(unsafe) open func configureTabBar()
   @_Concurrency.MainActor(unsafe) open func goForward()
   @_Concurrency.MainActor(unsafe) public func goBackward()
+  @available(*, deprecated, renamed: "canGoToNextStep()")
   @_Concurrency.MainActor(unsafe) public func hasNextStep() -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func canGoToNextStep() -> Swift.Bool
 }
 public enum StepLinkType {
   case push
@@ -735,6 +747,7 @@ extension MobileWorkflowCore.StepNavigationViewController : MobileWorkflowCore.S
   @_Concurrency.MainActor(unsafe) public func stepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func stepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   @_Concurrency.MainActor(unsafe) public func stepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) public func stepViewControllerIsTheLastOnTheFlow(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
 extension MobileWorkflowCore.StepNavigationViewController : MobileWorkflowCore.PresentationDelegate {
   @_Concurrency.MainActor(unsafe) public func presentStepWithId(_ stepId: Swift.String, isDiscardable: Swift.Bool, animated: Swift.Bool, willDismiss: MobileWorkflowCore.OnDismiss?, didDismiss: MobileWorkflowCore.OnDismiss?)
@@ -1110,6 +1123,7 @@ public protocol StepViewControllerDelegate : AnyObject {
   func stepViewControllerHasPreviousStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   func stepViewControllerHasNextStep(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
   func stepViewControllerShouldHideBackButton(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
+  func stepViewControllerIsTheLastOnTheFlow(_ stepViewController: MobileWorkflowCore.StepViewController) -> Swift.Bool
 }
 public enum StepViewControllerTitleMode {
   case largeTitle
