@@ -451,6 +451,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
 @class UISceneConnectionOptions;
 @class UIOpenURLContext;
 @class NSUserActivity;
+@class UIWindowScene;
+@class UIApplicationShortcutItem;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
@@ -460,6 +462,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 - (void)sceneDidEnterBackground:(UIScene * _Nonnull)scene;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
 - (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
+- (void)windowScene:(UIWindowScene * _Nonnull)windowScene performActionForShortcutItem:(UIApplicationShortcutItem * _Nonnull)shortcutItem completionHandler:(void (^ _Nonnull)(BOOL))completionHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 
@@ -1087,6 +1090,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
 @class UISceneConnectionOptions;
 @class UIOpenURLContext;
 @class NSUserActivity;
+@class UIWindowScene;
+@class UIApplicationShortcutItem;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @interface MWSceneDelegate : UIResponder <UIWindowSceneDelegate>
@@ -1096,6 +1101,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 - (void)sceneDidEnterBackground:(UIScene * _Nonnull)scene;
 - (void)scene:(UIScene * _Nonnull)scene openURLContexts:(NSSet<UIOpenURLContext *> * _Nonnull)URLContexts;
 - (void)scene:(UIScene * _Nonnull)scene continueUserActivity:(NSUserActivity * _Nonnull)userActivity;
+- (void)windowScene:(UIWindowScene * _Nonnull)windowScene performActionForShortcutItem:(UIApplicationShortcutItem * _Nonnull)shortcutItem completionHandler:(void (^ _Nonnull)(BOOL))completionHandler;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 @end
 

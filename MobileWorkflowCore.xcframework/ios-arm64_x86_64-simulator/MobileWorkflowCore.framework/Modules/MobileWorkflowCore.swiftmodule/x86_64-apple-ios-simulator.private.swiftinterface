@@ -371,12 +371,13 @@ public typealias MobileWorkflowSceneDelegate = MobileWorkflowCore.MWSceneDelegat
     get
   }
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, willConnectTo session: UIKit.UISceneSession, options connectionOptions: UIKit.UIScene.ConnectionOptions)
-  @_Concurrency.MainActor(unsafe) @objc public func sceneDidBecomeActive(_ scene: UIKit.UIScene)
-  @_Concurrency.MainActor(unsafe) @objc public func sceneDidEnterBackground(_ scene: UIKit.UIScene)
+  @_Concurrency.MainActor(unsafe) @objc open func sceneDidBecomeActive(_ scene: UIKit.UIScene)
+  @_Concurrency.MainActor(unsafe) @objc open func sceneDidEnterBackground(_ scene: UIKit.UIScene)
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, openURLContexts URLContexts: Swift.Set<UIKit.UIOpenURLContext>)
   @_Concurrency.MainActor(unsafe) public func load(configuration: Foundation.Data, serverId: Swift.Int?, cacheConfiguration: Swift.Bool) throws
   @_Concurrency.MainActor(unsafe) open func preferredConfigurations(urlContexts: Swift.Set<UIKit.UIOpenURLContext>) -> [MobileWorkflowCore.AppConfigurationContext]
   @_Concurrency.MainActor(unsafe) @objc open func scene(_ scene: UIKit.UIScene, continue userActivity: Foundation.NSUserActivity)
+  @_Concurrency.MainActor(unsafe) @objc open func windowScene(_ windowScene: UIKit.UIWindowScene, performActionFor shortcutItem: UIKit.UIApplicationShortcutItem, completionHandler: @escaping (Swift.Bool) -> Swift.Void)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init()
   @objc deinit
 }
@@ -865,8 +866,8 @@ public class CodableSelectionResult : MobileWorkflowCore.StepResult, MobileWorkf
   @objc deinit
 }
 public struct URLFormatter {
-  public static let DefaultURLComposerRegex: Swift.String
-  public init(regex: Swift.String = DefaultURLComposerRegex)
+  public init()
+  public init(valueFormatter: MobileWorkflowCore.ValueFormatter)
   public func parse(baseURL: Foundation.URL, complement: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
   public func parse(_ content: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Foundation.URL?
 }
@@ -1446,11 +1447,15 @@ open class ObservableStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.StepVi
   @objc deinit
 }
 public struct ValueFormatter {
+  public static let DefaultKeyPatternRegex: Swift.String
   public static let DefaultValueComposerRegex: Swift.String
   public init(regex: Swift.String = DefaultValueComposerRegex)
+  public init(regex: Swift.String, componentRegex: Swift.String)
+  public func hasSessionMarkers(_ content: Swift.String) -> Swift.Bool
   public func valueConsistsOfSingleIdentifier(_ valueString: Swift.String) -> Swift.Bool
   public func parseIdentifier(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
   public func parse(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Swift.String?
+  public func parse(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?, urlSafe: Swift.Bool) -> Swift.String?
   public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
   public func parseResponse<T>(resolvedValue: Any?, for key: Swift.String) -> T?
 }
@@ -2508,6 +2513,7 @@ public class RootCoordinator {
   public init(licensePath: Swift.String?, manager: MobileWorkflowCore.AppConfigurationManager, preferredConfigurations: [MobileWorkflowCore.AppConfigurationContext] = [], canShakeToClearApp: Swift.Bool = false, userDefaults: Foundation.UserDefaults = .standard)
   public func start(in window: UIKit.UIWindow)
   public func loadAppConfiguration(_ context: MobileWorkflowCore.AppConfigurationContext, animated: Swift.Bool)
+  @_Concurrency.MainActor public func loadNewConfiguration()
   @objc deinit
 }
 @available(*, deprecated, renamed: "MWSubtitleTableViewCell")

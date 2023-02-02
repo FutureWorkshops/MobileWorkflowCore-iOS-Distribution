@@ -7836,6 +7836,7 @@
             "usr": "c:@M@MobileWorkflowCore@objc(cs)MWSceneDelegate(im)sceneDidBecomeActive:",
             "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC20sceneDidBecomeActiveyySo7UISceneCF",
             "moduleName": "MobileWorkflowCore",
+            "isOpen": true,
             "objc_name": "sceneDidBecomeActive:",
             "declAttributes": [
               "ObjC",
@@ -7865,6 +7866,7 @@
             "usr": "c:@M@MobileWorkflowCore@objc(cs)MWSceneDelegate(im)sceneDidEnterBackground:",
             "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC23sceneDidEnterBackgroundyySo7UISceneCF",
             "moduleName": "MobileWorkflowCore",
+            "isOpen": true,
             "objc_name": "sceneDidEnterBackground:",
             "declAttributes": [
               "ObjC",
@@ -8040,6 +8042,60 @@
             "moduleName": "MobileWorkflowCore",
             "isOpen": true,
             "objc_name": "scene:continueUserActivity:",
+            "declAttributes": [
+              "ObjC",
+              "Custom",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "windowScene",
+            "printedName": "windowScene(_:performActionFor:completionHandler:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIWindowScene",
+                "printedName": "UIKit.UIWindowScene",
+                "usr": "c:objc(cs)UIWindowScene"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIApplicationShortcutItem",
+                "printedName": "UIKit.UIApplicationShortcutItem",
+                "usr": "c:objc(cs)UIApplicationShortcutItem"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Bool) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ]
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)MWSceneDelegate(im)windowScene:performActionForShortcutItem:completionHandler:",
+            "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC11windowScene_16performActionFor17completionHandlerySo08UIWindowG0C_So25UIApplicationShortcutItemCySbctF",
+            "moduleName": "MobileWorkflowCore",
+            "isOpen": true,
+            "objc_name": "windowScene:performActionForShortcutItem:completionHandler:",
             "declAttributes": [
               "ObjC",
               "Custom",
@@ -21169,56 +21225,30 @@
         "printedName": "URLFormatter",
         "children": [
           {
-            "kind": "Var",
-            "name": "DefaultURLComposerRegex",
-            "printedName": "DefaultURLComposerRegex",
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init()",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
+                "name": "URLFormatter",
+                "printedName": "MobileWorkflowCore.URLFormatter",
+                "usr": "s:18MobileWorkflowCore12URLFormatterV"
               }
             ],
-            "declKind": "Var",
-            "usr": "s:18MobileWorkflowCore12URLFormatterV23DefaultURLComposerRegexSSvpZ",
-            "mangledName": "$s18MobileWorkflowCore12URLFormatterV23DefaultURLComposerRegexSSvpZ",
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore12URLFormatterVACycfc",
+            "mangledName": "$s18MobileWorkflowCore12URLFormatterVACycfc",
             "moduleName": "MobileWorkflowCore",
-            "static": true,
             "declAttributes": [
-              "HasInitialValue",
-              "HasStorage",
               "AccessControl"
             ],
-            "isLet": true,
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore12URLFormatterV23DefaultURLComposerRegexSSvgZ",
-                "mangledName": "$s18MobileWorkflowCore12URLFormatterV23DefaultURLComposerRegexSSvgZ",
-                "moduleName": "MobileWorkflowCore",
-                "static": true,
-                "implicit": true,
-                "accessorKind": "get"
-              }
-            ]
+            "init_kind": "Designated"
           },
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(regex:)",
+            "printedName": "init(valueFormatter:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -21228,15 +21258,14 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "hasDefaultArg": true,
-                "usr": "s:SS"
+                "name": "ValueFormatter",
+                "printedName": "MobileWorkflowCore.ValueFormatter",
+                "usr": "s:18MobileWorkflowCore14ValueFormatterV"
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore12URLFormatterV5regexACSS_tcfc",
-            "mangledName": "$s18MobileWorkflowCore12URLFormatterV5regexACSS_tcfc",
+            "usr": "s:18MobileWorkflowCore12URLFormatterV14valueFormatterAcA05ValueF0V_tcfc",
+            "mangledName": "$s18MobileWorkflowCore12URLFormatterV14valueFormatterAcA05ValueF0V_tcfc",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
@@ -35686,6 +35715,53 @@
         "children": [
           {
             "kind": "Var",
+            "name": "DefaultKeyPatternRegex",
+            "printedName": "DefaultKeyPatternRegex",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore14ValueFormatterV22DefaultKeyPatternRegexSSvpZ",
+            "mangledName": "$s18MobileWorkflowCore14ValueFormatterV22DefaultKeyPatternRegexSSvpZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore14ValueFormatterV22DefaultKeyPatternRegexSSvgZ",
+                "mangledName": "$s18MobileWorkflowCore14ValueFormatterV22DefaultKeyPatternRegexSSvgZ",
+                "moduleName": "MobileWorkflowCore",
+                "static": true,
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "DefaultValueComposerRegex",
             "printedName": "DefaultValueComposerRegex",
             "children": [
@@ -35758,6 +35834,66 @@
               "AccessControl"
             ],
             "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(regex:componentRegex:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "ValueFormatter",
+                "printedName": "MobileWorkflowCore.ValueFormatter",
+                "usr": "s:18MobileWorkflowCore14ValueFormatterV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore14ValueFormatterV5regex14componentRegexACSS_SStcfc",
+            "mangledName": "$s18MobileWorkflowCore14ValueFormatterV5regex14componentRegexACSS_SStcfc",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "hasSessionMarkers",
+            "printedName": "hasSessionMarkers(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore14ValueFormatterV17hasSessionMarkersySbSSF",
+            "mangledName": "$s18MobileWorkflowCore14ValueFormatterV17hasSessionMarkersySbSSF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -35878,6 +36014,61 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore14ValueFormatterV5parse11valueString5usingSSSgSS_AA15ContentProvider_pSgtF",
             "mangledName": "$s18MobileWorkflowCore14ValueFormatterV5parse11valueString5usingSSSgSS_AA15ContentProvider_pSgtF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "parse",
+            "printedName": "parse(valueString:using:urlSafe:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.ContentProvider?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ContentProvider",
+                    "printedName": "MobileWorkflowCore.ContentProvider",
+                    "usr": "s:18MobileWorkflowCore15ContentProviderP"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore14ValueFormatterV5parse11valueString5using7urlSafeSSSgSS_AA15ContentProvider_pSgSbtF",
+            "mangledName": "$s18MobileWorkflowCore14ValueFormatterV5parse11valueString5using7urlSafeSSSgSS_AA15ContentProvider_pSgSbtF",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
@@ -66198,6 +66389,27 @@
               "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "loadNewConfiguration",
+            "printedName": "loadNewConfiguration()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore15RootCoordinatorC20loadNewConfigurationyyF",
+            "mangledName": "$s18MobileWorkflowCore15RootCoordinatorC20loadNewConfigurationyyF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl",
+              "Custom"
+            ],
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Class",
@@ -84123,13 +84335,6 @@
       "value": "\"appleIdCredentialUser\""
     },
     {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Network\/URLFormatter.swift",
-      "kind": "StringLiteral",
-      "offset": 253,
-      "length": 59,
-      "value": "\"\\{([a-zA-Z0-9_\\-]{1,}[\\.]{1}){1,}([a-zA-Z0-9_\\-]{1,})\\}\""
-    },
-    {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Image Capture Step (Temp Copy)\/MWCoreImageCaptureStep.swift",
       "kind": "BooleanLiteral",
       "offset": 446,
@@ -84734,7 +84939,14 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Network\/ValueFormatter.swift",
       "kind": "StringLiteral",
-      "offset": 249,
+      "offset": 564,
+      "length": 56,
+      "value": "\"([\\-a-zA-Z0-9_]{1,}[\\.]{1}){1,}([\\-a-zA-Z0-9_.]{1,})\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Network\/ValueFormatter.swift",
+      "kind": "StringLiteral",
+      "offset": 671,
       "length": 63,
       "value": "\"\\{([\\-a-zA-Z0-9_]{1,}[\\.]{1}){1,}([\\-a-zA-Z0-9_.|\\s]{1,})\\}\""
     },

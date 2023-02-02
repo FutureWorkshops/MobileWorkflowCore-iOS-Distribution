@@ -10,7 +10,7 @@
 		</data>
 		<key>Headers/MobileWorkflowCore-Swift.h</key>
 		<data>
-		S95ymjHS7YPQuOhbxPrm6qTzqwE=
+		Upb9E6B68F6NK1tvYdKBCgavUko=
 		</data>
 		<key>Headers/MobileWorkflowCore.h</key>
 		<data>
@@ -22,11 +22,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.abi.json</key>
 		<data>
-		8ZIMVZzSIUX8vvpfECDDIFV+4pk=
+		V2y7fFesu+M0NCACRbEEa7wgLEM=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		q+I9XwoS0bkVHRV8wD6bvPXFJnQ=
+		cfKTkCvWaovqbxvLaR8O8yCn70E=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -34,19 +34,19 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		q+I9XwoS0bkVHRV8wD6bvPXFJnQ=
+		cfKTkCvWaovqbxvLaR8O8yCn70E=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		TwHScwmQnTFw3ORs5Nw2uuHMCMU=
+		OlZWodG6fVtvYLdI+5zw6vPHgOw=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<data>
-		8ZIMVZzSIUX8vvpfECDDIFV+4pk=
+		V2y7fFesu+M0NCACRbEEa7wgLEM=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<data>
-		Sz0RpYHFtC5+f/K3yScqM9AbCaw=
+		JCUqYv+h6gwDWLOop+lpGhlRGBo=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
 		<data>
@@ -54,11 +54,11 @@
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftinterface</key>
 		<data>
-		Sz0RpYHFtC5+f/K3yScqM9AbCaw=
+		JCUqYv+h6gwDWLOop+lpGhlRGBo=
 		</data>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<data>
-		VuVCIm0ONI7XNFmly3puwiEtvwc=
+		thB66j5syZ71XRNuiNfU85AmHd0=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -96,7 +96,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			dtN7LbgEufQN4EhRjNUgWYctbWFGeoQsq2QSYcdAtWg=
+			XXjke9AF1Ei1Oq1XV8WTSwLdyJNWSbi0joc400ShC6g=
 			</data>
 		</dict>
 		<key>Headers/MobileWorkflowCore.h</key>
@@ -110,14 +110,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			sDx3wUMm5D2WvPwuk8Fq5OgRnzJ6S/pgP5kbbLPn2LM=
+			6oTL9NSx9DcbqMG99tXnQcOdkb5eJYU3SVDAprMmLSw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			rfcKACpNEKtCOVovaSr5WD4g7KOAnNBW7e2Cpv8tQXE=
+			2RMe9FsUZz7tlBvuPQJzVwKai+L6qKNmLDIoMQKJGvw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftdoc</key>
@@ -131,28 +131,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			rfcKACpNEKtCOVovaSr5WD4g7KOAnNBW7e2Cpv8tQXE=
+			2RMe9FsUZz7tlBvuPQJzVwKai+L6qKNmLDIoMQKJGvw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/arm64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			jlx4htqmeAmcVrAQjk4y06ZNJ95yzQyIqu3/Lzg9oOQ=
+			TKvjL3wBAYfqnC3kmu2c5DJRGaEv+9Ttt4X9OuRK8pE=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sDx3wUMm5D2WvPwuk8Fq5OgRnzJ6S/pgP5kbbLPn2LM=
+			6oTL9NSx9DcbqMG99tXnQcOdkb5eJYU3SVDAprMmLSw=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wkqGUZ230bg86ChSr5OSUiTcrKLqpZ/2k3+JKWIAH5Y=
+			wj1ZvpANJoGLCWTnwwuBxLk9aZYnjajqVuOzYIJvk4Q=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftdoc</key>
@@ -166,14 +166,14 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			wkqGUZ230bg86ChSr5OSUiTcrKLqpZ/2k3+JKWIAH5Y=
+			wj1ZvpANJoGLCWTnwwuBxLk9aZYnjajqVuOzYIJvk4Q=
 			</data>
 		</dict>
 		<key>Modules/MobileWorkflowCore.swiftmodule/x86_64-apple-ios-simulator.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2W8sH5HQkPq6gkVy67tCtQskbBiG3tEGPWHiY3GZuSQ=
+			BiEKMp1etRFaAzuXycUUnTdq7p6j/bT3lE32B7MCj58=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
