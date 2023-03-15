@@ -57,6 +57,14 @@ extension MobileWorkflowCore.MWEmailStep : MobileWorkflowCore.BuildableStep {
   }
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
+@_hasMissingDesignatedInitializers public class CoreSendEmailMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreSendEmail(id: Swift.String, title: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], sendTo: Swift.String, androidMaxSizeKb: Swift.String? = nil, subject: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreSendEmailMetadata
+}
 public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
   public let fileURL: Foundation.URL
   public let contentType: Swift.String
@@ -177,6 +185,19 @@ public typealias MobileWorkflowServices = MobileWorkflowCore.StepServices
 extension MobileWorkflowCore.StepServices {
   public static func buildEmptyServices() -> MobileWorkflowCore.StepServices
 }
+public struct RestListItem : Swift.Codable {
+  public static func restListItem(ascending: Swift.Bool, descending: Swift.Bool, name: Swift.String) -> MobileWorkflowCore.RestListItem
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RestListMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func restList(id: Swift.String, title: Swift.String, emptyText: Swift.String, url: Swift.String, liveSearch: Swift.Bool? = nil, search: Swift.Bool? = nil, searchSuggestions: Swift.Bool? = nil, searchSuggestionsURL: Swift.Bool? = nil, showPlaceholderImage: Swift.Bool? = nil, sortFields: Swift.String? = nil, sortFieldItems: [MobileWorkflowCore.RestListItem]? = nil, navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.RestListMetadata
+}
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
 }
@@ -294,8 +315,14 @@ extension UIKit.UIViewController {
 extension UIKit.UIViewController {
   @_Concurrency.MainActor(unsafe) public func showFilterSheet(options: [MobileWorkflowCore.SortFieldItem], ascendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, descendingActionHandler: ((Swift.String) -> Swift.Void)? = nil, resetHandler: (() -> Swift.Void)? = nil, cancelHandler: ((UIKit.UIAlertAction) -> Swift.Void)? = nil)
 }
+extension Foundation.Date {
+  public func shortDateString() -> Swift.String
+  public func shortTimeString() -> Swift.String
+}
 extension Swift.String {
   public func parseDateString(asTime: Swift.Bool, timeZone: Foundation.TimeZone = TimeZone.autoupdatingCurrent) -> Foundation.Date?
+  public func parseShortDateString() -> Foundation.Date?
+  public func parseShortTimeString() -> Foundation.Date?
 }
 public struct ARLoggerTask : MobileWorkflowCore.AsyncTask {
   public typealias Response = Swift.Void
@@ -329,6 +356,14 @@ extension MobileWorkflowCore.MWCompletionStep : MobileWorkflowCore.BuildableStep
     get
   }
   public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
+}
+@_hasMissingDesignatedInitializers public class CoreCompletionMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreCompletion(id: Swift.String, title: Swift.String, iconType: Swift.String? = nil, imageContentMode: Swift.String? = nil, imageURL: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreCompletionMetadata
 }
 public enum BinaryContentType {
   public enum Image {
@@ -451,6 +486,40 @@ public enum ARLoggerError : Swift.Error {
     get
   }
 }
+@_hasMissingDesignatedInitializers open class LinkMetadata : Swift.Codable {
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  open func encode(to encoder: Swift.Encoder) throws
+}
+public struct LinkConditionMetadata : Swift.Codable {
+  public static func equal(stepId: Swift.String, itemId: Swift.String?, property: Swift.String, value: Swift.String) -> MobileWorkflowCore.LinkConditionMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class PushLinkMetadata : MobileWorkflowCore.LinkMetadata {
+  public init(id: Swift.String, target: Swift.String, animated: Swift.Bool = true, condition: MobileWorkflowCore.LinkConditionMetadata? = nil)
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class NavigationModalLinkMetadata : MobileWorkflowCore.LinkMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class ContentModalLinkMetadata : MobileWorkflowCore.LinkMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.LinkMetadata {
+  public static func push(target: Swift.String, animated: Swift.Bool = true, condition: MobileWorkflowCore.LinkConditionMetadata? = nil, id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.PushLinkMetadata
+  public static func navigationModal(target: Swift.String, id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.NavigationModalLinkMetadata
+  public static func contentModal(target: Swift.String, id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.ContentModalLinkMetadata
+}
+extension Swift.String {
+  public func push(animated: Swift.Bool = true, id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.PushLinkMetadata
+  public func modal(id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.NavigationModalLinkMetadata
+  public func contentModal(id: Swift.String = UUID().uuidString) -> MobileWorkflowCore.ContentModalLinkMetadata
+}
 @available(*, deprecated, renamed: "QRScannerViewController")
 public typealias MobileWorkflowQRScannerViewController = MobileWorkflowCore.QRScannerViewController
 @objc @_inheritsConvenienceInitializers @_Concurrency.MainActor(unsafe) open class QRScannerViewController : MobileWorkflowCore.BarcodeScannerViewController {
@@ -506,6 +575,17 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
 extension MobileWorkflowCore.MWInstructionStepViewController {
   @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, buttonTitle: Swift.String, buttonAction: @escaping (() -> Swift.Void))
   @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, primaryConfig: MobileWorkflowCore.ButtonConfig, secondaryConfig: MobileWorkflowCore.ButtonConfig?, hasBlurredBackground: Swift.Bool = false)
+}
+public enum MetadataError : Foundation.LocalizedError {
+  case unableToParseMetadata
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: MobileWorkflowCore.MetadataError, b: MobileWorkflowCore.MetadataError) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
 }
 public enum FileUploadUpdate {
   case failed(error: Swift.Error)
@@ -760,12 +840,23 @@ public protocol InstructionStep : MobileWorkflowCore.Step {
   var session: MobileWorkflowCore.Session { get }
   var services: MobileWorkflowCore.StepServices { get }
 }
+@_hasMissingDesignatedInitializers public class CoreInstructionMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreInstructions(id: Swift.String, title: Swift.String, imageURL: Swift.String? = nil, imageContentMode: Swift.Int? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreInstructionMetadata
+}
 public class MWInstructionStep : MobileWorkflowCore.MWStep, MobileWorkflowCore.InstructionStep {
-  final public let imageURL: Swift.String?
+  final public let properties: MobileWorkflowCore.CoreInstructionMetadata
+  public var imageURL: Swift.String? {
+    get
+  }
   final public let image: UIKit.UIImage?
   final public let session: MobileWorkflowCore.Session
   final public let services: MobileWorkflowCore.StepServices
-  public init(identifier: Swift.String, text: Swift.String?, imageURL: Swift.String?, image: UIKit.UIImage?, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
+  public init(properties: MobileWorkflowCore.CoreInstructionMetadata, image: UIKit.UIImage?, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices, theme: MobileWorkflowCore.Theme)
   override public func instantiateViewController() -> MobileWorkflowCore.StepViewController
   @objc deinit
 }
@@ -991,7 +1082,7 @@ public struct UploadProperty : Swift.Codable {
   public let stepId: Swift.String
   public let itemId: Swift.String?
   public let key: Swift.String
-  public let label: Swift.String
+  public let label: Swift.String?
   public let output: Swift.String
   public let checked: Swift.Bool
   public var sessionKeyPath: Swift.String {
@@ -1006,6 +1097,20 @@ extension Swift.Collection where Self.Element == [Swift.String : Any] {
 }
 extension Swift.Dictionary where Key == Swift.String, Value == Any {
   public func asUploadProperty() throws -> MobileWorkflowCore.UploadProperty
+}
+public struct AppRail : Swift.Codable {
+  public let id: Swift.Int
+  public let name: Swift.String
+  public let steps: [MobileWorkflowCore.StepMetadata]
+  public let navigation: MobileWorkflowCore.NavigationMetadata
+  public let services: [MobileWorkflowCore.ServiceMetadata]
+  public let servers: [MobileWorkflowCore.ServerMetadata]
+  public let locales: [MobileWorkflowCore.LocalesMetadata]
+  public let theme: MobileWorkflowCore.ThemeMetadata?
+  public let analytics: MobileWorkflowCore.AnalyticsMetadata
+  public init(name: Swift.String, steps: [MobileWorkflowCore.StepMetadata], navigation: MobileWorkflowCore.NavigationMetadata, services: [MobileWorkflowCore.ServiceMetadata] = [], servers: [MobileWorkflowCore.ServerMetadata] = [], locales: [MobileWorkflowCore.LocalesMetadata] = [], theme: MobileWorkflowCore.ThemeMetadata? = nil, analytics: MobileWorkflowCore.AnalyticsMetadata = .disabled())
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 extension Swift.Error {
   public var isAuthenticationError: Swift.Bool {
@@ -1093,6 +1198,19 @@ final public class SecurityStore : MobileWorkflowCore.SecurityStoreProtocol {
   final public func password(for key: Swift.String) -> Swift.Result<Foundation.Data?, MobileWorkflowCore.CredentialError>
   final public func removePassword(key: Swift.String) -> Swift.Result<Swift.Void, MobileWorkflowCore.CredentialError>
   @objc deinit
+}
+public struct CoreListItem : Swift.Codable {
+  public static func coreListItem(text: Swift.String, detailText: Swift.String? = nil, imageURL: Swift.String? = nil, materialIconName: Swift.String? = nil, sectionName: Swift.String? = nil, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.CoreListItem
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class CoreListMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreList(id: Swift.String, title: Swift.String, items: [MobileWorkflowCore.CoreListItem], navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], search: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreListMetadata
 }
 public enum SuccessAction : Swift.String, Swift.Codable {
   case none
@@ -1359,6 +1477,16 @@ extension Swift.String {
 extension Swift.String {
   public func regexSanitized() -> Swift.String
 }
+public protocol RemoteImageCaching {
+  func storeImage(_ image: UIKit.UIImage, forUrl url: Swift.String)
+  func imageForURL(_ url: Swift.String) -> UIKit.UIImage?
+}
+final public class RemoteImageCache : MobileWorkflowCore.RemoteImageCaching {
+  public init()
+  final public func storeImage(_ image: UIKit.UIImage, forUrl url: Swift.String)
+  final public func imageForURL(_ url: Swift.String) -> UIKit.UIImage?
+  @objc deinit
+}
 @objc @_Concurrency.MainActor(unsafe) public class MWCompletionStepViewController : MobileWorkflowCore.MWInstructionStepViewController {
   @_Concurrency.MainActor(unsafe) public var completionStep: MobileWorkflowCore.MWCompletionStep {
     get
@@ -1459,6 +1587,15 @@ public struct ValueFormatter {
   public func fetchFirst(valueString: Swift.String, using session: MobileWorkflowCore.ContentProvider?) -> Any?
   public func parseResponse<T>(resolvedValue: Any?, for key: Swift.String) -> T?
 }
+public struct ServerMetadata : Swift.Codable {
+  public let id: Swift.Int
+  public let url: Swift.String
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension MobileWorkflowCore.ServerMetadata {
+  public static func http(id: Swift.Int, url: Swift.String) -> MobileWorkflowCore.ServerMetadata
+}
 extension Swift.Dictionary where Key == Swift.String {
   public subscript(first keys: [Swift.String]) -> Any? {
     get
@@ -1528,6 +1665,7 @@ public enum ImageLoadingResult {
   public var image: UIKit.UIImage? {
     get
   }
+  @available(*, deprecated, message: "No longer indicates synchronous retrieval when false")
   public var wasLoadedRemotely: Swift.Bool {
     get
   }
@@ -1650,6 +1788,7 @@ public enum ImageStyle : Swift.String, Swift.Codable {
 public enum TextStyle : Swift.String, Swift.Codable {
   case left
   case largeCenter
+  case largeLeft
   public init?(rawValue: Swift.String)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -1751,7 +1890,7 @@ public protocol TableStep : AnyObject, MobileWorkflowCore.Step {
   func configureTableCell(_ cell: UIKit.UITableViewCell, indexPath: Foundation.IndexPath, tableView: UIKit.UITableView)
 }
 public class ListStepItem : Swift.Codable {
-  final public let id: Swift.String
+  final public let id: Swift.String?
   final public let type: Swift.String?
   final public let text: Swift.String
   final public let detailText: Swift.String?
@@ -1759,7 +1898,7 @@ public class ListStepItem : Swift.Codable {
   final public let imageURL: Swift.String?
   final public let sectionName: Swift.String?
   required public init(from decoder: Swift.Decoder) throws
-  public init(id: Swift.String, type: Swift.String? = nil, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
+  public init(id: Swift.String? = nil, type: Swift.String? = nil, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
   @objc deinit
   public func encode(to encoder: Swift.Encoder) throws
 }
@@ -1809,6 +1948,32 @@ public enum MWPDFStepViewControllerError : Foundation.LocalizedError {
   @_Concurrency.MainActor(unsafe) override public init(step: MobileWorkflowCore.Step)
   @_Concurrency.MainActor(unsafe) @objc required dynamic public init?(coder: Foundation.NSCoder)
   @objc deinit
+}
+public struct RestUploadItemMetadata : Swift.Codable {
+  public static func restUploadItem(customOutput: Swift.String? = nil) -> MobileWorkflowCore.RestUploadItemMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class UploadMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], text: Swift.String, url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.UploadMetadata
+}
+public struct RestStackItem : Swift.Codable {
+  public static func restStackItem(buttonTitle: Swift.String? = nil, label: Swift.String? = nil, onSuccess: Swift.String? = nil, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.RestStackItem
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class RestStackMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func restStack(id: Swift.String, title: Swift.String, url: Swift.String, items: [MobileWorkflowCore.RestStackItem]? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.RestStackMetadata
 }
 public enum ARLogLevel : Swift.Int, Swift.Comparable {
   public static func < (lhs: MobileWorkflowCore.ARLogLevel, rhs: MobileWorkflowCore.ARLogLevel) -> Swift.Bool
@@ -2003,8 +2168,14 @@ extension Foundation.JSONDecoder {
   public func decodeParsingException<T>(data: Foundation.Data) throws -> T where T : Swift.Decodable
 }
 extension MobileWorkflowCore.URLAsyncTask {
-  public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = JSONEncoder(), decoder: Foundation.JSONDecoder = JSONDecoder()) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = JSONDecoder()) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
+  public static var defaultDecoder: Foundation.JSONDecoder {
+    get
+  }
+  public static var defaultEncoder: Foundation.JSONEncoder {
+    get
+  }
+  public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = URLAsyncTask.defaultEncoder, decoder: Foundation.JSONDecoder = URLAsyncTask.defaultDecoder) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
+  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = URLAsyncTask.defaultDecoder) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
   public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Swift.Int, Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
@@ -2033,6 +2204,33 @@ public struct PDFListAppsTask : MobileWorkflowCore.AsyncTask {
   public let input: Swift.Void
   public init()
   public typealias Input = Swift.Void
+}
+@_hasMissingDesignatedInitializers open class ServiceMetadata : Swift.Codable {
+  @objc deinit
+  open func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers open class PluginServiceMetadata : MobileWorkflowCore.ServiceMetadata {
+  open var pluginId: Swift.String
+  public init(key: Swift.String, pluginId: Swift.String)
+  required public init(from decoder: Swift.Decoder) throws
+  override open func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers open class RestServiceMetadata : MobileWorkflowCore.ServiceMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override open func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.ServiceMetadata {
+  public static func rest() -> MobileWorkflowCore.RestServiceMetadata
+}
+open class NavigationItemMetadata : Swift.Codable {
+  public init(id: Swift.String, modalType: Swift.String, linkId: Swift.String, label: Swift.String, onSuccess: Swift.String?, sfSymbolName: Swift.String?)
+  public static func navigationModal(linkId: Swift.String, label: Swift.String, onSuccess: Swift.String? = nil, id: Swift.String = UUID().uuidString, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.NavigationItemMetadata
+  @objc deinit
+  open func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
 }
 public struct ServiceConfiguration : Swift.Codable {
   public let type: Swift.String
@@ -2075,6 +2273,12 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
 }
 @_hasMissingDesignatedInitializers public class StepBuilder {
   @objc deinit
+}
+public struct AnalyticsMetadata : Swift.Codable {
+  public static func disabled() -> MobileWorkflowCore.AnalyticsMetadata
+  public static func ahoy(url: Swift.String, apiKey: Swift.String) -> MobileWorkflowCore.AnalyticsMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public struct ARLogger {
   public static var sharedInstance: MobileWorkflowCore.ARLogger {
@@ -2236,7 +2440,7 @@ public typealias MobileWorkflowBarcodeScannerViewController = MobileWorkflowCore
 extension MobileWorkflowCore.BarcodeScannerViewController : AVFoundation.AVCaptureMetadataOutputObjectsDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func metadataOutput(_ output: AVFoundation.AVCaptureMetadataOutput, didOutput metadataObjects: [AVFoundation.AVMetadataObject], from connection: AVFoundation.AVCaptureConnection)
 }
-public struct Theme {
+public struct Theme : Swift.Equatable {
   public let primaryTintColor: UIKit.UIColor
   public let primaryNavBarBackgroundColor: UIKit.UIColor
   public let primaryNavBarTintColor: UIKit.UIColor
@@ -2262,6 +2466,7 @@ public struct Theme {
   public let groupedNavBarShadowColor: UIKit.UIColor
   public let groupedBackgroundColor: UIKit.UIColor
   public let groupedCellBackgroundColor: UIKit.UIColor
+  public static func == (a: MobileWorkflowCore.Theme, b: MobileWorkflowCore.Theme) -> Swift.Bool
 }
 extension MobileWorkflowCore.Theme {
   public static var current: MobileWorkflowCore.Theme
@@ -2308,6 +2513,26 @@ extension MobileWorkflowCore.Plugin {
 public typealias MobileWorkflowStep = MobileWorkflowCore.BuildableStep
 extension MobileWorkflowCore.ServiceType {
   public func buildDecodableService<T>(type: T.Type, with config: MobileWorkflowCore.ServiceConfiguration) throws -> T where T : MobileWorkflowCore.AsyncTaskService, T : Swift.Decodable
+}
+extension Swift.DefaultStringInterpolation {
+  public mutating func appendInterpolation(output: Swift.String, fromStep stepId: Swift.String, itemId: Swift.String? = nil)
+  public mutating func appendInterpolation(answerFrom stepId: Swift.String, itemId: Swift.String? = nil)
+}
+extension Swift.DefaultStringInterpolation {
+  public mutating func appendInterpolation(selectedIdFrom stepId: Swift.String, itemId: Swift.String? = nil)
+  public mutating func appendInterpolation(selectedTextFrom stepId: Swift.String, itemId: Swift.String? = nil)
+  public mutating func appendInterpolation(selectedDetailTextFrom stepId: Swift.String, itemId: Swift.String? = nil)
+}
+extension Swift.String {
+  public static func sessionProperty(stepId: Swift.String, itemId: Swift.String?, checked: Swift.Bool = true, output: Swift.String = "answer", key: Swift.String? = nil) -> Swift.String
+}
+public struct SessionPropertyMetadata : Swift.Codable, Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+  public static func sessionProperty(stepId: Swift.String, itemId: Swift.String? = nil, checked: Swift.Bool = true, output: Swift.String, key: Swift.String) -> MobileWorkflowCore.SessionPropertyMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
 }
 public enum L10n {
   public enum Alert {
@@ -2463,6 +2688,19 @@ extension UIKit.UIColor {
 extension UIKit.UIColor {
   public func adjustedColorForBestContrast(withColor otherColor: UIKit.UIColor) -> UIKit.UIColor
 }
+public struct CoreStackItem : Swift.Codable {
+  public static func coreStackItem(type: Swift.String, androidDeepLink: Swift.String? = nil, appleSystemURL: Swift.String? = nil, contentMode: Swift.String? = nil, fullScreenImageURL: Swift.String? = nil, fullScreenImageOnTap: Swift.Bool? = nil, imageStyle: Swift.String? = nil, label: Swift.String? = nil, linkId: Swift.String? = nil, materialIconName: Swift.String? = nil, onSuccess: Swift.String? = nil, playAudioInBackground: Swift.Bool? = nil, playVideoPictureInPicture: Swift.Bool? = nil, previewURL: Swift.String? = nil, sfSymbolName: Swift.String? = nil, style: Swift.String? = nil, text: Swift.String? = nil, textStyle: Swift.String? = nil, url: Swift.String? = nil) -> MobileWorkflowCore.CoreStackItem
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class StackMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreStack(id: Swift.String, title: Swift.String, items: [MobileWorkflowCore.CoreStackItem], next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.StackMetadata
+}
 public protocol WorkflowInfoConvertible {
   func convert() -> MobileWorkflowCore.WorkflowInfo?
 }
@@ -2476,6 +2714,7 @@ public enum AppConfigurationContext {
   case remote(url: Swift.String, serverId: Swift.Int? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
   case cached(modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
   case file(path: Swift.String, serverId: Swift.Int? = nil, initialWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
+  case config(_: MobileWorkflowCore.AppRail, serverId: Swift.Int? = nil, initialWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil, modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo? = nil)
   public func updating(modalWorkflowInfo: MobileWorkflowCore.WorkflowInfo?) -> MobileWorkflowCore.AppConfigurationContext
 }
 extension Swift.Collection where Self.Element == MobileWorkflowCore.URLSchemeManager {
@@ -2528,7 +2767,6 @@ public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubt
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func updateImage(_ image: UIKit.UIImage?, animated: Swift.Bool = false)
-  @_Concurrency.MainActor(unsafe) public func updatePlaceholderImage(theme: MobileWorkflowCore.Theme, animated: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configureStyle(backgroundColor: UIKit.UIColor = Theme.current.primaryBackgroundColor, titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = Theme.current.primaryTextColor, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = Theme.current.secondaryTextColor)
   @objc deinit
 }
@@ -2578,6 +2816,27 @@ public enum Attachment {
 }
 extension MobileWorkflowCore.MWEmailStepViewController : MessageUI.MFMailComposeViewControllerDelegate {
   @_Concurrency.MainActor(unsafe) @objc dynamic public func mailComposeController(_ controller: MessageUI.MFMailComposeViewController, didFinishWith result: MessageUI.MFMailComposeResult, error: Swift.Error?)
+}
+open class StepMetadata : Swift.Codable {
+  final public let id: Swift.String
+  final public let type: Swift.String
+  final public let title: Swift.String
+  final public let links: [MobileWorkflowCore.LinkMetadata]
+  public init(id: Swift.String, type: Swift.String, title: Swift.String, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = [])
+  required public init(from decoder: Swift.Decoder) throws
+  @objc deinit
+  open func encode(to encoder: Swift.Encoder) throws
+}
+extension MobileWorkflowCore.StepData {
+  public func loadProperty<T>() throws -> T where T : MobileWorkflowCore.StepMetadata
+}
+public protocol BuildableStepWithMetadata : MobileWorkflowCore.BuildableStep {
+  associatedtype Metadata : MobileWorkflowCore.StepMetadata
+  var properties: Self.Metadata { get }
+  init(properties: Self.Metadata, session: MobileWorkflowCore.Session, services: MobileWorkflowCore.StepServices)
+}
+extension MobileWorkflowCore.BuildableStepWithMetadata {
+  public static func build(stepInfo: MobileWorkflowCore.StepInfo, services: MobileWorkflowCore.StepServices) throws -> MobileWorkflowCore.Step
 }
 public protocol ValueProvider : MobileWorkflowCore.SessionProvider {
   func fetchValue(for path: Swift.String) -> Any?
@@ -2656,7 +2915,7 @@ extension UIKit.UIImage {
   public static func coloredImage(size: CoreFoundation.CGSize, color: UIKit.UIColor) -> UIKit.UIImage
 }
 extension UIKit.UIImageView {
-  @_Concurrency.MainActor(unsafe) public func transition(to image: UIKit.UIImage?, animated: Swift.Bool, completion: ((Swift.Bool) -> Swift.Void)? = nil)
+  @_Concurrency.MainActor public func transition(to image: UIKit.UIImage?, animated: Swift.Bool, completion: ((Swift.Bool) -> Swift.Void)? = nil)
 }
 public protocol BackgroundService : MobileWorkflowCore.NamedType, MobileWorkflowCore.Reinitializable {
   var id: Swift.String { get }
@@ -2730,10 +2989,67 @@ extension MobileWorkflowCore.AuthRedirector {
   public func authRedirectHandler() -> MobileWorkflowCore.AuthRedirectHandler
   public func handleAuthRedirect(for url: Foundation.URL) -> Swift.Bool
 }
+@_hasMissingDesignatedInitializers public class ThemeMetadata : Swift.Codable {
+  @objc deinit
+  public func encode(to encoder: Swift.Encoder) throws
+  required public init(from decoder: Swift.Decoder) throws
+}
+@_hasMissingDesignatedInitializers public class SystemTintColorThemeMetadata : MobileWorkflowCore.ThemeMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class OtherTintColorThemeMetada : MobileWorkflowCore.ThemeMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class CustomThemeMetadata : MobileWorkflowCore.ThemeMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+public struct CustomThemeProperties : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct ThemeVariant : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension MobileWorkflowCore.ThemeVariant {
+  public static func dark(primaryTintColor: Swift.String = "", primaryNavBarBackgroundColor: Swift.String = "", primaryNavBarTitleColor: Swift.String = "", primaryNavBarTintColor: Swift.String = "", primaryNavBarShadowHidden: Swift.Bool = false, primaryNavBarShadowColor: Swift.String = "", primaryBackgroundColor: Swift.String = "", marginBackgroundColor: Swift.String = "", imagePlaceholderBackgroundColor: Swift.String = "", primaryTextColor: Swift.String = "", secondaryTextColor: Swift.String = "", primaryButtonColor: Swift.String = "", primaryButtonTextColor: Swift.String = "", destructiveButtonColor: Swift.String = "", destructiveButtonTextColor: Swift.String = "", groupedNavBarBackgroundColor: Swift.String = "", groupedNavBarTitleColor: Swift.String = "", groupedNavBarTintColor: Swift.String = "", groupedNavBarShadowHidden: Swift.Bool = false, groupedNavBarShadowColor: Swift.String = "", groupedBackgroundColor: Swift.String = "", groupedCellBackgroundColor: Swift.String = "") -> MobileWorkflowCore.ThemeVariant
+  public static func light(primaryTintColor: Swift.String = "", primaryNavBarBackgroundColor: Swift.String = "", primaryNavBarTitleColor: Swift.String = "", primaryNavBarTintColor: Swift.String = "", primaryNavBarShadowHidden: Swift.Bool = false, primaryNavBarShadowColor: Swift.String = "", primaryBackgroundColor: Swift.String = "", marginBackgroundColor: Swift.String = "", imagePlaceholderBackgroundColor: Swift.String = "", primaryTextColor: Swift.String = "", secondaryTextColor: Swift.String = "", primaryButtonColor: Swift.String = "", primaryButtonTextColor: Swift.String = "", destructiveButtonColor: Swift.String = "", destructiveButtonTextColor: Swift.String = "", groupedNavBarBackgroundColor: Swift.String = "", groupedNavBarTitleColor: Swift.String = "", groupedNavBarTintColor: Swift.String = "", groupedNavBarShadowHidden: Swift.Bool = false, groupedNavBarShadowColor: Swift.String = "", groupedBackgroundColor: Swift.String = "", groupedCellBackgroundColor: Swift.String = "") -> MobileWorkflowCore.ThemeVariant
+}
+extension MobileWorkflowCore.ThemeMetadata {
+  public static func systemTintColor(name: Swift.String) -> MobileWorkflowCore.SystemTintColorThemeMetadata
+  public static func otherTintColor(hexTintColor: Swift.String) -> MobileWorkflowCore.OtherTintColorThemeMetada
+  public static func otherTintColor(tintColor: UIKit.UIColor) -> MobileWorkflowCore.OtherTintColorThemeMetada
+  public static func custom(variants: [MobileWorkflowCore.ThemeVariant], buttonBorderWidth: Swift.Int = 3, buttonCornerRadius: Swift.Int = 22) -> MobileWorkflowCore.CustomThemeMetadata
+}
 extension MobileWorkflowCore.ListStepItem : MobileWorkflowCore.SelectionItem {
   public var resultKey: Swift.String? {
     get
   }
+}
+public struct ListNavigationMetadata : Swift.Codable {
+  public static func entry(step: Swift.String, sfSymbol: Swift.String? = nil) -> MobileWorkflowCore.ListNavigationMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct TabNavigationMetadata : Swift.Codable {
+  public static func tab(step: Swift.String, sfSymbol: Swift.String? = nil) -> MobileWorkflowCore.TabNavigationMetadata
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+public struct NavigationMetadata : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension MobileWorkflowCore.NavigationMetadata {
+  public static func primary(mainStep: Swift.String, onBoardingStep: Swift.String? = nil, authenticationStep: Swift.String? = nil) -> MobileWorkflowCore.NavigationMetadata
+  public static func list(steps: [MobileWorkflowCore.ListNavigationMetadata], onBoardingStep: Swift.String? = nil, authenticationStep: Swift.String? = nil) -> MobileWorkflowCore.NavigationMetadata
+  public static func tabs(tabs: [MobileWorkflowCore.TabNavigationMetadata], onBoardingStep: Swift.String? = nil, authenticationStep: Swift.String? = nil) -> MobileWorkflowCore.NavigationMetadata
 }
 public enum ReachabilityStatus : Swift.String {
   case offline
@@ -2783,6 +3099,21 @@ public struct URLResponseLogEvent : MobileWorkflowCore.ARLoggerEvent {
   public init(urlResponse: Foundation.URLResponse, data: Foundation.Data? = nil, file: Swift.String = #file, line: Swift.Int = #line, function: Swift.String = #function)
   public func message(for level: MobileWorkflowCore.ARLogLevel) -> Swift.String
 }
+@_hasMissingDesignatedInitializers public class CoreSimulateNetworkMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func coreSimulateNetwork(id: Swift.String, title: Swift.String, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreSimulateNetworkMetadata
+}
+public struct LocalesMetadata : Swift.Codable {
+  public func encode(to encoder: Swift.Encoder) throws
+  public init(from decoder: Swift.Decoder) throws
+}
+extension MobileWorkflowCore.LocalesMetadata {
+  public static func table(languageId: Swift.String, table: [Swift.String : Swift.String]) -> MobileWorkflowCore.LocalesMetadata
+}
 public protocol PDFStep {
   var pdfURL: Swift.String? { get }
   var sharingEnabled: Swift.Bool { get }
@@ -2799,6 +3130,8 @@ extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
 extension MobileWorkflowCore.ARLoggerError : Swift.Equatable {}
 extension MobileWorkflowCore.ARLoggerError : Swift.Hashable {}
+extension MobileWorkflowCore.MetadataError : Swift.Equatable {}
+extension MobileWorkflowCore.MetadataError : Swift.Hashable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Equatable {}
 extension MobileWorkflowCore.QueueControllerNetworkAsyncTaskService.Exceptions : Swift.Hashable {}
 extension MobileWorkflowCore.StepLinkType : Swift.Equatable {}

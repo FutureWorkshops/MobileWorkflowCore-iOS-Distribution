@@ -629,6 +629,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 
 
 
+
 #endif
 #if defined(__cplusplus)
 #endif
@@ -1238,6 +1239,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
