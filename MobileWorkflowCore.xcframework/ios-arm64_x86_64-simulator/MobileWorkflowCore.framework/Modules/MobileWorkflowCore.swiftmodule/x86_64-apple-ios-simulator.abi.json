@@ -28114,6 +28114,231 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "CameraiOSDocumentCaptureMetadata",
+        "printedName": "CameraiOSDocumentCaptureMetadata",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(id:title:next:links:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CameraiOSDocumentCaptureMetadata",
+                "printedName": "MobileWorkflowCore.CameraiOSDocumentCaptureMetadata",
+                "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushLinkMetadata",
+                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
+                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC2id5title4next5linksACSS_SSAA08PushLinkG0CSgSayAA0mG0CGtcfc",
+            "mangledName": "$s18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC2id5title4next5linksACSS_SSAA08PushLinkG0CSgSayAA0mG0CGtcfc",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CameraiOSDocumentCaptureMetadata",
+                "printedName": "MobileWorkflowCore.CameraiOSDocumentCaptureMetadata",
+                "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC4fromACs7Decoder_p_tKcfc",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "declAttributes": [
+              "Required",
+              "AccessControl"
+            ],
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC6encode2toys7Encoder_p_tKF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "declAttributes": [
+              "Override",
+              "AccessControl"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(id:type:title:next:links:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CameraiOSDocumentCaptureMetadata",
+                "printedName": "MobileWorkflowCore.CameraiOSDocumentCaptureMetadata",
+                "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushLinkMetadata",
+                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
+                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkG0CSgSayAA0nG0CGtcfc",
+            "mangledName": "$s18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkG0CSgSayAA0nG0CGtcfc",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "implicit": true,
+            "declAttributes": [
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC",
+        "mangledName": "$s18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "superclassUsr": "s:18MobileWorkflowCore12StepMetadataC",
+        "superclassNames": [
+          "MobileWorkflowCore.StepMetadata"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
@@ -73932,7 +74157,7 @@
           {
             "kind": "Function",
             "name": "coreSendEmail",
-            "printedName": "coreSendEmail(id:title:requestPropertyIdentifiers:sendTo:androidMaxSizeKb:subject:text:next:)",
+            "printedName": "coreSendEmail(id:title:requestPropertyIdentifiers:sendTo:androidMaxSizeKb:subject:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74031,11 +74256,26 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC13coreSendEmail2id5title26requestPropertyIdentifiers6sendTo16androidMaxSizeKb7subject4text4nextAA0cghE0CSS_SSSayAA07SessionlE0VGS2SSgA2rA08PushLinkE0CSgtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC13coreSendEmail2id5title26requestPropertyIdentifiers6sendTo16androidMaxSizeKb7subject4text4nextAA0cghE0CSS_SSSayAA07SessionlE0VGS2SSgA2rA08PushLinkE0CSgtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC13coreSendEmail2id5title26requestPropertyIdentifiers6sendTo16androidMaxSizeKb7subject4text4next5linksAA0cghE0CSS_SSSayAA07SessionlE0VGS2SSgA2sA08PushLinkE0CSgSayAA0zE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC13coreSendEmail2id5title26requestPropertyIdentifiers6sendTo16androidMaxSizeKb7subject4text4next5linksAA0cghE0CSS_SSSayAA07SessionlE0VGS2SSgA2sA08PushLinkE0CSgSayAA0zE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74252,7 +74492,7 @@
           {
             "kind": "Function",
             "name": "coreCompletion",
-            "printedName": "coreCompletion(id:title:iconType:imageContentMode:imageURL:text:next:)",
+            "printedName": "coreCompletion(id:title:iconType:imageContentMode:imageURL:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74346,11 +74586,26 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC14coreCompletion2id5title8iconType16imageContentMode0L3URL4text4nextAA0cgE0CSS_S2SSgA3nA08PushLinkE0CSgtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC14coreCompletion2id5title8iconType16imageContentMode0L3URL4text4nextAA0cgE0CSS_S2SSgA3nA08PushLinkE0CSgtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC14coreCompletion2id5title8iconType16imageContentMode0L3URL4text4next5linksAA0cgE0CSS_S2SSgA3oA08PushLinkE0CSgSayAA0tE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC14coreCompletion2id5title8iconType16imageContentMode0L3URL4text4next5linksAA0cgE0CSS_S2SSgA3oA08PushLinkE0CSgSayAA0tE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74446,6 +74701,71 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore12StepMetadataC16coreInstructions2id5title8imageURL0J11ContentMode4text4nextAA0c11InstructionE0CSS_S2SSgSiSgAmA08PushLinkE0CSgtFZ",
             "mangledName": "$s18MobileWorkflowCore12StepMetadataC16coreInstructions2id5title8imageURL0J11ContentMode4text4nextAA0c11InstructionE0CSS_S2SSgSiSgAmA08PushLinkE0CSgtFZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "cameraiOSDocumentCapture",
+            "printedName": "cameraiOSDocumentCapture(id:title:next:links:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "CameraiOSDocumentCaptureMetadata",
+                "printedName": "MobileWorkflowCore.CameraiOSDocumentCaptureMetadata",
+                "usr": "s:18MobileWorkflowCore32CameraiOSDocumentCaptureMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushLinkMetadata",
+                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
+                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC24cameraiOSDocumentCapture2id5title4next5linksAA07CameraighE0CSS_SSAA08PushLinkE0CSgSayAA0oE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC24cameraiOSDocumentCapture2id5title4next5linksAA07CameraighE0CSS_SSAA08PushLinkE0CSgSayAA0oE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74566,7 +74886,7 @@
           {
             "kind": "Function",
             "name": "restUpload",
-            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:text:url:disableBackOnNextStep:outputs:queueNetworkUploads:next:)",
+            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:url:disableBackOnNextStep:outputs:queueNetworkUploads:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74605,12 +74925,6 @@
                   }
                 ],
                 "usr": "s:Sa"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
               },
               {
                 "kind": "TypeNominal",
@@ -74674,6 +74988,21 @@
               {
                 "kind": "TypeNominal",
                 "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
                 "printedName": "MobileWorkflowCore.PushLinkMetadata?",
                 "children": [
                   {
@@ -74685,11 +75014,26 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers4text3url017disableBackOnNextD07outputs19queueNetworkUploads4nextAA0gE0CSS_S2SSayAA07SessionlE0VGS2SSbSgSayAA04Restg4ItemE0VGSgAtA08PushLinkE0CSgtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers4text3url017disableBackOnNextD07outputs19queueNetworkUploads4nextAA0gE0CSS_S2SSayAA07SessionlE0VGS2SSbSgSayAA04Restg4ItemE0VGSgAtA08PushLinkE0CSgtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgAUSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgAUSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74874,7 +75218,7 @@
           {
             "kind": "Function",
             "name": "coreSimulateNetwork",
-            "printedName": "coreSimulateNetwork(id:title:text:next:)",
+            "printedName": "coreSimulateNetwork(id:title:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74923,11 +75267,127 @@
                 ],
                 "hasDefaultArg": true,
                 "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4nextAA0cghE0CSS_S2SSgAA08PushLinkE0CSgtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4nextAA0cghE0CSS_S2SSgAA08PushLinkE0CSgtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4next5linksAA0cghE0CSS_S2SSgAA08PushLinkE0CSgSayAA0oE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4next5linksAA0cghE0CSS_S2SSgAA08PushLinkE0CSgSayAA0oE0CGtFZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "pdfUtilitiesPDFViewer",
+            "printedName": "pdfUtilitiesPDFViewer(id:title:pdfURL:saveOnDevice:sharingEnabled:next:links:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PDFUtilitiesPDFViewerMetadata",
+                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
+                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushLinkMetadata",
+                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
+                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC21pdfUtilitiesPDFViewer2id5title0F3URL12saveOnDevice14sharingEnabled4next5linksAA012PDFUtilitieshE0CSS_S2SSbSgAnA08PushLinkE0CSgSayAA0uE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC21pdfUtilitiesPDFViewer2id5title0F3URL12saveOnDevice14sharingEnabled4next5linksAA012PDFUtilitieshE0CSS_S2SSbSgAnA08PushLinkE0CSgSayAA0uE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -81606,6 +82066,171 @@
         "moduleName": "MobileWorkflowCore",
         "declAttributes": [
           "AccessControl"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "PDFUtilitiesPDFViewerMetadata",
+        "printedName": "PDFUtilitiesPDFViewerMetadata",
+        "children": [
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PDFUtilitiesPDFViewerMetadata",
+                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
+                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC4fromACs7Decoder_p_tKcfc",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "declAttributes": [
+              "Required",
+              "AccessControl"
+            ],
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC6encode2toys7Encoder_p_tKF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "declAttributes": [
+              "Override",
+              "AccessControl"
+            ],
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(id:type:title:next:links:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PDFUtilitiesPDFViewerMetadata",
+                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
+                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "PushLinkMetadata",
+                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
+                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.LinkMetadata]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "LinkMetadata",
+                    "printedName": "MobileWorkflowCore.LinkMetadata",
+                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkF0CSgSayAA0mF0CGtcfc",
+            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkF0CSgSayAA0mF0CGtcfc",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "implicit": true,
+            "declAttributes": [
+              "Override"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC",
+        "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "superclassUsr": "s:18MobileWorkflowCore12StepMetadataC",
+        "hasMissingDesignatedInitializers": true,
+        "superclassNames": [
+          "MobileWorkflowCore.StepMetadata"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
         ]
       },
       {
@@ -93435,6 +94060,13 @@
       "value": "\"MobileWorkflowCore.CoreSendEmailMetadata\""
     },
     {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Email Step\/MWEmailStep.swift",
+      "kind": "Array",
+      "offset": 5266,
+      "length": 2,
+      "value": "[]"
+    },
+    {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Domain\/AppConfigurationDependencies.swift",
       "kind": "StringLiteral",
       "offset": 1370,
@@ -93636,6 +94268,13 @@
       "offset": 1981,
       "length": 22,
       "value": "\"MobileWorkflowCore.CoreCompletionMetadata\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Completion Step\/MWCompletionStep.swift",
+      "kind": "Array",
+      "offset": 3990,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/BinaryContentType.swift",
@@ -94189,6 +94828,20 @@
       "offset": 192,
       "length": 21,
       "value": "\"MobileWorkflowCore.MWDocumentCaptureStep\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Document Capture Step\/MWDocumentCaptureStep.swift",
+      "kind": "StringLiteral",
+      "offset": 939,
+      "length": 32,
+      "value": "\"MobileWorkflowCore.CameraiOSDocumentCaptureMetadata\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Document Capture Step\/MWDocumentCaptureStep.swift",
+      "kind": "Array",
+      "offset": 1587,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Analytics\/AhoyService.swift",
@@ -95288,6 +95941,13 @@
       "offset": 5111,
       "length": 14,
       "value": "\"MobileWorkflowCore.UploadMetadata\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
+      "kind": "Array",
+      "offset": 8280,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Stack Step\/MWNetworkStackStep.swift",
@@ -97292,6 +97952,13 @@
       "value": "\"MobileWorkflowCore.CoreSimulateNetworkMetadata\""
     },
     {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Simulate Network Step\/MWSimulateNetworkStep.swift",
+      "kind": "Array",
+      "offset": 2617,
+      "length": 2,
+      "value": "[]"
+    },
+    {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/metadata\/LocalesMetadata.swift",
       "kind": "StringLiteral",
       "offset": 272,
@@ -97332,6 +97999,20 @@
       "offset": 559,
       "length": 9,
       "value": "\"MobileWorkflowCore.MWPDFStep\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
+      "kind": "StringLiteral",
+      "offset": 2192,
+      "length": 29,
+      "value": "\"MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
+      "kind": "Array",
+      "offset": 3920,
+      "length": 2,
+      "value": "[]"
     }
   ]
 }

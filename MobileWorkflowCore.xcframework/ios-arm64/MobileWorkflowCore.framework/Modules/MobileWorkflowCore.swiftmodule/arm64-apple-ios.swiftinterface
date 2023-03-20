@@ -63,7 +63,7 @@ extension MobileWorkflowCore.MWEmailStep : MobileWorkflowCore.BuildableStep {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func coreSendEmail(id: Swift.String, title: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], sendTo: Swift.String, androidMaxSizeKb: Swift.String? = nil, subject: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreSendEmailMetadata
+  public static func coreSendEmail(id: Swift.String, title: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], sendTo: Swift.String, androidMaxSizeKb: Swift.String? = nil, subject: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreSendEmailMetadata
 }
 public struct FileInformation : Swift.Codable, Swift.Hashable, Swift.Equatable {
   public let fileURL: Foundation.URL
@@ -363,7 +363,7 @@ extension MobileWorkflowCore.MWCompletionStep : MobileWorkflowCore.BuildableStep
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func coreCompletion(id: Swift.String, title: Swift.String, iconType: Swift.String? = nil, imageContentMode: Swift.String? = nil, imageURL: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreCompletionMetadata
+  public static func coreCompletion(id: Swift.String, title: Swift.String, iconType: Swift.String? = nil, imageContentMode: Swift.String? = nil, imageURL: Swift.String? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreCompletionMetadata
 }
 public enum BinaryContentType {
   public enum Image {
@@ -1148,6 +1148,15 @@ public struct StepData : Swift.Codable {
   }
   public init(from decoder: Swift.Decoder) throws
   public func encode(to encoder: Swift.Encoder) throws
+}
+public class CameraiOSDocumentCaptureMetadata : MobileWorkflowCore.StepMetadata {
+  public init(id: Swift.String, title: Swift.String, next: MobileWorkflowCore.PushLinkMetadata?, links: [MobileWorkflowCore.LinkMetadata])
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func cameraiOSDocumentCapture(id: Swift.String, title: Swift.String, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CameraiOSDocumentCaptureMetadata
 }
 public class AnyResult : MobileWorkflowCore.StepResult, MobileWorkflowCore.ValueProvider {
   public var identifier: Swift.String
@@ -1960,7 +1969,7 @@ public struct RestUploadItemMetadata : Swift.Codable {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], text: Swift.String, url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.UploadMetadata
+  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.UploadMetadata
 }
 public struct RestStackItem : Swift.Codable {
   public static func restStackItem(buttonTitle: Swift.String? = nil, label: Swift.String? = nil, onSuccess: Swift.String? = nil, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.RestStackItem
@@ -3105,7 +3114,7 @@ public struct URLResponseLogEvent : MobileWorkflowCore.ARLoggerEvent {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func coreSimulateNetwork(id: Swift.String, title: Swift.String, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil) -> MobileWorkflowCore.CoreSimulateNetworkMetadata
+  public static func coreSimulateNetwork(id: Swift.String, title: Swift.String, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreSimulateNetworkMetadata
 }
 public struct LocalesMetadata : Swift.Codable {
   public func encode(to encoder: Swift.Encoder) throws
@@ -3125,6 +3134,14 @@ extension MobileWorkflowCore.PDFStep {
   public var saveOnDevice: Swift.Bool {
     get
   }
+}
+@_hasMissingDesignatedInitializers public class PDFUtilitiesPDFViewerMetadata : MobileWorkflowCore.StepMetadata {
+  required public init(from decoder: Swift.Decoder) throws
+  override public func encode(to encoder: Swift.Encoder) throws
+  @objc deinit
+}
+extension MobileWorkflowCore.StepMetadata {
+  public static func pdfUtilitiesPDFViewer(id: Swift.String, title: Swift.String, pdfURL: Swift.String, saveOnDevice: Swift.Bool? = nil, sharingEnabled: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata
 }
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
