@@ -8,6 +8,7 @@ import AuthenticationServices
 import BackgroundTasks
 import SystemConfiguration.CaptiveNetwork
 import Combine
+import CoreImage
 import CoreLocation
 import CryptoKit
 import Foundation
@@ -196,7 +197,7 @@ public struct RestListItem : Swift.Codable {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func restList(id: Swift.String, title: Swift.String, emptyText: Swift.String, url: Swift.String, liveSearch: Swift.Bool? = nil, search: Swift.Bool? = nil, searchSuggestions: Swift.Bool? = nil, searchSuggestionsURL: Swift.Bool? = nil, showPlaceholderImage: Swift.Bool? = nil, sortFields: Swift.String? = nil, sortFieldItems: [MobileWorkflowCore.RestListItem]? = nil, navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.RestListMetadata
+  public static func restList(id: Swift.String, title: Swift.String, emptyText: Swift.String, url: Swift.String, imageShape: Swift.String? = nil, liveSearch: Swift.Bool? = nil, search: Swift.Bool? = nil, searchSuggestions: Swift.Bool? = nil, searchSuggestionsURL: Swift.Bool? = nil, showPlaceholderImage: Swift.Bool? = nil, sortFields: Swift.String? = nil, sortFieldItems: [MobileWorkflowCore.RestListItem]? = nil, navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.RestListMetadata
 }
 public protocol StringConvertableValue {
   var stringValue: Swift.String { get }
@@ -265,6 +266,15 @@ extension Foundation.NSArray : MobileWorkflowCore.StringConvertableValue {
 }
 extension Foundation.NSDateComponents : MobileWorkflowCore.StringConvertableValue {
   public var stringValue: Swift.String {
+    get
+  }
+}
+public enum ImageShape : Swift.String, Swift.Codable {
+  case square
+  case circle
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
     get
   }
 }
@@ -1125,7 +1135,8 @@ public protocol ResponseError : Foundation.LocalizedError, Swift.Decodable {
 extension MobileWorkflowCore.ResponseError {
   public static func build(errorCode: Swift.Int, data: Foundation.Data) throws -> Foundation.LocalizedError
 }
-public struct SimpleResponseError : MobileWorkflowCore.ResponseError {
+public struct SimpleResponseError : MobileWorkflowCore.ResponseError, MobileWorkflowCore.TitledError {
+  public let title: Swift.String?
   public let message: Swift.String?
   public let error: Swift.String?
   public let errorCode: Swift.Int?
@@ -1219,7 +1230,7 @@ public struct CoreListItem : Swift.Codable {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func coreList(id: Swift.String, title: Swift.String, items: [MobileWorkflowCore.CoreListItem], navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], search: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreListMetadata
+  public static func coreList(id: Swift.String, title: Swift.String, items: [MobileWorkflowCore.CoreListItem], imageShape: Swift.String? = nil, navigationItems: [MobileWorkflowCore.NavigationItemMetadata] = [], search: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.CoreListMetadata
 }
 public enum SuccessAction : Swift.String, Swift.Codable {
   case none
@@ -1969,7 +1980,7 @@ public struct RestUploadItemMetadata : Swift.Codable {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.UploadMetadata
+  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], showErrorsInAlert: Swift.Bool, url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.UploadMetadata
 }
 public struct RestStackItem : Swift.Codable {
   public static func restStackItem(buttonTitle: Swift.String? = nil, label: Swift.String? = nil, onSuccess: Swift.String? = nil, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.RestStackItem
@@ -2768,15 +2779,24 @@ public class RootCoordinator {
 public typealias MobileWorkflowSubtitleTableViewCell = MobileWorkflowCore.MWSubtitleTableViewCell
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @_Concurrency.MainActor(unsafe) public class MWSubtitleTableViewCell : UIKit.UITableViewCell {
   public struct ViewData {
-    public init(title: Swift.String?, subtitle: Swift.String?, image: UIKit.UIImage?, willLoadImage: Swift.Bool, isDisclosureIndictorHidden: Swift.Bool)
+    public enum ImageMaskShape {
+      case none
+      case circle
+      public static func == (a: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape, b: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    public init(title: Swift.String?, subtitle: Swift.String?, image: UIKit.UIImage?, willLoadImage: Swift.Bool, isDisclosureIndictorHidden: Swift.Bool, imageMaskShape: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape = .none)
   }
   @_Concurrency.MainActor(unsafe) public var viewData: MobileWorkflowCore.MWSubtitleTableViewCell.ViewData? {
     get
     set
   }
-  @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) public func updateImage(_ image: UIKit.UIImage?, animated: Swift.Bool = false)
   @_Concurrency.MainActor(unsafe) public func configureStyle(backgroundColor: UIKit.UIColor = Theme.current.primaryBackgroundColor, titleFont: UIKit.UIFont = .preferredFont(forTextStyle: .headline, weight: .regular), titleTextColor: UIKit.UIColor = Theme.current.primaryTextColor, subtitleFont: UIKit.UIFont = .preferredFont(forTextStyle: .subheadline, weight: .regular), subtitleTextColor: UIKit.UIColor = Theme.current.secondaryTextColor)
+  @_Concurrency.MainActor(unsafe) @objc override dynamic public func prepareForReuse()
   @objc deinit
 }
 public struct Server : Swift.Codable {
@@ -3143,6 +3163,9 @@ extension MobileWorkflowCore.PDFStep {
 extension MobileWorkflowCore.StepMetadata {
   public static func pdfUtilitiesPDFViewer(id: Swift.String, title: Swift.String, pdfURL: Swift.String, saveOnDevice: Swift.Bool? = nil, sharingEnabled: Swift.Bool? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata
 }
+extension MobileWorkflowCore.ImageShape : Swift.Equatable {}
+extension MobileWorkflowCore.ImageShape : Swift.Hashable {}
+extension MobileWorkflowCore.ImageShape : Swift.RawRepresentable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Equatable {}
 extension MobileWorkflowCore.MWCompletionStep.IconType : Swift.Hashable {}
 extension MobileWorkflowCore.ARLoggerError : Swift.Equatable {}
@@ -3199,6 +3222,8 @@ extension MobileWorkflowCore.HTTPMethod : Swift.Hashable {}
 extension MobileWorkflowCore.HTTPMethod : Swift.RawRepresentable {}
 extension MobileWorkflowCore.CredentialError : Swift.Equatable {}
 extension MobileWorkflowCore.CredentialError : Swift.Hashable {}
+extension MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape : Swift.Equatable {}
+extension MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape : Swift.Hashable {}
 extension MobileWorkflowCore.SyncResult : Swift.Equatable {}
 extension MobileWorkflowCore.SyncResult : Swift.Hashable {}
 extension MobileWorkflowCore.PDFImageRenderError : Swift.Equatable {}

@@ -472,7 +472,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @interface MWSubtitleTableViewCell : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)layoutSubviews;
+- (void)prepareForReuse;
 @end
 
 
@@ -1112,7 +1112,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @interface MWSubtitleTableViewCell : UITableViewCell
 - (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)layoutSubviews;
+- (void)prepareForReuse;
 @end
 
 

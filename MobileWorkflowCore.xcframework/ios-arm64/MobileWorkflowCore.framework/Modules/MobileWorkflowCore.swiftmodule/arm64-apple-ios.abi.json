@@ -5258,6 +5258,219 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "ImageShape",
+        "printedName": "ImageShape",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "square",
+            "printedName": "square",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.ImageShape.Type) -> MobileWorkflowCore.ImageShape",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageShape",
+                    "printedName": "MobileWorkflowCore.ImageShape",
+                    "usr": "s:18MobileWorkflowCore10ImageShapeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "MobileWorkflowCore.ImageShape.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageShape",
+                        "printedName": "MobileWorkflowCore.ImageShape",
+                        "usr": "s:18MobileWorkflowCore10ImageShapeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18MobileWorkflowCore10ImageShapeO6squareyA2CmF",
+            "mangledName": "$s18MobileWorkflowCore10ImageShapeO6squareyA2CmF",
+            "moduleName": "MobileWorkflowCore"
+          },
+          {
+            "kind": "Var",
+            "name": "circle",
+            "printedName": "circle",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.ImageShape.Type) -> MobileWorkflowCore.ImageShape",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageShape",
+                    "printedName": "MobileWorkflowCore.ImageShape",
+                    "usr": "s:18MobileWorkflowCore10ImageShapeO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "MobileWorkflowCore.ImageShape.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageShape",
+                        "printedName": "MobileWorkflowCore.ImageShape",
+                        "usr": "s:18MobileWorkflowCore10ImageShapeO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18MobileWorkflowCore10ImageShapeO6circleyA2CmF",
+            "mangledName": "$s18MobileWorkflowCore10ImageShapeO6circleyA2CmF",
+            "moduleName": "MobileWorkflowCore"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(rawValue:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.ImageShape?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageShape",
+                    "printedName": "MobileWorkflowCore.ImageShape",
+                    "usr": "s:18MobileWorkflowCore10ImageShapeO"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore10ImageShapeO8rawValueACSgSS_tcfc",
+            "mangledName": "$s18MobileWorkflowCore10ImageShapeO8rawValueACSgSS_tcfc",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Var",
+            "name": "rawValue",
+            "printedName": "rawValue",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore10ImageShapeO8rawValueSSvp",
+            "mangledName": "$s18MobileWorkflowCore10ImageShapeO8rawValueSSvp",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore10ImageShapeO8rawValueSSvg",
+                "mangledName": "$s18MobileWorkflowCore10ImageShapeO8rawValueSSvg",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:18MobileWorkflowCore10ImageShapeO",
+        "mangledName": "$s18MobileWorkflowCore10ImageShapeO",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "enumRawTypeName": "String",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "RawRepresentable",
+            "printedName": "RawRepresentable",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "RawValue",
+                "printedName": "RawValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:SY",
+            "mangledName": "$sSY"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
+          }
+        ]
+      },
+      {
         "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
@@ -27246,6 +27459,66 @@
         "children": [
           {
             "kind": "Var",
+            "name": "title",
+            "printedName": "title",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore19SimpleResponseErrorV5titleSSSgvp",
+            "mangledName": "$s18MobileWorkflowCore19SimpleResponseErrorV5titleSSSgvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Optional",
+                    "printedName": "Swift.String?",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sq"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore19SimpleResponseErrorV5titleSSSgvg",
+                "mangledName": "$s18MobileWorkflowCore19SimpleResponseErrorV5titleSSSgvg",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "message",
             "printedName": "message",
             "children": [
@@ -27556,6 +27829,13 @@
             "printedName": "ResponseError",
             "usr": "s:18MobileWorkflowCore13ResponseErrorP",
             "mangledName": "$s18MobileWorkflowCore13ResponseErrorP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "TitledError",
+            "printedName": "TitledError",
+            "usr": "s:18MobileWorkflowCore11TitledErrorP",
+            "mangledName": "$s18MobileWorkflowCore11TitledErrorP"
           },
           {
             "kind": "Conformance",
@@ -72308,9 +72588,209 @@
             "printedName": "ViewData",
             "children": [
               {
+                "kind": "TypeDecl",
+                "name": "ImageMaskShape",
+                "printedName": "ImageMaskShape",
+                "children": [
+                  {
+                    "kind": "Var",
+                    "name": "none",
+                    "printedName": "none",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape.Type) -> MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ImageMaskShape",
+                            "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                            "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Metatype",
+                            "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape.Type",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ImageMaskShape",
+                                "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                                "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "declKind": "EnumElement",
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO4noneyA2GmF",
+                    "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO4noneyA2GmF",
+                    "moduleName": "MobileWorkflowCore"
+                  },
+                  {
+                    "kind": "Var",
+                    "name": "circle",
+                    "printedName": "circle",
+                    "children": [
+                      {
+                        "kind": "TypeFunc",
+                        "name": "Function",
+                        "printedName": "(MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape.Type) -> MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "ImageMaskShape",
+                            "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                            "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Metatype",
+                            "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape.Type",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "ImageMaskShape",
+                                "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                                "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "declKind": "EnumElement",
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO6circleyA2GmF",
+                    "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO6circleyA2GmF",
+                    "moduleName": "MobileWorkflowCore"
+                  },
+                  {
+                    "kind": "Function",
+                    "name": "==",
+                    "printedName": "==(_:_:)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageMaskShape",
+                        "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                        "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "ImageMaskShape",
+                        "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                        "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
+                      }
+                    ],
+                    "declKind": "Func",
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO2eeoiySbAG_AGtFZ",
+                    "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO2eeoiySbAG_AGtFZ",
+                    "moduleName": "MobileWorkflowCore",
+                    "static": true,
+                    "implicit": true,
+                    "funcSelfKind": "NonMutating"
+                  },
+                  {
+                    "kind": "Var",
+                    "name": "hashValue",
+                    "printedName": "hashValue",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Var",
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO9hashValueSivp",
+                    "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO9hashValueSivp",
+                    "moduleName": "MobileWorkflowCore",
+                    "implicit": true,
+                    "accessors": [
+                      {
+                        "kind": "Accessor",
+                        "name": "Get",
+                        "printedName": "Get()",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Int",
+                            "printedName": "Swift.Int",
+                            "usr": "s:Si"
+                          }
+                        ],
+                        "declKind": "Accessor",
+                        "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO9hashValueSivg",
+                        "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO9hashValueSivg",
+                        "moduleName": "MobileWorkflowCore",
+                        "implicit": true,
+                        "accessorKind": "get"
+                      }
+                    ]
+                  },
+                  {
+                    "kind": "Function",
+                    "name": "hash",
+                    "printedName": "hash(into:)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Hasher",
+                        "printedName": "Swift.Hasher",
+                        "paramValueOwnership": "InOut",
+                        "usr": "s:s6HasherV"
+                      }
+                    ],
+                    "declKind": "Func",
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO4hash4intoys6HasherVz_tF",
+                    "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO4hash4intoys6HasherVz_tF",
+                    "moduleName": "MobileWorkflowCore",
+                    "implicit": true,
+                    "funcSelfKind": "NonMutating"
+                  }
+                ],
+                "declKind": "Enum",
+                "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO",
+                "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO",
+                "moduleName": "MobileWorkflowCore",
+                "declAttributes": [
+                  "AccessControl"
+                ],
+                "conformances": [
+                  {
+                    "kind": "Conformance",
+                    "name": "Equatable",
+                    "printedName": "Equatable",
+                    "usr": "s:SQ",
+                    "mangledName": "$sSQ"
+                  },
+                  {
+                    "kind": "Conformance",
+                    "name": "Hashable",
+                    "printedName": "Hashable",
+                    "usr": "s:SH",
+                    "mangledName": "$sSH"
+                  }
+                ]
+              },
+              {
                 "kind": "Constructor",
                 "name": "init",
-                "printedName": "init(title:subtitle:image:willLoadImage:isDisclosureIndictorHidden:)",
+                "printedName": "init(title:subtitle:image:willLoadImage:isDisclosureIndictorHidden:imageMaskShape:)",
                 "children": [
                   {
                     "kind": "TypeNominal",
@@ -72371,11 +72851,18 @@
                     "name": "Bool",
                     "printedName": "Swift.Bool",
                     "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ImageMaskShape",
+                    "printedName": "MobileWorkflowCore.MWSubtitleTableViewCell.ViewData.ImageMaskShape",
+                    "hasDefaultArg": true,
+                    "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV14ImageMaskShapeO"
                   }
                 ],
                 "declKind": "Constructor",
-                "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV5title8subtitle5image13willLoadImage26isDisclosureIndictorHiddenAESSSg_AKSo7UIImageCSgS2btcfc",
-                "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV5title8subtitle5image13willLoadImage26isDisclosureIndictorHiddenAESSSg_AKSo7UIImageCSgS2btcfc",
+                "usr": "s:18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV5title8subtitle5image13willLoadImage26isDisclosureIndictorHidden0K9MaskShapeAESSSg_ALSo7UIImageCSgS2bAE0nsT0Otcfc",
+                "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC0F4DataV5title8subtitle5image13willLoadImage26isDisclosureIndictorHidden0K9MaskShapeAESSSg_ALSo7UIImageCSgS2bAE0nsT0Otcfc",
                 "moduleName": "MobileWorkflowCore",
                 "declAttributes": [
                   "AccessControl"
@@ -72504,32 +72991,6 @@
           },
           {
             "kind": "Function",
-            "name": "layoutSubviews",
-            "printedName": "layoutSubviews()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)MWSubtitleTableViewCell(im)layoutSubviews",
-            "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC14layoutSubviewsyyF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "objc_name": "layoutSubviews",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
             "name": "updateImage",
             "printedName": "updateImage(_:animated:)",
             "children": [
@@ -72622,6 +73083,32 @@
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "Custom",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "prepareForReuse",
+            "printedName": "prepareForReuse()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)MWSubtitleTableViewCell(im)prepareForReuse",
+            "mangledName": "$s18MobileWorkflowCore23MWSubtitleTableViewCellC15prepareForReuseyyF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "objc_name": "prepareForReuse",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
               "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
@@ -74287,7 +74774,7 @@
           {
             "kind": "Function",
             "name": "restList",
-            "printedName": "restList(id:title:emptyText:url:liveSearch:search:searchSuggestions:searchSuggestionsURL:showPlaceholderImage:sortFields:sortFieldItems:navigationItems:next:links:)",
+            "printedName": "restList(id:title:emptyText:url:imageShape:liveSearch:search:searchSuggestions:searchSuggestionsURL:showPlaceholderImage:sortFields:sortFieldItems:navigationItems:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74318,6 +74805,21 @@
                 "name": "String",
                 "printedName": "Swift.String",
                 "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
@@ -74479,8 +74981,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC8restList2id5title9emptyText3url10liveSearch6search0O11Suggestions0oP3URL20showPlaceholderImage10sortFields0U10FieldItems010navigationX04next5linksAA04RestgE0CSS_S3SSbSgA4USSSgSayAA04RestG4ItemVGSgSayAA014NavigationItemE0CGAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC8restList2id5title9emptyText3url10liveSearch6search0O11Suggestions0oP3URL20showPlaceholderImage10sortFields0U10FieldItems010navigationX04next5linksAA04RestgE0CSS_S3SSbSgA4USSSgSayAA04RestG4ItemVGSgSayAA014NavigationItemE0CGAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC8restList2id5title9emptyText3url10imageShape10liveSearch6search0Q11Suggestions0qR3URL20showPlaceholderImage10sortFields0W10FieldItems010navigationZ04next5linksAA04RestgE0CSS_S4SSgSbSgA4wVSayAA04RestG4ItemVGSgSayAA014NavigationItemE0CGAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC8restList2id5title9emptyText3url10imageShape10liveSearch6search0Q11Suggestions0qR3URL20showPlaceholderImage10sortFields0W10FieldItems010navigationZ04next5linksAA04RestgE0CSS_S4SSgSbSgA4wVSayAA04RestG4ItemVGSgSayAA014NavigationItemE0CGAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74777,7 +75279,7 @@
           {
             "kind": "Function",
             "name": "coreList",
-            "printedName": "coreList(id:title:items:navigationItems:search:next:links:)",
+            "printedName": "coreList(id:title:items:imageShape:navigationItems:search:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74810,6 +75312,21 @@
                   }
                 ],
                 "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
               },
               {
                 "kind": "TypeNominal",
@@ -74873,8 +75390,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC8coreList2id5title5items15navigationItems6search4next5linksAA0cgE0CSS_SSSayAA0cG4ItemVGSayAA010NavigationpE0CGSbSgAA08PushLinkE0CSgSayAA0sE0CGtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC8coreList2id5title5items15navigationItems6search4next5linksAA0cgE0CSS_SSSayAA0cG4ItemVGSayAA010NavigationpE0CGSbSgAA08PushLinkE0CSgSayAA0sE0CGtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC8coreList2id5title5items10imageShape15navigationItems6search4next5linksAA0cgE0CSS_SSSayAA0cG4ItemVGSSSgSayAA010NavigationrE0CGSbSgAA08PushLinkE0CSgSayAA0uE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC8coreList2id5title5items10imageShape15navigationItems6search4next5linksAA0cgE0CSS_SSSayAA0cG4ItemVGSSSgSayAA010NavigationrE0CGSbSgAA08PushLinkE0CSgSayAA0uE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -74886,7 +75403,7 @@
           {
             "kind": "Function",
             "name": "restUpload",
-            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:url:disableBackOnNextStep:outputs:queueNetworkUploads:text:next:links:)",
+            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:showErrorsInAlert:url:disableBackOnNextStep:outputs:queueNetworkUploads:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -74925,6 +75442,12 @@
                   }
                 ],
                 "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
               },
               {
                 "kind": "TypeNominal",
@@ -75032,8 +75555,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgAUSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgAUSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers17showErrorsInAlert3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSbSSSbSgSayAA04Restg4ItemE0VGSgAVSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers17showErrorsInAlert3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSbSSSbSgSayAA04Restg4ItemE0VGSgAVSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -76678,6 +77201,13 @@
         "declAttributes": [
           "RawDocComment"
         ]
+      },
+      {
+        "kind": "Import",
+        "name": "CoreImage",
+        "printedName": "CoreImage",
+        "declKind": "Import",
+        "moduleName": "MobileWorkflowCore"
       },
       {
         "kind": "Import",
@@ -94110,57 +94640,71 @@
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
+      "kind": "StringLiteral",
+      "offset": 6023,
+      "length": 18,
+      "value": "\"_navigationItems\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
+      "kind": "StringLiteral",
+      "offset": 6023,
+      "length": 18,
+      "value": "\"_navigationItems\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
       "kind": "Array",
-      "offset": 6387,
+      "offset": 6762,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
       "kind": "StringLiteral",
-      "offset": 5386,
+      "offset": 5659,
       "length": 16,
       "value": "\"MobileWorkflowCore.RestListMetadata\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
       "kind": "Array",
-      "offset": 9386,
+      "offset": 10100,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWNetworkListStep.swift",
       "kind": "Array",
-      "offset": 9461,
+      "offset": 10175,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/ListStep.swift",
       "kind": "Array",
-      "offset": 430,
+      "offset": 508,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/ListStep.swift",
       "kind": "Array",
-      "offset": 490,
+      "offset": 568,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/ListStep.swift",
       "kind": "StringLiteral",
-      "offset": 177,
+      "offset": 255,
       "length": 8,
       "value": "\"MobileWorkflowCore.ListStep\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/ListStep.swift",
       "kind": "StringLiteral",
-      "offset": 177,
+      "offset": 255,
       "length": 8,
       "value": "\"MobileWorkflowCore.ListStep\""
     },
@@ -94986,35 +95530,35 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/MWListStep.swift",
       "kind": "StringLiteral",
-      "offset": 3175,
+      "offset": 3477,
       "length": 18,
       "value": "\"_navigationItems\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/MWListStep.swift",
       "kind": "StringLiteral",
-      "offset": 3175,
+      "offset": 3477,
       "length": 18,
       "value": "\"_navigationItems\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/MWListStep.swift",
       "kind": "StringLiteral",
-      "offset": 3026,
+      "offset": 3304,
       "length": 16,
       "value": "\"MobileWorkflowCore.CoreListMetadata\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/MWListStep.swift",
       "kind": "Array",
-      "offset": 4683,
+      "offset": 5272,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/List Step\/MWListStep.swift",
       "kind": "Array",
-      "offset": 4787,
+      "offset": 5376,
       "length": 2,
       "value": "[]"
     },
@@ -95133,56 +95677,56 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 399,
+      "offset": 405,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 438,
+      "offset": 444,
       "length": 6,
       "value": "\"from\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 477,
+      "offset": 483,
       "length": 4,
       "value": "\"to\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 517,
+      "offset": 523,
       "length": 11,
       "value": "\"locale_id\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 399,
+      "offset": 405,
       "length": 4,
       "value": "\"id\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 438,
+      "offset": 444,
       "length": 6,
       "value": "\"from\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 477,
+      "offset": 483,
       "length": 4,
       "value": "\"to\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Model\/Translation.swift",
       "kind": "StringLiteral",
-      "offset": 517,
+      "offset": 523,
       "length": 11,
       "value": "\"locale_id\""
     },
@@ -95938,14 +96482,14 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
       "kind": "StringLiteral",
-      "offset": 5111,
+      "offset": 5521,
       "length": 14,
       "value": "\"MobileWorkflowCore.UploadMetadata\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
       "kind": "Array",
-      "offset": 8280,
+      "offset": 9036,
       "length": 2,
       "value": "[]"
     },
@@ -96827,140 +97371,147 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8876,
+      "offset": 8857,
+      "length": 37,
+      "value": "\"networkStep.missingUploadProperties\""
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
+      "kind": "StringLiteral",
+      "offset": 8986,
       "length": 22,
       "value": "\"invalidLicense.title\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 8955,
+      "offset": 9065,
       "length": 24,
       "value": "\"invalidLicense.message\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9080,
+      "offset": 9190,
       "length": 31,
       "value": "\"workflow.confirmCancelMessage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9228,
+      "offset": 9338,
       "length": 47,
       "value": "\"barcodeScanner.videoRecordingUnsupportedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9357,
+      "offset": 9467,
       "length": 49,
       "value": "\"barcodeScanner.requiredBarcodesUnsupportedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9483,
+      "offset": 9593,
       "length": 44,
       "value": "\"barcodeScanner.cameraPermissionDeniedError\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9620,
+      "offset": 9730,
       "length": 24,
       "value": "\"qrScanner.instructions\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 9748,
+      "offset": 9858,
       "length": 34,
       "value": "\"completion.checkboxAccessibility\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10394,
+      "offset": 10504,
       "length": 31,
       "value": "\"imageCaptureStep.captureImage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10489,
+      "offset": 10599,
       "length": 33,
       "value": "\"imageCaptureStep.recaptureImage\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10587,
+      "offset": 10697,
       "length": 34,
       "value": "\"imageCaptureStep.nextButtonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10686,
+      "offset": 10796,
       "length": 34,
       "value": "\"imageCaptureStep.skipButtonTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10787,
+      "offset": 10897,
       "length": 36,
       "value": "\"imageCaptureStep.cameraUnavailable\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 10898,
+      "offset": 11008,
       "length": 44,
       "value": "\"imageCaptureStep.captureErrorNoPermissions\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11018,
+      "offset": 11128,
       "length": 45,
       "value": "\"imageCaptureStep.captureErrorCameraNotFound\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11142,
+      "offset": 11252,
       "length": 48,
       "value": "\"imageCaptureStep.captureErrorNoOutputDirectory\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11267,
+      "offset": 11377,
       "length": 46,
       "value": "\"imageCaptureStep.captureErrorCannotWriteFile\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11387,
+      "offset": 11497,
       "length": 43,
       "value": "\"imageCaptureStep.photoLibraryNotAvailable\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11529,
+      "offset": 11639,
       "length": 29,
       "value": "\"stepBuilder.parseErrorTitle\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/Supporting Files\/L10n.swift",
       "kind": "StringLiteral",
-      "offset": 11625,
+      "offset": 11735,
       "length": 31,
       "value": "\"stepBuilder.parseErrorMessage\""
     },
@@ -97134,8 +97685,29 @@
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 376,
+      "length": 2,
+      "value": "60"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 432,
+      "length": 1,
+      "value": "8"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
+      "kind": "IntegerLiteral",
+      "offset": 482,
+      "length": 1,
+      "value": "4"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
       "kind": "BooleanLiteral",
-      "offset": 1861,
+      "offset": 5403,
       "length": 5,
       "value": "false"
     },
@@ -97163,7 +97735,7 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Extension\/UIImage+Workflow.swift",
       "kind": "BooleanLiteral",
-      "offset": 218,
+      "offset": 235,
       "length": 5,
       "value": "false"
     },
