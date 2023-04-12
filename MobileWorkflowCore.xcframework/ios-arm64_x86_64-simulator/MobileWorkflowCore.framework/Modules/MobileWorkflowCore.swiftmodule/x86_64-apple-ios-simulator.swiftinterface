@@ -1980,7 +1980,7 @@ public struct RestUploadItemMetadata : Swift.Codable {
   @objc deinit
 }
 extension MobileWorkflowCore.StepMetadata {
-  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], showErrorsInAlert: Swift.Bool, url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.UploadMetadata
+  public static func restUpload(id: Swift.String, title: Swift.String, method: Swift.String, requestPropertyIdentifiers: [MobileWorkflowCore.SessionPropertyMetadata], url: Swift.String, disableBackOnNextStep: Swift.Bool? = nil, outputs: [MobileWorkflowCore.RestUploadItemMetadata]? = nil, queueNetworkUploads: Swift.Bool? = nil, showErrorsInAlert: Swift.Bool? = true, text: Swift.String? = nil, next: MobileWorkflowCore.PushLinkMetadata? = nil, links: [MobileWorkflowCore.LinkMetadata] = []) -> MobileWorkflowCore.UploadMetadata
 }
 public struct RestStackItem : Swift.Codable {
   public static func restStackItem(buttonTitle: Swift.String? = nil, label: Swift.String? = nil, onSuccess: Swift.String? = nil, sfSymbolName: Swift.String? = nil) -> MobileWorkflowCore.RestStackItem

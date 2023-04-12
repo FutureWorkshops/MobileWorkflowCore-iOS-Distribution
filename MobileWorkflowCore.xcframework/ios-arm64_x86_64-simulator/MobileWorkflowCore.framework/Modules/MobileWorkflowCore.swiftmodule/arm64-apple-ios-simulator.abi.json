@@ -75403,7 +75403,7 @@
           {
             "kind": "Function",
             "name": "restUpload",
-            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:showErrorsInAlert:url:disableBackOnNextStep:outputs:queueNetworkUploads:text:next:links:)",
+            "printedName": "restUpload(id:title:method:requestPropertyIdentifiers:url:disableBackOnNextStep:outputs:queueNetworkUploads:showErrorsInAlert:text:next:links:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -75445,12 +75445,6 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
                 "name": "String",
                 "printedName": "Swift.String",
                 "usr": "s:SS"
@@ -75488,6 +75482,21 @@
                       }
                     ],
                     "usr": "s:Sa"
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.Bool?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
                   }
                 ],
                 "hasDefaultArg": true,
@@ -75555,8 +75564,8 @@
               }
             ],
             "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers17showErrorsInAlert3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSbSSSbSgSayAA04Restg4ItemE0VGSgAVSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers17showErrorsInAlert3url017disableBackOnNextD07outputs19queueNetworkUploads4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSbSSSbSgSayAA04Restg4ItemE0VGSgAVSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "usr": "s:18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads17showErrorsInAlert4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgA2VSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepMetadataC10restUpload2id5title6method26requestPropertyIdentifiers3url017disableBackOnNextD07outputs19queueNetworkUploads17showErrorsInAlert4text4next5linksAA0gE0CSS_S2SSayAA07SessionlE0VGSSSbSgSayAA04Restg4ItemE0VGSgA2VSSSgAA08PushLinkE0CSgSayAA04LinkE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -96482,14 +96491,21 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
       "kind": "StringLiteral",
-      "offset": 5521,
+      "offset": 5361,
       "length": 14,
       "value": "\"MobileWorkflowCore.UploadMetadata\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
+      "kind": "BooleanLiteral",
+      "offset": 8816,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network Step\/MWNetworkUploadStep.swift",
       "kind": "Array",
-      "offset": 9036,
+      "offset": 8922,
       "length": 2,
       "value": "[]"
     },
