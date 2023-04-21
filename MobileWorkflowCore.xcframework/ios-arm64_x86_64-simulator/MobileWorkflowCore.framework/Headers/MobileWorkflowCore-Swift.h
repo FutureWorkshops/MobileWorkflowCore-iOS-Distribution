@@ -256,34 +256,11 @@ using UInt = size_t;
 #endif
 
 #if defined(__OBJC__)
-@protocol UIViewControllerTransitionCoordinator;
-@class NSString;
-@class NSBundle;
-@class NSCoder;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
-@interface BarcodeScannerViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-- (void)viewWillLayoutSubviews;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class AVCaptureMetadataOutput;
-@class AVMetadataObject;
-@class AVCaptureConnection;
-
-@interface BarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
-- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
-
 
 
 
 @class UITraitCollection;
+@class NSCoder;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 @interface CustomButton : UIButton
@@ -300,6 +277,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 
 
 
+@class NSString;
 @class NSInputStream;
 @class NSOutputStream;
 @class NSData;
@@ -319,6 +297,8 @@ SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @end
 
 
+@class UIViewController;
+@class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
 @interface FullScreenImageViewController : UINavigationController
@@ -437,7 +417,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MWLoadingStepViewController")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
+SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController") SWIFT_DEPRECATED_MSG("Use classes from PDF plugin instead")
 @interface MWPDFStepViewController : MWContentStepViewController
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
@@ -510,11 +490,25 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
 @end
 
+@protocol UIViewControllerTransitionCoordinator;
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
-@interface QRScannerViewController : BarcodeScannerViewController
+SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController") SWIFT_DEPRECATED
+@interface QRScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)viewWillLayoutSubviews;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface QRScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
@@ -599,6 +593,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 
@@ -896,34 +891,11 @@ using UInt = size_t;
 #endif
 
 #if defined(__OBJC__)
-@protocol UIViewControllerTransitionCoordinator;
-@class NSString;
-@class NSBundle;
-@class NSCoder;
-
-SWIFT_CLASS("_TtC18MobileWorkflowCore28BarcodeScannerViewController")
-@interface BarcodeScannerViewController : UIViewController
-- (void)viewDidLoad;
-- (void)viewWillAppear:(BOOL)animated;
-- (void)viewWillDisappear:(BOOL)animated;
-- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
-- (void)viewWillLayoutSubviews;
-- (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-@class AVCaptureMetadataOutput;
-@class AVMetadataObject;
-@class AVCaptureConnection;
-
-@interface BarcodeScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
-- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
-@end
-
 
 
 
 @class UITraitCollection;
+@class NSCoder;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 @interface CustomButton : UIButton
@@ -940,6 +912,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 
 
 
+@class NSString;
 @class NSInputStream;
 @class NSOutputStream;
 @class NSData;
@@ -959,6 +932,8 @@ SWIFT_PROTOCOL("_TtP18MobileWorkflowCore14StreamProvider_")
 @end
 
 
+@class UIViewController;
+@class NSBundle;
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore29FullScreenImageViewController")
 @interface FullScreenImageViewController : UINavigationController
@@ -1077,7 +1052,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore27MWLoadingStepViewController")
 @end
 
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController")
+SWIFT_CLASS("_TtC18MobileWorkflowCore23MWPDFStepViewController") SWIFT_DEPRECATED_MSG("Use classes from PDF plugin instead")
 @interface MWPDFStepViewController : MWContentStepViewController
 - (void)viewDidLoad;
 - (void)viewWillAppear:(BOOL)animated;
@@ -1150,11 +1125,25 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore22PanZoomImageScrollView")
 - (void)scrollViewDidScroll:(UIScrollView * _Nonnull)scrollView;
 @end
 
+@protocol UIViewControllerTransitionCoordinator;
 
-SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController")
-@interface QRScannerViewController : BarcodeScannerViewController
+SWIFT_CLASS("_TtC18MobileWorkflowCore23QRScannerViewController") SWIFT_DEPRECATED
+@interface QRScannerViewController : UIViewController
+- (void)viewDidLoad;
+- (void)viewWillAppear:(BOOL)animated;
+- (void)viewWillDisappear:(BOOL)animated;
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id <UIViewControllerTransitionCoordinator> _Nonnull)coordinator;
+- (void)viewWillLayoutSubviews;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class AVCaptureMetadataOutput;
+@class AVMetadataObject;
+@class AVCaptureConnection;
+
+@interface QRScannerViewController (SWIFT_EXTENSION(MobileWorkflowCore)) <AVCaptureMetadataOutputObjectsDelegate>
+- (void)captureOutput:(AVCaptureMetadataOutput * _Nonnull)output didOutputMetadataObjects:(NSArray<AVMetadataObject *> * _Nonnull)metadataObjects fromConnection:(AVCaptureConnection * _Nonnull)connection;
 @end
 
 
@@ -1239,6 +1228,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore14StepTitleLabel")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
+
 
 
 

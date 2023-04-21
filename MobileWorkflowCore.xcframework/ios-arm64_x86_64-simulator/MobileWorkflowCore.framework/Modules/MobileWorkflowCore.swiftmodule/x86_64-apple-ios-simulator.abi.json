@@ -4789,6 +4789,43 @@
             ],
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "buildEmptyServices",
+            "printedName": "buildEmptyServices(additionalServices:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "StepServices",
+                "printedName": "MobileWorkflowCore.StepServices",
+                "usr": "s:18MobileWorkflowCore12StepServicesC"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.AsyncTaskService]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AsyncTaskService",
+                    "printedName": "MobileWorkflowCore.AsyncTaskService",
+                    "usr": "s:18MobileWorkflowCore16AsyncTaskServiceP"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore12StepServicesC010buildEmptyE0010additionalE0ACSayAA16AsyncTaskService_pG_tFZ",
+            "mangledName": "$s18MobileWorkflowCore12StepServicesC010buildEmptyE0010additionalE0ACSayAA16AsyncTaskService_pG_tFZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "Final"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Class",
@@ -5123,6 +5160,137 @@
         ]
       },
       {
+        "kind": "TypeDecl",
+        "name": "PresentStepTask",
+        "printedName": "PresentStepTask",
+        "children": [
+          {
+            "kind": "Var",
+            "name": "input",
+            "printedName": "input",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore15PresentStepTaskV5inputSSvp",
+            "mangledName": "$s18MobileWorkflowCore15PresentStepTaskV5inputSSvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "HasStorage",
+              "AccessControl"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore15PresentStepTaskV5inputSSvg",
+                "mangledName": "$s18MobileWorkflowCore15PresentStepTaskV5inputSSvg",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(stepId:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "PresentStepTask",
+                "printedName": "MobileWorkflowCore.PresentStepTask",
+                "usr": "s:18MobileWorkflowCore15PresentStepTaskV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore15PresentStepTaskV6stepIdACSS_tcfc",
+            "mangledName": "$s18MobileWorkflowCore15PresentStepTaskV6stepIdACSS_tcfc",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "init_kind": "Designated"
+          }
+        ],
+        "declKind": "Struct",
+        "usr": "s:18MobileWorkflowCore15PresentStepTaskV",
+        "mangledName": "$s18MobileWorkflowCore15PresentStepTaskV",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "AsyncTask",
+            "printedName": "AsyncTask",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "Response",
+                "printedName": "Response",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  }
+                ]
+              },
+              {
+                "kind": "TypeWitness",
+                "name": "Input",
+                "printedName": "Input",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:18MobileWorkflowCore9AsyncTaskP",
+            "mangledName": "$s18MobileWorkflowCore9AsyncTaskP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
         "kind": "Import",
         "name": "CoreLocation",
         "printedName": "CoreLocation",
@@ -5236,6 +5404,261 @@
         "printedName": "UIKit",
         "declKind": "Import",
         "moduleName": "MobileWorkflowCore"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "MotionObserver",
+        "printedName": "MotionObserver",
+        "children": [
+          {
+            "kind": "TypeDecl",
+            "name": "MotionEvent",
+            "printedName": "MotionEvent",
+            "children": [
+              {
+                "kind": "Var",
+                "name": "shake",
+                "printedName": "shake",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(MobileWorkflowCore.MotionObserver.MotionEvent.Type) -> MobileWorkflowCore.MotionObserver.MotionEvent",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "MotionEvent",
+                        "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent",
+                        "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Metatype",
+                        "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent.Type",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "MotionEvent",
+                            "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent",
+                            "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "declKind": "EnumElement",
+                "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO5shakeyA2EmF",
+                "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO5shakeyA2EmF",
+                "moduleName": "MobileWorkflowCore"
+              },
+              {
+                "kind": "Function",
+                "name": "==",
+                "printedName": "==(_:_:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MotionEvent",
+                    "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent",
+                    "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "MotionEvent",
+                    "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent",
+                    "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO2eeoiySbAE_AEtFZ",
+                "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO2eeoiySbAE_AEtFZ",
+                "moduleName": "MobileWorkflowCore",
+                "static": true,
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              },
+              {
+                "kind": "Var",
+                "name": "hashValue",
+                "printedName": "hashValue",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Var",
+                "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO9hashValueSivp",
+                "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO9hashValueSivp",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "accessors": [
+                  {
+                    "kind": "Accessor",
+                    "name": "Get",
+                    "printedName": "Get()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Int",
+                        "printedName": "Swift.Int",
+                        "usr": "s:Si"
+                      }
+                    ],
+                    "declKind": "Accessor",
+                    "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO9hashValueSivg",
+                    "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO9hashValueSivg",
+                    "moduleName": "MobileWorkflowCore",
+                    "implicit": true,
+                    "accessorKind": "get"
+                  }
+                ]
+              },
+              {
+                "kind": "Function",
+                "name": "hash",
+                "printedName": "hash(into:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Hasher",
+                    "printedName": "Swift.Hasher",
+                    "paramValueOwnership": "InOut",
+                    "usr": "s:s6HasherV"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO4hash4intoys6HasherVz_tF",
+                "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO4hash4intoys6HasherVz_tF",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "funcSelfKind": "NonMutating"
+              }
+            ],
+            "declKind": "Enum",
+            "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO",
+            "mangledName": "$s18MobileWorkflowCore14MotionObserverC0D5EventO",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Equatable",
+                "printedName": "Equatable",
+                "usr": "s:SQ",
+                "mangledName": "$sSQ"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Hashable",
+                "printedName": "Hashable",
+                "usr": "s:SH",
+                "mangledName": "$sSH"
+              }
+            ]
+          },
+          {
+            "kind": "Function",
+            "name": "notificationName",
+            "printedName": "notificationName(for:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Name",
+                "printedName": "Foundation.NSNotification.Name",
+                "usr": "c:@T@NSNotificationName"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "MotionEvent",
+                "printedName": "MobileWorkflowCore.MotionObserver.MotionEvent",
+                "usr": "s:18MobileWorkflowCore14MotionObserverC0D5EventO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore14MotionObserverC16notificationName3forSo014NSNotificationG0aAC0D5EventO_tFZ",
+            "mangledName": "$s18MobileWorkflowCore14MotionObserverC16notificationName3forSo014NSNotificationG0aAC0D5EventO_tFZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "observeMotionEnd",
+            "printedName": "observeMotionEnd(motion:event:on:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "EventSubtype",
+                "printedName": "UIKit.UIEvent.EventSubtype",
+                "usr": "c:@E@UIEventSubtype"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIEvent?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIEvent",
+                    "printedName": "UIKit.UIEvent",
+                    "usr": "c:objc(cs)UIEvent"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIViewController",
+                "printedName": "UIKit.UIViewController",
+                "usr": "c:objc(cs)UIViewController"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore14MotionObserverC07observeD3End6motion5event2onySo14UIEventSubtypeV_So0K0CSgSo16UIViewControllerCtFZ",
+            "mangledName": "$s18MobileWorkflowCore14MotionObserverC07observeD3End6motion5event2onySo14UIEventSubtypeV_So0K0CSgSo16UIViewControllerCtFZ",
+            "moduleName": "MobileWorkflowCore",
+            "static": true,
+            "declAttributes": [
+              "Final",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "s:18MobileWorkflowCore14MotionObserverC",
+        "mangledName": "$s18MobileWorkflowCore14MotionObserverC",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
+        ],
+        "hasMissingDesignatedInitializers": true
       },
       {
         "kind": "Import",
@@ -8471,98 +8894,6 @@
           },
           {
             "kind": "Var",
-            "name": "canShakeToClearApp",
-            "printedName": "canShakeToClearApp",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvp",
-            "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvp",
-            "moduleName": "MobileWorkflowCore",
-            "isOpen": true,
-            "declAttributes": [
-              "Custom",
-              "HasInitialValue",
-              "HasStorage",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "hasStorage": true,
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvg",
-                "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvg",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "isOpen": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvs",
-                "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvs",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "isOpen": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvM",
-                "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC18canShakeToClearAppSbvM",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "isOpen": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
             "name": "hasCachedConfiguration",
             "printedName": "hasCachedConfiguration",
             "children": [
@@ -8745,6 +9076,34 @@
               "ObjC",
               "Custom",
               "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "showNoValidConfigurationScreen",
+            "printedName": "showNoValidConfigurationScreen(animated:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore15MWSceneDelegateC30showNoValidConfigurationScreen8animatedySb_tYaF",
+            "mangledName": "$s18MobileWorkflowCore15MWSceneDelegateC30showNoValidConfigurationScreen8animatedySb_tYaF",
+            "moduleName": "MobileWorkflowCore",
+            "isOpen": true,
+            "declAttributes": [
+              "AccessControl",
+              "Custom"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -10420,12 +10779,11 @@
             "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvp",
             "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvp",
             "moduleName": "MobileWorkflowCore",
-            "overriding": true,
             "isOpen": true,
             "declAttributes": [
               "Custom",
               "AccessControl",
-              "Override"
+              "RawDocComment"
             ],
             "accessors": [
               {
@@ -10444,7 +10802,6 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvg",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvg",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "isOpen": true,
                 "accessorKind": "get"
               },
@@ -10469,7 +10826,6 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvs",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvs",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "isOpen": true,
                 "accessorKind": "set"
               },
@@ -10488,7 +10844,6 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvM",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC16instructionsTextSSvM",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "implicit": true,
                 "isOpen": true,
                 "accessorKind": "_modify"
@@ -10519,12 +10874,11 @@
             "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvp",
             "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvp",
             "moduleName": "MobileWorkflowCore",
-            "overriding": true,
             "isOpen": true,
             "declAttributes": [
               "Custom",
               "AccessControl",
-              "Override"
+              "RawDocComment"
             ],
             "accessors": [
               {
@@ -10551,7 +10905,6 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvg",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvg",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "isOpen": true,
                 "accessorKind": "get"
               },
@@ -10584,7 +10937,6 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvs",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvs",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "isOpen": true,
                 "accessorKind": "set"
               },
@@ -10603,12 +10955,166 @@
                 "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvM",
                 "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvM",
                 "moduleName": "MobileWorkflowCore",
-                "overriding": true,
                 "implicit": true,
                 "isOpen": true,
                 "accessorKind": "_modify"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "viewDidLoad",
+            "printedName": "viewDidLoad()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController(im)viewDidLoad",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC11viewDidLoadyyF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "objc_name": "viewDidLoad",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewWillAppear",
+            "printedName": "viewWillAppear(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController(im)viewWillAppear:",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC14viewWillAppearyySbF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "objc_name": "viewWillAppear:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewWillDisappear",
+            "printedName": "viewWillDisappear(_:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController(im)viewWillDisappear:",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC17viewWillDisappearyySbF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "objc_name": "viewWillDisappear:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewWillTransition",
+            "printedName": "viewWillTransition(to:with:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGSize",
+                "printedName": "CoreFoundation.CGSize",
+                "usr": "c:@S@CGSize"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "UIViewControllerTransitionCoordinator",
+                "printedName": "UIKit.UIViewControllerTransitionCoordinator",
+                "usr": "c:objc(pl)UIViewControllerTransitionCoordinator"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController(im)viewWillTransitionToSize:withTransitionCoordinator:",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC18viewWillTransition2to4withySo6CGSizeV_So06UIViewfI11Coordinator_ptF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "objc_name": "viewWillTransitionToSize:withTransitionCoordinator:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "viewWillLayoutSubviews",
+            "printedName": "viewWillLayoutSubviews()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController(im)viewWillLayoutSubviews",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC22viewWillLayoutSubviewsyyF",
+            "moduleName": "MobileWorkflowCore",
+            "overriding": true,
+            "isOpen": true,
+            "objc_name": "viewWillLayoutSubviews",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "Override",
+              "AccessControl"
+            ],
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
@@ -10631,12 +11137,10 @@
             "usr": "s:18MobileWorkflowCore23QRScannerViewControllerC5found4codeySS_tF",
             "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC5found4codeySS_tF",
             "moduleName": "MobileWorkflowCore",
-            "overriding": true,
             "isOpen": true,
             "declAttributes": [
               "Custom",
-              "AccessControl",
-              "Override"
+              "AccessControl"
             ],
             "funcSelfKind": "NonMutating"
           },
@@ -10735,22 +11239,74 @@
               "Required"
             ],
             "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "metadataOutput",
+            "printedName": "metadataOutput(_:didOutput:from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AVCaptureMetadataOutput",
+                "printedName": "AVFoundation.AVCaptureMetadataOutput",
+                "usr": "c:objc(cs)AVCaptureMetadataOutput"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[AVFoundation.AVMetadataObject]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "AVMetadataObject",
+                    "printedName": "AVFoundation.AVMetadataObject",
+                    "usr": "c:objc(cs)AVMetadataObject"
+                  }
+                ],
+                "usr": "s:Sa"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "AVCaptureConnection",
+                "printedName": "AVFoundation.AVCaptureConnection",
+                "usr": "c:objc(cs)AVCaptureConnection"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "c:@CM@MobileWorkflowCore@objc(cs)QRScannerViewController(im)captureOutput:didOutputMetadataObjects:fromConnection:",
+            "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC14metadataOutput_03didH04fromySo017AVCaptureMetadataH0C_SaySo16AVMetadataObjectCGSo0K10ConnectionCtF",
+            "moduleName": "MobileWorkflowCore",
+            "objc_name": "captureOutput:didOutputMetadataObjects:fromConnection:",
+            "declAttributes": [
+              "Dynamic",
+              "ObjC",
+              "Custom",
+              "AccessControl"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Class",
         "usr": "c:@M@MobileWorkflowCore@objc(cs)QRScannerViewController",
         "mangledName": "$s18MobileWorkflowCore23QRScannerViewControllerC",
         "moduleName": "MobileWorkflowCore",
+        "deprecated": true,
         "isOpen": true,
         "declAttributes": [
           "Custom",
           "AccessControl",
+          "Available",
           "ObjC"
         ],
-        "superclassUsr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController",
+        "superclassUsr": "c:objc(cs)UIViewController",
         "inheritsConvenienceInitializers": true,
         "superclassNames": [
-          "MobileWorkflowCore.BarcodeScannerViewController",
           "UIKit.UIViewController",
           "UIKit.UIResponder",
           "ObjectiveC.NSObject"
@@ -16754,6 +17310,57 @@
             "moduleName": "MobileWorkflowCore",
             "implicit": true,
             "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "StepLinkType",
+                "printedName": "MobileWorkflowCore.StepLinkType",
+                "usr": "s:18MobileWorkflowCore12StepLinkTypeO"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore12StepLinkTypeO4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s18MobileWorkflowCore12StepLinkTypeO4fromACs7Decoder_p_tKcfc",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore12StepLinkTypeO6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s18MobileWorkflowCore12StepLinkTypeO6encode2toys7Encoder_p_tKF",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Enum",
@@ -16777,6 +17384,20 @@
             "printedName": "Hashable",
             "usr": "s:SH",
             "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
           }
         ]
       },
@@ -16852,6 +17473,57 @@
                 "usr": "s:18MobileWorkflowCore8StepLinkV4RuleO13propertyMatchyAESS_SStcAEmF",
                 "mangledName": "$s18MobileWorkflowCore8StepLinkV4RuleO13propertyMatchyAESS_SStcAEmF",
                 "moduleName": "MobileWorkflowCore"
+              },
+              {
+                "kind": "Constructor",
+                "name": "init",
+                "printedName": "init(from:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Rule",
+                    "printedName": "MobileWorkflowCore.StepLink.Rule",
+                    "usr": "s:18MobileWorkflowCore8StepLinkV4RuleO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Decoder",
+                    "printedName": "Swift.Decoder",
+                    "usr": "s:s7DecoderP"
+                  }
+                ],
+                "declKind": "Constructor",
+                "usr": "s:18MobileWorkflowCore8StepLinkV4RuleO4fromAEs7Decoder_p_tKcfc",
+                "mangledName": "$s18MobileWorkflowCore8StepLinkV4RuleO4fromAEs7Decoder_p_tKcfc",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "throwing": true,
+                "init_kind": "Designated"
+              },
+              {
+                "kind": "Function",
+                "name": "encode",
+                "printedName": "encode(to:)",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Encoder",
+                    "printedName": "Swift.Encoder",
+                    "usr": "s:s7EncoderP"
+                  }
+                ],
+                "declKind": "Func",
+                "usr": "s:18MobileWorkflowCore8StepLinkV4RuleO6encode2toys7Encoder_p_tKF",
+                "mangledName": "$s18MobileWorkflowCore8StepLinkV4RuleO6encode2toys7Encoder_p_tKF",
+                "moduleName": "MobileWorkflowCore",
+                "implicit": true,
+                "throwing": true,
+                "funcSelfKind": "NonMutating"
               }
             ],
             "declKind": "Enum",
@@ -16860,6 +17532,22 @@
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Decodable",
+                "printedName": "Decodable",
+                "usr": "s:Se",
+                "mangledName": "$sSe"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Encodable",
+                "printedName": "Encodable",
+                "usr": "s:SE",
+                "mangledName": "$sSE"
+              }
             ]
           },
           {
@@ -17097,6 +17785,57 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Constructor",
+            "name": "init",
+            "printedName": "init(from:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "StepLink",
+                "printedName": "MobileWorkflowCore.StepLink",
+                "usr": "s:18MobileWorkflowCore8StepLinkV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Decoder",
+                "printedName": "Swift.Decoder",
+                "usr": "s:s7DecoderP"
+              }
+            ],
+            "declKind": "Constructor",
+            "usr": "s:18MobileWorkflowCore8StepLinkV4fromACs7Decoder_p_tKcfc",
+            "mangledName": "$s18MobileWorkflowCore8StepLinkV4fromACs7Decoder_p_tKcfc",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "throwing": true,
+            "init_kind": "Designated"
+          },
+          {
+            "kind": "Function",
+            "name": "encode",
+            "printedName": "encode(to:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Encoder",
+                "printedName": "Swift.Encoder",
+                "usr": "s:s7EncoderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore8StepLinkV6encode2toys7Encoder_p_tKF",
+            "mangledName": "$s18MobileWorkflowCore8StepLinkV6encode2toys7Encoder_p_tKF",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "throwing": true,
+            "funcSelfKind": "NonMutating"
           }
         ],
         "declKind": "Struct",
@@ -17128,6 +17867,20 @@
             ],
             "usr": "s:s12IdentifiableP",
             "mangledName": "$ss12IdentifiableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Decodable",
+            "printedName": "Decodable",
+            "usr": "s:Se",
+            "mangledName": "$sSe"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Encodable",
+            "printedName": "Encodable",
+            "usr": "s:SE",
+            "mangledName": "$sSE"
           }
         ]
       },
@@ -17504,6 +18257,133 @@
         "moduleName": "MobileWorkflowCore",
         "declAttributes": [
           "RawDocComment"
+        ]
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "StepPresentation",
+        "printedName": "StepPresentation",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "presentModal",
+            "printedName": "presentModal(stepId:session:presentationContext:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PresentationContext",
+                "printedName": "MobileWorkflowCore.PresentationContext",
+                "usr": "s:18MobileWorkflowCore19PresentationContextV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore16StepPresentationP12presentModal6stepId7session19presentationContextySS_AA15ContentProvider_pAA0eL0VtYaF",
+            "mangledName": "$s18MobileWorkflowCore16StepPresentationP12presentModal6stepId7session19presentationContextySS_AA15ContentProvider_pAA0eL0VtYaF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.StepPresentation>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.StepPresentation>",
+            "protocolReq": true,
+            "declAttributes": [
+              "Custom"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "presentModal",
+            "printedName": "presentModal(stepId:session:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore16StepPresentationP12presentModal6stepId7sessionySS_AA15ContentProvider_ptYaF",
+            "mangledName": "$s18MobileWorkflowCore16StepPresentationP12presentModal6stepId7sessionySS_AA15ContentProvider_ptYaF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.StepPresentation>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.StepPresentation>",
+            "protocolReq": true,
+            "declAttributes": [
+              "Custom"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "presentModal",
+            "printedName": "presentModal(stepId:session:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore16StepPresentationPAAE12presentModal6stepId7sessionySS_AA15ContentProvider_ptYaF",
+            "mangledName": "$s18MobileWorkflowCore16StepPresentationPAAE12presentModal6stepId7sessionySS_AA15ContentProvider_ptYaF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.StepPresentation>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.StepPresentation>",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Protocol",
+        "usr": "s:18MobileWorkflowCore16StepPresentationP",
+        "mangledName": "$s18MobileWorkflowCore16StepPresentationP",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "AccessControl"
         ]
       },
       {
@@ -18861,6 +19741,47 @@
             "funcSelfKind": "NonMutating"
           },
           {
+            "kind": "Function",
+            "name": "presentModal",
+            "printedName": "presentModal(stepId:session:presentationContext:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "ContentProvider",
+                "printedName": "MobileWorkflowCore.ContentProvider",
+                "usr": "s:18MobileWorkflowCore15ContentProviderP"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "PresentationContext",
+                "printedName": "MobileWorkflowCore.PresentationContext",
+                "hasDefaultArg": true,
+                "usr": "s:18MobileWorkflowCore19PresentationContextV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore28StepNavigationViewControllerC12presentModal6stepId7session19presentationContextySS_AA15ContentProvider_pAA012PresentationN0VtYaF",
+            "mangledName": "$s18MobileWorkflowCore28StepNavigationViewControllerC12presentModal6stepId7session19presentationContextySS_AA15ContentProvider_pAA012PresentationN0VtYaF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl",
+              "Custom",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(navigationBarClass:toolbarClass:)",
@@ -19442,17 +20363,10 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "StepViewControllerDelegate",
-            "printedName": "StepViewControllerDelegate",
-            "usr": "s:18MobileWorkflowCore26StepViewControllerDelegateP",
-            "mangledName": "$s18MobileWorkflowCore26StepViewControllerDelegateP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "PresentationDelegate",
-            "printedName": "PresentationDelegate",
-            "usr": "s:18MobileWorkflowCore20PresentationDelegateP",
-            "mangledName": "$s18MobileWorkflowCore20PresentationDelegateP"
+            "name": "StepPresentation",
+            "printedName": "StepPresentation",
+            "usr": "s:18MobileWorkflowCore16StepPresentationP",
+            "mangledName": "$s18MobileWorkflowCore16StepPresentationP"
           },
           {
             "kind": "Conformance",
@@ -19509,6 +20423,20 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "StepViewControllerDelegate",
+            "printedName": "StepViewControllerDelegate",
+            "usr": "s:18MobileWorkflowCore26StepViewControllerDelegateP",
+            "mangledName": "$s18MobileWorkflowCore26StepViewControllerDelegateP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "PresentationDelegate",
+            "printedName": "PresentationDelegate",
+            "usr": "s:18MobileWorkflowCore20PresentationDelegateP",
+            "mangledName": "$s18MobileWorkflowCore20PresentationDelegateP"
           }
         ]
       },
@@ -34378,6 +35306,50 @@
           },
           {
             "kind": "Function",
+            "name": "nextLink",
+            "printedName": "nextLink(on:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.StepLink?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StepLink",
+                    "printedName": "MobileWorkflowCore.StepLink",
+                    "usr": "s:18MobileWorkflowCore8StepLinkV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Array",
+                "printedName": "[MobileWorkflowCore.StepLink]",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StepLink",
+                    "printedName": "MobileWorkflowCore.StepLink",
+                    "usr": "s:18MobileWorkflowCore8StepLinkV"
+                  }
+                ],
+                "usr": "s:Sa"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore7SessionC8nextLink2onAA04StepF0VSgSayAGG_tF",
+            "mangledName": "$s18MobileWorkflowCore7SessionC8nextLink2onAA04StepF0VSgSayAGG_tF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "buildEmptySession",
             "printedName": "buildEmptySession()",
             "children": [
@@ -46602,6 +47574,51 @@
         "moduleName": "MobileWorkflowCore"
       },
       {
+        "kind": "Var",
+        "name": "kUserActivityNotificationName",
+        "printedName": "kUserActivityNotificationName",
+        "children": [
+          {
+            "kind": "TypeNominal",
+            "name": "Name",
+            "printedName": "Foundation.NSNotification.Name",
+            "usr": "c:@T@NSNotificationName"
+          }
+        ],
+        "declKind": "Var",
+        "usr": "s:18MobileWorkflowCore29kUserActivityNotificationNameSo014NSNotificationG0avp",
+        "mangledName": "$s18MobileWorkflowCore29kUserActivityNotificationNameSo014NSNotificationG0avp",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "HasInitialValue",
+          "HasStorage",
+          "AccessControl"
+        ],
+        "isLet": true,
+        "hasStorage": true,
+        "accessors": [
+          {
+            "kind": "Accessor",
+            "name": "Get",
+            "printedName": "Get()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Name",
+                "printedName": "Foundation.NSNotification.Name",
+                "usr": "c:@T@NSNotificationName"
+              }
+            ],
+            "declKind": "Accessor",
+            "usr": "s:18MobileWorkflowCore29kUserActivityNotificationNameSo014NSNotificationG0avg",
+            "mangledName": "$s18MobileWorkflowCore29kUserActivityNotificationNameSo014NSNotificationG0avg",
+            "moduleName": "MobileWorkflowCore",
+            "implicit": true,
+            "accessorKind": "get"
+          }
+        ]
+      },
+      {
         "kind": "TypeDecl",
         "name": "Event",
         "printedName": "Event",
@@ -46735,6 +47752,43 @@
             "declKind": "EnumElement",
             "usr": "s:18MobileWorkflowCore5EventO19applicationOpensURLyA2CmF",
             "mangledName": "$s18MobileWorkflowCore5EventO19applicationOpensURLyA2CmF",
+            "moduleName": "MobileWorkflowCore"
+          },
+          {
+            "kind": "Var",
+            "name": "userActivityTriggered",
+            "printedName": "userActivityTriggered",
+            "children": [
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(MobileWorkflowCore.Event.Type) -> MobileWorkflowCore.Event",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Event",
+                    "printedName": "MobileWorkflowCore.Event",
+                    "usr": "s:18MobileWorkflowCore5EventO"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Metatype",
+                    "printedName": "MobileWorkflowCore.Event.Type",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Event",
+                        "printedName": "MobileWorkflowCore.Event",
+                        "usr": "s:18MobileWorkflowCore5EventO"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "declKind": "EnumElement",
+            "usr": "s:18MobileWorkflowCore5EventO21userActivityTriggeredyA2CmF",
+            "mangledName": "$s18MobileWorkflowCore5EventO21userActivityTriggeredyA2CmF",
             "moduleName": "MobileWorkflowCore"
           }
         ],
@@ -49915,10 +50969,12 @@
         "usr": "c:@M@MobileWorkflowCore@objc(cs)MWPDFStepViewController",
         "mangledName": "$s18MobileWorkflowCore23MWPDFStepViewControllerC",
         "moduleName": "MobileWorkflowCore",
+        "deprecated": true,
         "isOpen": true,
         "declAttributes": [
           "Custom",
           "AccessControl",
+          "Available",
           "ObjC"
         ],
         "superclassUsr": "c:@M@MobileWorkflowCore@objc(cs)MWContentStepViewController",
@@ -62622,6 +63678,16 @@
       },
       {
         "kind": "Import",
+        "name": "UIKit",
+        "printedName": "UIKit",
+        "declKind": "Import",
+        "moduleName": "MobileWorkflowCore",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "Foundation",
         "printedName": "Foundation",
         "declKind": "Import",
@@ -63759,633 +64825,6 @@
             ],
             "usr": "s:18MobileWorkflowCore9AsyncTaskP",
             "mangledName": "$s18MobileWorkflowCore9AsyncTaskP"
-          }
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "UIKit",
-        "printedName": "UIKit",
-        "declKind": "Import",
-        "moduleName": "MobileWorkflowCore",
-        "declAttributes": [
-          "RawDocComment"
-        ]
-      },
-      {
-        "kind": "Import",
-        "name": "AVFoundation",
-        "printedName": "AVFoundation",
-        "declKind": "Import",
-        "moduleName": "MobileWorkflowCore"
-      },
-      {
-        "kind": "TypeDecl",
-        "name": "BarcodeScannerViewController",
-        "printedName": "BarcodeScannerViewController",
-        "children": [
-          {
-            "kind": "Var",
-            "name": "instructionsText",
-            "printedName": "instructionsText",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvp",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvp",
-            "moduleName": "MobileWorkflowCore",
-            "isOpen": true,
-            "declAttributes": [
-              "Custom",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvg",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvg",
-                "moduleName": "MobileWorkflowCore",
-                "isOpen": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvs",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvs",
-                "moduleName": "MobileWorkflowCore",
-                "isOpen": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvM",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC16instructionsTextSSvM",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "isOpen": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Var",
-            "name": "supportedBarcodes",
-            "printedName": "supportedBarcodes",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Array",
-                "printedName": "[AVFoundation.AVMetadataObject.ObjectType]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ObjectType",
-                    "printedName": "AVFoundation.AVMetadataObject.ObjectType",
-                    "usr": "c:@T@AVMetadataObjectType"
-                  }
-                ],
-                "usr": "s:Sa"
-              }
-            ],
-            "declKind": "Var",
-            "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvp",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvp",
-            "moduleName": "MobileWorkflowCore",
-            "isOpen": true,
-            "declAttributes": [
-              "Custom",
-              "AccessControl",
-              "RawDocComment"
-            ],
-            "accessors": [
-              {
-                "kind": "Accessor",
-                "name": "Get",
-                "printedName": "Get()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Array",
-                    "printedName": "[AVFoundation.AVMetadataObject.ObjectType]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ObjectType",
-                        "printedName": "AVFoundation.AVMetadataObject.ObjectType",
-                        "usr": "c:@T@AVMetadataObjectType"
-                      }
-                    ],
-                    "usr": "s:Sa"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvg",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvg",
-                "moduleName": "MobileWorkflowCore",
-                "isOpen": true,
-                "accessorKind": "get"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Set",
-                "printedName": "Set()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  },
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Array",
-                    "printedName": "[AVFoundation.AVMetadataObject.ObjectType]",
-                    "children": [
-                      {
-                        "kind": "TypeNominal",
-                        "name": "ObjectType",
-                        "printedName": "AVFoundation.AVMetadataObject.ObjectType",
-                        "usr": "c:@T@AVMetadataObjectType"
-                      }
-                    ],
-                    "usr": "s:Sa"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvs",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvs",
-                "moduleName": "MobileWorkflowCore",
-                "isOpen": true,
-                "accessorKind": "set"
-              },
-              {
-                "kind": "Accessor",
-                "name": "Modify",
-                "printedName": "Modify()",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Void",
-                    "printedName": "()"
-                  }
-                ],
-                "declKind": "Accessor",
-                "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvM",
-                "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC17supportedBarcodesSaySo20AVMetadataObjectTypeaGvM",
-                "moduleName": "MobileWorkflowCore",
-                "implicit": true,
-                "isOpen": true,
-                "accessorKind": "_modify"
-              }
-            ]
-          },
-          {
-            "kind": "Function",
-            "name": "viewDidLoad",
-            "printedName": "viewDidLoad()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)viewDidLoad",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC11viewDidLoadyyF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "objc_name": "viewDidLoad",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "viewWillAppear",
-            "printedName": "viewWillAppear(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)viewWillAppear:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC14viewWillAppearyySbF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "objc_name": "viewWillAppear:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "viewWillDisappear",
-            "printedName": "viewWillDisappear(_:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "usr": "s:Sb"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)viewWillDisappear:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC17viewWillDisappearyySbF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "objc_name": "viewWillDisappear:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "viewWillTransition",
-            "printedName": "viewWillTransition(to:with:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "CGSize",
-                "printedName": "CoreFoundation.CGSize",
-                "usr": "c:@S@CGSize"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "UIViewControllerTransitionCoordinator",
-                "printedName": "UIKit.UIViewControllerTransitionCoordinator",
-                "usr": "c:objc(pl)UIViewControllerTransitionCoordinator"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)viewWillTransitionToSize:withTransitionCoordinator:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC18viewWillTransition2to4withySo6CGSizeV_So06UIViewgJ11Coordinator_ptF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "objc_name": "viewWillTransitionToSize:withTransitionCoordinator:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "viewWillLayoutSubviews",
-            "printedName": "viewWillLayoutSubviews()",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)viewWillLayoutSubviews",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC22viewWillLayoutSubviewsyyF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "isOpen": true,
-            "objc_name": "viewWillLayoutSubviews",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "found",
-            "printedName": "found(code:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore28BarcodeScannerViewControllerC5found4codeySS_tF",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC5found4codeySS_tF",
-            "moduleName": "MobileWorkflowCore",
-            "isOpen": true,
-            "declAttributes": [
-              "Custom",
-              "AccessControl"
-            ],
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(nibName:bundle:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "BarcodeScannerViewController",
-                "printedName": "MobileWorkflowCore.BarcodeScannerViewController",
-                "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.String?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "String",
-                    "printedName": "Swift.String",
-                    "usr": "s:SS"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Foundation.Bundle?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bundle",
-                    "printedName": "Foundation.Bundle",
-                    "usr": "c:objc(cs)NSBundle"
-                  }
-                ],
-                "usr": "s:Sq"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)initWithNibName:bundle:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC7nibName6bundleACSSSg_So8NSBundleCSgtcfc",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "initWithNibName:bundle:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Override"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(coder:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "MobileWorkflowCore.BarcodeScannerViewController?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "BarcodeScannerViewController",
-                    "printedName": "MobileWorkflowCore.BarcodeScannerViewController",
-                    "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController"
-                  }
-                ],
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "NSCoder",
-                "printedName": "Foundation.NSCoder",
-                "usr": "c:objc(cs)NSCoder"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)initWithCoder:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC5coderACSgSo7NSCoderC_tcfc",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "implicit": true,
-            "objc_name": "initWithCoder:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "Required"
-            ],
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "metadataOutput",
-            "printedName": "metadataOutput(_:didOutput:from:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "AVCaptureMetadataOutput",
-                "printedName": "AVFoundation.AVCaptureMetadataOutput",
-                "usr": "c:objc(cs)AVCaptureMetadataOutput"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Array",
-                "printedName": "[AVFoundation.AVMetadataObject]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "AVMetadataObject",
-                    "printedName": "AVFoundation.AVMetadataObject",
-                    "usr": "c:objc(cs)AVMetadataObject"
-                  }
-                ],
-                "usr": "s:Sa"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "AVCaptureConnection",
-                "printedName": "AVFoundation.AVCaptureConnection",
-                "usr": "c:objc(cs)AVCaptureConnection"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "c:@CM@MobileWorkflowCore@objc(cs)BarcodeScannerViewController(im)captureOutput:didOutputMetadataObjects:fromConnection:",
-            "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC14metadataOutput_03didI04fromySo017AVCaptureMetadataI0C_SaySo16AVMetadataObjectCGSo0L10ConnectionCtF",
-            "moduleName": "MobileWorkflowCore",
-            "objc_name": "captureOutput:didOutputMetadataObjects:fromConnection:",
-            "declAttributes": [
-              "Dynamic",
-              "ObjC",
-              "Custom",
-              "AccessControl"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "c:@M@MobileWorkflowCore@objc(cs)BarcodeScannerViewController",
-        "mangledName": "$s18MobileWorkflowCore28BarcodeScannerViewControllerC",
-        "moduleName": "MobileWorkflowCore",
-        "isOpen": true,
-        "declAttributes": [
-          "Custom",
-          "AccessControl",
-          "ObjC"
-        ],
-        "superclassUsr": "c:objc(cs)UIViewController",
-        "inheritsConvenienceInitializers": true,
-        "superclassNames": [
-          "UIKit.UIViewController",
-          "UIKit.UIResponder",
-          "ObjectiveC.NSObject"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Equatable",
-            "printedName": "Equatable",
-            "usr": "s:SQ",
-            "mangledName": "$sSQ"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Hashable",
-            "printedName": "Hashable",
-            "usr": "s:SH",
-            "mangledName": "$sSH"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CVarArg",
-            "printedName": "CVarArg",
-            "usr": "s:s7CVarArgP",
-            "mangledName": "$ss7CVarArgP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObservingPublishing",
-            "printedName": "_KeyValueCodingAndObservingPublishing",
-            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
-            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "_KeyValueCodingAndObserving",
-            "printedName": "_KeyValueCodingAndObserving",
-            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
-            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomStringConvertible",
-            "printedName": "CustomStringConvertible",
-            "usr": "s:s23CustomStringConvertibleP",
-            "mangledName": "$ss23CustomStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "CustomDebugStringConvertible",
-            "printedName": "CustomDebugStringConvertible",
-            "usr": "s:s28CustomDebugStringConvertibleP",
-            "mangledName": "$ss28CustomDebugStringConvertibleP"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Sendable",
-            "printedName": "Sendable",
-            "usr": "s:s8SendableP",
-            "mangledName": "$ss8SendableP"
           }
         ]
       },
@@ -72412,7 +72851,7 @@
           {
             "kind": "Constructor",
             "name": "init",
-            "printedName": "init(licensePath:manager:preferredConfigurations:canShakeToClearApp:userDefaults:)",
+            "printedName": "init(licensePath:manager:preferredConfigurations:userDefaults:showNoConfiguration:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -72457,22 +72896,34 @@
               },
               {
                 "kind": "TypeNominal",
-                "name": "Bool",
-                "printedName": "Swift.Bool",
-                "hasDefaultArg": true,
-                "usr": "s:Sb"
-              },
-              {
-                "kind": "TypeNominal",
                 "name": "UserDefaults",
                 "printedName": "Foundation.UserDefaults",
                 "hasDefaultArg": true,
                 "usr": "c:objc(cs)NSUserDefaults"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(Swift.Bool) async -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Bool",
+                    "printedName": "Swift.Bool",
+                    "usr": "s:Sb"
+                  }
+                ],
+                "hasDefaultArg": true
               }
             ],
             "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore15RootCoordinatorC11licensePath7manager23preferredConfigurations18canShakeToClearApp12userDefaultsACSSSg_AA0O20ConfigurationManagerCSayAA0oR7ContextOGSbSo06NSUserQ0Ctcfc",
-            "mangledName": "$s18MobileWorkflowCore15RootCoordinatorC11licensePath7manager23preferredConfigurations18canShakeToClearApp12userDefaultsACSSSg_AA0O20ConfigurationManagerCSayAA0oR7ContextOGSbSo06NSUserQ0Ctcfc",
+            "usr": "s:18MobileWorkflowCore15RootCoordinatorC11licensePath7manager23preferredConfigurations12userDefaults19showNoConfigurationACSSSg_AA03AppO7ManagerCSayAA0pO7ContextOGSo06NSUserL0CySbYactcfc",
+            "mangledName": "$s18MobileWorkflowCore15RootCoordinatorC11licensePath7manager23preferredConfigurations12userDefaults19showNoConfigurationACSSSg_AA03AppO7ManagerCSayAA0pO7ContextOGSo06NSUserL0CySbYactcfc",
             "moduleName": "MobileWorkflowCore",
             "declAttributes": [
               "AccessControl"
@@ -75819,107 +76270,6 @@
             "declKind": "Func",
             "usr": "s:18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4next5linksAA0cghE0CSS_S2SSgAA08PushLinkE0CSgSayAA0oE0CGtFZ",
             "mangledName": "$s18MobileWorkflowCore12StepMetadataC19coreSimulateNetwork2id5title4text4next5linksAA0cghE0CSS_S2SSgAA08PushLinkE0CSgSayAA0oE0CGtFZ",
-            "moduleName": "MobileWorkflowCore",
-            "static": true,
-            "declAttributes": [
-              "Final"
-            ],
-            "isFromExtension": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Function",
-            "name": "pdfUtilitiesPDFViewer",
-            "printedName": "pdfUtilitiesPDFViewer(id:title:pdfURL:saveOnDevice:sharingEnabled:next:links:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "PDFUtilitiesPDFViewerMetadata",
-                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
-                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.Bool?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "Swift.Bool?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "Bool",
-                    "printedName": "Swift.Bool",
-                    "usr": "s:Sb"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "PushLinkMetadata",
-                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
-                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Array",
-                "printedName": "[MobileWorkflowCore.LinkMetadata]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "LinkMetadata",
-                    "printedName": "MobileWorkflowCore.LinkMetadata",
-                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sa"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore12StepMetadataC21pdfUtilitiesPDFViewer2id5title0F3URL12saveOnDevice14sharingEnabled4next5linksAA012PDFUtilitieshE0CSS_S2SSbSgAnA08PushLinkE0CSgSayAA0uE0CGtFZ",
-            "mangledName": "$s18MobileWorkflowCore12StepMetadataC21pdfUtilitiesPDFViewer2id5title0F3URL12saveOnDevice14sharingEnabled4next5linksAA012PDFUtilitieshE0CSS_S2SSbSgAnA08PushLinkE0CSgSayAA0uE0CGtFZ",
             "moduleName": "MobileWorkflowCore",
             "static": true,
             "declAttributes": [
@@ -82609,171 +82959,6 @@
       },
       {
         "kind": "TypeDecl",
-        "name": "PDFUtilitiesPDFViewerMetadata",
-        "printedName": "PDFUtilitiesPDFViewerMetadata",
-        "children": [
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(from:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "PDFUtilitiesPDFViewerMetadata",
-                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
-                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Decoder",
-                "printedName": "Swift.Decoder",
-                "usr": "s:s7DecoderP"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC4fromACs7Decoder_p_tKcfc",
-            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC4fromACs7Decoder_p_tKcfc",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "declAttributes": [
-              "Required",
-              "AccessControl"
-            ],
-            "throwing": true,
-            "init_kind": "Designated"
-          },
-          {
-            "kind": "Function",
-            "name": "encode",
-            "printedName": "encode(to:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "Void",
-                "printedName": "()"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Encoder",
-                "printedName": "Swift.Encoder",
-                "usr": "s:s7EncoderP"
-              }
-            ],
-            "declKind": "Func",
-            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC6encode2toys7Encoder_p_tKF",
-            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC6encode2toys7Encoder_p_tKF",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "declAttributes": [
-              "Override",
-              "AccessControl"
-            ],
-            "throwing": true,
-            "funcSelfKind": "NonMutating"
-          },
-          {
-            "kind": "Constructor",
-            "name": "init",
-            "printedName": "init(id:type:title:next:links:)",
-            "children": [
-              {
-                "kind": "TypeNominal",
-                "name": "PDFUtilitiesPDFViewerMetadata",
-                "printedName": "MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata",
-                "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "String",
-                "printedName": "Swift.String",
-                "usr": "s:SS"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Optional",
-                "printedName": "MobileWorkflowCore.PushLinkMetadata?",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "PushLinkMetadata",
-                    "printedName": "MobileWorkflowCore.PushLinkMetadata",
-                    "usr": "s:18MobileWorkflowCore16PushLinkMetadataC"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sq"
-              },
-              {
-                "kind": "TypeNominal",
-                "name": "Array",
-                "printedName": "[MobileWorkflowCore.LinkMetadata]",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "LinkMetadata",
-                    "printedName": "MobileWorkflowCore.LinkMetadata",
-                    "usr": "s:18MobileWorkflowCore12LinkMetadataC"
-                  }
-                ],
-                "hasDefaultArg": true,
-                "usr": "s:Sa"
-              }
-            ],
-            "declKind": "Constructor",
-            "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkF0CSgSayAA0mF0CGtcfc",
-            "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC2id4type5title4next5linksACSS_S2SAA08PushLinkF0CSgSayAA0mF0CGtcfc",
-            "moduleName": "MobileWorkflowCore",
-            "overriding": true,
-            "implicit": true,
-            "declAttributes": [
-              "Override"
-            ],
-            "init_kind": "Designated"
-          }
-        ],
-        "declKind": "Class",
-        "usr": "s:18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC",
-        "mangledName": "$s18MobileWorkflowCore29PDFUtilitiesPDFViewerMetadataC",
-        "moduleName": "MobileWorkflowCore",
-        "declAttributes": [
-          "AccessControl"
-        ],
-        "superclassUsr": "s:18MobileWorkflowCore12StepMetadataC",
-        "hasMissingDesignatedInitializers": true,
-        "superclassNames": [
-          "MobileWorkflowCore.StepMetadata"
-        ],
-        "conformances": [
-          {
-            "kind": "Conformance",
-            "name": "Decodable",
-            "printedName": "Decodable",
-            "usr": "s:Se",
-            "mangledName": "$sSe"
-          },
-          {
-            "kind": "Conformance",
-            "name": "Encodable",
-            "printedName": "Encodable",
-            "usr": "s:SE",
-            "mangledName": "$sSE"
-          }
-        ]
-      },
-      {
-        "kind": "TypeDecl",
         "name": "Collection",
         "printedName": "Collection",
         "children": [
@@ -82805,6 +82990,38 @@
             "sugared_genericSig": "<Self where Self : Swift.Collection, Self.Element == [Swift.String : Any]>",
             "isFromExtension": true,
             "throwing": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "firstSimplePush",
+            "printedName": "firstSimplePush()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "MobileWorkflowCore.StepLink?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "StepLink",
+                    "printedName": "MobileWorkflowCore.StepLink",
+                    "usr": "s:18MobileWorkflowCore8StepLinkV"
+                  }
+                ],
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:Sl18MobileWorkflowCoreAA8StepLinkV7ElementRtzrlE15firstSimplePushACSgyF",
+            "mangledName": "$sSl18MobileWorkflowCoreAA8StepLinkV7ElementRtzrlE15firstSimplePushACSgyF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : Swift.Collection, τ_0_0.Element == MobileWorkflowCore.StepLink>",
+            "sugared_genericSig": "<Self where Self : Swift.Collection, Self.Element == MobileWorkflowCore.StepLink>",
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "isFromExtension": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -89012,6 +89229,212 @@
       },
       {
         "kind": "TypeDecl",
+        "name": "UIWindow",
+        "printedName": "UIWindow",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "showRootViewController",
+            "printedName": "showRootViewController(_:animated:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIViewController?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIViewController",
+                    "printedName": "UIKit.UIViewController",
+                    "usr": "c:objc(cs)UIViewController"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So8UIWindowC18MobileWorkflowCoreE22showRootViewController_8animatedSbSo06UIViewH0CSg_SbtYaF",
+            "mangledName": "$sSo8UIWindowC18MobileWorkflowCoreE22showRootViewController_8animatedSbSo06UIViewH0CSg_SbtYaF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "DiscardableResult",
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "showRootViewController",
+            "printedName": "showRootViewController(_:animated:completion:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "UIKit.UIViewController?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "UIViewController",
+                    "printedName": "UIKit.UIViewController",
+                    "usr": "c:objc(cs)UIViewController"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Bool",
+                "printedName": "Swift.Bool",
+                "hasDefaultArg": true,
+                "usr": "s:Sb"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((Swift.Bool) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(Swift.Bool) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Bool",
+                        "printedName": "Swift.Bool",
+                        "usr": "s:Sb"
+                      }
+                    ]
+                  }
+                ],
+                "hasDefaultArg": true,
+                "usr": "s:Sq"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:So8UIWindowC18MobileWorkflowCoreE22showRootViewController_8animated10completionySo06UIViewH0CSg_SbySbcSgtF",
+            "mangledName": "$sSo8UIWindowC18MobileWorkflowCoreE22showRootViewController_8animated10completionySo06UIViewH0CSg_SbySbcSgtF",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Class",
+        "usr": "c:objc(cs)UIWindow",
+        "moduleName": "UIKit",
+        "isOpen": true,
+        "intro_iOS": "2.0",
+        "objc_name": "UIWindow",
+        "declAttributes": [
+          "Available",
+          "ObjC",
+          "NonSendable",
+          "Custom",
+          "Dynamic"
+        ],
+        "superclassUsr": "c:objc(cs)UIView",
+        "isExternal": true,
+        "inheritsConvenienceInitializers": true,
+        "superclassNames": [
+          "UIKit.UIView",
+          "UIKit.UIResponder",
+          "ObjectiveC.NSObject"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Equatable",
+            "printedName": "Equatable",
+            "usr": "s:SQ",
+            "mangledName": "$sSQ"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Hashable",
+            "printedName": "Hashable",
+            "usr": "s:SH",
+            "mangledName": "$sSH"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CVarArg",
+            "printedName": "CVarArg",
+            "usr": "s:s7CVarArgP",
+            "mangledName": "$ss7CVarArgP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObservingPublishing",
+            "printedName": "_KeyValueCodingAndObservingPublishing",
+            "usr": "s:10Foundation37_KeyValueCodingAndObservingPublishingP",
+            "mangledName": "$s10Foundation37_KeyValueCodingAndObservingPublishingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_KeyValueCodingAndObserving",
+            "printedName": "_KeyValueCodingAndObserving",
+            "usr": "s:10Foundation27_KeyValueCodingAndObservingP",
+            "mangledName": "$s10Foundation27_KeyValueCodingAndObservingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomStringConvertible",
+            "printedName": "CustomStringConvertible",
+            "usr": "s:s23CustomStringConvertibleP",
+            "mangledName": "$ss23CustomStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "CustomDebugStringConvertible",
+            "printedName": "CustomDebugStringConvertible",
+            "usr": "s:s28CustomDebugStringConvertibleP",
+            "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "__DefaultCustomPlaygroundQuickLookable",
+            "printedName": "__DefaultCustomPlaygroundQuickLookable",
+            "usr": "s:s38__DefaultCustomPlaygroundQuickLookableP",
+            "mangledName": "$ss38__DefaultCustomPlaygroundQuickLookableP"
+          }
+        ]
+      },
+      {
+        "kind": "TypeDecl",
         "name": "Error",
         "printedName": "Error",
         "children": [
@@ -94769,7 +95192,14 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Extension\/UIWindow+Workflow.swift",
       "kind": "BooleanLiteral",
-      "offset": 235,
+      "offset": 271,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Extension\/UIWindow+Workflow.swift",
+      "kind": "BooleanLiteral",
+      "offset": 1272,
       "length": 4,
       "value": "true"
     },
@@ -94860,44 +95290,37 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
       "kind": "Array",
-      "offset": 402,
+      "offset": 636,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 557,
+      "offset": 791,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
       "kind": "Array",
-      "offset": 617,
+      "offset": 851,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 998,
+      "offset": 1232,
       "length": 5,
       "value": "\"app\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
       "kind": "StringLiteral",
-      "offset": 1013,
+      "offset": 1247,
       "length": 6,
       "value": "\"json\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/SceneDelegate\/MWSceneDelegate.swift",
-      "kind": "BooleanLiteral",
-      "offset": 1279,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Network List Step\/MWSearchSuggestionsViewController.swift",
@@ -95070,28 +95493,28 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/StepNavigationViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 957,
+      "offset": 1604,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/StepNavigationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 145,
+      "offset": 774,
       "length": 28,
       "value": "\"MobileWorkflowCore.StepNavigationViewController\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/StepNavigationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 145,
+      "offset": 774,
       "length": 28,
       "value": "\"MobileWorkflowCore.StepNavigationViewController\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/StepNavigationViewController.swift",
       "kind": "StringLiteral",
-      "offset": 145,
+      "offset": 774,
       "length": 28,
       "value": "\"MobileWorkflowCore.StepNavigationViewController\""
     },
@@ -96440,6 +96863,13 @@
       "value": "\"MobileWorkflowCore.PanZoomImageViewController\""
     },
     {
+      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Events\/EventService.swift",
+      "kind": "StringLiteral",
+      "offset": 214,
+      "length": 40,
+      "value": "\"AppRail.UserInteraction.NSUserActivity\""
+    },
+    {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Image Capture Step (Temp Copy)\/MWCoreImageCaptureCameraPreviewView.swift",
       "kind": "FloatLiteral",
       "offset": 197,
@@ -96904,35 +97334,35 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/MWStepFactory.swift",
       "kind": "StringLiteral",
-      "offset": 2371,
+      "offset": 2352,
       "length": 9,
       "value": "\"display\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/MWStepFactory.swift",
       "kind": "StringLiteral",
-      "offset": 2405,
+      "offset": 2386,
       "length": 16,
       "value": "\"networkDisplay\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/MWStepFactory.swift",
       "kind": "StringLiteral",
-      "offset": 2371,
+      "offset": 2352,
       "length": 9,
       "value": "\"display\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/MWStepFactory.swift",
       "kind": "StringLiteral",
-      "offset": 2405,
+      "offset": 2386,
       "length": 16,
       "value": "\"networkDisplay\""
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/StepFactory\/MWStepFactory.swift",
       "kind": "Array",
-      "offset": 4339,
+      "offset": 4268,
       "length": 2,
       "value": "[]"
     },
@@ -97688,16 +98118,9 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/RootCoordinator.swift",
       "kind": "Array",
-      "offset": 1993,
+      "offset": 1969,
       "length": 2,
       "value": "[]"
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/core\/Presentation\/Controller\/RootCoordinator.swift",
-      "kind": "BooleanLiteral",
-      "offset": 2040,
-      "length": 5,
-      "value": "false"
     },
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
@@ -98573,34 +98996,6 @@
       "offset": 476,
       "length": 13,
       "value": "\"language_id\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
-      "kind": "StringLiteral",
-      "offset": 559,
-      "length": 9,
-      "value": "\"MobileWorkflowCore.MWPDFStep\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
-      "kind": "StringLiteral",
-      "offset": 559,
-      "length": 9,
-      "value": "\"MobileWorkflowCore.MWPDFStep\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
-      "kind": "StringLiteral",
-      "offset": 2192,
-      "length": 29,
-      "value": "\"MobileWorkflowCore.PDFUtilitiesPDFViewerMetadata\""
-    },
-    {
-      "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/PDF Step\/MWPDFStep.swift",
-      "kind": "Array",
-      "offset": 3920,
-      "length": 2,
-      "value": "[]"
     }
   ]
 }
