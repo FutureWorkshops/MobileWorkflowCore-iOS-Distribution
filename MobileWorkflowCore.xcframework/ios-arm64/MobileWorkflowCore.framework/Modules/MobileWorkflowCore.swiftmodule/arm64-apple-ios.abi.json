@@ -49605,6 +49605,46 @@
             ]
           },
           {
+            "kind": "Var",
+            "name": "searchableContent",
+            "printedName": "searchableContent",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:18MobileWorkflowCore12ListStepItemC17searchableContentSSvp",
+            "mangledName": "$s18MobileWorkflowCore12ListStepItemC17searchableContentSSvp",
+            "moduleName": "MobileWorkflowCore",
+            "declAttributes": [
+              "AccessControl"
+            ],
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:18MobileWorkflowCore12ListStepItemC17searchableContentSSvg",
+                "mangledName": "$s18MobileWorkflowCore12ListStepItemC17searchableContentSSvg",
+                "moduleName": "MobileWorkflowCore",
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
             "kind": "Constructor",
             "name": "init",
             "printedName": "init(from:)",

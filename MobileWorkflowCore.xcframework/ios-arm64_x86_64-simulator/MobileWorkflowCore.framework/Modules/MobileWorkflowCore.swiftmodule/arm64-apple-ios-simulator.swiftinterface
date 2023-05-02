@@ -1989,6 +1989,9 @@ public class ListStepItem : Swift.Codable {
   final public let sfSymbolName: Swift.String?
   final public let imageURL: Swift.String?
   final public let sectionName: Swift.String?
+  public var searchableContent: Swift.String {
+    get
+  }
   required public init(from decoder: Swift.Decoder) throws
   public init(id: Swift.String? = nil, type: Swift.String? = nil, text: Swift.String, detailText: Swift.String?, sfSymbolName: Swift.String?, imageURL: Swift.String?, sectionName: Swift.String? = nil)
   @objc deinit
