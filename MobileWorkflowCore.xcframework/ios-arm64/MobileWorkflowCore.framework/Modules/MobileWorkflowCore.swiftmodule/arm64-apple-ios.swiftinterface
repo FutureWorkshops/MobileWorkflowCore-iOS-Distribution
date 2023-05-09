@@ -2342,6 +2342,7 @@ public protocol RemoteContentStepViewController : UIKit.UIViewController, Mobile
   func loadContent()
   func showLoading()
   func hideLoading()
+  @_Concurrency.MainActor func presentCurrentState()
   @_Concurrency.MainActor func update(content: Self.StepType.ResponseType)
 }
 public protocol LoadState : Swift.Equatable {
@@ -2357,6 +2358,10 @@ extension MobileWorkflowCore.RemoteContentStepViewController {
   public var showBadURLError: Swift.Bool {
     get
   }
+  @_Concurrency.MainActor public func presentCurrentState()
+}
+extension MobileWorkflowCore.RemoteContentStepViewController {
+  @_Concurrency.MainActor public func handle(result: Swift.Result<Self.StepType.ResponseType, Swift.Error>)
 }
 extension MobileWorkflowCore.RemoteContentStepViewController where Self : MobileWorkflowCore.HasLoadState {
   public func loadContent()

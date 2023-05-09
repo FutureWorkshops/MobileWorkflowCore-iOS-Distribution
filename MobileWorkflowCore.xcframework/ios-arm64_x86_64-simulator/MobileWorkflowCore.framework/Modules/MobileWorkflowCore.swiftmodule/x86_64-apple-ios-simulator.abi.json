@@ -60879,6 +60879,30 @@
           },
           {
             "kind": "Function",
+            "name": "presentCurrentState",
+            "printedName": "presentCurrentState()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore31RemoteContentStepViewControllerP19presentCurrentStateyyF",
+            "mangledName": "$s18MobileWorkflowCore31RemoteContentStepViewControllerP19presentCurrentStateyyF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.RemoteContentStepViewController>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.RemoteContentStepViewController>",
+            "protocolReq": true,
+            "declAttributes": [
+              "Custom"
+            ],
+            "reqNewWitnessTableEntry": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
             "name": "update",
             "printedName": "update(content:)",
             "children": [
@@ -60946,6 +60970,71 @@
                 "accessorKind": "get"
               }
             ]
+          },
+          {
+            "kind": "Function",
+            "name": "presentCurrentState",
+            "printedName": "presentCurrentState()",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore31RemoteContentStepViewControllerPAAE19presentCurrentStateyyF",
+            "mangledName": "$s18MobileWorkflowCore31RemoteContentStepViewControllerPAAE19presentCurrentStateyyF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.RemoteContentStepViewController>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.RemoteContentStepViewController>",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "handle",
+            "printedName": "handle(result:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Result",
+                "printedName": "Swift.Result<τ_0_0.StepType.ResponseType, Swift.Error>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "DependentMember",
+                    "printedName": "τ_0_0.StepType.ResponseType"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Error",
+                    "printedName": "Swift.Error",
+                    "usr": "s:s5ErrorP"
+                  }
+                ],
+                "usr": "s:s6ResultO"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:18MobileWorkflowCore31RemoteContentStepViewControllerPAAE6handle6resultys6ResultOy0F4Type_08ResponseL0QZs5Error_pG_tF",
+            "mangledName": "$s18MobileWorkflowCore31RemoteContentStepViewControllerPAAE6handle6resultys6ResultOy0F4Type_08ResponseL0QZs5Error_pG_tF",
+            "moduleName": "MobileWorkflowCore",
+            "genericSig": "<τ_0_0 where τ_0_0 : MobileWorkflowCore.RemoteContentStepViewController>",
+            "sugared_genericSig": "<Self where Self : MobileWorkflowCore.RemoteContentStepViewController>",
+            "declAttributes": [
+              "Custom"
+            ],
+            "isFromExtension": true,
+            "funcSelfKind": "NonMutating"
           },
           {
             "kind": "Function",
