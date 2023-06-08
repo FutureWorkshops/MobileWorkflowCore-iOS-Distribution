@@ -231,6 +231,7 @@ using UInt = size_t;
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import AVFoundation;
+@import CoreData;
 @import CoreFoundation;
 @import Foundation;
 @import MessageUI;
@@ -363,6 +364,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 - (void)viewLayoutMarginsDidChange;
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
 @property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -447,6 +449,21 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore24MWStackTextTableViewCell")
+@interface MWStackTextTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)prepareForReuse;
+@end
+
+@class UITextView;
+@class NSURL;
+
+@interface MWStackTextTableViewCell (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextViewDelegate>
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @interface MWSubtitleTableViewCell : UITableViewCell
@@ -454,6 +471,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)prepareForReuse;
 @end
+
 
 
 
@@ -542,6 +560,32 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
+@end
+
+@class NSEntityDescription;
+@class NSManagedObjectContext;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15QueueItemEntity")
+@interface QueueItemEntity : NSManagedObject
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+@class NSUUID;
+@class NSNumber;
+@class NSDate;
+
+@interface QueueItemEntity (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly, copy) NSUUID * _Null_unspecified id;
+@property (nonatomic, readonly, copy) NSString * _Null_unspecified name;
+@property (nonatomic, readonly, copy) NSString * _Null_unspecified taskType;
+@property (nonatomic, readonly, copy) NSData * _Null_unspecified task;
+@property (nonatomic, readonly, copy) NSData * _Null_unspecified session;
+@property (nonatomic, readonly, copy) NSString * _Nullable error;
+@property (nonatomic, readonly, strong) NSNumber * _Null_unspecified status;
+@property (nonatomic, readonly, copy) NSDate * _Null_unspecified createdAt;
 @end
 
 
@@ -866,6 +910,7 @@ using UInt = size_t;
 #pragma clang diagnostic ignored "-Watimport-in-framework-header"
 #endif
 @import AVFoundation;
+@import CoreData;
 @import CoreFoundation;
 @import Foundation;
 @import MessageUI;
@@ -998,6 +1043,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore20MWStepViewController")
 - (void)viewLayoutMarginsDidChange;
 - (void)motionEnded:(UIEventSubtype)motion withEvent:(UIEvent * _Nullable)event;
 @property (nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle;
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated;
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil SWIFT_UNAVAILABLE;
 @end
 
@@ -1082,6 +1128,21 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15MWSceneDelegate")
 @end
 
 
+SWIFT_CLASS("_TtC18MobileWorkflowCore24MWStackTextTableViewCell")
+@interface MWStackTextTableViewCell : UITableViewCell
+- (nonnull instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString * _Nullable)reuseIdentifier SWIFT_UNAVAILABLE;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
+- (void)prepareForReuse;
+@end
+
+@class UITextView;
+@class NSURL;
+
+@interface MWStackTextTableViewCell (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextViewDelegate>
+- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
 
 SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 @interface MWSubtitleTableViewCell : UITableViewCell
@@ -1089,6 +1150,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore23MWSubtitleTableViewCell")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
 - (void)prepareForReuse;
 @end
+
 
 
 
@@ -1177,6 +1239,32 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore38QueueControllerNetworkAsyncTaskService")
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didSendBodyData:(int64_t)bytesSent totalBytesSent:(int64_t)totalBytesSent totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didFinishCollectingMetrics:(NSURLSessionTaskMetrics * _Nonnull)metrics;
 - (void)URLSession:(NSURLSession * _Nonnull)session task:(NSURLSessionTask * _Nonnull)task didCompleteWithError:(NSError * _Nullable)error;
+@end
+
+@class NSEntityDescription;
+@class NSManagedObjectContext;
+
+SWIFT_CLASS("_TtC18MobileWorkflowCore15QueueItemEntity")
+@interface QueueItemEntity : NSManagedObject
+- (nonnull instancetype)initWithEntity:(NSEntityDescription * _Nonnull)entity insertIntoManagedObjectContext:(NSManagedObjectContext * _Nullable)context OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+
+
+@class NSUUID;
+@class NSNumber;
+@class NSDate;
+
+@interface QueueItemEntity (SWIFT_EXTENSION(MobileWorkflowCore))
+@property (nonatomic, readonly, copy) NSUUID * _Null_unspecified id;
+@property (nonatomic, readonly, copy) NSString * _Null_unspecified name;
+@property (nonatomic, readonly, copy) NSString * _Null_unspecified taskType;
+@property (nonatomic, readonly, copy) NSData * _Null_unspecified task;
+@property (nonatomic, readonly, copy) NSData * _Null_unspecified session;
+@property (nonatomic, readonly, copy) NSString * _Nullable error;
+@property (nonatomic, readonly, strong) NSNumber * _Null_unspecified status;
+@property (nonatomic, readonly, copy) NSDate * _Null_unspecified createdAt;
 @end
 
 
