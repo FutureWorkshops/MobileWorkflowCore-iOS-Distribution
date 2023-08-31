@@ -98554,7 +98554,7 @@
           {
             "kind": "Function",
             "name": "scaledAndCroppedToSquare",
-            "printedName": "scaledAndCroppedToSquare(ofLength:)",
+            "printedName": "scaledAndCroppedToSquare(ofLength:scale:)",
             "children": [
               {
                 "kind": "TypeNominal",
@@ -98567,11 +98567,17 @@
                 "name": "CGFloat",
                 "printedName": "CoreGraphics.CGFloat",
                 "usr": "s:14CoreFoundation7CGFloatV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "CGFloat",
+                "printedName": "CoreGraphics.CGFloat",
+                "usr": "s:14CoreFoundation7CGFloatV"
               }
             ],
             "declKind": "Func",
-            "usr": "s:So7UIImageC18MobileWorkflowCoreE24scaledAndCroppedToSquare8ofLengthAB0D10Foundation7CGFloatV_tF",
-            "mangledName": "$sSo7UIImageC18MobileWorkflowCoreE24scaledAndCroppedToSquare8ofLengthAB0D8Graphics7CGFloatV_tF",
+            "usr": "s:So7UIImageC18MobileWorkflowCoreE24scaledAndCroppedToSquare8ofLength5scaleAB0D10Foundation7CGFloatV_AItF",
+            "mangledName": "$sSo7UIImageC18MobileWorkflowCoreE24scaledAndCroppedToSquare8ofLength5scaleAB0D8Graphics7CGFloatV_AItF",
             "moduleName": "MobileWorkflowCore",
             "isFromExtension": true,
             "funcSelfKind": "NonMutating"
@@ -102214,7 +102220,7 @@
     {
       "filePath": "\/Users\/vagrant\/git\/MobileWorkflowCore\/MobileWorkflowCore\/steps\/Table Step\/MWSubtitleTableViewCell.swift",
       "kind": "BooleanLiteral",
-      "offset": 5403,
+      "offset": 5412,
       "length": 5,
       "value": "false"
     },

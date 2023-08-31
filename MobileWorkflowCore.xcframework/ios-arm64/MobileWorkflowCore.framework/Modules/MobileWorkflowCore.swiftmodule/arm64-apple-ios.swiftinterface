@@ -3161,7 +3161,7 @@ extension UIKit.UIImage {
   public func resized(to size: CoreFoundation.CGSize, preservingAspectRatio: Swift.Bool = false, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
   public func resized(withRatio ratio: CoreFoundation.CGFloat, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage
   public func resized(toNumberOfBytes numberOfBytes: Swift.Int, format: UIKit.UIGraphicsImageRendererFormat = UIGraphicsImageRendererFormat()) -> UIKit.UIImage?
-  public func scaledAndCroppedToSquare(ofLength length: CoreFoundation.CGFloat) -> UIKit.UIImage
+  public func scaledAndCroppedToSquare(ofLength length: CoreFoundation.CGFloat, scale: CoreFoundation.CGFloat) -> UIKit.UIImage
   public static func coloredImage(size: CoreFoundation.CGSize, color: UIKit.UIColor) -> UIKit.UIImage
 }
 extension UIKit.UIImageView {
