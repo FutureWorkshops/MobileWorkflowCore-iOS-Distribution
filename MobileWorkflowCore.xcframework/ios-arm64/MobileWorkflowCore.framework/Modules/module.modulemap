@@ -1,7 +1,7 @@
 framework module MobileWorkflowCore {
   umbrella header "MobileWorkflowCore.h"
-
   export *
+
   module * { export * }
 }
 
