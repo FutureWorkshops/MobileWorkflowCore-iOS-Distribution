@@ -318,7 +318,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore12CustomButton")
 @property (nonatomic, readonly) CGSize intrinsicContentSize;
 - (void)layoutSubviews;
 - (void)tintColorDidChange;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection SWIFT_AVAILABILITY(ios,introduced=8.0,deprecated=17.0,message="Use the trait change registration APIs declared in the UITraitChangeObservable protocol");
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -430,7 +430,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore31MWInstructionStepViewController")
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 - (void)viewDidLoad;
 - (void)viewLayoutMarginsDidChange;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection SWIFT_AVAILABILITY(ios,introduced=6.0,deprecated=16.0,message="Use the trait change registration APIs declared in the UITraitChangeObservable protocol");
 @end
 
 
@@ -506,10 +506,11 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore24MWStackTextTableViewCell")
 @end
 
 @class UITextView;
-@class NSURL;
+@class UITextItem;
+@class UIAction;
 
 @interface MWStackTextTableViewCell (SWIFT_EXTENSION(MobileWorkflowCore)) <UITextViewDelegate>
-- (BOOL)textView:(UITextView * _Nonnull)textView shouldInteractWithURL:(NSURL * _Nonnull)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction SWIFT_WARN_UNUSED_RESULT;
+- (UIAction * _Nullable)textView:(UITextView * _Nonnull)textView primaryActionForTextItem:(UITextItem * _Nonnull)textItem defaultAction:(UIAction * _Nonnull)defaultAction SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -641,7 +642,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore15QueueItemEntity")
 SWIFT_CLASS("_TtC18MobileWorkflowCore29RotationAwareTabBarController")
 @interface RotationAwareTabBarController : UITabBarController
 @property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
-@property (nonatomic, readonly) BOOL shouldAutorotate;
+@property (nonatomic, readonly) BOOL shouldAutorotate SWIFT_AVAILABILITY(ios,introduced=6.0,deprecated=16.0,message="Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.");
 - (nonnull instancetype)initWithNibName:(NSString * _Nullable)nibNameOrNil bundle:(NSBundle * _Nullable)nibBundleOrNil OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -651,7 +652,7 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore9StateView")
 @interface StateView : UIView
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder SWIFT_UNAVAILABLE;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection SWIFT_AVAILABILITY(ios,introduced=8.0,deprecated=17.0,message="Use the trait change registration APIs declared in the UITraitChangeObservable protocol");
 @end
 
 
@@ -676,8 +677,8 @@ SWIFT_CLASS("_TtC18MobileWorkflowCore28StepNavigationViewController")
 - (void)viewDidLoad;
 - (void)viewLayoutMarginsDidChange;
 @property (nonatomic, readonly, strong) UIViewController * _Nullable childViewControllerForStatusBarStyle;
-- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection;
-@property (nonatomic, readonly) BOOL shouldAutorotate;
+- (void)traitCollectionDidChange:(UITraitCollection * _Nullable)previousTraitCollection SWIFT_AVAILABILITY(ios,introduced=8.0,deprecated=17.0,message="Use the trait change registration APIs declared in the UITraitChangeObservable protocol");
+@property (nonatomic, readonly) BOOL shouldAutorotate SWIFT_AVAILABILITY(ios,introduced=6.0,deprecated=16.0,message="Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.");
 @property (nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations;
 @property (nonatomic, readonly) UIInterfaceOrientation preferredInterfaceOrientationForPresentation;
 @property (nonatomic, readonly) BOOL canBecomeFirstResponder;

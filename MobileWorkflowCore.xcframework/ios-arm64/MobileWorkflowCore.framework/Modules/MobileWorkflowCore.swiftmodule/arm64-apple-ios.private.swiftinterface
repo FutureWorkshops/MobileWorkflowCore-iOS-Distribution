@@ -1,6 +1,6 @@
 // swift-interface-format-version: 1.0
 // swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
-// swift-module-flags: -target arm64-apple-ios15.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
+// swift-module-flags: -target arm64-apple-ios17.1 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name MobileWorkflowCore
 // swift-module-flags-ignorable: -enable-bare-slash-regex
 import AVFoundation
 import AVKit
@@ -178,7 +178,7 @@ public struct BootARLoggerTask : MobileWorkflowCore.AsyncTask {
   @objc deinit
 }
 extension MobileWorkflowCore.MWStackTextTableViewCell : UIKit.UITextViewDelegate {
-  @_Concurrency.MainActor(unsafe) @objc final public func textView(_ textView: UIKit.UITextView, shouldInteractWith URL: Foundation.URL, in characterRange: Foundation.NSRange, interaction: UIKit.UITextItemInteraction) -> Swift.Bool
+  @_Concurrency.MainActor(unsafe) @objc final public func textView(_ textView: UIKit.UITextView, primaryActionFor textItem: UIKit.UITextItem, defaultAction: UIKit.UIAction) -> UIKit.UIAction?
 }
 public struct PDFViewInput {
   public let filePath: Swift.String
@@ -654,6 +654,7 @@ public typealias MobileWorkflowButtonViewController = MobileWorkflowCore.MWInstr
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLoad()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func viewLayoutMarginsDidChange()
   @_Concurrency.MainActor(unsafe) public func configureWithTitle(_ title: Swift.String, body: Swift.String, navigationFooterConfig: MobileWorkflowCore.NavigationFooterView.Config?)
+  @available(iOS, introduced: 6.0, deprecated: 16.0, message: "Use the trait change registration APIs declared in the UITraitChangeObservable protocol")
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func showLoading()
   @_Concurrency.MainActor(unsafe) public func hideLoading()
@@ -916,7 +917,9 @@ extension MobileWorkflowCore.StepPresentation {
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var childForStatusBarStyle: UIKit.UIViewController? {
     @objc get
   }
+  @available(iOS, introduced: 8.0, deprecated: 17.0, message: "Use the trait change registration APIs declared in the UITraitChangeObservable protocol")
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
+  @available(iOS, introduced: 6.0, deprecated: 16.0, message: "Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.")
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var shouldAutorotate: Swift.Bool {
     @objc get
   }
@@ -1324,6 +1327,7 @@ public protocol CredentializedAsyncTask : MobileWorkflowCore.AsyncTask, MobileWo
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillAppear(_ animated: Swift.Bool)
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewDidLayoutSubviews()
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func viewWillTransition(to size: CoreFoundation.CGSize, with coordinator: any UIKit.UIViewControllerTransitionCoordinator)
+  @available(iOS, introduced: 6.0, deprecated: 16.0, message: "Use the trait change registration APIs declared in the UITraitChangeObservable protocol")
   @_Concurrency.MainActor(unsafe) @objc override dynamic open func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) @objc open func numberOfSections(in tableView: UIKit.UITableView) -> Swift.Int
   @_Concurrency.MainActor(unsafe) @objc open func tableView(_ tableView: UIKit.UITableView, numberOfRowsInSection section: Swift.Int) -> Swift.Int
@@ -2005,6 +2009,7 @@ extension MobileWorkflowCore.URLAsyncTaskConvertible where Self : MobileWorkflow
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var supportedInterfaceOrientations: UIKit.UIInterfaceOrientationMask {
     @objc get
   }
+  @available(iOS, introduced: 6.0, deprecated: 16.0, message: "Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.")
   @_Concurrency.MainActor(unsafe) @objc override dynamic open var shouldAutorotate: Swift.Bool {
     @objc get
   }
@@ -2373,9 +2378,9 @@ extension MobileWorkflowCore.URLAsyncTask {
     get
   }
   public static func build<Body, Response>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Body? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], encoder: Foundation.JSONEncoder = URLAsyncTask.defaultEncoder, decoder: Foundation.JSONDecoder = URLAsyncTask.defaultDecoder) throws -> MobileWorkflowCore.URLAsyncTask<Response> where Body : Swift.Encodable, Response : Swift.Decodable
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = URLAsyncTask.defaultDecoder) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
-  public static func build<T>(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Swift.Int, Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], decoder: Foundation.JSONDecoder = URLAsyncTask.defaultDecoder) -> MobileWorkflowCore.URLAsyncTask<T> where T : Swift.Decodable
+  public static func build(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
+  public static func build(url: Foundation.URL, method: MobileWorkflowCore.HTTPMethod, body: Foundation.Data? = nil, session: any MobileWorkflowCore.ContentProvider, credential: MobileWorkflowCore.Credential? = nil, headers: [Swift.String : Swift.String] = [:], shouldInterceptRequest: Swift.Bool = true, shouldInterceptResponse: Swift.Bool = false, parser: @escaping (Swift.Int, Foundation.Data) throws -> T) -> MobileWorkflowCore.URLAsyncTask<T>
 }
 extension MobileWorkflowCore.URLAsyncTask where T == (statusCode: Swift.Int, data: Foundation.Data?) {
   public static func build(urlString: Swift.String, uploadProperties: [MobileWorkflowCore.UploadProperty], session: any MobileWorkflowCore.ContentProvider, method: MobileWorkflowCore.HTTPMethod, accept: Swift.String = "application/json", credential: MobileWorkflowCore.Credential?, shouldInterceptResponse: Swift.Bool, fileManager: Foundation.FileManager, errorParser: ((Foundation.Data) -> (any Swift.Error)?)? = nil) throws -> MobileWorkflowCore.URLAsyncTask<MobileWorkflowCore.URLAsyncTask<T>.Response>
@@ -2780,6 +2785,7 @@ public struct DeleteLogsTask : MobileWorkflowCore.AsyncTask {
     public init(title: Swift.String, style: MobileWorkflowCore.ButtonStyle = .primary, action: @escaping () -> Swift.Void)
   }
   @_Concurrency.MainActor(unsafe) @objc override dynamic public init(frame: CoreFoundation.CGRect)
+  @available(iOS, introduced: 8.0, deprecated: 17.0, message: "Use the trait change registration APIs declared in the UITraitChangeObservable protocol")
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func configure(isLoading: Swift.Bool = false, title: Swift.String? = nil, subtitle: Swift.String? = nil, buttonConfig: MobileWorkflowCore.StateView.ButtonConfig? = nil, theme: MobileWorkflowCore.Theme = .current)
   @_Concurrency.MainActor(unsafe) public func configureForError(_ error: any Swift.Error, theme: MobileWorkflowCore.Theme = .current, okAction: (() -> Swift.Void)?)
@@ -3240,6 +3246,7 @@ public enum ButtonStyle : Swift.String, Swift.Codable {
   @_Concurrency.MainActor(unsafe) convenience public init(style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func layoutSubviews()
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func tintColorDidChange()
+  @available(iOS, introduced: 8.0, deprecated: 17.0, message: "Use the trait change registration APIs declared in the UITraitChangeObservable protocol")
   @_Concurrency.MainActor(unsafe) @objc override dynamic public func traitCollectionDidChange(_ previousTraitCollection: UIKit.UITraitCollection?)
   @_Concurrency.MainActor(unsafe) public func configureWithStyle(_ style: MobileWorkflowCore.ButtonStyle, theme: MobileWorkflowCore.Theme)
   @_Concurrency.MainActor(unsafe) public func configureWithImage(_ image: UIKit.UIImage)
